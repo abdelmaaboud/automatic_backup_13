@@ -1,0 +1,48 @@
+<odoo>
+    <t t-name="barcode_scanner.login">
+        <div>
+            <h3 class="text-center mb32 mt32">Login</h3>
+            <t t-if="widget.users.length">
+                <div class="container-fluid text-center">
+                    <div class="row">
+                        <t t-foreach="widget.users" t-as="user">
+                            <div class="col-xs-12 col-sm-4 col-lg-3">
+                                <a href="#" onClick="return false;">
+                                    <div t-att-id="user.id" t-att-data-email="user.email" class="thumbnail">
+                                        <div class="row">
+                                            <div class="col-xs-4">  
+                                                <img t-if="user.image" t-attf-src="data:image/png;base64,{{user.image}}" class="img-responsive"/>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <h4 class="caption"><t t-esc="user.name"/></h4>
+                                                <h5 class="caption"><t t-if="user.email" t-esc="user.email"/></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </t>
+                    </div>
+                </div>    
+            </t>
+        </div>  
+    </t>
+
+    <t t-name="barcode_scanner.login.pincode">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <div class="form-group">
+                        <label for="pin_code">Pin Code</label>
+                        <input autocomplete="off" id="pin_code" class="form-control" autofocus="" type="tel" inputmode="decimal" pattern="[0-9]*" 
+                            style="-webkit-text-security:disc; text-security: disc; -moz-text-security: disc;"/>
+                    </div>
+                </div>
+                <div class="col-xs-12 text-center">
+                    <p>Enter your pin code.</p>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</odoo>

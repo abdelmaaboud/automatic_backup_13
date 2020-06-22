@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_contract_report_wizard_print" model="ir.ui.view">
+        <field name="name">view_contract_report_wizard_form_print</field>
+        <field name="model">contract.report.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Contract Report Print">
+                <group>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="remove_prices"/>
+                    <field name="only_worklogs"/>
+                    <field name="group_by_issue_and_task" attrs="{'invisible': [('only_worklogs', '=', True)]}"/>
+                    <newline/>
+                </group>
+                <footer>
+                    <button name="action_print" class="oe_highlight" string="Print" type="object"/>
+                    or
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_contract_report_wizard_send_by_email" model="ir.ui.view">
+        <field name="name">view_contract_report_wizard_form_send_by_email</field>
+        <field name="model">contract.report.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Contract Report Print">
+                <group>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="remove_prices"/>
+                    <field name="only_worklogs"/>
+                    <field name="group_by_issue_and_task" attrs="{'invisible': [('only_worklogs', '=', True)]}"/>
+                    <newline/>
+                </group>
+                <div style="text-align:right">
+                    <button special="cancel" string="Cancel"/>
+                    <button name="action_send_email" class="oe_highlight" string="Send by email" type="object"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

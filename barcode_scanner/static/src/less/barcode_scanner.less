@@ -1,0 +1,158 @@
+.floating-action {
+    position:fixed;
+	width:48px;
+	height:48px;
+	bottom:20px;
+	right:20px;
+	background-color:#0C9;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 2;
+}
+
+.floating-action:hover {
+    box-shadow: 0 6px 14px 0 #666;
+    transform: scale(1.05);
+    cursor: pointer;
+ }
+
+.icon-float {
+    margin-top:18px;
+}
+
+.btn-space {
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+/*
+	CSS For notification manager
+*/
+.o_notification_manager {
+    width: 300px;
+    max-width: 100%;
+    top: @navbar-height;
+    right: 0;
+    position: fixed;
+    
+
+    z-index: 1100; // Bootstrap modal z-index is 1050
+
+    .o_notification {
+        padding: 0;
+        margin: 5px 0 0 0;
+
+        opacity: 0;
+
+        background-color: #FCFBEA;
+        position: relative;
+        .o_close {
+            .o-position-absolute(5px, 5px);
+            color: rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+        }
+
+        .o_notification_title {
+            .o-flex-display();
+            .o-align-items(center);
+
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 10px 10px 10px 20px;
+
+            font-weight: bold;
+
+            .o_icon {
+                display: inline-block;
+                margin-right: 20px;
+                color: rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        .o_notification_content {
+            padding: 10px;
+        }
+
+        &.o_error {
+            color: white;
+            background-color: #F16567;
+        }
+    }
+}
+
+/*
+    For wrapping too long text
+*/
+
+.caption{
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+/*
+    Input and label for modify image button (on the product page for example)
+*/
+.js .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    max-width: 80%;
+    font-size: 1.25rem;
+    /* 20px */
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+    /* 10px 20px */
+}
+
+.no-js .inputfile + label {
+    display: none;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label * {
+    /* pointer-events: none; */
+    /* in case of FastClick lib use */
+}
+
+.inputfile + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    /* 4px */
+    margin-right: 0.25em;
+    /* 4px */
+}
+
+.inputfile + label {
+    color: #f1e5e6;
+    background-color: #d3394c;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label,
+.inputfile + label:hover {
+    background-color: #722040;
+}
+
+/* Breadcrumb */
+.breadcrumb {background-color:white}
+

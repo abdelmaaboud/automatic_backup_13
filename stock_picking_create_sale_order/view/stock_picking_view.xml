@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_picking_tree_needing_so" model="ir.actions.act_window">
+        <field name="name">Picking Lists needing an SO</field>
+        <field name="res_model">stock.picking</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form,calendar</field>
+        <field name="domain"></field>
+        <field name="groups_id" eval="[(4, ref('stock.group_stock_manager'))]" />
+        <field name="context">{
+                'search_default_picking_type_id': [active_id],
+                'default_picking_type_id': active_id,
+                'contact_display': 'partner_address',
+                'search_default_need_so_creation': 1,
+        }
+        </field>
+        <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Define a new transfer
+          </p>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_picking_internal_search_sales_order_to_be_created">
+       <field name="name">view_picking_internal_search_sales_order_to_be_created</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+        <field name="groups_id" eval="[(4, ref('stock.group_stock_manager'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='done']" position="after">
+                <filter name="need_so_creation" string="In Need for an SO" domain="[('created_sale_order_id', '=', False), ('origin', '=', False), ('group_id', '=', False), ('state', '!=', 'cancel'), ('picking_type_code', '=', 'outgoing'), ('do_not_create_an_so', '=', False)]" />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_picking_type_kanban_sales_order_to_be_created">
+        <field name="name">stock_picking_type_kanban_sales_order_to_be_created</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.stock_picking_type_kanban"/>
+        <field name="groups_id" eval="[(4, ref('stock.group_stock_manager'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='count_picking_backorders']" position="after">
+                <field name="count_picking_needing_so" />
+            </xpath>
+
+            <xpath expr="(//div[@class='container o_kanban_card_content']//div[@class='row'])" position="after">
+                <div t-if="record.count_picking_needing_so.raw_value &gt; 0" class="row">
+                    <div class="col-xs-9">
+                        <a class="oe_kanban_stock_picking_type_list" name="get_action_picking_tree_needing_so" type="object">
+                            In need of SO
+                        </a>
+                    </div>
+                    <div class="col-xs-3">
+                        <field name="count_picking_needing_so"/>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_picking_form_create_sale_order">
+       <field name="name">view_picking_form_create_sale_order</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="groups_id" eval="[(4, ref('stock.group_stock_manager'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <!-- Only show this button if the PL has no reference from SO and no Procurement Group -->
+                <button name="action_create_sale_order" states="confirmed,waiting,partially_available,done" string="Create a Sale Order" type="object" class="oe_highlight" attrs="{'invisible': ['&amp;', ('picking_type_code', '=', 'outgoing'), '|', ('created_sale_order_id', '!=', False), ('do_not_create_an_so', '=', True)]}"/>
+            </xpath>
+            <xpath expr="//page[@name='extra']/group/group[1]" position="inside">
+                <field name="created_sale_order_id" attrs="{'invisible': [('created_sale_order_id', '=', False)]}" />
+            </xpath>
+            <xpath expr="//field[@name='location_dest_id']" position="after">
+                <field name="do_not_create_an_so" attrs="{'invisible': [('origin', '!=', False), ('group_id', '!=', 'False'), ('state', '=', 'cancel'), ('picking_type_code', '=', 'outgoing')]}" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

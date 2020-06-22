@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+     <!-- Adds a scroll bar on top of the report table -->
+	 <record id="report_top_scrolling_bar" model="ir.ui.view">
+         <field name="name">report_top_scrolling_bar</field>
+         <field name="inherit_id" ref="account_reports.main_template"/>
+         <field name="arch" type="xml">
+             <xpath expr="//div[@class='o_account_reports_summary']" position="after">
+                <script src="/account_asset_depreciation_schedule/static/src/js/jquery.doubleScroll.js"></script>
+                <script>
+<![CDATA[
+$(document).ready(function() {
+   $('.table-responsive').doubleScroll({
+    contentElement: undefined,
+	scrollCss: {
+		'overflow-x': 'auto',
+		'overflow-y': 'hidden'
+	},
+	contentCss: {
+		'overflow-x': 'auto',
+		'overflow-y': 'hidden'
+	},
+	onlyIfScroll: true,
+	resetOnWindowResize: true,
+});
+});
+]]>
+                 </script>
+             </xpath>
+         </field>
+     </record>
+</odoo>

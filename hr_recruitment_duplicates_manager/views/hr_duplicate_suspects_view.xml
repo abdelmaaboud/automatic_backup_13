@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.actions.act_window" id="list_hr_application_duplicate_suspects_action">
+        <field name="name">Suspected Duplicates</field>
+        <field name="res_model">hr_duplicate_suspect</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_list_application" parent="hr_recruitment.menu_crm_case_categ0_act_job"
+              name="Applications" sequence="0" action="hr_recruitment.crm_case_categ0_act_job" />
+
+    <menuitem id="menu_list_duplicate_suspects" parent="hr_recruitment.menu_crm_case_categ0_act_job"
+              name="Suspected Duplicates" sequence="1"
+              action="list_hr_application_duplicate_suspects_action"/>
+
+    <record model="ir.ui.view" id="duplicate_aplications_suspects_tree_view">
+        <field name="name">duplicate_aplications_suspects_tree_view</field>
+        <field name="model">hr_duplicate_suspect</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="origin_partner_name" />
+                <field name="origin_job_id" />
+                <field name="origin_create_date" />
+                <field name="origin_stage_id" />
+                <field name="duplicate_partner_name"/>
+                <field name="duplicate_job_id" />
+                <field name="duplicate_create_date" />
+                <field name="duplicate_stage_id" />
+            </tree>
+        </field>
+    </record>
+
+<!--    <record model="ir.ui.view" id="duplicate_aplications_suspect_form_view">-->
+<!--        <field name="name">duplicate_aplications_suspect_form_view</field>-->
+<!--        <field name="model">hr_duplicate_suspect</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form>-->
+<!--                <sheet>-->
+<!--                    <h1>Suspected Duplicate</h1>-->
+<!--                    <group>-->
+<!--                        <group name="origin" string="Origin">-->
+<!--                            <field name="origin_id" />-->
+<!--                            <field name="origin_partner_name" />-->
+<!--                            <field name="origin_job_id" />-->
+<!--                            <field name="origin_create_date" />-->
+<!--                            <field name="origin_stage_id" />-->
+<!--                        </group>-->
+<!--                        <group name="duplicate" string="Duplicate">-->
+<!--                            <field name="duplicate_id" />-->
+<!--                            <field name="duplicate_partner_name" />-->
+<!--                            <field name="duplicate_job_id" />-->
+<!--                            <field name="duplicate_create_date" />-->
+<!--                            <field name="duplicate_stage_id" />-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+</odoo>

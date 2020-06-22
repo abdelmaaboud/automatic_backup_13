@@ -1,0 +1,82 @@
+<odoo>
+    <t t-name="barcode_scanner.picking_info">
+        <div class="container-fluid text-center">
+            <h3 class="text-center">Picking Info</h3>
+            <div class="row" t-if="widget.picking">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                    <h2 class="text-left"> <t t-esc="widget.picking.name"></t></h2>
+                    <t t-if="widget.incomming.in_selected != null">
+                        <h6>There is <t t-esc="widget.incomming.in_selected - widget.incomming.out_selected"/> product(s) to process.</h6>
+                    </t>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Products</div>
+
+                        <t t-if="widget.picking.moves">
+                            <t t-foreach="widget.picking.moves" t-as="move">
+
+                                <div class="thumbnail">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-3">
+                                            <img t-if="widget.picking.product.image" t-attf-src="data:image/png;base64,{{move.product.image}}" class="img-responsive" style="margin: 0 auto;"/>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-9">
+                                            <h3><t t-esc="widget.picking.product.name"/></h3>
+                                            <p t-if="widget.picking.product.ref"> Ref : <t t-esc="widget.picking.product.ref"/> </p>
+                                            <p t-if="widget.picking.product.barcode"> Barcode : <t t-esc="widget.picking.product.barcode"/> </p>
+                                        </div>
+                                    </div>
+                                    <hr style="padding:5px; margin:5px;" />
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <label> Ordered quantity </label>
+                                            <span> : <t t-esc="move.ordered_qty"/> </span>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <label t-if="widget.operation_type_name == 'in'"> Done quantity </label>
+                                            <label t-else=""> Reserved quantity </label>
+                                            <span> : <t t-if="widget.operation_type_name == 'in'" t-esc="move.qty_done"/> <t t-else="" t-esc="move.reserved"/> </span>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="input-group number-spinner">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                                </span>
+                                                <input t-att-data-barcode="widget.picking.product.barcode" 
+                                                        t-attf-id="product_{{move.product_id}}" type="number" class="form-control text-center"/>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </t>
+                        </t>
+                    </div>
+                    <t t-if="widget.operation_type_name == 'in' ">
+                        <div class="[ form-group ]">
+                            <input type="checkbox" name="last_incomming_checkbox" id="last_incomming_checkbox" autocomplete="off" />
+                            <div class="[ btn-group ]">
+                                <label for="last_incomming_checkbox" class="[ btn btn-default ]">
+                                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                                    <span> </span>
+                                </label>
+                                <label for="last_incomming_checkbox" class="[ btn btn-default active ]">
+                                    Click here if it's the last incomming product
+                                </label>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-if="widget.operation_type_name == 'in'">
+                        <button id="finish_incomming_picking_button" class="btn btn-default">Finish</button>
+                        <button t-if="widget.outgoing_exists" id="validate_picking_button" class="btn btn-primary">Reserve Products</button>
+                        <button t-else="" class="btn btn-default disabled">Reserve Products</button>
+                    </t>
+                    <button t-else="" id="validate_picking_button" class="btn btn-default">Confirm</button>
+                </div>
+            </div>
+            <a id="tap_to_scan_fab" class="floating-action"> <i class="fa fa-barcode icon-float"></i> </a>
+        </div>
+    </t>
+</odoo>

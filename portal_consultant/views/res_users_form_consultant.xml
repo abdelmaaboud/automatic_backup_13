@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="res_users_form_consultant" model="ir.ui.view">
+        <field name="name">res_users_form_consultant</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button type="object" name="change_consultant_rights" string="Convert to consultant user" attrs="{'invisible': [('is_consultant', '=', True)]}" class="oe_highlight"/>
+                <button type="object" name="change_consultant_rights" string="Convert to internal user" attrs="{'invisible': [('is_consultant', '=', False)]}" class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="is_consultant" readonly="True"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_users_tree_consultant" model="ir.ui.view">
+        <field name="name">view_users_tree_consultant</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='login']" position="after">
+                <field name="is_consultant" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_users_search_consultant" model="ir.ui.view">
+        <field name="name">view_users_search_consultant</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='no_share']" position="after">
+                <filter name="consultants" string="Consultant Users" domain="[('is_consultant','=',True)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

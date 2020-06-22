@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="sale_order_delivery_method_improved">
+        <field name="name">sale.order.delivery.method.improved</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="delivery.view_order_form_with_carrier"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//button[@name='set_delivery_line']" position="attributes">
+                    <attribute name="string">Add delivery costs</attribute>
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

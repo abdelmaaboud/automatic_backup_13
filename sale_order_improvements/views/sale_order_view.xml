@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="sale_order_improvement_form">
+        <field name="name">sale.order.improvement.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']" position="before">
+                <field name="header_text" class="oe_inline" placeholder="Optional header text" widget="html" nolabel="1"/>
+            </xpath>
+            <xpath expr="//field[@name='note']" position="replace">
+                <field name="note" class="oe_inline" placeholder="Note" widget="html" nolabel="1"/>
+            </xpath>
+            <xpath expr="//field[@name='analytic_account_id']" position="replace" >
+                <field name="analytic_account_id" invisible="1" context="{'default_partner_id':partner_invoice_id, 'default_name':name}" attrs="{'readonly': ['|',('analytic_account_id','!=',False),('invoice_count','!=',0),('state','=','sale')]}" groups="analytic.group_analytic_accounting" force_save="1"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                <field name="analytic_account_id" context="{'default_partner_id':partner_invoice_id, 'default_name':name}" attrs="{'readonly': ['|',('analytic_account_id','!=',False),('invoice_count','!=',0),('state','=','sale')]}" groups="analytic.group_analytic_accounting" force_save="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sale_order_client_order_ref_move_view">
+        <field name="name">sale.order.client.order.ref.move.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='client_order_ref']" position="replace"/>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="client_order_ref" string="Customer Ref."/>
+                <field name="internal_order_ref" string="Internal Ref."/>
+            </xpath>
+        </field>
+    </record>
+
+<!--    <record model="ir.ui.view" id="view_sale_order_attachments">-->
+<!--        <field name="name">sale.order.attachments</field>-->
+<!--        <field name="model">sale.order</field>-->
+<!--        <field name="inherit_id" ref="sale.view_order_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <page position="after">-->
+<!--                <page string="Attachments">-->
+<!--                    <field name="attachments_ids" widget="many2many_binary" string="Attach a file"/>-->
+<!--                </page>-->
+<!--            </page>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record model="ir.ui.view" id="quotation_tree_with_reference">
+        <field name="name">quotation.tree.with.reference</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="client_order_ref" string="Customer Ref."/>
+                <field name="internal_order_ref" string="Internal Ref."/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sale_order_tree_with_reference">
+        <field name="name">sale.order.tree.with.reference</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="client_order_ref" string="Customer Ref."/>
+                <field name="internal_order_ref" string="Internal Ref."/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

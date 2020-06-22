@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="project_task_mastertype_form">
+           <field name="name">project_task_type_form</field>
+            <field name="model">project.task.mastertype</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="code" />
+                            <field name="sequence" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="project_task_mastertype_tree">
+           <field name="name">project_task_type_tree</field>
+            <field name="model">project.task.mastertype</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="sequence" widget="handle"/>
+                    <field name="name" />
+                    <field name="code" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_project_task_mastertype">
+            <field name="name">Task types</field>
+            <field name="res_model">project.task.mastertype</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_project_task_mastertype" name="Task Types" parent="project.menu_project_config" action="action_project_task_mastertype"/>
+    </data>
+</odoo>

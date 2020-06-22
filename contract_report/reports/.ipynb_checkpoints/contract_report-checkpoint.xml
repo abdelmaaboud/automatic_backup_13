@@ -1,0 +1,842 @@
+<?xml version="1.0"?>
+<odoo>
+    <report
+            id="contract_abakus"
+            string="Contract Service Report"
+            model="contract.report.wizard"
+            report_type="qweb-html"
+            file="contract_report"
+            name="contract_report.report_contract"
+            attachment_use="True"
+            attachment='"ServiceReport-"+object.name.replace(" ","").replace("*","")+"("+time.strftime("%Y%m%d_%H%M%S")+").pdf"'
+    />
+
+    <template id="report_contract">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="sub" t-value="o.subscription_id"/>
+                <t t-call="contract_report.report_contract_document" t-lang="sub.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+    
+    <template id="report_contract_document">
+        <t t-name="contract_report.report_contract_document">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <style type="text/css">
+                        .table-striped {
+                        font-size: 10pt;
+                        }
+                        .table-striped &gt; tbody &gt; tr:nth-child(2n+1) &gt; td, .table-striped &gt; tbody &gt;
+                        tr:nth-child(2n+1) &gt;
+                        th {
+                        background-color: #F9F9F9;
+                        }
+
+                        .abakusBordered {
+                        border: 2px #E94E1B solid;
+                        background-color: #F9F9F9;
+                        }
+
+                        .abakusBorderedNoBackground {
+                        border: 2px #E94E1B solid;
+                        }
+
+                        .abakusBackground {
+                        background-color: #E94E1B;
+                        color: #F9F9F9;
+                        }
+
+                        .issueTaskTable {
+                        border: 1px solid black;
+                        }
+
+                        .issueTaskTable td {
+                        vertical-align: top;
+                        word-wrap: break-word;
+                        word-break: break-word;
+                        }
+
+                        .issueTaskTable th {
+                        text-align: left;
+                        padding: 2px 0 2px 5px;
+                        border-top: 1px black solid;
+                        border-bottom: 4px black double;
+                        border-right: 1px dotted black;
+                        background-color: #E94E1B;
+                        color: white;
+                        font-size: 9pt;
+                        }
+
+                        .issueIDTD {
+                        width: 25px;
+                        color: white;
+                        background-color: #E94E1B;
+                        border-right: 1px dotted black;
+                        padding: 4px;
+                        border-bottom: 1px solid black;
+                        font-size: 9pt;
+                        }
+
+                        .issueStatus {
+                        background-color: lightgrey;
+                        border-radius: 50px;
+                        padding: 2px 6px 2px 6px;
+                        border: 1px solid gray;
+                        margin-top: 4px;
+                        margin-bottom: 4px;
+                        }
+
+                        .issueCreationDate {
+                        font-style: italic;
+                        }
+
+                        .issueNameTD {
+                        padding: 4px;
+                        font-size: 9pt;
+                        font-weight: bold;
+                        border-bottom: 1px solid black;
+                        border-right: 1px dotted black;
+                        }
+
+                        .issueName {
+                        font-weight: bold;
+                        }
+
+                        .issueTimesheetsTitle {
+                        text-decoration: underline;
+                        margin: 1px 0 2px 5px;
+                        color: #E94E1B;
+                        font-weight: bold;
+                        }
+
+                        .otherAccountPannel {
+                        display: block;
+                        font-style: italic;
+                        font-weight: bold;
+                        }
+
+                        .issueAssigneeDateTD {
+                        padding: 4px;
+                        font-size: 9pt;
+                        border-bottom: 1px solid black;
+                        border-right: 1px dotted black;
+                        }
+
+                        .tdTitle {
+                        font-weight: bold;
+                        text-decoration: underline;
+                        }
+
+                        .timesheetTable {
+                        border: 1px solid gray;
+                        margin-left: 4px;
+                        margin-right: 4px;
+                        width: 100%;
+                        }
+
+                        .timesheetTable td {
+                        padding: 2px;
+                        font-weight: lighter;
+                        border-bottom: 1px solid gray;
+                        font-size: 9pt;
+                        }
+
+                        .issueTotal {
+                        float: right;
+                        margin: 2px;
+                        font-weight: bold;
+                        }
+
+                        .issueTotal td {
+                        text-align: right;
+                        }
+
+                        .totalTable {
+                        margin-top: 10px;
+                        }
+
+                    </style>
+                    <div class="row">
+                        <div class="col-xs-5 col-xs-offset-7">
+                            <strong>
+                                <span t-field="sub.partner_id"/>
+                            </strong>
+                            <address t-field="sub.partner_id"
+                                     t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: true}"/>
+                            <span t-field="sub.partner_id.vat"/>
+                        </div>
+                    </div>
+
+                    <h1 class="text-center">Service report</h1>
+                    <t t-set="travel_cost" t-value="0"/>
+                    <t t-if="sub.on_site_invoice_by_km==True">
+                        <t t-set="travel_cost" t-value="sub.on_site_product.lst_price*sub.on_site_distance_in_km"/>
+                    </t>
+                    <t t-if="sub.on_site_invoice_by_km==False">
+                        <t t-set="travel_cost" t-value="sub.on_site_product.lst_price"/>
+                    </t>
+
+                    <!-- contract details -->
+                    <table class="table abakusBordered">
+                        <tr>
+                            <th>Contract</th>
+                            <td>
+                                <span t-field="sub.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Customer</th>
+                            <td>
+                                <t t-if="sub.partner_id.parent_id">
+                                    <span t-esc="sub.partner_id.parent_id.name"/>
+                                </t>
+                                <t t-if="not sub.partner_id.parent_id">
+                                    <span t-esc="sub.partner_id.name"/>
+                                </t>
+                            </td>
+                        </tr>
+                        <!-- Prices -->
+                        <t t-if="not o.remove_prices">
+                            <tr>
+                                <th>Minimum annual contractual amount</th>
+                                <td><span t-esc="sub.format_decimal_number(sub.contractual_minimum_amount)"/>€
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Hour rate</th>
+                                <td>
+                                    <span t-esc="sub.format_decimal_number(sub.timesheet_product_price)"/>
+                                    €, On site travel cost:
+                                    <span t-esc="sub.format_decimal_number(travel_cost)"/>
+                                    €
+                                </td>
+                            </tr>
+                        </t>
+                        <tr>
+                            <th>Period covered by contract</th>
+                            <td>
+                                <span t-esc="sub.format_date(sub.date_start)"/>
+                                -
+                                <span t-esc="sub.format_date(sub.date)"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Reporting period</th>
+                            <td>
+                                <span t-esc="sub.get_report_interval(o.get_start_date(),o.get_end_date())"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Creation date</th>
+                            <td>
+                                <span t-esc="time.strftime('%d-%m-%Y')"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div style="page-break-inside:avoid;">
+                        <h2>Service delivery</h2>
+
+                        <!-- Variables -->
+                        <t t-set="service_delivery_total" t-value="0"/>
+                        <t t-set="working_hours_total" t-value="0"/>
+                        <t t-set="on_site_total" t-value="0"/>
+                        <t t-set="price" t-value="sub.timesheet_product_price"/>
+
+
+                        <!-- Grouped per Issue/Task Worklogs -->
+                        <t t-if="o.group_by_issue_and_task">
+                            <t t-foreach="sub.get_master_type_ids()" t-as="master_type">
+                                <t t-set="task_ids" t-value="sub.get_tasks_of_type(master_type.id)"/>
+                                <t t-if="len(task_ids) &gt; 0">
+                                    <h3><span t-field="master_type.name"/></h3>
+                                    <table class="issueTaskTable">
+                                        <tr>
+                                            <th width="25px">#</th>
+                                            <th width="20%">Status, Date &amp; Assignee</th>
+                                            <th width="70%"><span t-field="master_type.name"/></th>
+                                        </tr>
+
+                                        <!-- Issues -->
+                                        <t t-foreach="task_ids.sorted(key=lambda i: i.create_date)" t-as="issue">
+                                            <tr class="issueTaskTR">
+                                                <td class="issueIDTD">
+                                                    <span t-field="issue.id" class="issueID"/>
+                                                </td>
+                                                <td class="issueAssigneeDateTD">
+                                                    <span t-field="issue.stage_id.name" class="issueStatus"/>
+                                                    <br/>
+                                                    <span class="tdTitle">Created by:</span>
+                                                    <br/>
+                                                    <t t-if="issue.email_from">
+                                                        <span t-field="issue.email_from" class="issueCreator"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <span t-field="issue.create_uid" class="issueCreator"/>
+                                                    </t>
+                                                    <br/>
+                                                    (<span t-field="issue.create_date"
+                                                           t-field-options="{&quot;format&quot;: &quot;dd/MM/YYYY&quot;}"
+                                                           class="issueCreationDate"/>)
+                                                    <br/>
+                                                    <span class="tdTitle">Assigned to:</span>
+                                                    <br/>
+                                                    <span t-field="issue.user_id" class="issueUser"/>
+                                                </td>
+                                                <td class="issueNameTD">
+                                                    <span t-field="issue.name" class="issueName"/>
+                                                    <br/>
+
+                                                    <!-- Issue Timesheets -->
+                                                    <t t-if="len(issue.timesheet_ids) &gt; 0">
+                                                        <span class="issueTimesheetsTitle">Timesheets related to this
+                                                            issue:
+                                                        </span>
+                                                        <table class="timesheetTable">
+                                                            <t t-set="issue_total_time" t-value="0"/>
+                                                            <t t-set="issue_total_price" t-value="0"/>
+                                                            <t t-foreach="issue.timesheet_ids.sorted(key=lambda i: i.date)"
+                                                               t-as="line">
+                                                                <t t-if="not line.move_id and o.check_start_end_line_date(line.date)">
+                                                                    <tr>
+                                                                        <td style="max-width: 250px;">
+                                                                            <span t-raw="line.name"/>
+                                                                            <t t-if="line.account_id != sub.analytic_account_id">
+                                                                                <p class="otherAccountPannel">
+                                                                                    Invoiced on:
+                                                                                    <span t-esc="line.account_id.name"/>
+                                                                                </p>
+                                                                            </t>
+                                                                        </td>
+                                                                        <td width="100px">
+                                                                            <span t-field="line.date"
+                                                                                  t-field-options="{&quot;format&quot;: &quot;dd.MM.YYYY&quot;}"/>
+                                                                            <br/>
+                                                                            <span t-esc="line.user_id.name"/>
+                                                                            <br/>
+                                                                            <i>
+                                                                                <t t-if="line.on_site==True">
+                                                                                    <t t-set="on_site_total"
+                                                                                       t-value="on_site_total + 1"/>
+                                                                                    OS
+                                                                                </t>
+                                                                                <t t-if="line.on_site==False">
+                                                                                    SD
+                                                                                </t>
+                                                                            </i>
+                                                                        </td>
+                                                                        <td width="50px">
+                                                                            <span t-esc="sub.decimal_to_hours(line.unit_amount * sub.contractual_factor)"/>
+                                                                            <t t-if="not o.remove_prices">
+                                                                                <br/>
+                                                                                <i>at
+                                                                                    <span t-esc="line.to_invoice.name"/>
+                                                                                </i>
+                                                                            </t>
+                                                                        </td>
+                                                                        <t t-if="not o.remove_prices and line.account_id == sub.analytic_account_id">
+                                                                            <td width="55px">
+                                                                                <span t-esc="sub.format_decimal_number(line.amount)"/>
+                                                                                €
+                                                                            </td>
+                                                                        </t>
+                                                                        <t t-if="line.account_id != sub.analytic_account_id">
+                                                                            <td>/</td>
+                                                                        </t>
+                                                                        <t t-if="not o.remove_prices and line.account_id == sub.analytic_account_id">
+                                                                            <t t-set="service_delivery_total"
+                                                                               t-value="service_delivery_total + line.amount"/>
+                                                                            <t t-set="working_hours_total"
+                                                                               t-value="working_hours_total + (line.unit_amount * sub.contractual_factor)"/>
+                                                                            <t t-set="issue_total_time"
+                                                                               t-value="issue_total_time + line.unit_amount"/>
+                                                                            <t t-set="issue_total_price"
+                                                                               t-value="issue_total_price + line.amount"/>
+                                                                        </t>
+                                                                    </tr>
+                                                                </t>
+                                                            </t>
+                                                        </table>
+                                                        <t t-if="not o.remove_prices">
+                                                            <table class="issueTotal">
+                                                                <tr>
+                                                                    <td width="135px">Total worked time:</td>
+                                                                    <td width="70px">
+                                                                        <span t-esc="sub.decimal_to_hours(issue_total_time)"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Total:</td>
+                                                                    <td>
+                                                                        <span t-esc="sub.format_decimal_number(issue_total_price)"/>
+                                                                        €
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </t>
+                                                    </t>
+                                                </td>
+
+                                            </tr>
+                                        </t>
+                                    </table>
+                                </t>
+                            </t>
+                            <!-- Non linked to issue or task worklogs -->
+                            <h3>Stand-alone worklogs (not linked to an Issue nor a Task)</h3>
+                            <table class="issueTaskTable" width="100%">
+                                <t t-set="standalone_total_time" t-value="0"/>
+                                <t t-set="standalone_total_price" t-value="0"/>
+                                <tr>
+                                    <th>
+                                        Description
+                                    </th>
+                                    <th width="15%">
+                                        Assignee
+                                    </th>
+                                    <th width="15%">
+                                        Time
+                                    </th>
+                                    <t t-if="not o.remove_prices">
+                                        <th width="15%">
+                                            Price
+                                        </th>
+                                    </t>
+                                </tr>
+                                <t t-foreach="sub.get_standalone()" t-as="line">
+                                    <tr>
+                                            <td style="max-width: 250px;">
+                                                <span t-raw="line.name"/>
+                                            </td>
+                                            <td width="100px">
+                                                <span t-field="line.date"
+                                                      t-field-options="{&quot;format&quot;: &quot;dd.MM.YYYY&quot;}"/>
+                                                <br/>
+                                                <span t-esc="line.user_id.name"/>
+                                                <br/>
+                                                <i>
+                                                    <t t-if="line.on_site==True">
+                                                        <t t-set="on_site_total" t-value="on_site_total + 1"/>
+                                                        OS
+                                                    </t>
+                                                    <t t-if="line.on_site==False">
+                                                        SD
+                                                    </t>
+                                                </i>
+                                            </td>
+                                            <td width="50px">
+                                                <span t-esc="sub.decimal_to_hours(line.unit_amount * sub.contractual_factor)"/>
+                                                <t t-if="not o.remove_prices">
+                                                    <br/>
+                                                    <i>at
+                                                        <span t-esc="line.to_invoice.name"/>
+                                                    </i>
+                                                </t>
+                                            </td>
+                                            <t t-if="not o.remove_prices">
+                                                <td width="55px">
+                                                    <span t-esc="sub.format_decimal_number(line.amount)"/>
+                                                    €
+                                                </td>
+                                            </t>
+                                            <t t-if="not o.remove_prices">
+                                                <t t-set="service_delivery_total"
+                                                   t-value="service_delivery_total + line.amount"/>
+                                                <t t-set="working_hours_total"
+                                                   t-value="working_hours_total + (line.unit_amount * sub.contractual_factor)"/>
+                                                <t t-set="standalone_total_time"
+                                                   t-value="standalone_total_time + line.unit_amount"/>
+                                                <t t-set="standalone_total_price"
+                                                   t-value="standalone_total_price + line.amount"/>
+                                            </t>
+                                        </tr>
+                                </t>
+                                <t t-if="not o.remove_prices">
+                                    <tr>
+                                        <th colspan="2">
+                                            Standalone Total
+                                        </th>
+                                        <th>
+                                            <span t-esc="sub.decimal_to_hours(standalone_total_time)"/>
+                                        </th>
+                                        <th>
+                                            <span t-esc="sub.format_decimal_number(standalone_total_price)"/>
+                                            €
+                                        </th>
+                                    </tr>
+                                </t>
+                            </table>
+                        </t>
+
+
+                        <!-- Non Grouped Worklogs -->
+                        <t t-if="not o.group_by_issue_and_task">
+                            <h2>Service delivery</h2>
+                            <!-- analytic line details -->
+
+                            <table class="table table-condensed table-striped">
+                                <tr class="abakusBordered">
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th style="width: 130px;">Support</th>
+                                    <th>Type</th>
+                                    <th>Quantity</th>
+                                    <t t-if="not o.remove_prices">
+                                        <th>Invoiceable</th>
+                                        <th class="text-right" style="width: 90px;">Amount</th>
+                                    </t>
+                                </tr>
+                                <t t-set="service_delivery_total" t-value="0"/>
+                                <t t-set="working_hours_total" t-value="0"/>
+                                <t t-set="on_site_total" t-value="0"/>
+                                <t t-set="price" t-value="sub.timesheet_product_price"/>
+
+                                <t t-foreach="sub.get_timesheets()" t-as="line">
+                                    <t t-if="not line.move_id and o.check_start_end_line_date(line.date)">
+                                        <tr>
+                                            <td>
+                                                <span t-field="line.date"
+                                                      t-field-options="{&quot;format&quot;: &quot;dd.MM.YYYY&quot;}"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.user_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-if="line.on_site==True">
+                                                    <t t-set="on_site_total" t-value="on_site_total + 1"/>
+                                                    OS
+                                                </t>
+                                                <t t-if="line.on_site==False">
+                                                    SD
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <span t-esc="sub.decimal_to_hours(line.unit_amount * sub.contractual_factor)"/>
+                                            </td>
+                                            <t t-if="not o.remove_prices">
+                                                <td>
+                                                    <span t-esc="line.to_invoice.name"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-esc="sub.format_decimal_number(line.amount)"/>
+                                                    €
+                                                </td>
+                                            </t>
+                                        </tr>
+                                        <t t-if="not o.remove_prices">
+                                            <t t-set="service_delivery_total"
+                                               t-value="service_delivery_total + line.amount"/>
+                                            <t t-set="working_hours_total"
+                                               t-value="working_hours_total + (line.unit_amount * sub.contractual_factor)"/>
+                                        </t>
+                                    </t>
+                                </t>
+                            </table>
+                        </t>
+
+                        <!-- Total -->
+                        <t t-if="not o.remove_prices">
+                            <table class="table totalTable">
+                                <tr class="abakusBordered">
+                                    <th>Service delivery total</th>
+                                    <th class="text-right">
+                                        <span t-esc="sub.format_decimal_number(service_delivery_total)"/>
+                                        €
+                                    </th>
+                                </tr>
+                            </table>
+                        </t>
+                    </div>
+                    <t t-set="prepaid_instalment_total" t-value="0"/>
+                    <t t-if="not o.remove_prices and not o.only_worklogs">
+                        <div style="page-break-inside:avoid;">
+                            <h2>Issued invoices</h2>
+                            <table class="table table-condensed table-striped">
+                                <tr class="abakusBordered">
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Reference</th>
+                                    <th style="width: 90px;">Amount</th>
+                                </tr>
+                                <t t-foreach="sub.get_invoice_analytic_lines()" t-as="line">
+                                    <t t-if="line.move_id and o.check_start_end_line_date(line.date)">
+                                        <tr>
+                                            <td>
+                                                <span t-field="line.date"
+                                                      t-field-options="{&quot;format&quot;: &quot;dd.MM.YYYY&quot;}"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.move_id"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="sub.format_decimal_number(line.amount)"/>
+                                                €
+                                            </td>
+                                        </tr>
+                                        <t t-set="prepaid_instalment_total"
+                                           t-value="prepaid_instalment_total + line.amount"/>
+                                    </t>
+                                </t>
+                            </table>
+                            <t t-if="not o.only_worklogs">
+                                <table class="table">
+                                    <tr class="abakusBordered">
+                                        <th>Invoiced amount</th>
+                                        <th class="text-right">
+                                            <span t-esc="sub.format_decimal_number(prepaid_instalment_total)"/>
+                                            €
+                                        </th>
+                                    </tr>
+                                </table>
+                            </t>
+                        </div>
+                    </t>
+                    <!-- OK -->
+                    <t t-if="not o.remove_prices">
+                        <div style="margin-top: 25px; page-break-inside:avoid;">
+                            <h2>Balance</h2>
+                            <table class="table table-condensed table-bordered">
+                                <tr>
+                                    <th style="width: 30%;">Service delivery</th>
+                                    <th class="text-right">
+                                        <span t-esc="sub.format_decimal_number(service_delivery_total)"/>
+                                        €
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 40px;">Working hours</td>
+                                    <td class="text-right">
+                                        <span t-esc="sub.decimal_to_hours(working_hours_total)"/>
+                                        <br/>
+                                        <t t-if="prepaid_instalment_total!=0">
+                                            equivalent to<span
+                                                t-esc="int((service_delivery_total/prepaid_instalment_total) * 100)"/>%
+                                            of the prepaid units
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 40px;">On site support</td>
+                                    <td class="text-right">
+                                        <span t-esc="on_site_total"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table table-condensed table-bordered">
+                                <tr>
+                                    <th style="width: 30%;">Invoiced amount</th>
+                                    <th class="text-right">
+                                        <span t-esc="sub.format_decimal_number(prepaid_instalment_total)"/>
+                                        €
+                                    </th>
+                                </tr>
+                            </table>
+                            <table class="table table-condensed abakusBorderedNoBackground">
+                                <tr style="font-size:15px;">
+                                    <th>Balance</th>
+                                    <t t-set="balance" t-value="prepaid_instalment_total - service_delivery_total"/>
+                                    <th class="text-right">
+                                        <t t-if="balance&gt;=0">
+                                            In your favour
+                                        </t>
+                                        <t t-if="balance&lt;0">
+                                            In our favour
+                                        </t>
+                                        <span t-esc="sub.format_decimal_number(abs(balance))"/>
+                                        €*
+                                    </th>
+                                </tr>
+                            </table>
+                            <small>*All prices plus VAT, where applicable.</small>
+                            <br/>
+                            <small>The present report is not an invoice.</small>
+                        </div>
+                    </t>
+                    <div style="page-break-inside:avoid;">
+                        <h3>Information</h3>
+                        <table class="table table-condensed table-bordered">
+                            <tr>
+                                <th>SD</th>
+                                <td>Service Desk accessible by calling +32 87 59 35 58 / +352 20 88 20 58 or per email
+                                    at support@abakusitsolutions.eu
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>OS</th>
+                                <td>"On-Site" on site intervention / appointment</td>
+                            </tr>
+                            <tr>
+                                <th>SLA</th>
+                                <td>Service Level Agreement</td>
+                            </tr>
+                            <tr>
+                                <th>Reaction time: (Compliance 85%)</th>
+                                <td>SD : reaction per email or telephone
+                                    <br/>
+                                    OS : technician present on site
+                                    <br/>
+                                    Reaction time are only available valid for customers with SLA contracts.
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Ticket</th>
+                                <td>
+                                    Created by:
+                                    <ul style="padding-left: 40px;">
+                                        <li>Proactive maintenance</li>
+                                        <li>Monitoring</li>
+                                        <li>Support request (Service Desk)</li>
+                                    </ul>
+                                    Contains:
+                                    <ul style="padding-left: 40px;">
+                                        <li>A start, assignment and end time</li>
+                                        <li>A responsible</li>
+                                        <li>A priority</li>
+                                        <li>A status</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!--                    <t t-if="o.isStatistics()">-->
+                    <!--                        <div style="page-break-inside:avoid;">-->
+                    <!--                            <h1 class="text-center text-uppercase">Tickets Statistics</h1>-->
+                    <!--                            <table class="table abakusBorderedNoBackground">-->
+                    <!--                                <tr>-->
+                    <!--                                    <td style="vertical-align: middle;">-->
+                    <!--                                        <h3>Distribution OS/SD*</h3>-->
+                    <!--                                        <t t-set="types" t-value="o._issue_per_type_detail()"/>-->
+                    <!--                                        <table class="table table-condensed table-bordered">-->
+                    <!--                                            <tr>-->
+                    <!--                                                <th/>-->
+                    <!--                                                <th>SD</th>-->
+                    <!--                                                <th>OS</th>-->
+                    <!--                                                <th>Total</th>-->
+                    <!--                                            </tr>-->
+                    <!--                                            <tr>-->
+                    <!--                                                <th>Work logs</th>-->
+                    <!--                                                <td>-->
+                    <!--                                                    <t t-foreach="o.dictionary_to_list(types['SD']['stuff'])" t-as="stuff">-->
+                    <!--                                                        <span t-esc="stuff[0]"/>:-->
+                    <!--                                                        <span t-esc="stuff[1]"/>-->
+                    <!--                                                        <br/>-->
+                    <!--                                                    </t>-->
+                    <!--                                                </td>-->
+                    <!--                                                <td>-->
+                    <!--                                                    <t t-foreach="o.dictionary_to_list(types['OS']['stuff'])" t-as="stuff">-->
+                    <!--                                                        <span t-esc="stuff[0]"/>:-->
+                    <!--                                                        <span t-esc="stuff[1]"/>-->
+                    <!--                                                        <br/>-->
+                    <!--                                                    </t>-->
+                    <!--                                                </td>-->
+                    <!--                                                <td>-->
+                    <!--                                                    <span t-esc="types['OS']['workLogsSum']+types['SD']['workLogsSum']"/>-->
+                    <!--                                                </td>-->
+                    <!--                                            </tr>-->
+                    <!--                                            <tr>-->
+                    <!--                                                <th>Time</th>-->
+                    <!--                                                <td>-->
+                    <!--                                                    <span t-esc="o.decimal_to_hours(types['SD']['timeSum'])"/>-->
+                    <!--                                                </td>-->
+                    <!--                                                <td>-->
+                    <!--                                                    <span t-esc="o.decimal_to_hours(types['OS']['timeSum'])"/>-->
+                    <!--                                                </td>-->
+                    <!--                                                <td>-->
+                    <!--                                                    <span t-esc="o.decimal_to_hours(types['OS']['timeSum']+types['SD']['timeSum'])"/>-->
+                    <!--                                                </td>-->
+                    <!--                                            </tr>-->
+                    <!--                                            <t t-if="not o.isRemovePrices()">-->
+                    <!--                                                <tr>-->
+                    <!--                                                    <th>Price</th>-->
+                    <!--                                                    <td>-->
+                    <!--                                                        <span t-esc="o.format_decimal_number(types['SD']['priceSum'])"/>-->
+                    <!--                                                        €-->
+                    <!--                                                    </td>-->
+                    <!--                                                    <td>-->
+                    <!--                                                        <span t-esc="o.format_decimal_number(types['OS']['priceSum'])"/>-->
+                    <!--                                                        €-->
+                    <!--                                                    </td>-->
+                    <!--                                                    <td>-->
+                    <!--                                                        <span t-esc="o.format_decimal_number(types['OS']['priceSum']+types['SD']['priceSum'])"/>-->
+                    <!--                                                        €-->
+                    <!--                                                    </td>-->
+                    <!--                                                </tr>-->
+                    <!--                                            </t>-->
+                    <!--                                        </table>-->
+                    <!--                                        * Based on-->
+                    <!--                                        <span t-esc="types['ticketSum']"/>-->
+                    <!--                                        tickets-->
+                    <!--                                    </td>-->
+                    <!--                                    <td class="text-right" style="vertical-align: middle;">-->
+                    <!--                                        <img t-att-src="o.issue_per_type" style="max-height:200px"/>-->
+                    <!--                                    </td>-->
+                    <!--                                </tr>-->
+
+
+                    <!--                                <t t-if="o.sla_bool">-->
+                    <!--                                    <tr>-->
+                    <!--                                        <td style="vertical-align: middle;">-->
+                    <!--                                            <h3>SLA Condition Rules</h3>-->
+                    <!--                                            <table class="table table-condensed table-bordered table-striped">-->
+                    <!--                                                <tr>-->
+                    <!--                                                    <th>Service type</th>-->
+                    <!--                                                    <th>Priority</th>-->
+                    <!--                                                    <th>Reaction time in minutes</th>-->
+                    <!--                                                </tr>-->
+                    <!--                                                <t t-foreach="o.sla_id.sla_rule_ids" t-as="rule">-->
+                    <!--                                                    <tr>-->
+                    <!--                                                        <td class="text-uppercase">-->
+                    <!--                                                            <span t-esc="rule.service_type"/>-->
+                    <!--                                                        </td>-->
+                    <!--                                                        <td>-->
+                    <!--                                                            <t t-if="rule.issue_priority == '0'">Low</t>-->
+                    <!--                                                            <t t-if="rule.issue_priority == '1'">Normal</t>-->
+                    <!--                                                            <t t-if="rule.issue_priority == '2'">High</t>-->
+                    <!--                                                        </td>-->
+                    <!--                                                        <td>-->
+                    <!--                                                            <span t-esc="rule.action_time"/>-->
+                    <!--                                                        </td>-->
+                    <!--                                                    </tr>-->
+                    <!--                                                </t>-->
+                    <!--                                            </table>-->
+                    <!--                                            <h4>Average reaction time:-->
+                    <!--                                                <t t-if="int(o.average_reaction_time)==0">0-1</t>-->
+                    <!--                                                <t t-if="int(o.average_reaction_time)&gt;0">-->
+                    <!--                                                    <span t-esc="int(o.average_reaction_time)"/>-->
+                    <!--                                                </t>-->
+                    <!--                                                min-->
+                    <!--                                            </h4>-->
+                    <!--                                        </td>-->
+                    <!--                                        <td class="text-right" style="vertical-align: middle;">-->
+                    <!--                                            <img t-att-src="o.issue_per_result" style="max-height:200px"/>-->
+                    <!--                                        </td>-->
+                    <!--                                    </tr>-->
+                    <!--                                </t>-->
+
+                    <!--                                <tr>-->
+                    <!--                                    <td class="text-center" style="vertical-align: middle;">-->
+                    <!--                                        <h3>Status</h3>-->
+                    <!--                                        <img t-att-src="o.issue_per_stage" style="max-height:200px;"/>-->
+                    <!--                                    </td>-->
+                    <!--                                    <td class="text-center" style="vertical-align: middle;">-->
+                    <!--                                        <h3>Priority</h3>-->
+                    <!--                                        <img t-att-src="o.issue_per_priority" style="max-height:200px"/>-->
+                    <!--                                    </td>-->
+                    <!--                                </tr>-->
+                    <!--                            </table>-->
+                    <!--                        </div>-->
+                    <!--                    </t>-->
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

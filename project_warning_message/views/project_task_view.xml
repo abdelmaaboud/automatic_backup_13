@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="view_task_form2_warning_text">
+           <field name="name">view_task_form2_warning_text</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='description']" position="before">
+                    <field name="warning_text" widget="html" attrs="{'invisible': [('warning_text', '=', False)], 'readonly': True, 'nolabel': True}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

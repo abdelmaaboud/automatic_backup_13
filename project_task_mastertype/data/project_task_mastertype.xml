@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="project.task.mastertype" id="project_task_mastertype.task">
+            <field name="name">Task</field>
+            <field name="code">TASK</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record model="project.task.mastertype" id="project_task_mastertype.issue">
+            <field name="name">Ticket</field>
+            <field name="code">TICKET</field>
+            <field name="sequence">2</field>
+        </record>
+
+        <record model="project.task.mastertype" id="project_task_mastertype.rfc">
+            <field name="name">Request for Change</field>
+            <field name="code">RFC</field>
+            <field name="sequence">10</field>
+        </record>
+    </data>
+</odoo>

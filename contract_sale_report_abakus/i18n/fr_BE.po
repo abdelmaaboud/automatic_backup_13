@@ -1,0 +1,188 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_order_improvements
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0e-20171205\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-02 17:04+0000\n"
+"PO-Revision-Date: 2018-03-02 18:11+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fr_BE\n"
+"X-Generator: Poedit 2.0.1\n"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "<span><strong>Delivery Method:</strong><br/></span>"
+msgstr "<span><strong>Méthode de livraison :</strong><br/></span>"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "<span><strong>Payment Term:</strong><br/></span>"
+msgstr "<span><strong>Conditions de paiement :</strong><br/></span>"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "<span><strong>Reference:</strong><br/></span>"
+msgstr "<span><strong>Référence :</strong><br/></span>"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "<span><strong>Representative:</strong><br/></span>"
+msgstr "<span><strong>Conseiller :</strong><br/></span>"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "<span><strong>Requestor:</strong><br/></span>"
+msgstr "<span><strong>Demandeur :</strong><br/></span>"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "<strong>Expiration Date:</strong><br/>"
+msgstr "<strong>Date de validité :</strong><br/>"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "<strong>Order Date:</strong><br/>"
+msgstr "<strong>Date de commande :</strong><br/>"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "<strong>Quotation Date:</strong><br/>"
+msgstr "<strong>Date d'offre :</strong><br/>"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "<strong>Total Without Taxes</strong>"
+msgstr "<strong>Total hors taxes</strong>"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "<strong>Total</strong>"
+msgstr "<strong>Total à payer</strong>"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "Acceptance signifies the customer’s agreement on the proposed solutions, technology and services. Subject to prior information to the client, AbAKUS it-solutions reserves the right to propose similar or equivalent equipment if the product ordered is no longer available."
+msgstr "L’acceptation marque l'accord du client sur les solutions, la technologie et les prestations proposées. Moyennant information préalable au client, AbAKUS it-solutions se réserve le droit de proposer du matériel similaire ou équivalent si le produit commandé n’est plus disponible."
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "All plans, descriptive literature, product specifications and all descriptions or illustrations are given for the sole purpose of providing an indicative idea of the products they describe."
+msgstr "L’ensemble des plans, de la documentation descriptive, des spécifications des produits et toutes les descriptions ou illustrations sont faits à la seule fin de donner une idée indicative des produits qui y sont décrits."
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "Amount"
+msgstr "Montant"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.view_sale_order_attachments
+msgid "Attach a file"
+msgstr "Joindre un fichier"
+
+#. module: sale_order_improvements
+#: model:ir.model.fields,field_description:sale_order_improvements.field_sale_order_attachments_ids
+#: model:ir.ui.view,arch_db:sale_order_improvements.view_sale_order_attachments
+msgid "Attachments"
+msgstr "Pièces jointes"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.quotation_tree_with_reference
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_client_order_ref_move_view
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_tree_with_reference
+msgid "Customer Ref."
+msgstr "Réf. client"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "Description"
+msgstr "Description"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "Disc.(%)"
+msgstr "Rem.(%)"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.quotation_tree_with_reference
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_client_order_ref_move_view
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_tree_with_reference
+msgid "Internal Ref."
+msgstr "Réf. interne"
+
+#. module: sale_order_improvements
+#: model:ir.model.fields,field_description:sale_order_improvements.field_sale_order_internal_order_ref
+msgid "Internal Reference"
+msgstr "Référence interne"
+
+#. module: sale_order_improvements
+#: model:ir.model.fields,field_description:sale_order_improvements.field_sale_order_header_text
+msgid "Optional header text"
+msgstr "En-tête optionnel"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_title_report_improved
+msgid "Order"
+msgstr "Commande"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "Price"
+msgstr "Prix"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_title_report_improved
+msgid "Quotation"
+msgstr "Devis"
+
+#. module: sale_order_improvements
+#: model:ir.model,name:sale_order_improvements.model_sale_order
+msgid "Sales Order"
+msgstr "Commande de ventes"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "Taxes"
+msgstr "Taxes"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "The invoice will be sent and will be due upon delivery of the goods and/or services."
+msgstr "La facture sera envoyée et due dès livraison des biens et/ou des services."
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "The order is placed by returning this offer dated and signed, with the signature preceded by the words “read and approved”. Confirmation of the order can also be made by email or by online approval on our internet portal."
+msgstr "La commande se fait par retour de cette offre datée, signée et précédée de la mention « lu et approuvé ». La confirmation de commande peut également se faire par email ou par approbation en ligne sur notre portail."
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "Unless included in the list of products and services offered, installation and configuration costs are not included in this offer."
+msgstr "Sauf si repris dans la liste des produits et services offerts, les frais d’installation et de configuration ne sont pas compris dans cette offre."
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "Unless otherwise mentioned, the general conditions of AbAKUS it-solutions apply. By accepting this offer the customer acknowledges that he/she has read and accepted them. The general conditions of sale are available at www.abakusitsolutions.eu/company/general-conditions"
+msgstr "Sauf mention contraire, les conditions générales d’AbAKUS it-solutions sont d’application. En acceptant cette offre le client reconnait avoir pu en prendre connaissance et les accepter. Les conditions générales de vente sont disponibles sur www.abakusitsolutions.eu/company/general-conditions"
+
+#. module: sale_order_improvements
+#: model:ir.ui.view,arch_db:sale_order_improvements.sale_order_report_improved
+msgid "VAT:"
+msgstr "TVA :"
+
+#. module: sale_order_improvements
+#: model:ir.model,name:sale_order_improvements.model_sale_order_special_condition
+msgid "sale.order.special.condition"
+msgstr "sale.order.special.condition"

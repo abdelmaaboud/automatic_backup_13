@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_bonus" model="ir.actions.act_window">
+        <field name="name">Bonus</field>
+        <field name="res_model">hr.bonus</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Bonus"
+              id="menu_bonus"
+              sequence="5" action="action_bonus" web_icon="hr_bonus,static/description/menu.png"/>
+</odoo>

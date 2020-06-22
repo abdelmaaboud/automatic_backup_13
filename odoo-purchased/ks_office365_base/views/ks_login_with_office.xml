@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <template id="ks_office365_base.login" name='Office Odoo Login' inherit_id="web.login">
+        <xpath expr="//form" position="inside">
+            <t t-set='ks_office_url' t-value="request.env['ks_office365.settings'].ks_get_code_url()"/>
+            <a t-att-href="ks_office_url" class="btn btn-danger btn-block"
+               style="color: white; margin-top: 0.5em; margin-bottom: 0.5em; width: fit-content;">Login with Office 365
+            </a>
+        </xpath>
+    </template>
+</odoo>

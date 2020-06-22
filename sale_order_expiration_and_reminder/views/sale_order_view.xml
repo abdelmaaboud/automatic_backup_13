@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="sale_order_expiration_date_view">
+        <field name="name">Sale order expiration date</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook[last()]" position="inside">
+                <page string="Consultancy Contract">
+                    <group name="consultancy_settings">
+                        <group>
+                            <field name="consultancy_expiration_selection"/>
+                            <field name="consultancy_expiration_date" attrs="{'invisible': [('consultancy_expiration_selection', '=', 'not_applicable')]}"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="account_invoice_with_delivery_method_form">
+        <field name="name">account.invoice.with.delivery.method.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//div[@groups='base.group_multi_currency']" position="after">
+                    <field name="carrier_id" attrs="{'readonly': [('state', 'in', ('open', 'paid', 'cancel'))]}"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

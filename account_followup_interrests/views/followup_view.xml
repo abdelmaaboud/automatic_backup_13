@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="account_followup_interest_form" model="ir.ui.view">
+        <field name="name">account.followup_interest_form</field>
+        <field name="model">account_followup.followup</field>
+        <field name="inherit_id" ref="account_reports_followup.view_account_followup_followup_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="(//field[@name='followup_line_ids'])" position="before">
+                <group string="Late Interests">
+                    <group>
+                        <field name="late_interest_percentage" />
+                        <field name="late_allowance" widget="monetary" />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_followup_line_interests_tree" model="ir.ui.view">
+        <field name="name">account.followup_line_interest_tree</field>
+        <field name="model">account_followup.followup.line</field>
+        <field name="inherit_id" ref="account_reports_followup.view_account_followup_followup_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="(//field[@name='manual_action'])" position="after">
+                <field name="compute_interests" />
+                <field name="compute_allowance" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_followup_line_interests_form" model="ir.ui.view">
+        <field name="name">account.followup_line_interest_form</field>
+        <field name="model">account_followup.followup.line</field>
+        <field name="inherit_id" ref="account_reports_followup.view_account_followup_followup_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="(//div[last()])" position="after">
+                <div>
+                    <field name="compute_interests" />
+                    <label for="compute_interests"/>
+                </div>
+                <div>
+                    <field name="compute_allowance" />
+                    <label for="compute_allowance"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Show info regarding followup in the move line form -->
+    <record id="account_move_line_interests_form" model="ir.ui.view">
+        <field name="name">account.move_line_interests_form</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="(//field[@name='followup_date'])" position="after">
+                <field name="payments_interests" attrs="{'invisible': [('full_reconcile_id','!=',False)]}"/>
+                <field name="payments_allowances" attrs="{'invisible': [('full_reconcile_id','!=',False)]}" />
+                <field name="late_days" attrs="{'invisible': [('full_reconcile_id','!=',False)]}" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

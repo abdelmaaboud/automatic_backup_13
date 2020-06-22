@@ -1,0 +1,617 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* ks_office365_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-14 13:07+0000\n"
+"PO-Revision-Date: 2020-01-14 13:07+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ks_office365_base
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_authentication_redirect_fail_page
+msgid "<span class=\"tick\" style=\"font-size: 90px;                             line-height: 1;                             margin-bottom: -11px\">\n"
+"                  ✕\n"
+"              </span>\n"
+"              <span>Failed</span>"
+msgstr "<span class=\"tick\" style=\"font-size: 90px;                             line-height: 1;                             margin-bottom: -11px\">\n"
+"                  ✕\n"
+"              </span>\n"
+"              <span>Failed</span>"
+
+#. module: ks_office365_base
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_authentication_redirect_success_page
+msgid "<span class=\"tick\" style=\"font-size: 90px;                             line-height: 1;                             margin-bottom: -30px;\">\n"
+"                  ✔\n"
+"              </span>\n"
+"              <span>Successful</span>"
+msgstr "<span class=\"tick\" style=\"font-size: 90px;                             line-height: 1;                             margin-bottom: -30px;\">\n"
+"                  ✔\n"
+"              </span>\n"
+"              <span>Successful</span>"
+
+#. module: ks_office365_base
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:232
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:233
+#: code:addons/ks_office365_base/models/ks_office365.py:232
+#: code:addons/ks_office365_base/models/ks_office365.py:233
+#, python-format
+msgid "Access Denied!\n"
+" User is not authenticated."
+msgstr "Access Denied!\n"
+" User is not authenticated."
+
+#. module: ks_office365_base
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:95
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:96
+#: code:addons/ks_office365_base/models/ks_office365.py:95
+#: code:addons/ks_office365_base/models/ks_office365.py:96
+#, python-format
+msgid "Access Denied! \n"
+"User is not authenticated."
+msgstr "Access Denied! \n"
+"User is not authenticated."
+
+#. module: ks_office365_base
+#: model:ir.module.category,description:ks_office365_base.module_category_office_rights
+msgid "Access rights for Office365"
+msgstr "Access rights for Office365"
+
+#. module: ks_office365_base
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_office365_logs_filter
+#: selection:ks_office365.logs,ks_module_type:0
+#: selection:ks_office365.logs,ks_operation:0
+#: selection:ks_office365.logs,ks_operation_type:0
+msgid "Authentication"
+msgstr "Authentication"
+
+#. module: ks_office365_base
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:122
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:266
+#: code:addons/ks_office365_base/models/ks_office365.py:122
+#: code:addons/ks_office365_base/models/ks_office365.py:266
+#, python-format
+msgid "Authentication failed!\n"
+" Check log to know more"
+msgstr "Authentication failed!\n"
+" Check log to know more"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_res_users_ks_auth_token
+msgid "Authorization Token"
+msgstr "Authorization Token"
+
+#. module: ks_office365_base
+#: selection:ks.deleted,ks_module:0
+#: selection:ks.office.job,ks_module:0
+#: selection:ks_office365.logs,ks_module_type:0
+msgid "Calendar"
+msgstr "Calendar"
+
+#. module: ks_office365_base
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_office365_view_users_form
+msgid "Clear Token"
+msgstr "Clear Token"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_settings_ks_client_id
+msgid "Client ID"
+msgstr "Client ID"
+
+#. module: ks_office365_base
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:70
+#: code:addons/ks_office365_base/models/ks_office365.py:70
+#, python-format
+msgid "Client ID, Client Secret and Redirect URI are required"
+msgstr "Client ID, Client Secret and Redirect URI are required"
+
+#. module: ks_office365_base
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:71
+#: code:addons/ks_office365_base/models/ks_office365.py:71
+#, python-format
+msgid "Client ID, Client Secret or Redirect URI not entered!"
+msgstr "Client ID, Client Secret or Redirect URI not entered!"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_settings_ks_client_secret
+msgid "Client Secret"
+msgstr "Client Secret"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_res_users_ks_code
+msgid "Code"
+msgstr "Code"
+
+#. module: ks_office365_base
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_office_jobs_filter
+#: selection:ks.office.job,ks_status:0
+msgid "Completed"
+msgstr "Completed"
+
+#. module: ks_office365_base
+#: selection:ks.deleted,ks_module:0
+#: selection:ks.office.job,ks_module:0
+#: selection:ks_office365.logs,ks_module_type:0
+msgid "Contact"
+msgstr "Contact"
+
+#. module: ks_office365_base
+#: selection:ks_office365.logs,ks_operation_type:0
+msgid "Create"
+msgstr "Create"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_deleted_create_uid
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_logs_create_uid
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_settings_create_uid
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office_job_create_uid
+msgid "Created by"
+msgstr "Created by"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_deleted_create_date
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_logs_create_date
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_settings_create_date
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office_job_create_date
+msgid "Created on"
+msgstr "Created on"
+
+#. module: ks_office365_base
+#: model:ir.ui.view,arch_db:ks_office365_base.settings_form_view
+msgid "Credentials"
+msgstr "Credentials"
+
+#. module: ks_office365_base
+#: selection:ks_office365.logs,ks_operation_type:0
+msgid "Delete"
+msgstr "Delete"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_deleted_display_name
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_logs_display_name
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_settings_display_name
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office_job_display_name
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_res_users_ks_auth_user_email
+msgid "Email"
+msgstr "Email"
+
+#. module: ks_office365_base
+#. openerp-web
+#: code:addons/addons/odoo-office-365/ks_office365_base/static/src/js/ks_message.js:11
+#: code:addons/ks_office365_base/static/src/js/ks_message.js:11
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_office_jobs_filter
+#: selection:ks.office.job,ks_status:0
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: ks_office365_base
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:188
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:190
+#: code:addons/ks_office365_base/models/ks_office365.py:188
+#: code:addons/ks_office365_base/models/ks_office365.py:190
+#, python-format
+msgid "Error Logging In \n"
+"Reason: %serror_description"
+msgstr "Error Logging In \n"
+"Reason: %serror_description"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office_job_ks_error_text
+msgid "Error Message"
+msgstr "Error Message"
+
+#. module: ks_office365_base
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_office365_logs_filter
+#: selection:ks_office365.logs,ks_status:0
+msgid "Failed"
+msgstr "Failed"
+
+#. module: ks_office365_base
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_office365_view_users_form
+msgid "Generate Token"
+msgstr "Generate Token"
+
+#. module: ks_office365_base
+#: model:ir.ui.menu,name:ks_office365_base.ks_office365_menus
+msgid "Home"
+msgstr "Home"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_deleted_id
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_logs_id
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_settings_id
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office_job_id
+msgid "ID"
+msgstr "ID"
+
+#. module: ks_office365_base
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_office_jobs_filter
+#: selection:ks.office.job,ks_status:0
+msgid "In Process"
+msgstr "In Process"
+
+#. module: ks_office365_base
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:109
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:162
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:247
+#: code:addons/ks_office365_base/models/ks_office365.py:109
+#: code:addons/ks_office365_base/models/ks_office365.py:162
+#: code:addons/ks_office365_base/models/ks_office365.py:247
+#, python-format
+msgid "Internet connected failed!"
+msgstr "Internet connected failed!"
+
+#. module: ks_office365_base
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:260
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:261
+#: code:addons/ks_office365_base/models/ks_office365.py:260
+#: code:addons/ks_office365_base/models/ks_office365.py:261
+#, python-format
+msgid "Invalid value of Client Secret!"
+msgstr "Invalid value of Client Secret!"
+
+#. module: ks_office365_base
+#: model:ir.actions.server,name:ks_office365_base.action_account_invoice_update_taxes
+msgid "Job Completed"
+msgstr "Job Completed"
+
+#. module: ks_office365_base
+#: model:ir.ui.menu,name:ks_office365_base.ks_office365_jobs_menu_id
+msgid "Jobs"
+msgstr "Jobs"
+
+#. module: ks_office365_base
+#: model:ir.model,name:ks_office365_base.model_ks_deleted
+msgid "Keeps records of office 365 deleted records in odoo databases"
+msgstr "Keeps records of office 365 deleted records in odoo databases"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_settings_ks_dont_sync
+msgid "Ks Dont Sync"
+msgstr "Ks Dont Sync"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_res_users_ks_is_login_user
+msgid "Ks Is Login User"
+msgstr "Ks Is Login User"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_deleted_ks_module
+msgid "Ks Module"
+msgstr "Ks Module"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_deleted_ks_odoo_id
+msgid "Ks Odoo"
+msgstr "Ks Odoo"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_deleted_ks_office_id
+msgid "Ks Office"
+msgstr "Ks Office"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_settings_ks_office_login
+msgid "Ks Office Login"
+msgstr "Ks Office Login"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_settings_ks_office_login_code
+msgid "Ks Office Login Code"
+msgstr "Ks Office Login Code"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_deleted_ks_user_id
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_logs_ks_user
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_settings_ks_user
+msgid "Ks User"
+msgstr "Ks User"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_deleted___last_update
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_logs___last_update
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_settings___last_update
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office_job___last_update
+msgid "Last Modified on"
+msgstr "Last Modified on"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_deleted_write_uid
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_logs_write_uid
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_settings_write_uid
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office_job_write_uid
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_deleted_write_date
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_logs_write_date
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_settings_write_date
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office_job_write_date
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_logs_ks_date
+msgid "Log Date"
+msgstr "Log Date"
+
+#. module: ks_office365_base
+#: model:ir.ui.view,arch_db:ks_office365_base.login
+msgid "Login with Office 365"
+msgstr "Login with Office 365"
+
+#. module: ks_office365_base
+#: model:ir.ui.menu,name:ks_office365_base.ks_office365_logs_sidemenu
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_office365_logs_filter
+msgid "Logs"
+msgstr "Logs"
+
+#. module: ks_office365_base
+#: selection:ks.deleted,ks_module:0
+#: selection:ks.office.job,ks_module:0
+#: selection:ks_office365.logs,ks_module_type:0
+msgid "Mail"
+msgstr "Mail"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_logs_ks_message
+msgid "Message"
+msgstr "Message"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office_job_ks_module
+msgid "Module"
+msgstr "Module"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_deleted_name
+msgid "Name"
+msgstr "Name"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_logs_ks_odoo_id
+msgid "Odoo Id"
+msgstr "Odoo Id"
+
+#. module: ks_office365_base
+#: selection:ks.office.job,ks_job:0
+#: selection:ks_office365.logs,ks_operation:0
+msgid "Odoo to Office"
+msgstr "Odoo to Office"
+
+#. module: ks_office365_base
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_office365_logs_filter
+msgid "Odoo to office"
+msgstr "Odoo to office"
+
+#. module: ks_office365_base
+#: model:ir.actions.act_window,name:ks_office365_base.ks_office_jobs_action
+msgid "Office 365 Jobs"
+msgstr "Office 365 Jobs"
+
+#. module: ks_office365_base
+#: model:ir.actions.act_window,name:ks_office365_base.ks_logs_action_item_id
+msgid "Office 365 Logs"
+msgstr "Office 365 Logs"
+
+#. module: ks_office365_base
+#: model:ir.actions.act_window,name:ks_office365_base.settings_action_id
+msgid "Office 365 Settings"
+msgstr "Office 365 Settings"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_logs_ks_office_id
+msgid "Office Id"
+msgstr "Office Id"
+
+#. module: ks_office365_base
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_office_jobs_filter
+msgid "Office Jobs"
+msgstr "Office Jobs"
+
+#. module: ks_office365_base
+#: selection:ks.office.job,ks_job:0
+#: selection:ks_office365.logs,ks_operation:0
+msgid "Office to Odoo"
+msgstr "Office to Odoo"
+
+#. module: ks_office365_base
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_office365_logs_filter
+msgid "Office to odoo"
+msgstr "Office to odoo"
+
+#. module: ks_office365_base
+#: model:ir.actions.server,name:ks_office365_base.ks_office_setting_actions_user
+#: model:ir.ui.menu,name:ks_office365_base.ks_office365_main_sidemenu
+msgid "Office365"
+msgstr "Office365"
+
+#. module: ks_office365_base
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_office_log_form_view
+msgid "Office365 Logs"
+msgstr "Office365 Logs"
+
+#. module: ks_office365_base
+#: model:res.groups,name:ks_office365_base.office_manager_group_id
+msgid "Office365 Manager"
+msgstr "Office365 Manager"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_logs_ks_module_type
+msgid "Office365 Module"
+msgstr "Office365 Module"
+
+#. module: ks_office365_base
+#: model:ir.module.category,name:ks_office365_base.module_category_office_rights
+msgid "Office365 Rights"
+msgstr "Office365 Rights"
+
+#. module: ks_office365_base
+#: model:ir.ui.menu,name:ks_office365_base.ks_office365_settings_menu
+msgid "Office365 Settings"
+msgstr "Office365 Settings"
+
+#. module: ks_office365_base
+#: model:res.groups,name:ks_office365_base.office_users_group_id
+msgid "Office365 Users"
+msgstr "Office365 Users"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_logs_ks_operation
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office_job_ks_job
+msgid "Operation"
+msgstr "Operation"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_logs_ks_operation_type
+msgid "Operation Type"
+msgstr "Operation Type"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_logs_ks_record_name
+msgid "Record Name"
+msgstr "Record Name"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office_job_ks_records
+msgid "Records Processed"
+msgstr "Records Processed"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_settings_ks_redirect_url
+msgid "Redirect URL"
+msgstr "Redirect URL"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_res_users_ks_auth_refresh_token
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_office365_view_users_form
+msgid "Refresh Token"
+msgstr "Refresh Token"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_settings_ks_scope
+#: model:ir.model.fields,field_description:ks_office365_base.field_res_users_ks_scope
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_office_scope_page
+msgid "Scope"
+msgstr "Scope"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_settings_rec_name
+msgid "Settings"
+msgstr "Settings"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_logs_ks_status
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office_job_ks_status
+msgid "Status"
+msgstr "Status"
+
+#. module: ks_office365_base
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_office365_logs_filter
+#: selection:ks_office365.logs,ks_status:0
+msgid "Success"
+msgstr "Success"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_ks_office365_settings_ks_sync_individual
+msgid "Sync Individual Calendar Event"
+msgstr "Sync Individual Calendar Event"
+
+#. module: ks_office365_base
+#: selection:ks.deleted,ks_module:0
+#: selection:ks.office.job,ks_module:0
+#: selection:ks_office365.logs,ks_module_type:0
+msgid "Task"
+msgstr "Task"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,help:ks_office365_base.field_ks_office365_settings_ks_sync_individual
+msgid "This will allow you to sync an event automatically when it is created or attendee is updated in odoo calendar and will send instant email notification to the attendees of the event."
+msgstr "This will allow you to sync an event automatically when it is created or attendee is updated in odoo calendar and will send instant email notification to the attendees of the event."
+
+#. module: ks_office365_base
+#: model:ir.ui.view,arch_db:ks_office365_base.ks_office365_view_users_form
+msgid "Token"
+msgstr "Token"
+
+#. module: ks_office365_base
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:118
+#: code:addons/ks_office365_base/models/ks_office365.py:118
+#, python-format
+msgid "Token generated successful!"
+msgstr "Token generated successful!"
+
+#. module: ks_office365_base
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:256
+#: code:addons/ks_office365_base/models/ks_office365.py:256
+#, python-format
+msgid "Token refreshed successful!"
+msgstr "Token refreshed successful!"
+
+#. module: ks_office365_base
+#: selection:ks_office365.logs,ks_operation_type:0
+msgid "Update"
+msgstr "Update"
+
+#. module: ks_office365_base
+#: model:ir.model.fields,field_description:ks_office365_base.field_res_users_ks_auth_user_name
+msgid "Username"
+msgstr "Username"
+
+#. module: ks_office365_base
+#: model:ir.model,name:ks_office365_base.model_res_users
+msgid "Users"
+msgstr "Users"
+
+#. module: ks_office365_base
+#. openerp-web
+#: code:addons/addons/odoo-office-365/ks_office365_base/static/src/js/ks_message.js:17
+#: code:addons/ks_office365_base/static/src/js/ks_message.js:17
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: ks_office365_base
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:216
+#: code:addons/ks_office365_base/models/ks_office365.py:216
+#, python-format
+msgid "You have to install at least one of the modules to generate token"
+msgstr "You have to install at least one of the modules to generate token"
+
+#. module: ks_office365_base
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:121
+#: code:addons/addons/odoo-office-365/ks_office365_base/models/ks_office365.py:265
+#: code:addons/ks_office365_base/models/ks_office365.py:121
+#: code:addons/ks_office365_base/models/ks_office365.py:265
+#, python-format
+msgid "error_description"
+msgstr "error_description"
+
+#. module: ks_office365_base
+#: model:ir.model,name:ks_office365_base.model_ks_office_job
+msgid "ks.office.job"
+msgstr "ks.office.job"
+
+#. module: ks_office365_base
+#: model:ir.model,name:ks_office365_base.model_ks_office365_logs
+msgid "ks_office365.logs"
+msgstr "ks_office365.logs"
+
+#. module: ks_office365_base
+#: model:ir.model,name:ks_office365_base.model_ks_office365_settings
+msgid "ks_office365.settings"
+msgstr "ks_office365.settings"
+

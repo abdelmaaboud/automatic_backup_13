@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_task_form2_inherited_improvements" model="ir.ui.view">
+            <field name="name">view_task_form2_inherited_improvements</field>
+            <field name="model">project.task</field>
+			<field name="inherit_id" ref="hr_timesheet.view_task_form2_inherited"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='timesheet_ids']//field[@name='date']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='timesheet_ids']//field[@name='date']" position="before">
+                    <field name="date_begin"/>
+                </xpath>
+                <xpath expr="//field[@name='unit_amount']" position="before">
+                    <field name="note_to_manager"/>
+                    <button name="remove_quarter" string="-" type="object" class="oe_highlight oe_inline"/>
+                </xpath>
+                <xpath expr="//field[@name='unit_amount']" position="after">
+                    <button name="add_quarter" string="+" type="object" class="oe_highlight oe_inline"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

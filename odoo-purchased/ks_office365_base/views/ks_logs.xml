@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="ks_office_log_tree_view" model="ir.ui.view">
+        <field name="name">ks_office.log.tree</field>
+        <field name="model">ks_office365.logs</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="ks_status=='success'" decoration-danger="ks_status=='failed'" create="false">
+                <field name="ks_record_name"/>
+                <field name="ks_status"/>
+                <field name="ks_operation_type"/>
+                <field name="ks_module_type"/>
+                <field name="ks_operation"/>
+                <field name="ks_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ks_office_log_form_view" model="ir.ui.view">
+        <field name="name">ks_office.log.form</field>
+        <field name="model">ks_office365.logs</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <sheet string="Office365 Logs">
+                    <div class="oe_title">
+                        <group>
+                            <group>
+                                <field name="ks_date"/>
+                            </group>
+                            <group>
+                                <field name="ks_status"/>
+                            </group>
+                            <group>
+                                <field name="ks_module_type"/>
+                            </group>
+                        </group>
+                    </div>
+                        <group style="word-break: break-all;">
+                            <field name="ks_office_id" attrs="{'invisible': [('ks_office_id', '=', '')]}"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="ks_record_name"/>
+                                <field name="ks_operation"/>
+                            </group>
+                            <group>
+                                <field name="ks_odoo_id" attrs="{'invisible': [('ks_odoo_id', '=', '0')]}"/>
+                                <field name="ks_operation_type"/>
+                            </group>
+                        </group>
+                        <group>
+                            <div class="col-12"  style="word-break: break-all;">
+                                <group>
+                                    <field name="ks_message"/>
+                                </group>
+                            </div>
+                        </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="ks_logs_action_item_id" model="ir.actions.act_window">
+        <field name="name">Office 365 Logs</field>
+        <field name="res_model">ks_office365.logs</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="ks_office365_logs_filter" model="ir.ui.view">
+        <field name="name">Office365 Logs Filter</field>
+        <field name="model">ks_office365.logs</field>
+        <field name="arch" type="xml">
+            <search string="Logs">
+                <field name="ks_status"/>
+                <field name="ks_odoo_id" filter_domain="[('ks_odoo_id', '=', self)]"/>
+                <field name="ks_office_id" filter_domain="[('ks_office_id', '=', self)]"/>
+                <field name="ks_record_name"/>
+                <field name="ks_date"/>
+                <field name="ks_operation"/>
+                <field name="ks_module_type"/>
+                <field name="ks_operation_type"/>
+
+                <filter string="Odoo to office" name="operation_odoo_to_office" domain="[('ks_operation', '=', 'odoo_to_office')]"/>
+                <filter string="Office to odoo" name="operation_office_to_odoo" domain="[('ks_operation', '=', 'office_to_odoo')]"/>
+                <separator/>
+                <filter string="Success" name="log_status_success" domain="[('ks_status', '=', 'success')]"/>
+                <filter string="Failed" name="log_status_failed" domain="[('ks_status', '=', 'failed')]"/>
+                <separator/>
+                <filter string="Authentication" name="module_authentication" domain="[('ks_module_type', '=', 'authentication')]"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<report
+			id="sale_report_deliveries_labels"
+			string="Sales delivery labels"
+			model="sale.order" 
+			report_type="qweb-pdf"
+			file="deliveries_labels.report_deliverieslabels_sale" 
+			name="deliveries_labels.report_deliverieslabels_sale"
+			/>
+
+		<template id="report_deliverieslabels_sale">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="deliveries_labels.report_deliverieslabels_sale_document" t-lang="o.partner_id.lang"/>
+				</t>
+			</t>
+		</template>
+
+		<template id="report_deliverieslabels_sale_document">
+			<t t-call="web.basic_layout">
+				<div class="page">
+					<t t-name="deliveries_labels.report_deliverieslabels_sale_document">
+						<!-- Multicompany -->
+						<t t-if="o and 'company_id' in o">
+							<t t-set="company" t-value="o.company_id"/>
+						</t>
+						<t t-if="not o or not 'company_id' in o">
+							<t t-set="company" t-value="res_company"/>
+						</t>
+						<div t-foreach="o.order_line" t-as="line">
+							<t t-set="product_uos_qty" t-value="line.product_uom_qty"/>
+							<t t-set="company" t-value="company"/>
+							<t t-set="label_name" t-value="o.name"/>
+							<t t-set="label_date" t-value="o.date_order"/>
+							<t t-set="customer" t-value="o.partner_shipping_id"/>
+							<t t-set="customer_address" t-value="o.partner_shipping_id"/>
+							<t t-set="product" t-value="line.product_id"/>
+							<t t-call="deliveries_labels.report_delivery_label_document"/>
+						</div>
+					</t>
+				</div>
+
+			</t>
+		</template>
+
+        <!-- <report 
+            id="stock_report_deliveries_labels"
+			string="Picking Delivery labels"
+			model="stock.picking" 
+			report_type="qweb-pdf"
+			file="deliveries_labels.report_deliverieslabels_stock" 
+			name="deliveries_labels.report_deliverieslabels_stock"
+		/> -->
+
+		<template id="report_deliverieslabels_stock">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="deliveries_labels.report_deliverieslabels_stock_document" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+		<template id="report_deliverieslabels_stock_document">
+			<t t-call="web.basic_layout">
+				<div class="page">
+					<t t-name="deliveries_labels.report_deliverieslabels_stock_document">
+						<t t-if="o and 'company_id' in o">
+							<t t-set="company" t-value="o.company_id"/>
+						</t>
+						<t t-if="not o or not 'company_id' in o">
+							<t t-set="company" t-value="res_company"/>
+						</t>
+
+						<div t-foreach="o.move_lines" t-as="line">
+							<t t-set="product_uos_qty" t-value="line.product_uom_qty"/>
+							<t t-set="company" t-value="company"/>
+							<t t-set="label_name" t-value="o.name"/>
+							<t t-set="label_date" t-value="o.date"/>
+							<t t-set="customer" t-value="o.partner_id"/>
+							<t t-set="customer_address" t-value="o.partner_id"/>
+							<t t-set="product" t-value="line.product_id"/>
+							<t t-call="deliveries_labels.report_delivery_label_document"/>
+						</div>
+					</t>
+				</div>
+			</t>
+		</template>
+        
+        <!-- STOCK PACK OPERATION REPORT -->   
+		<report 
+			id="stock_pack_operation_report_deliveries_labels"
+			string="Stock pack operation labels"
+			model="stock.move.line"
+			report_type="qweb-pdf"
+			file="deliveries_labels.report_deliverieslabels_stock_pack_operation" 
+			name="deliveries_labels.report_deliverieslabels_stock_pack_operation"
+		/>
+
+        <template id="report_deliverieslabels_stock_pack_operation">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="deliveries_labels.report_deliverieslabels_stock_pack_operation_document" t-lang="o.owner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+		<template id="report_deliverieslabels_stock_pack_operation_document">
+			<t t-call="web.basic_layout">
+				<div class="page">
+
+					<t t-name="deliveries_labels.report_deliverieslabels_stock_pack_operation_document">
+						<t t-if="o.picking_id and 'company_id' in o.picking_id">
+							<t t-set="company" t-value="o.picking_id.company_id"/>
+						</t>
+						<t t-if="not o.picking_id or not 'company_id' in o.picking_id">
+							<t t-set="company" t-value="res_company"/>
+						</t>
+
+						<t t-set="product_uos_qty" t-value="o.product_qty"/>
+						<t t-set="company" t-value="company"/>
+						<t t-set="label_name" t-value="o.picking_id.name"/>
+						<t t-set="label_date" t-value="o.picking_id.date"/>
+						<t t-set="customer" t-value="o.picking_id.partner_id"/>
+						<t t-set="customer_address" t-value="o.picking_id.partner_id"/>
+						<t t-set="product" t-value="o.product_id"/>
+						<t t-call="deliveries_labels.report_delivery_label_document"/>
+					</t>
+				</div>
+			</t>
+		</template>
+        
+        <!-- STOCK MOVE TRANSIENT REPORT -->   
+		<report 
+			id="stock_move_transient_report_deliveries_labels"
+			string="Stock move transient labels"
+			model="stock.move.transient" 
+			report_type="qweb-pdf"
+			file="deliveries_labels.report_deliverieslabels_stock_move_transient" 
+			name="deliveries_labels.report_deliverieslabels_stock_move_transient"
+		/>
+
+		<template id="report_deliverieslabels_stock_move_transient">
+			<t t-name="deliveries_labels.report_deliverieslabels_stock_move_transient">
+				<t t-call="web.html_container">
+					<t t-foreach="docs" t-as="o">
+						<t t-call="deliveries_labels.report_deliverieslabels_stock_move_transient_document" t-lang="o.picking_id.partner_id.lang"/>
+					</t>
+				</t>
+			</t>
+		</template>
+
+		<template id="report_deliverieslabels_stock_move_transient_document">
+			<t t-call="web.basic_layout">
+				<div class="page">
+					<t t-name="deliveries_labels.report_deliverieslabels_stock_move_transient_document">
+						<t t-if="o.picking_id and 'company_id' in o.picking_id">
+							<t t-set="company" t-value="o.picking_id.company_id"/>
+						</t>
+						<t t-if="not o.picking_id or not 'company_id' in o.picking_id">
+							<t t-set="company" t-value="res_company"/>
+						</t>
+
+						<t t-set="product_uos_qty" t-value="o.product_qty"/>
+						<t t-set="company" t-value="company"/>
+						<t t-set="label_name" t-value="o.picking_id.name"/>
+						<t t-set="label_date" t-value="o.date"/>
+						<t t-set="customer" t-value="o.picking_id.partner_id"/>
+						<t t-set="customer_address" t-value="o.picking_id.partner_id"/>
+						<t t-set="product" t-value="o.product_id"/>
+						<t t-call="deliveries_labels.report_delivery_label_document"/>
+					</t>
+				</div>
+			</t>
+		</template>
+
+        <!-- STOCK MOVE REPORT -->   
+		<report 
+			id="stock_move_report_deliveries_labels"
+			string="Stock move labels"
+			model="stock.move" 
+			report_type="qweb-pdf"
+			file="deliveries_labels.report_deliverieslabels_stock_move" 
+			name="deliveries_labels.report_deliverieslabels_stock_move"
+		/>
+
+		<template id="report_deliverieslabels_stock_move">
+			<t t-name="deliveries_labels.report_deliverieslabels_stock_move">
+				<t t-call="web.html_container">
+					<t t-foreach="docs" t-as="o">
+						<t t-call="deliveries_labels.report_deliverieslabels_stock_move_document" t-lang="o.picking_id.partner_id.lang"/>
+					</t>
+				</t>
+			</t>
+		</template>
+
+		<template id="report_deliverieslabels_stock_move_document">
+			<t t-call="web.basic_layout">
+				<div class="page">
+					<t t-name="deliveries_labels.report_deliverieslabels_stock_move_document">
+						<t t-if="o.picking_id and 'company_id' in o.picking_id">
+							<t t-set="company" t-value="o.picking_id.company_id"/>
+						</t>
+						<t t-if="not o.picking_id or not 'company_id' in o.picking_id">
+							<t t-set="company" t-value="res_company"/>
+						</t>
+
+						<t t-set="product_uos_qty" t-value="o.product_qty"/>
+						<t t-set="company" t-value="company"/>
+						<t t-set="label_name" t-value="o.picking_id.name"/>
+						<t t-set="label_date" t-value="o.date"/>
+						<t t-set="customer" t-value="o.picking_id.partner_id"/>
+						<t t-set="customer_address" t-value="o.picking_id.partner_id"/>
+						<t t-set="product" t-value="o.product_id"/>
+						<t t-call="deliveries_labels.report_delivery_label_document"/>
+					</t>
+				</div>
+			</t>
+		</template>
+        
+
+        <!-- Deliveries labels report for 1 line -->
+        <template id="report_delivery_label_document">
+            <t t-name="deliveries_labels.report_delivery_label_document">
+                <!-- you need to set this fields in the parent report
+                product_uos_qty     #float
+                company             #res.partner
+                label_name          #string
+                label_date          #string (%Y-%m-%d %H:%M:%S)
+                customer            #res.partner
+                customer_address    #res.partner
+                product             #product.template
+                -->
+				<div class="page" t-foreach="int(round(product_uos_qty))" t-as="unit">
+					<div class="oe_structure"/>
+					<div class="row">
+						<table style="width: 100%; text-align: center;">
+							<!-- Company name -->
+							
+                                <tr>
+								<td colspan="2" style="border-bottom: 1px black solid;">
+									<span t-esc="company.partner_id.name" /> / <span t-esc="company.partner_id.phone" />
+								</td>
+							</tr>
+							<!-- Label name and date -->
+							<tr>
+								<td style="font-size: 14pt;">
+									<strong><span t-esc="label_name"/></strong>
+								</td>
+								<td style="font-size: 14pt;">
+									<span t-esc="time.strftime('%d.%m.%Y',time.strptime(label_date,'%Y-%m-%d %H:%M:%S'))"/>
+								</td>
+							</tr>
+							<!-- Customer -->
+							<tr>
+								<td colspan="2" style="border: 1px black solid; margin-top: 10px; margin-bottom: 10px; padding: 5px; font-size: 12pt;">
+									<b>
+                                        <t t-if="customer.parent_id">
+                                            <span t-esc="customer.parent_id.name"/>: 
+                                        </t>
+                                        <span t-esc="customer.name" />
+                                    </b>
+								</td>
+							</tr>
+							<!-- Customer address -->
+							<tr>
+								<td colspan="2">
+									<span t-esc="customer_address.street"/>
+									<span t-esc="customer_address.zip"/> <span t-esc="customer_address.city"/>
+								</td>
+							</tr>
+							<!-- Product - QoU - barcode - SKU -->
+							<tr>
+								<td colspan="2" style="border: 1px solid black; margin-top: 10px; margin-bottom: 10px; padding: 5px; font-size: 12pt">
+									<b>
+                                        <t t-if="len(product.name) &gt; 50">
+                                            <span t-esc="product.name[:49]"/>...
+                                        </t>
+                                        <t t-if="len(product.name) &lt; 51">
+                                            <span t-esc="product.name"/>
+                                        </t>
+                                    </b>
+                                    <br />Ref:
+                                    <span style="font-size: 11pt;" t-esc="product.default_code"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Quantity:
+								</td>
+								<td>
+									<span t-esc="unit_index + 1" />
+									/
+									<span t-esc="int(product_uos_qty)"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<span t-if="product.barcode">
+										<img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', product.barcode, 600, 100)" style="margin-top: 5px; width:270px; height:40px"/>
+                                        <br />
+                                        <span t-esc="product.barcode"/>
+									</span>
+								</td>
+							</tr>
+							<!-- END -->
+							<tr>
+								<td colspan="2">
+									<img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="margin-top: 2px; height: 75px;"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			    <div class="oe_structure"/>
+		    </t>
+		</template>
+	</data>
+</odoo>

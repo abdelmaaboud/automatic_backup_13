@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="sale_order_change_create_invoice_action_form_view" model="ir.ui.view">
+        <field name="name">sale_order_change_create_invoice_action_form_view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_management.sale_order_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[1]" position="attributes">
+                <attribute name="type">object</attribute>
+                <attribute name="name">action_create_invoice</attribute>
+            </xpath>
+            <xpath expr="//button[2]" position="attributes">
+                <attribute name="type">object</attribute>
+                <attribute name="name">action_create_invoice</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

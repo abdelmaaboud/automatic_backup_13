@@ -1,0 +1,83 @@
+<odoo>
+    <t t-name="barcode_scanner.partner_outgoing_picking">
+        <ol class="breadcrumb">
+            <li id="home_breadcrumb"><a href="javascript:">Home</a></li>
+            <li id="partners_breadcrumb"><a href="javascript:">Partners</a></li>
+            <li id="partner_breadcrumb"><a href="javascript:"><t t-esc="widget.partner_key"/></a></li>
+            <li class="active"><t t-esc="widget.picking.name"/></li>
+        </ol>
+        <div class="container-fluid text-center">
+            <h3 class="text-center">Outgoing Picking</h3>
+            <div class="row" t-if="widget.picking">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                    <h2 class="text-left"> <t t-esc="widget.picking.name"></t></h2>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Products</div>
+
+                        <div class="panel-body">
+                            <div class="row" style="display:flex; flex-wrap: wrap;">
+                                <t t-foreach="widget.picking.moves" t-as="move">
+                                    <t t-call="barcode_scanner.outgoing_picking_product"/>
+                                </t>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <button id="validate_picking_button" class="btn btn-default">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="barcode_scanner.outgoing_picking_product">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+            <div class="thumbnail">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <img t-if="product.image" t-attf-src="data:image/png;base64,{{product.image}}" class="img-responsive"/>
+                        <img t-else="" src="/barcode_scanner/static/src/image/image-not-found.jpg" class="img-responsive"/>
+                    </div>
+                    <div class="col-xs-8">
+                         <div class="text-left">
+                            <p> Name :  <t t-esc="move.product.name"/> </p>
+                            <p t-if="move.product.ref"> Reference :  <t t-esc="move.product.ref"/> </p>
+                            <p t-if="move.product.barcode"> Barcode :  <t t-esc="move.product.barcode"/> </p>
+                            <p t-if="widget.picking.origin"> Document Source :  <t t-esc="widget.picking.origin"/> </p>
+                        </div>
+                    </div>
+                </div>
+                <hr style="magin:0px; padding:0px;" />
+                <t t-if="move.has_move_lines">
+                    <t t-foreach="move.move_lines" t-as="move_line">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-4">
+                                <p style="magin:0px; padding:0px;"> Ordered : <t t-esc="move_line.product_uom_qty"/> </p>
+                            </div>
+                            <div class="col-xs-6 col-sm-4">
+                                <p style="magin:0px; padding:0px;"> Reserved : <t t-esc="move_line.product_qty"/> </p>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <div class="input-group number-spinner">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                    </span>
+                                    <input t-att-value="move_line.selected" t-att-data-barcode="move.product.barcode" 
+                                            t-attf-id="move_line_{{move_line.id}}" type="number" class="form-control text-center"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-right mt24">
+                                <p> FROM : <t t-esc="move_line.location.display_name"/> </p>
+                            </div>
+                        </div>
+                        <hr t-if="move_line_index != move.move_lines.length - 1"/>
+                    </t>
+                </t>
+            </div>
+        </div>
+    </t>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="edit_project_tasks_integration">
+           <field name="name">edit_project_tasks_integration</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='misc']" position="inside">
+                    <field name="accept_email_from_support" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

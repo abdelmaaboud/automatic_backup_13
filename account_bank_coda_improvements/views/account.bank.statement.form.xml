@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record model="ir.ui.view" id="account_bank_statement_form_improved">
+        <field name="name">account.bank.statement.form</field>
+        <field name="model">account.bank.statement</field>
+        <field name="inherit_id" ref="account.view_bank_statement_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="(//notebook)" position="before">
+                <label for="bank_account_balance" /> <field name="bank_account_balance" class="oe_inline" /> €
+            </xpath>
+        </field>
+    </record>
+</odoo>

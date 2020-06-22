@@ -1,0 +1,759 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* contract_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0e-20180829\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-13 11:00+0000\n"
+"PO-Revision-Date: 2018-11-13 12:15+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: de\n"
+"X-Generator: Poedit 2.2\n"
+
+#. module: contract_report
+#: model:mail.template,body_html:contract_report.email_template_service_report
+msgid ""
+"\n"
+"<div style=\"font-family: Arial, Helvetica, Calibri, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; padding: 0 5px 0 5px; link\">\n"
+"\n"
+"    <p>Dear client,</p>\n"
+"\n"
+"    <p>Please find attached the service report</p>\n"
+"    \n"
+"    <p style=\"border-left: 2px solid #E97B2E; margin-left: 10px; padding-left: 5px;\">\n"
+"        &nbsp;&nbsp;<strong>INFORMATION</strong><br />\n"
+"        &nbsp;&nbsp;Client: <strong>${object.partner_id.name}</strong><br />\n"
+"        &nbsp;&nbsp;Contact person: <strong>${object.manager_id.name}</strong><br />\n"
+"    </p>  \n"
+"        \n"
+"    <p>Don't hesitate to contact us if you have any question.</p>\n"
+"    <p>Thanks a lot for having chosen ${object.company_id.name or 'us'}!</p>\n"
+"\n"
+"    <!-- SIGNATURE -->\n"
+"    <div style=\"width: 100%; margin: 0px; padding: 0px; background-color: #E97B2E; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;\">\n"
+"        <h3 style=\"margin: 0px; padding: 10px 15px; font-size: 14px; color: #DDD;\">\n"
+"            <strong>${object.company_id.name}</strong></h3>\n"
+"    </div>\n"
+"    <div style=\"width: 100% -15px; margin: 0px; padding: 5px 15px; line-height: 16px; background-color: #DDD; border-bottom-right-radius: 5px 5px; border-bottom-left-radius: 5px 5px; \">\n"
+"        <span style=\"color: #222; margin-bottom: 5px; display: block; \">\n"
+"        % if object.company_id.street:\n"
+"            ${object.company_id.street}<br/>\n"
+"        % endif\n"
+"        % if object.company_id.street2:\n"
+"            ${object.company_id.street2}<br/>\n"
+"        % endif\n"
+"        % if object.company_id.city or object.company_id.zip:\n"
+"            ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+"        % endif\n"
+"        % if object.company_id.country_id:\n"
+"            ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"        % endif\n"
+"        </span>\n"
+"        % if object.company_id.phone:\n"
+"            <div style=\"margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; \">\n"
+"                Phone: &nbsp; ${object.company_id.phone}\n"
+"            </div>\n"
+"        % endif\n"
+"         % if object.company_id.fax:\n"
+"            <div style=\"margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; \">\n"
+"                Fax: &nbsp; ${object.company_id.fax}\n"
+"            </div>\n"
+"        % endif\n"
+"        % if object.company_id.website:\n"
+"            <div>\n"
+"                <a href=\"${object.company_id.website}\">www.abakusitsolutions.eu</a>\n"
+"            </div>\n"
+"        %endif\n"
+"    </div>\n"
+"</div>\n"
+"            "
+msgstr ""
+"\n"
+"<div style=\"font-family: Arial, Helvetica, Calibri, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; padding: 0 5px 0 5px; link\">\n"
+"\n"
+"    <p>Sehr geehrter Kunde,</p>\n"
+"\n"
+"    <p>anbei Ihr Dienstleistungsbericht</p>\n"
+"    \n"
+"    <p style=\"border-left: 2px solid #E97B2E; margin-left: 10px; padding-left: 5px;\">\n"
+"        &nbsp;&nbsp;<strong>INFORMATION</strong><br />\n"
+"        &nbsp;&nbsp;Kunde: <strong>${object.partner_id.name}</strong><br />\n"
+"        &nbsp;&nbsp;Ansprechpartner: <strong>${object.manager_id.name}</strong><br />\n"
+"    </p>  \n"
+"        \n"
+"    <p>Bei Fragen stehen wir Ihnen gerne zur Verfügung.</p>\n"
+"    <p>Wir danken Ihnen für Ihre freundliche Zusammenarbeit mit ${object.company_id.name or 'uns'}, Ihr Specialist für IT Komfort</p>\n"
+"\n"
+"    <!-- SIGNATURE -->\n"
+"    <div style=\"width: 100%; margin: 0px; padding: 0px; background-color: #E97B2E; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;\">\n"
+"        <h3 style=\"margin: 0px; padding: 10px 15px; font-size: 14px; color: #DDD;\">\n"
+"            <strong>${object.company_id.name}</strong></h3>\n"
+"    </div>\n"
+"    <div style=\"width: 100% -15px; margin: 0px; padding: 5px 15px; line-height: 16px; background-color: #DDD; border-bottom-right-radius: 5px 5px; border-bottom-left-radius: 5px 5px; \">\n"
+"        <span style=\"color: #222; margin-bottom: 5px; display: block; \">\n"
+"        % if object.company_id.street:\n"
+"            ${object.company_id.street}<br/>\n"
+"        % endif\n"
+"        % if object.company_id.street2:\n"
+"            ${object.company_id.street2}<br/>\n"
+"        % endif\n"
+"        % if object.company_id.city or object.company_id.zip:\n"
+"            ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+"        % endif\n"
+"        % if object.company_id.country_id:\n"
+"            ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"        % endif\n"
+"        </span>\n"
+"        % if object.company_id.phone:\n"
+"            <div style=\"margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; \">\n"
+"                Telefon: &nbsp; ${object.company_id.phone}\n"
+"            </div>\n"
+"        % endif\n"
+"         % if object.company_id.fax:\n"
+"            <div style=\"margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; \">\n"
+"                Fax: &nbsp; ${object.company_id.fax}\n"
+"            </div>\n"
+"        % endif\n"
+"        % if object.company_id.website:\n"
+"            <div>\n"
+"                <a href=\"${object.company_id.website}\">www.abakusitsolutions.eu</a>\n"
+"            </div>\n"
+"        %endif\n"
+"    </div>\n"
+"</div>\n"
+"            "
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "\"On-Site\" on site intervention / appointment"
+msgstr "\"On-Site\" Arbeiten vor-Ort beim Kunden / auf Termin"
+
+#. module: contract_report
+#: model:mail.template,subject:contract_report.email_template_service_report
+msgid "${object.company_id.name|safe}: Service Report"
+msgstr "${object.company_id.name|safe}: Dienstleistungsbericht"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "% of the prepaid units"
+msgstr "% der vertraglichen Mindestleistung"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid ""
+") <br/>\n"
+"                                                        <span class=\"tdTitle\">Assigned to:</span><br/>"
+msgstr ""
+") <br/>\n"
+"                                                        <span class=\"tdTitle\">Zugewiesen an:</span><br/>"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid ""
+") <br/>\n"
+"                                                    <span class=\"tdTitle\">Assigned to:</span><br/>"
+msgstr ""
+") <br/>\n"
+"                                                    <span class=\"tdTitle\">Zugewiesen an:</span><br/>"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "* Based on"
+msgstr "* Basierend auf"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "0-1"
+msgstr "0-1"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid ""
+"<br/>\n"
+"                                                        <span class=\"tdTitle\">Created by:</span><br/>"
+msgstr ""
+"<br/>\n"
+"                                                        <span class=\"tdTitle\">Angelegt von:</span><br/>"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid ""
+"<br/>\n"
+"                                                    <span class=\"tdTitle\">Created by:</span><br/>"
+msgstr ""
+"<br/>\n"
+"                                                    <span class=\"tdTitle\">Angelegt von:</span><br/>"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid ""
+"<small>*All prices plus VAT, where applicable.</small><br/>\n"
+"                                <small>The present report is not an invoice.</small>"
+msgstr ""
+"<small>Alle Preise zzgl. MWST, soweit anwendbar.</small><br/>\n"
+"                                <small>Der vorliegende Bericht ist keine Rechnung.</small>"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "<span class=\"issueTimesheetsTitle\">Timesheets related to this issue:</span>"
+msgstr "<span class=\"issueTimesheetsTitle\">Dientstleistungen in Zusammenhang mit diesem Ticket:</span>"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "<span class=\"issueTimesheetsTitle\">Timesheets related to this task:</span>"
+msgstr "<span class=\"issueTimesheetsTitle\">Dientstleistungen in Zusammenhang mit dieser Task:</span>"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "A priority"
+msgstr "Eine Priorität"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "A responsible"
+msgstr "Einen Verantwortlichen"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "A start, assignment and end time"
+msgstr "Eine Start-, Zuweisungs- und Endzeit"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "A status"
+msgstr "Ein Status"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Amount"
+msgstr "Betrag"
+
+#. module: contract_report
+#: model:ir.model,name:contract_report.model_account_analytic_account
+msgid "Analytic Account"
+msgstr "Kostenstellenkonto"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Assignee"
+msgstr "Assignee"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Average reaction time:"
+msgstr "Durchschnittliche Reaktionszeit:"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Balance"
+msgstr "Saldo"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.view_contract_report_wizard_print
+#: model:ir.ui.view,arch_db:contract_report.view_contract_report_wizard_send_by_email
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Contains:"
+msgstr "Beinhaltet:"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Contract"
+msgstr "Vertrag"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.view_contract_report_wizard_print
+#: model:ir.ui.view,arch_db:contract_report.view_contract_report_wizard_send_by_email
+msgid "Contract Report Print"
+msgstr "Contract Report Print"
+
+#. module: contract_report
+#: model:ir.actions.report.xml,name:contract_report.contract_abakus
+msgid "Contract Service Report"
+msgstr "Dienstleistungsbericht"
+
+#. module: contract_report
+#: model:ir.model.fields,field_description:contract_report.field_sale_subscription_contract_report_info
+msgid "Contract report settings"
+msgstr "Contract report settings"
+
+#. module: contract_report
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_create_uid
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_wizard_create_uid
+msgid "Created by"
+msgstr "Angelegt von"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Created by:"
+msgstr "Erstellt durch:"
+
+#. module: contract_report
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_create_date
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_wizard_create_date
+msgid "Created on"
+msgstr "Angelegt am"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Creation date"
+msgstr "Erstellt am"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Customer"
+msgstr "Kunde"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Date"
+msgstr "Datum"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Description"
+msgstr "Beschreibung"
+
+#. module: contract_report
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_display_name
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_wizard_display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Distribution OS/SD*"
+msgstr "Verteilung OS/SD*"
+
+#. module: contract_report
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_wizard_end_date
+msgid "End date"
+msgstr "Enddatum"
+
+#. module: contract_report
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_group_by_issue_and_task
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_wizard_group_by_issue_and_task
+msgid "Group by Issue/Task"
+msgstr "Group by Issue/Task"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "High"
+msgstr "High"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Hour rate"
+msgstr "Stundensatz"
+
+#. module: contract_report
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_id
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_wizard_id
+msgid "ID"
+msgstr "ID"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "In our favour"
+msgstr "Zu unseren Gunsten"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "In your favour"
+msgstr "Zu Ihren Gunsten"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Information"
+msgstr "Informationen"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Invoiceable"
+msgstr "Berechnet"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Invoiced amount"
+msgstr "Rechnungsbetrag"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Invoiced on:"
+msgstr "In Rechnung gestellt auf:"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Issue"
+msgstr "Ticket"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Issued invoices"
+msgstr "Ausgestellte Rechnungen"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Issues"
+msgstr "Tickets"
+
+#. module: contract_report
+#: model:ir.model.fields,field_description:contract_report.field_contract_report___last_update
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_wizard___last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: contract_report
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_wizard_write_uid
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: contract_report
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_wizard_write_date
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Low"
+msgstr "Low"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Minimum annual contractual amount"
+msgstr "Vertragliche jährliche Mindestleistung"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Monitoring"
+msgstr "Monitoring"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "No SLA"
+msgstr "Kein SLA"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Normal"
+msgstr "Normal"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "OS"
+msgstr "OS"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "On site support"
+msgstr "Anfahrten"
+
+#. module: contract_report
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_only_worklogs
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_wizard_only_worklogs
+msgid "Only worklogs"
+msgstr "Only worklogs"
+
+#. module: contract_report
+#: model:ir.model.fields,field_description:contract_report.field_sale_subscription_report_partner_id_12541
+msgid "Partner for the Report"
+msgstr "Partner for the Report"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Period covered by contract"
+msgstr "Vertragliche Zeitspanne"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Price"
+msgstr "Preis"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.view_account_analytic_account_sla_stats
+#: model:ir.ui.view,arch_db:contract_report.view_contract_report_wizard_print
+msgid "Print"
+msgstr "Druck"
+
+#. module: contract_report
+#: code:addons/contract_report/models/sale_subscription.py:51
+#, python-format
+msgid "Print Service Report"
+msgstr "Print Service Report"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Priority"
+msgstr "Priorität"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Proactive maintenance"
+msgstr "Proaktive Wartung"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Quantity"
+msgstr "Anzahl"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Reaction time in minutes"
+msgstr "Reaktionszeit in Minuten"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Reaction time: (Compliance 85%)"
+msgstr "Reaktions-Zeit (Compliance: 85%)"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Reference"
+msgstr "Referenz"
+
+#. module: contract_report
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_remove_prices
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_wizard_remove_prices
+msgid "Remove prices"
+msgstr "Remove prices"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Reporting period"
+msgstr "Zeitraum des Berichts"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "SD"
+msgstr "SD"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid ""
+"SD : reaction per email or telephone<br/>\n"
+"                                        OS : technician present on site<br/>\n"
+"                                        Reaction time are only available  valid for customers with SLA contracts."
+msgstr ""
+"SD : meldet sich per Email oder Telefon<br/>\n"
+"                                        OS : Techniker vor-Ort beim Kunden<br/>\n"
+"                                        Abkommen zur Reaktions-Zeit gelten nur für Kunden mit SLA."
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "SLA"
+msgstr "SLA"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "SLA Condition Rules"
+msgstr "SLA - Vertragsregeln"
+
+#. module: contract_report
+#: model:ir.model,name:contract_report.model_sale_subscription
+msgid "Sale Subscription"
+msgstr "Verkauf über Abonnement"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.view_account_analytic_account_sla_stats
+msgid "Send by Email"
+msgstr "Per E-Mail versenden"
+
+#. module: contract_report
+#: code:addons/contract_report/models/sale_subscription.py:36
+#, python-format
+msgid "Send by Email Service Report"
+msgstr "Send by Email Service Report"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.view_contract_report_wizard_send_by_email
+msgid "Send by email"
+msgstr "Sende per Email"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Service Desk accessible by calling +32 87 59 35 58 / +352 20 88 20 58 or per email at support@abakusitsolutions.eu"
+msgstr "Service Desk +32 87 59 35 58 / +352 20 88 20 58 oder per Email an support@abakusitsolutions.eu"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Service Level Agreement"
+msgstr "Service Level Agreement"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.view_account_analytic_account_sla_stats
+msgid "Service Report"
+msgstr "Dienstleistungsbericht"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Service delivery"
+msgstr "Dienstleistungen"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Service delivery total"
+msgstr "Dienstleistungen Total"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Service report"
+msgstr "Dienstleistungsbericht"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Service type"
+msgstr "Dienstleistungstyp"
+
+#. module: contract_report
+#: model:mail.template,report_name:contract_report.email_template_service_report
+msgid "ServiceReport_${(object.name or '').replace('/','_').replace('*','_').replace(\"'\",\"\").replace(':','_')}(${'%Y%m%d_%H%M%S'|time()})"
+msgstr "Dienstleistungsbericht_${(object.name or '').replace('/','_').replace('*','_').replace(':','_')}(${'%Y%m%d_%H%M%S'|time()})"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Stand-alone worklogs (not linked to an Issue nor a Task)"
+msgstr "Unbestimmte  Worklogs (nicht an einem Ticket oder einer Task verbunden)"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Standalone Total"
+msgstr "Total der unbestimmten Worklogs"
+
+#. module: contract_report
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_wizard_start_date
+msgid "Start date"
+msgstr "Anfangsdatum"
+
+#. module: contract_report
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_statistics
+#: model:ir.model.fields,field_description:contract_report.field_contract_report_wizard_statistics
+msgid "Statistics"
+msgstr "Statistiken"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Status"
+msgstr "Status"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Status, Date &amp; Assignee"
+msgstr "Status, Datum &amp; Techniker"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Support"
+msgstr "Support"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Support request (Service Desk)"
+msgstr "Supportanfrage (Service Desk)"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Task"
+msgstr "Aufgaben"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Tasks"
+msgstr "Aufgaben"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Ticket"
+msgstr "Ticket"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Tickets Statistics"
+msgstr "Statistiken der Tickets"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Time"
+msgstr "Zeit"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Total"
+msgstr "Bruttobetrag"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Total worked time:"
+msgstr "Total worked time:"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Total:"
+msgstr "Summe:"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Type"
+msgstr "Art"
+
+#. module: contract_report
+#: code:addons/contract_report/models/sale_subscription.py:20
+#, python-format
+msgid "Warning, no contact for the report is specified for this contract. Please, set one."
+msgstr "Warning, no contact for the report is specified for this contract. Please, set one."
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Work logs"
+msgstr "Dienstleistungen"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "Working hours"
+msgstr "Geleistete Arbeitszeit"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "at"
+msgstr "zu"
+
+#. module: contract_report
+#: model:ir.model,name:contract_report.model_contract_report
+msgid "contract.report"
+msgstr "contract.report"
+
+#. module: contract_report
+#: model:ir.model,name:contract_report.model_contract_report_wizard
+msgid "contract.report.wizard"
+msgstr "contract.report.wizard"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "equivalent to"
+msgstr "entspricht"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "min"
+msgstr "min"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "tickets"
+msgstr "Tickets"
+
+#. module: contract_report
+#: model:ir.ui.view,arch_db:contract_report.report_contract_document
+msgid "€, On site travel cost:"
+msgstr "€, Anfahrtskosten: "

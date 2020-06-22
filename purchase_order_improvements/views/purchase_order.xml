@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_order_supplier_reference_view_tree" model="ir.ui.view">
+        <field name="name">purchase_order_supplier_reference_view_tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="partner_ref"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_order_filter_reference_search_view" model="ir.ui.view">
+        <field name="name">purchase_order_filter_reference_search_view</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="filter_domain">['|',('name','ilike',self),('partner_ref','ilike',self)]</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

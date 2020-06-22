@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="account_invoice_with_structured_communication">
+            <field name="name">account_invoice_with_structured_communication</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='reference']" position="replace">
+                    <field name="reference_type" />
+                    <field name="reference" />
+                    <field name="supplier_reference" attrs="{'invsible': [('type','=', 'in_invoice'), ('type', '=', 'out_invoice')]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

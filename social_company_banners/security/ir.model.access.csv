@@ -1,0 +1,4 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_social_banner_employees,access_social_banner_employees,model_social_banner,base.group_user,1,0,0,0
+access_social_banner_hr_officers,access_social_banner_hr_officers,model_social_banner,hr.group_hr_user,1,1,1,1
+access_social_banner_read_all,access_social_banner_read_all,model_social_banner_read,base.group_user,1,1,1,1

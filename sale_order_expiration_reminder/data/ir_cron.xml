@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record forcecreate="True" id="ir_cron_sale_order" model="ir.cron">
+            <field name="name">Sale order expiration check</field>
+            <field name="active" eval="True"/>
+            <field name="interval_number">7</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model" eval="'sale.order'"/>
+            <field name="function" eval="'_sale_order_expiration_check'"/>
+            <field name="args" eval="'()'"/>
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 06:00:00')" />
+        </record>
+    </data>
+</odoo>

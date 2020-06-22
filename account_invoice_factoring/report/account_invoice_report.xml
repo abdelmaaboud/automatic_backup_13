@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <template id="account_invoice_report_factoring" inherit_id="account.report_invoice_document">
+            <xpath expr="//p[@t-if='o.payment_term_id']" position="after">
+                <t t-if="o.do_factoring and o.company_id.factoring_text">
+                    <p  t-field="o.company_id.factoring_text" />
+                </t>
+            </xpath>
+        </template>
+	</data>
+</odoo>

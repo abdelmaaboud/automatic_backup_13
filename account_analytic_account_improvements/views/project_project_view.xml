@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="edit_project_account_analytic_account_improvements">
+            <field name="name">edit_project_account_analytic_account_improvements</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <!-- Link to sale subscription -->
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="sale_subscription_id" attrs="{'invisible':[('sale_subscription_id', '=', False)]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

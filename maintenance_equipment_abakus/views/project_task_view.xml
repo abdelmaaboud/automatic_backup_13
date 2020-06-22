@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="view_task_form2_equipments" model="ir.ui.view">
+            <field name="name">view_task_form2_equipments</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="groups_id" eval="[(4, ref('maintenance.group_equipment_manager'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="equipment_ids" widget="many2many_tags" domain="['|', ('customer_id', '=', partner_id), '|', ('customer_id.parent_id', '=', partner_id), ('customer_id.child_ids', '=', partner_id)]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_task_search_form_equipment" model="ir.ui.view">
+            <field name="name">view_task_search_form_equipment</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_search_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="equipment_ids" string="Related equipments" domain="[('equipment_ids', 'ilike', self)]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

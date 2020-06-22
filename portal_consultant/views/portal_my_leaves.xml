@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_consultant.portal_my_leaves" name="Portal : Leaves">
+
+        <t t-call="portal.portal_layout">
+            <t t-if="help_text">
+                <div style="margin-top:10px;">
+                    <t t-raw="help_text"/>
+                </div>
+            </t>
+            <h5/>
+            <header>
+                <h3>Leaves Summary</h3>
+                <t>
+                    <a href="/my/leaves/form/-1" class="btn btn-default">Create</a>
+                </t>
+            </header>
+            <t>
+                <h5/>
+            </t>
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <table class="table table-hover o_portal_my_doc_table">
+                        <thead>
+                            <tr class="active">
+                                <th style="text-align:left;">Leave Type</th>
+                                <th style="text-align:left;">Description</th>
+                                <th style="text-align:left;">Start Date</th>
+                                <th style="text-align:left;">End Date</th>
+                                <th style="text-align:left;">Number of Days</th>
+                                <th style="text-align:left;">Status</th>
+                                <th style="text-align:left;">Actions</th>
+                            </tr>
+                        </thead>
+                        <t t-foreach="leaves" t-as="leave">
+                            <tr>
+                                <td style="text-align:left;">
+                                    <span t-esc="leave.holiday_status_id.name"/>
+                                </td>
+                                <td style="text-align:left;">
+                                    <a t-attf-href="/my/leaves/form/#{leave.id}">
+                                        <t t-esc="leave.name"/>
+                                    </a>
+                                </td>
+                                <td style="text-align:left;">
+                                    <span t-esc="leave.date_from" t-options="{'widget': 'date'}"/>
+                                </td>
+                                <td style="text-align:left;">
+                                    <span t-esc="leave.date_to" t-options="{'widget': 'date'}"/>
+                                </td>
+                                <td style="text-align:left;">
+                                    <span t-esc="leave.number_of_days_temp"/>
+                                </td>
+                                <td style="text-align:left;">
+                                    <t t-if="leave.state=='draft'">
+                                        <span>New</span>
+                                    </t>
+                                    <t t-elif="leave.state=='cancel'">
+                                        <span>Cancelled</span>
+                                    </t>
+                                    <t t-elif="leave.state=='confirm'">
+                                        <span>To Approve</span>
+                                    </t>
+                                    <t t-elif="leave.state=='refuse'">
+                                        <span>Refused</span>
+                                    </t>
+                                    <t t-elif="leave.state=='validate1'">
+                                        <span>Second Approval</span>
+                                    </t>
+                                    <t t-elif="leave.state=='validate'">
+                                        <span>Approved</span>
+                                    </t>
+                                </td>
+                                <td style="text-align:left;">
+                                    <t t-if="leave.state=='draft' or leave.state=='confirm'">
+                                        <span class="glyphicon glyphicon-remove text-danger"
+                                              attribute-hidden="True" data-toggle="modal"
+                                              data-target="#deleteLeaveModal"/>
+                                        <!-- Modal : delete an leave -->
+                                        <div class="modal fade" id="deleteLeaveModal" tabindex="-1" role="dialog"
+                                             aria-labelledby="deleteLeaveModalLabel"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="deleteLeaveModalLabel">Confirmation
+                                                        </h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Are you sure you want to delete this leave ?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a t-attf-href="/my/leaves/delete/#{leave.id}"
+                                                           class="btn btn-info">OK
+                                                        </a>
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_consultant.portal_form_leave" name="Portal : Leave Form">
+        <t t-call="portal.portal_layout">
+            <t t-if="help_text">
+                <div style="margin-top:10px;">
+                    <t t-raw="help_text"/>
+                </div>
+            </t>
+            <h5/>
+            <t t-if="info">
+                <div class="alert alert-danger" role="alert">
+                    <span t-esc="info"/>
+                </div>
+            </t>
+            <h5/>
+            <form action="/my/leaves/edit" method="POST" enctype="multipart/form-data">
+                <div class="form-row">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <h5/>
+                    <div class="form-group col-md-6">
+                        <div class="col-xs-12" style="margin-bottom:15px;">
+                            <label for="leave_name">Leave Description</label>
+                            <t t-if="leave_id">
+                                <input type="hidden" t-att-value="leave_id.id" name="leave_id"/>
+                                <t t-if="leave_id and 'state' in leave_id and leave_id.state=='draft' or leave_id.state=='confirm'">
+                                    <input type="text" class="form-control" id="leave_name"
+                                        required="True" name="leave_name" t-att-value="leave_id.name"/>
+                                </t>
+                                <t t-else="">
+                                    <input type="text" class="form-control" id="leave_name"
+                                        name="leave_name" t-att-value="leave_id.name" readonly="True"/>
+                                </t>
+                            </t>
+                            <t t-else="">
+                                <input type="text" class="form-control" id="leave_name"
+                                    required="True" name="leave_name"/>
+                            </t>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="leave_date_from">Start Date</label>
+                            <t t-if="leave_id">
+                                <t t-if="leave_id and leave_id.state=='draft' or leave_id.state=='confirm'">
+                                    <t t-set="start_date_tmp"
+                                       t-value="datetime.datetime.strptime(leave_id.date_from, '%Y-%m-%d %H:%M:%S').date()"/>
+                                    <input type="date" class="form-control" id="leave_start_date" required="True"
+                                           name="leave_start_date"
+                                           t-att-value="start_date_tmp" style="text-align:center"/>
+                                </t>
+                                <t t-else="">
+                                    <t t-set="start_date_tmp"
+                                       t-value="datetime.datetime.strptime(leave_id.date_from, '%Y-%m-%d %H:%M:%S').date()"/>
+                                    <input type="date" class="form-control" id="leave_start_date" required="True"
+                                           name="leave_start_date" style="text-align:center"
+                                           t-att-value="start_date_tmp" readonly="True"/>
+                                </t>
+                            </t>
+                            <t t-else="">
+                                <input type="date" class="form-control" id="leave_start_date" required="True"
+                                       name="leave_start_date" style="text-align:center"/>
+                            </t>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="leave_date_to">End Date</label>
+                            <t t-if="leave_id">
+                                <t t-if="leave_id and leave_id.state=='draft' or leave_id.state=='confirm'">
+                                    <t t-set="end_date_tmp"
+                                       t-value="datetime.datetime.strptime(leave_id.date_to, '%Y-%m-%d %H:%M:%S').date()"/>
+                                    <input type="date" class="form-control" id="leave_end_date" required="True"
+                                           name="leave_end_date"
+                                           t-att-value="end_date_tmp" style="text-align:center"/>
+                                </t>
+                                <t t-else="">
+                                    <t t-set="end_date_tmp"
+                                       t-value="datetime.datetime.strptime(leave_id.date_to, '%Y-%m-%d %H:%M:%S').date()"/>
+                                    <input type="date" class="form-control" id="leave_end_date" required="True"
+                                           name="leave_end_date"
+                                           t-att-value="end_date_tmp" readonly="True" style="text-align:center"/>
+                                </t>
+                            </t>
+                            <t t-else="">
+                                <input type="date" class="form-control" id="leave_end_date" required="True"
+                                       name="leave_end_date" style="text-align:center"/>
+                            </t>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="leave_start_moment">Start Moment</label>
+                            <t t-if="leave_id">
+                                <t t-esc="leave_id.day_time_from"/>
+                                <t t-if="leave_id and leave_id.state=='draft' or leave_id.state=='confirm'">
+                                    <select class="form-control" id="leave_start_moment" required="True" name="leave_start_moment">
+                                        <t t-if="leave_id.day_time_from == 'morning'">
+                                            <option value="morning" t-esc="'Morning'" selected="True"/>
+                                            <option value="midday" t-esc="'Midday'"/>
+                                        </t>
+                                        <t t-elif="leave_id.day_time_from == 'midday'">
+                                            <option value="morning" t-esc="'Morning'"/>
+                                            <option value="midday" t-esc="'Midday'" selected="True"/>
+                                        </t>
+                                    </select>
+                                </t>
+                            </t>
+                            <t t-else="">
+                                <select class="form-control" id="leave_start_moment" required="True"
+                                        name="leave_start_moment">
+                                    <option value="morning">Morning</option>
+                                    <option value="midday">Midday</option>
+                                </select>
+                            </t>
+                        </div>
+    
+                        <div class="form-group col-md-4">
+                            <label for="leave_end_moment">End Moment</label>
+                            <t t-if="leave_id">
+                                <t t-esc="leave_id.day_time_to"/>
+                                <t t-if="leave_id and leave_id.state=='draft' or leave_id.state=='confirm'">
+                                    <select class="form-control" id="leave_end_moment" required="True" name="leave_end_moment">
+                                        <t t-if="leave_id.day_time_to == 'midday'">
+                                            <option value="midday" t-esc="'Midday'" selected="True"/>
+                                            <option value="evening" t-esc="'Evening'"/>
+                                        </t>
+                                        <t t-elif="leave_id.day_time_to == 'evening'">
+                                            <option value="midday" t-esc="'Midday'"/>
+                                            <option value="evening" t-esc="'Evening'" selected="True"/>
+                                        </t>
+                                    </select>
+                                </t>
+                            </t>
+                            <t t-else="">
+                                <select class="form-control" id="leave_end_moment" required="True" name="leave_end_moment">
+                                    <option value="midday">Midday</option>
+                                    <option value="evening">Evening</option>
+                                </select>
+                            </t>
+                        </div>
+                        
+                        <div class="form-group col-md-4">
+                            <label for="leave_name">Number of Days</label>
+                            <t t-if="leave_id">
+                                <input type="text" class="form-control" id="leave_number_of_days"
+                                       name="leave_number_of_days" t-att-value="leave_id.number_of_days_temp"
+                                       readonly="True"/>
+                            </t>
+                            <t t-else="">
+                                <input type="text" class="form-control" id="leave_number_of_days"
+                                       name="leave_number_of_days" readonly="True"/>
+                            </t>
+                        </div>
+                        
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <div class="col-xs-12">
+                            <label for="leave_types">Leave Types</label>
+                            <t t-if="leave_id">
+                                <t t-if="leave_id and 'state' in leave_id and leave_id.state=='draft' or leave_id.state=='confirm'">
+                                    <select class="form-control" id="leave_holiday_status" required="True"
+                                            name="leave_holiday_status">
+                                        <t t-foreach="leave_types" t-as="leave_type">
+                                            <t t-if="leave_type.id==leave_id.holiday_status_id.id">
+                                                <option t-att-value="leave_type.id" selected="True">
+                                                    <t t-esc="leave_type.name"/> (/<t t-esc="leave_type.remaining_leaves" />)
+                                                </option>
+                                            </t>
+                                            <t t-else="">
+                                                <option t-att-value="leave_type.id"
+                                                        ><t t-esc="leave_type.name"/> (<t t-esc="leave_type.remaining_leaves" />)
+                                                </option>
+                                            </t>
+                                        </t>
+                                    </select>
+                                </t>
+                                <t t-else="">
+                                    <select class="form-control" id="leave_holiday_status" required="True"
+                                            name="leave_holiday_status">
+                                        <option>
+                                            <t t-att-value="leave_id.holiday_status_id" t-esc="leave_id.holiday_status_id.name"/>
+                                        </option>
+                                    </select>
+                                </t>
+                            </t>
+                            <t t-else="">
+                                <select class="form-control" id="leave_holiday_status" required="True"
+                                        name="leave_holiday_status">
+                                    <t t-foreach="leave_types" t-as="leave_type">
+                                        <option t-att-value="leave_type.id">
+                                            <t t-esc="leave_type.name"/> (<t t-esc="leave_type.remaining_leaves" />)
+                                        </option>
+                                    </t>
+                                </select>
+                            </t>
+                        </div>
+
+                        <div class="form-group col-xs-12" style="margin-top:15px;">
+                            <label for="leave_file">Sick Note</label>
+                            <t t-if="not leave_id or leave_id.state=='draft' or leave_id.state=='confirm'">
+                                <input type="file" class="form-control-file" id="leave_file" name="leave_file"/>
+                            </t>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-6 col-xs-offset-3">
+                        <t t-if="leave_id">
+                            <ul class="list-group">
+                                <t t-if="not attachments">
+                                    <p class="text-center">No attachment for this leave</p>
+                                </t>
+                                <t t-else="">
+                                    <t t-foreach="attachments" t-as="attachment">
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-xs-11">
+                                                    <a t-attf-href="/my/leaves/download/attachment/#{attachment.id}"
+                                                       download="leave_attachment" t-esc="attachment.datas_fname"/>
+                                                </div>
+                                                <t t-if="leave_id.state=='draft' or leave_id.state=='confirm'">
+                                                    <div class="col-xs-1">
+                                                        <span class="glyphicon glyphicon-remove text-danger"
+                                                              attribute-hidden="True" data-toggle="modal"
+                                                              data-target="#deleteAttachmentModal"/>
+                                                    </div>
+                                                    <!-- Modal : delete an attachment -->
+                                                    <div class="modal fade" id="deleteAttachmentModal" tabindex="-1"
+                                                         role="dialog"
+                                                         aria-labelledby="deleteAttachmentModalLabel"
+                                                         aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="deleteAttachmentModalLabel">Confirmation
+                                                                    </h5>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Are you sure you want to delete this attachment ?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <a t-attf-href="/my/leaves/delete/attachment/#{attachment.id}"
+                                                                       class="btn btn-info">OK
+                                                                    </a>
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                            data-dismiss="modal">
+                                                                        Cancel
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </li>
+                                    </t>
+                                </t>
+                            </ul>
+                        </t>
+                    </div>
+
+
+                    <div class="form-group col-md-12">
+                        <t t-if="not leave_id">
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <a href="/my/leaves" class="btn btn-default">Discard</a>
+                        </t>
+                        <t t-elif="leave_id and leave_id.state=='draft'">
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <a t-attf-href="/my/leaves" class="btn btn-default">Discard</a>
+                            <a t-attf-href="/my/leaves/submit/#{leave_id.id}"
+                               class="btn btn-primary">Submit
+                            </a>
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#deleteLeaveModal">
+                                Delete
+                            </button>
+                            <!-- Modal : delete a leave -->
+                            <div class="modal fade" id="deleteLeaveModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="deleteLeaveModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteLeaveModalLabel">Confirmation</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete this leave ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a t-attf-href="/my/leaves/delete/#{leave_id.id}"
+                                               class="btn btn-info">OK
+                                            </a>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                        <t t-elif="leave_id and leave_id.state=='confirm'">
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <a t-attf-href="/my/leaves" class="btn btn-default">Discard</a>
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#deleteLeaveModal">
+                                Delete
+                            </button>
+                            <!-- Modal : delete a leave -->
+                            <div class="modal fade" id="deleteLeaveModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="deleteLeaveModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteLeaveModalLabel">Confirmation</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete this leave ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a t-attf-href="/my/leaves/delete/#{leave_id.id}"
+                                               class="btn btn-info">OK
+                                            </a>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </form>
+            <script src="/portal_consultant/static/src/js/compute_leaves_date.js"/>
+        </t>
+    </template>
+</odoo>

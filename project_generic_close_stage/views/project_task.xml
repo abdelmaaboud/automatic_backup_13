@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form -->
+    <record model="ir.ui.view" id="project_view_task_form_generic_close">
+        <field name="name">view_task_form_generic_close</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button class="btn-primary" name="action_close" string="Close Task" type="object" attrs="{'invisible': ['|', ('project_id', '=', False), ('is_closed', '=', True)]}" />
+            </xpath>
+            <xpath expr="//field[@name='project_id']" position="after">
+                <field name="is_closed" invisible="1" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

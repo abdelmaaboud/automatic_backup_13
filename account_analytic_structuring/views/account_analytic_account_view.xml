@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.actions.act_window" id="account_analytic_structured_line_action">
+            <field name="context">{'search_default_group_date': 1, 'search_default_group_journal': 1, 'default_account_id': active_id}</field>
+            <field name="domain">[('date', '&gt;=', context.get('from_date', '2010-01-01')), ('date', '&lt;=', context.get('to_date', '2100-01-01')), ('account_id','=', active_id), ('move_id', '!=', False)]</field>
+            <field name="name">Structured lines</field>
+            <field name="res_model">account.analytic.line</field>
+            <field name="view_mode">tree,form,graph,pivot</field>
+            <field name="view_id" ref="view_account_analytic_structured_line_tree"/>
+            <field name="view_type">form</field>
+        </record>
+
+        <record model="ir.ui.view" id="account_analytic_account_structured">
+            <field name="name">account_analytic_account_structured</field>
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+            <field name="arch" type="xml">
+                <!-- Add the debit, credit and balance -->
+                <xpath expr="//group[@name='main']" position="after">
+                    <group name="accounting">
+                        <group name="structured_accounting" string="Structured Accounting (Account + Children)">
+                            <field name="structured_credit" widget="monetary" />
+                            <field name="structured_debit" widget="monetary" />
+                            <field name="structured_balance" widget="monetary" />
+                        </group>
+                        <group name="direct_lines" string="Account">
+                            <field name="lines_credit" widget="monetary" />
+                            <field name="lines_debit" widget="monetary" />
+                            <field name="lines_balance" widget="monetary" />
+                            <button class="oe_stat_button" icon="fa-bars"  type="action" name="%(account_analytic_structured_line_action)d"
+                        string="Lines" />
+                        </group>
+                    </group>
+                    <group name="structure">
+                        <group string="Structure">
+                            <field name="structured_name" />
+                            <field name="structured_type" />
+                            <field name="parent_account_id" domain="[('structured_type', '=', 'parent')]" />
+                        </group>
+                        <group string="Children">
+                            <field name="child_account_ids_credit" widget="monetary" />
+                            <field name="child_account_ids_debit" widget="monetary" />
+                            <field name="child_account_ids_balance" widget="monetary" />
+                        </group>
+                    </group>
+                    <group name="child_accounts" string="Children accounts" attrs="{'invisible': [('structured_type', '!=', 'parent')]}">
+                        <field name="child_account_ids" toolbar="1" context="{'search_default_group_date': 1, 'from_date': context.get('from_date', False), 'to_date': context.get('to_date', False), }">
+                            <tree>
+                                <field name="structured_name" />
+                                <field name="code" />
+                                <field name="structured_type" />
+                                <field name="structured_credit" sum="Total credit"/>
+                                <field name="structured_debit" sum="Total debit"/>
+                                <field name="structured_balance" sum="Total Balance"/>
+                                <field name="company_id" />
+                            </tree>
+                        </field>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_analytic_account_tree_with_structure">
+            <field name="name">account_analytic_account_tree_with_structure</field>
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_account_list" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='display_name']" position="before">
+                    <field name="structured_type" />
+                </xpath>
+                <xpath expr="//field[@name='debit']" position="replace">
+                    <field name="structured_debit" />
+                </xpath>
+                <xpath expr="//field[@name='credit']" position="replace">
+                    <field name="structured_credit" />
+                </xpath>
+                <xpath expr="//field[@name='balance']" position="replace">
+                    <field name="structured_balance" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

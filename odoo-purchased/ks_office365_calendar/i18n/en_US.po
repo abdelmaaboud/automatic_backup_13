@@ -1,0 +1,475 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* ks_office365_calendar
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-14 13:10+0000\n"
+"PO-Revision-Date: 2020-01-14 13:10+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:46
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:685
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:46
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:685
+#, python-format
+msgid "\n"
+"Check Jobs to know how many records have been processed."
+msgstr "\n"
+"Check Jobs to know how many records have been processed."
+
+#. module: ks_office365_calendar
+#: model:ir.ui.view,arch_db:ks_office365_calendar.ks_office365_calendar_view_users_form
+msgid "<span style=\"font-size: 14px; font-weight: bold;\"><u>Sync using fields</u></span>"
+msgstr "<span style=\"font-size: 14px; font-weight: bold;\"><u>Sync using fields</u></span>"
+
+#. module: ks_office365_calendar
+#: model:ir.ui.view,arch_db:ks_office365_calendar.ks_office365_calendar_filter
+#: model:ir.ui.view,arch_db:ks_office365_calendar.ks_office365_calendar_scopes
+msgid "Calendar"
+msgstr "Calendar"
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:31
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:671
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:31
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:671
+#, python-format
+msgid "Days can only be in numbers less then 999 and greater than or equal to 0."
+msgstr "Days can only be in numbers less then 999 and greater than or equal to 0."
+
+#. module: ks_office365_calendar
+#: model:ir.model.fields,field_description:ks_office365_calendar.field_res_users_ks_calendar_sync_using_end_datetime
+msgid "End DateTime"
+msgstr "End DateTime"
+
+#. module: ks_office365_calendar
+#. openerp-web
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/static/src/js/ks_message.js:11
+#: code:addons/ks_office365_calendar/static/src/js/ks_message.js:11
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: ks_office365_calendar
+#: model:ir.model,name:ks_office365_calendar.model_calendar_event
+msgid "Event"
+msgstr "Event"
+
+#. module: ks_office365_calendar
+#: model:ir.model.fields,field_description:ks_office365_calendar.field_calendar_event_ks_office_event_id
+msgid "Event ID"
+msgstr "Event ID"
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:1113
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:1113
+#, python-format
+msgid "Event deleted from Odoo Calendar"
+msgstr "Event deleted from Odoo Calendar"
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:555
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:555
+#, python-format
+msgid "Event deleted from outlook Calendar"
+msgstr "Event deleted from outlook Calendar"
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:561
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:561
+#, python-format
+msgid "Event not deleted from outlook Calendar \n"
+"Reason: %serrormessage"
+msgstr "Event not deleted from outlook Calendar \n"
+"Reason: %serrormessage"
+
+#. module: ks_office365_calendar
+#: model:ir.model.fields,field_description:ks_office365_calendar.field_res_users_ks_export_office_calendar
+msgid "Export"
+msgstr "Export"
+
+#. module: ks_office365_calendar
+#: model:ir.model.fields,field_description:ks_office365_calendar.field_res_users_ks_calendar_filter_domain
+msgid "Filter Domain"
+msgstr "Filter Domain"
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:69
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:711
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:712
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:69
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:711
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:712
+#, python-format
+msgid "Generate Authentication Token"
+msgstr "Generate Authentication Token"
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:71
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:71
+#, python-format
+msgid "Generate Authentication Token!"
+msgstr "Generate Authentication Token!"
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:1421
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:1431
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:1421
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:1431
+#, python-format
+msgid "Generate Authentication Token. '%s' has not generated token yet."
+msgstr "Generate Authentication Token. '%s' has not generated token yet."
+
+#. module: ks_office365_calendar
+#: model:ir.model.fields,field_description:ks_office365_calendar.field_res_users_ks_import_office_calendar
+msgid "Import"
+msgstr "Import"
+
+#. module: ks_office365_calendar
+#: model:ir.model.fields,field_description:ks_office365_calendar.field_res_users_ks_calendar_sync_using_days
+msgid "Ks Calendar Sync Using Days"
+msgstr "Ks Calendar Sync Using Days"
+
+#. module: ks_office365_calendar
+#: model:ir.model.fields,field_description:ks_office365_calendar.field_calendar_event_ks_is_updated
+msgid "Ks Is Updated"
+msgstr "Ks Is Updated"
+
+#. module: ks_office365_calendar
+#: model:ir.model.fields,field_description:ks_office365_calendar.field_calendar_event_ks_rec_type_noend
+msgid "Ks Rec Type Noend"
+msgstr "Ks Rec Type Noend"
+
+#. module: ks_office365_calendar
+#: model:ir.model.fields,field_description:ks_office365_calendar.field_calendar_event_ks_user_id
+msgid "Ks User"
+msgstr "Ks User"
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:467
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:467
+#, python-format
+msgid "Multiple event with the same subject 'subject' and end datetime '' exists in Odoo.\n"
+"Note: This event is being synced with respect to subject and end datetime."
+msgstr "Multiple event with the same subject 'subject' and end datetime '' exists in Odoo.\n"
+"Note: This event is being synced with respect to subject and end datetime."
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:164
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:164
+#, python-format
+msgid "Multiple event with the same subject 'subject' and end datetime '' exists in in Office 365.\n"
+"Note: This event is being synced with respect to subject and end datetime."
+msgstr "Multiple event with the same subject 'subject' and end datetime '' exists in in Office 365.\n"
+"Note: This event is being synced with respect to subject and end datetime."
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:423
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:423
+#, python-format
+msgid "Multiple event with the same subject 'subject' and start datetime '' exists in Odoo.\n"
+"Note: This event is being synced with respect to subject and start datetime."
+msgstr "Multiple event with the same subject 'subject' and start datetime '' exists in Odoo.\n"
+"Note: This event is being synced with respect to subject and start datetime."
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:148
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:148
+#, python-format
+msgid "Multiple event with the same subject 'subject' and start datetime '' exists in in Office 365.\n"
+"Note: This event is being synced with respect to subject and start datetime."
+msgstr "Multiple event with the same subject 'subject' and start datetime '' exists in in Office 365.\n"
+"Note: This event is being synced with respect to subject and start datetime."
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:377
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:377
+#, python-format
+msgid "Multiple event with the same subject 'subject' exists in Odoo.\n"
+"Note: This event is being synced with respect to subject."
+msgstr "Multiple event with the same subject 'subject' exists in Odoo.\n"
+"Note: This event is being synced with respect to subject."
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:132
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:132
+#, python-format
+msgid "Multiple event with the same subject 'subject' exists in in Office 365.\n"
+"Note: This event is being synced with respect to subject."
+msgstr "Multiple event with the same subject 'subject' exists in in Office 365.\n"
+"Note: This event is being synced with respect to subject."
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:184
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:184
+#, python-format
+msgid "Multiple event with the same subject 'subject', start datetime '' and end datetime '' exists in in Office 365.\n"
+"Note: This event is being synced with respect to subject, start datetime end datetime."
+msgstr "Multiple event with the same subject 'subject', start datetime '' and end datetime '' exists in in Office 365.\n"
+"Note: This event is being synced with respect to subject, start datetime end datetime."
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:514
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:514
+#, python-format
+msgid "Multiple event with the same subject 'subject', start datetime 'startdateTime' and end datetime 'enddateTime' exists in Odoo.\n"
+"Note: This event is being synced with respect to subject, start datetime and end datetime."
+msgstr "Multiple event with the same subject 'subject', start datetime 'startdateTime' and end datetime 'enddateTime' exists in Odoo.\n"
+"Note: This event is being synced with respect to subject, start datetime and end datetime."
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:813
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:813
+#, python-format
+msgid "Multiple events with same subject '' and end datetime '' exists in Odoo. \n"
+"Note: This event is being synced with respect to subject and end datetime."
+msgstr "Multiple events with same subject '' and end datetime '' exists in Odoo. \n"
+"Note: This event is being synced with respect to subject and end datetime."
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:1020
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:1020
+#, python-format
+msgid "Multiple events with same subject '' and end datetime '' exists in Office 365. \n"
+"Note: This event is being synced with respect to subject and end datetime."
+msgstr "Multiple events with same subject '' and end datetime '' exists in Office 365. \n"
+"Note: This event is being synced with respect to subject and end datetime."
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:799
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:799
+#, python-format
+msgid "Multiple events with same subject '' and start datetime '' exists in Odoo. \n"
+"Note: This event is being synced with respect to subject and start datetime."
+msgstr "Multiple events with same subject '' and start datetime '' exists in Odoo. \n"
+"Note: This event is being synced with respect to subject and start datetime."
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:786
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:786
+#, python-format
+msgid "Multiple events with same subject '' exists in Odoo. \n"
+"Note: This event is being synced with respect to subject."
+msgstr "Multiple events with same subject '' exists in Odoo. \n"
+"Note: This event is being synced with respect to subject."
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:949
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:949
+#, python-format
+msgid "Multiple events with same subject '' exists in Office 365. \n"
+"Note: This event is being synced with respect to subject."
+msgstr "Multiple events with same subject '' exists in Office 365. \n"
+"Note: This event is being synced with respect to subject."
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:825
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:825
+#, python-format
+msgid "Multiple events with same subject '', start datetime '' and end datetime '' exists in Odoo. \n"
+"Note: This event is being synced with respect to subject, start datetime and end datetime."
+msgstr "Multiple events with same subject '', start datetime '' and end datetime '' exists in Odoo. \n"
+"Note: This event is being synced with respect to subject, start datetime and end datetime."
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:1064
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:1064
+#, python-format
+msgid "Multiple events with same subject '', start datetime '' and end datetime '' exists in Office 365. \n"
+"Note: This event is being synced with respect to subject, start datetime and end datetime."
+msgstr "Multiple events with same subject '', start datetime '' and end datetime '' exists in Office 365. \n"
+"Note: This event is being synced with respect to subject, start datetime and end datetime."
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:982
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:982
+#, python-format
+msgid "Multiple events with same subject '', start datetime '' exists in Office 365. \n"
+"Note: This event is being synced with respect to subject and start datetime."
+msgstr "Multiple events with same subject '', start datetime '' exists in Office 365. \n"
+"Note: This event is being synced with respect to subject and start datetime."
+
+#. module: ks_office365_calendar
+#: model:ir.actions.act_window,name:ks_office365_calendar.ks_office_calendar_action_id
+msgid "Office 365 Calendar"
+msgstr "Office 365 Calendar"
+
+#. module: ks_office365_calendar
+#: model:ir.ui.view,arch_db:ks_office365_calendar.ks_office365_calendar_view_users_form
+msgid "Office365 Calendar"
+msgstr "Office365 Calendar"
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:52
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:728
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:52
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:728
+#, python-format
+msgid "Process Is Already Running."
+msgstr "Process Is Already Running."
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:393
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:439
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:483
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:537
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:1178
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:393
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:439
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:483
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:537
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:1178
+#, python-format
+msgid "Record created!"
+msgstr "Record created!"
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:1118
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:1118
+#, python-format
+msgid "Record not be deleted from ODOO Calendar \n"
+"Reason: %s"
+msgstr "Record not be deleted from ODOO Calendar \n"
+"Reason: %s"
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:627
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:634
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:640
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:645
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:1143
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:627
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:634
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:640
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:645
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:1143
+#, python-format
+msgid "Record updated!"
+msgstr "Record updated!"
+
+#. module: ks_office365_calendar
+#: model:ir.actions.server,name:ks_office365_calendar.calendar_export_cron_ir_actions_server
+#: model:ir.cron,cron_name:ks_office365_calendar.calendar_export_cron
+#: model:ir.cron,name:ks_office365_calendar.calendar_export_cron
+msgid "Run Office 365 Calendar Export Cron"
+msgstr "Run Office 365 Calendar Export Cron"
+
+#. module: ks_office365_calendar
+#: model:ir.actions.server,name:ks_office365_calendar.calendar_import_cron_ir_actions_server
+#: model:ir.cron,cron_name:ks_office365_calendar.calendar_import_cron
+#: model:ir.cron,name:ks_office365_calendar.calendar_import_cron
+msgid "Run Office 365 Calendar Import Cron"
+msgstr "Run Office 365 Calendar Import Cron"
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:98
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:105
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:760
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:767
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:98
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:105
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:760
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:767
+#, python-format
+msgid "Some error occurred! \n"
+"Please check logs for more information."
+msgstr "Some error occurred! \n"
+"Please check logs for more information."
+
+#. module: ks_office365_calendar
+#: model:ir.model.fields,field_description:ks_office365_calendar.field_res_users_ks_calendar_sync_using_start_datetime
+msgid "Start DateTime"
+msgstr "Start DateTime"
+
+#. module: ks_office365_calendar
+#: model:ir.model.fields,field_description:ks_office365_calendar.field_res_users_ks_calendar_sync_using_subject
+msgid "Subject"
+msgstr "Subject"
+
+#. module: ks_office365_calendar
+#: model:ir.ui.view,arch_db:ks_office365_calendar.ks_office365_calendar_view_users_form
+msgid "Sync Odoo Calendar to Office365"
+msgstr "Sync Odoo Calendar to Office365"
+
+#. module: ks_office365_calendar
+#: model:ir.ui.view,arch_db:ks_office365_calendar.ks_office365_calendar_view_users_form
+msgid "Sync Office365 Calendar to Odoo"
+msgstr "Sync Office365 Calendar to Odoo"
+
+#. module: ks_office365_calendar
+#: model:ir.model.fields,field_description:ks_office365_calendar.field_res_users_ks_sync_deleted_event
+msgid "Sync deleted events"
+msgstr "Sync deleted events"
+
+#. module: ks_office365_calendar
+#: model:ir.model.fields,field_description:ks_office365_calendar.field_res_users_ks_calendar_sync_days_before
+msgid "Sync events from last (in days)"
+msgstr "Sync events from last (in days)"
+
+#. module: ks_office365_calendar
+#: model:ir.model.fields,help:ks_office365_calendar.field_res_users_ks_calendar_filter_domain
+msgid "This filter domain is only applicable while syncing from Odoo to office 365."
+msgstr "This filter domain is only applicable while syncing from Odoo to office 365."
+
+#. module: ks_office365_calendar
+#: model:ir.model.fields,help:ks_office365_calendar.field_res_users_ks_calendar_sync_days_before
+msgid "This will allow you to sync only those events/meetings that are created or updated in the given days. Here 0 days means Today."
+msgstr "This will allow you to sync only those events/meetings that are created or updated in the given days. Here 0 days means Today."
+
+#. module: ks_office365_calendar
+#: model:ir.model,name:ks_office365_calendar.model_res_users
+msgid "Users"
+msgstr "Users"
+
+#. module: ks_office365_calendar
+#. openerp-web
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/static/src/js/ks_message.js:17
+#: code:addons/ks_office365_calendar/static/src/js/ks_message.js:17
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:95
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:102
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:758
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:765
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:95
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:102
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:758
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:765
+#, python-format
+msgid "errorcode"
+msgstr "errorcode"
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:1130
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:1164
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:1130
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:1164
+#, python-format
+msgid "errorcode\n"
+"errormessage"
+msgstr "errorcode\n"
+"errormessage"
+
+#. module: ks_office365_calendar
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:1138
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:1158
+#: code:addons/addons/odoo-office-365/ks_office365_calendar/models/ks_sync_calendar.py:1170
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:1138
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:1158
+#: code:addons/ks_office365_calendar/models/ks_sync_calendar.py:1170
+#, python-format
+msgid "errormessage"
+msgstr "errormessage"
+

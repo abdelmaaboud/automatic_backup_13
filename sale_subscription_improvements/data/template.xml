@@ -1,0 +1,61 @@
+<odoo>
+    <record id="email_subscription_expired_reminder" model="mail.template">
+        <field name="name">Sale Subscription: Expiration reminder</field>
+        <field name="email_from">${(object.company_id.email or 'noreply@localhost')|safe}</field>
+        <field name="subject">Subscriptions expiration reminder</field>
+        <field name="email_to">${object.user_id.email or ''}</field>
+        <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
+        <field name="body_html"><![CDATA[
+
+            Dear ${object.user_id.name},
+            % macro sale_subscription_table(values):
+            <table cellspacing="1" border="1" cellpadding="4">
+                <tr>
+                    <th>Customer</th>
+                    <th>Ref</th>
+                    <th>Expiration Date</th>
+                    <th>Status</th>
+                </tr>
+                % for customer, sales_subscription in values:
+                    % for sale_subscription in sales_subscription:
+                    <tr>
+                        <td>${customer.name}</td>
+                        <td>
+                            ${sale_subscription.code}
+                            -
+                            <a href='/mail/view?model=sale.subscription&res_id=${sale_subscription.id}'>${sale_subscription.name}</a>
+                        </td>
+                        <td>${sale_subscription.date}</td>
+                        <td>${sale_subscription.state}</td>
+                    </tr>
+                    % endfor
+                % endfor
+            </table>
+            % endmacro
+
+            % if "new" in ctx["data"]:
+                <h2>The following subscriptions just expired: </h2>
+                ${sale_subscription_table(ctx["data"]["new"].items())}
+            % endif
+            % if "old" in ctx["data"]:
+                <h2>The following expired subscriptions are still not processed: </h2>
+                ${sale_subscription_table(ctx["data"]["old"].items())}
+            % endif
+            % if "future" in ctx["data"]:
+                <h2>The following subscriptions will expire in less than one month: </h2>
+                ${sale_subscription_table(ctx["data"]["future"].items())}
+            % endif
+
+            <p>
+                Thanks,
+            </p>
+            <pre>
+            --
+            Odoo Automatic Email
+            </pre>
+
+
+            ]]>
+        </field>
+    </record>
+</odoo>

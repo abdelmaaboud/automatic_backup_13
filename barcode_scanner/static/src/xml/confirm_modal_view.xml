@@ -1,0 +1,23 @@
+<odoo>
+    <t t-name="barcode_scanner.confirm_modal">
+
+        <div id="confirm_modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                    <h4 class="modal-title">Confirmation</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <p>Are you sure you want to continue ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="modal-confirm-button" class="btn btn-default">Confirm</button>
+                    <button type="button" id="modal-cancel-button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    
+    </t>
+</odoo>

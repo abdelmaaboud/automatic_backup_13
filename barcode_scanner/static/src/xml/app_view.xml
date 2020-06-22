@@ -1,0 +1,51 @@
+<odoo>
+    <t t-name="barcode_scanner.app">
+        <div class="container-fluid" style="margin-bottom: 60px;">
+            <nav id="navbar-default" class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a id="home_title" href="javascript:void(0)" class="navbar-brand">Barcode Scanner</a>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li data-toggle="collapse" data-target="#navbar" t-if="widget.loggedIn"><a href="javascript:void(0)" id="home_nav_button">Home</a></li>
+                            <li data-toggle="collapse" data-target="#navbar" t-if="widget.loggedIn"><a href="javascript:void(0)" id="product_list_nav_button">Products</a></li>
+                            <li data-toggle="collapse" data-target="#navbar" t-if="widget.loggedIn"><a href="javascript:void(0)" id="partner_list_nav_button">Partners</a></li>
+                            <li data-toggle="collapse" data-target="#navbar" t-if="widget.loggedIn"><a href="javascript:void(0)" id="inventory_nav_button">Inventory</a></li>
+                        </ul>
+                        <ul t-if="widget.loggedIn" class="nav navbar-nav navbar-right">
+                            <li><a href="javascript:void(0)" id="logout_nav_button">Logout</a></li>
+                        </ul>
+                        <ul t-if="!widget.loggedIn" class="nav navbar-nav navbar-right">
+                            <li><a href="/barcode_scanner/login">Login</a></li>
+                        </ul>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </nav>
+        </div>
+    </t>
+
+    <t t-name="Notification">
+        <div class="o_notification" t-translation="off">
+            <a t-if="widget.sticky" class="fa fa-times o_close" href="javascript:void(0)"/>
+            <div class="o_notification_title">
+                <span class="o_icon fa fa-3x fa-lightbulb-o"/>
+                <t t-raw="widget.title"/>
+            </div>
+            <div class="o_notification_content" t-if="widget.text"><t t-raw="widget.text"/></div>
+        </div>
+    </t>
+    
+    <t t-name="Warning" t-extend="Notification">
+        <t t-jquery=".o_notification">$(this).addClass('o_error');</t>
+        <t t-jquery=".o_icon" t-operation="replace">
+            <span class="o_icon fa fa-3x fa-exclamation"/>
+        </t>
+    </t>
+
+</odoo>

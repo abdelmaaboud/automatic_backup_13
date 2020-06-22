@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Employee form view -->
+        <record id="view_employee_form_extended" model="ir.ui.view">
+            <field name="name">hr.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                     <page string="ABAKUS" groups="hr.group_hr_user">
+                        <group string="Contract info">
+                            <field name="entry_date"/>
+                        </group>
+                        <group string="Office access">
+                            <field name="key_number"/>
+                            <field name="has_badge"/>
+                        </group>
+                        <group>
+                            <group string="Computer">
+                                <field name="computer_model"/>
+                                <field name="computer_serial"/>
+                                <field name="computer_acquisition_date"/>
+                            </group>
+                            <group string="Fuel card">
+                                <field name="partner_id"/>
+                                <field name="fuel_card_number"/>
+                                <field name="fuel_card_pin"/>
+                            </group>
+                        </group>
+                        <separator string="Notes" name="notes"/>
+                        <field name="notes"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

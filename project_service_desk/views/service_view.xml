@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Top menu item -->
+        <menuitem name="Service Desk"
+                  id="project_service_desk.menu_main_service_desk"
+                  groups="project.group_project_manager,project.group_project_user"
+                  icon="fa-calendar"
+                  web_icon="project_service_desk,static/description/icon.png"
+                  sequence="52"/>
+    </data>
+</odoo>

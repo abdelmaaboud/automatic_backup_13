@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="account_followup_line_add_subject_form_view" model="ir.ui.view">
+        <field name="name">account_followup_line_add_subject_form_view</field>
+        <field name="model">account_followup.followup.line</field>
+        <field name="inherit_id" ref="account_reports_followup.view_account_followup_followup_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/group[2]" position="before">
+                <group>
+                    <field name="subject" attrs="{'invisible': [('send_email', '=', False), ('send_letter', '=', False)]}"/>
+                    <field name="signature" attrs="{'invisible': [('send_email', '=', False), ('send_letter', '=', False)]}"/>
+                    <field name="sequence"/>
+                </group>
+            </xpath>
+            <xpath expr="//field[@name='description']" position="after">
+                <field name="description_bottom" nolabel="1" colspan="2"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

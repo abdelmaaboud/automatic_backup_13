@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_board_kpi_category" model="ir.actions.act_window">
+            <field name="name">KPI Categories</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">board.kpi.category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="KPI Categories"
+            action="action_board_kpi_category"
+            id="menu_board_kpi_category"
+            parent="menu_board_kpi"
+            sequence="20"/>
+
+        <record id="board_kpi_category_tree_view" model="ir.ui.view">
+            <field name="name">board.kpi.category.tree.view</field>
+            <field name="model">board.kpi.category</field>
+            <field name="arch" type="xml">
+                <tree string="KPI Category">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="board_kpi_category_form_view" model="ir.ui.view">
+            <field name="name">board.kpi.category.form.view</field>
+            <field name="model">board.kpi.category</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

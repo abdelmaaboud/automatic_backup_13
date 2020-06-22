@@ -1,0 +1,44 @@
+<odoo>
+    <t t-name="barcode_scanner.partner">
+        <ol class="breadcrumb">
+            <li id="home_breadcrumb"><a href="javascript:">Home</a></li>
+            <li id="partners_breadcrumb"><a href="javascript:">Partners</a></li>
+            <li class="active"><t t-esc="widget.partner_key"/></li>
+        </ol>
+        <div class="container-fluid text-center clearfix">
+            <h3 class="text-center mb32">Partner</h3>
+            <div class="row" t-if="widget.partner != undefined">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                   <div class="thumbnail">
+                        <div class="row">
+                            <div class="col-xs-12" >
+                                <img t-if="widget.partner.image"
+                                     t-attf-src="data:image/png;base64,{{widget.partner.image}}" class="img-responsive img-thumbnail"/>
+                            </div>
+                            
+                            <div class="col-xs-12">
+                                <div>
+                                    
+                                    <h2 id="partner_name"> <t t-esc="widget.partner.name"></t> </h2>
+                                    <h4> <t t-esc="widget.partner.street"></t> </h4>
+                                    <h4> <t t-esc="widget.partner.zip"></t> <t t-esc="widget.partner.city"></t> <t t-if="widget.partner.state" t-esc="widget.partner.state"></t> </h4>
+                                    <h4> <t t-esc="widget.partner.country"></t> </h4>
+
+                                    <hr />
+                                    
+                                    <h4 t-if="widget.partner.is_company === true"> Company </h4>
+                                    <h4 t-if="widget.partner.is_employee === true"> Employee </h4>
+                                    <h4 t-if="widget.partner.is_customer === true"> Customer </h4>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button t-if="widget.partner.pickings.length gt 0" id="outgoings_button" class="btn btn-default">Outgoings pickings</button>
+            <button t-if="widget.partner.pickings.length lt 1" class="btn btn-default disabled">No outgoings pickings</button>
+            <button id="sell_button"  class="btn btn-default">Create Transfer</button>
+        </div>
+    </t>
+</odoo>

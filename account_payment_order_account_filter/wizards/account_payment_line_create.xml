@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="account_payment_line_create_form_add_account_ids_form_view" model="ir.ui.view">
+        <field name="name">account_payment_line_create_form_add_account_ids_form_view</field>
+        <field name="model">account.payment.line.create</field>
+        <field name="inherit_id" ref="account_payment_order.account_payment_line_create_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='journal_ids']" position="after">
+                <field name="account_ids" widget="many2many_tags"/>
+            </xpath>
+            <xpath expr="//field[@name='move_line_ids']/tree/field[@name='amount_currency']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='move_line_ids']/tree/field[@name='amount_currency']" position="after">
+                <field name="balance"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

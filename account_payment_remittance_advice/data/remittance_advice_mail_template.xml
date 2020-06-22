@@ -1,0 +1,81 @@
+<?xml version="1.0" ?>
+<odoo>
+    <!-- Mail template are declared in a NOUPDATE block
+         so users can freely customize/delete them -->
+    <!--Email template -->
+    <record id="account_remittance_advice_mail_template" model="mail.template">
+        <field name="name">Remittance Advice Email</field>
+        <field name="subject">${object.company_id.name|safe}: Remittance Advice
+            ${object.move_line_id.invoice_id.supplier_reference|safe}
+        </field>
+        <field name="partner_to">${object.partner_id.id}</field>
+        <field name="model_id" ref="account_payment_structured_communication.model_account_payment_line"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="lang">${object.partner_id.lang}</field>
+        <field name="body_html"><![CDATA[
+<div style="font-family: Arial, Helvetica, Calibri, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; padding: 0 5px 0 5px; link">
+    <p>Dear partner,</p>
+
+    <p>
+        The following payment has been remitted by AbAKUS it-solutions
+    </p>
+
+    <div style="margin:0px 0px 9px 0px;border-left: 2px solid #E97B2E; margin-left: 10px; padding-left: 5px;">
+        <p style="margin:0px 0px 9px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;"><strong style="font-weight:bold;"><u>REFERENCES</u></strong></p>
+
+        <p style="margin:0px 0px 9px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;"><strong style="font-weight:bold;">Supplier Name: </strong>${object.partner_id.name}</p>
+
+        <p style="margin:0px 0px 9px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;"><strong style="font-weight:bold;">Invoice Reference: </strong>${object.move_line_id.invoice_id.supplier_reference}</p>
+
+        <p style="margin:0px 0px 9px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;"><strong style="font-weight:bold;">Payment Date: </strong>${object.date}</p>
+
+        <p style="margin:0px 0px 9px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;"><strong style="font-weight:bold;">Payment Amount: </strong>${object.amount_currency}${object.currency_id.symbol}</p>
+    </div>
+
+    <p>
+        For questions about this payment or changes to your Email address, please contact AbAKUS it-solutions by Email at accounting@abakusitsolutions.eu 
+    </p>
+    <p>
+        Please do not reply to this mail by using your Email reply option.
+    </p>
+    
+    <!-- SIGNATURE -->
+    <div style="width: 100%; margin: 0px; padding: 0px; background-color: #E97B2E; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+        <h3 style="margin: 0px; padding: 10px 15px; font-size: 14px; color: #DDD;">
+            <strong>${object.company_id.name}</strong></h3>
+    </div>
+    <div style="width: 100% -15px; margin: 0px; padding: 5px 15px; line-height: 16px; background-color: #DDD; border-bottom-right-radius: 5px 5px; border-bottom-left-radius: 5px 5px; ">
+        <span style="color: #222; margin-bottom: 5px; display: block; ">
+        % if object.company_id.street:
+            ${object.company_id.street}<br/>
+        % endif
+        % if object.company_id.street2:
+            ${object.company_id.street2}<br/>
+        % endif
+        % if object.company_id.city or object.company_id.zip:
+            ${object.company_id.zip} ${object.company_id.city}<br/>
+        % endif
+        % if object.company_id.country_id:
+            ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>
+        % endif
+        </span>
+        % if object.company_id.phone:
+            <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+                Phone: &nbsp; ${object.company_id.phone}
+            </div>
+        % endif
+         % if object.company_id.fax:
+            <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+                Fax: &nbsp; ${object.company_id.fax}
+            </div>
+        % endif
+        % if object.company_id.website:
+            <div>
+                <a href="${object.company_id.website}">www.abakusitsolutions.eu</a>
+            </div>
+        %endif
+    </div>
+</div>
+            ]]></field>
+    </record>
+</odoo>

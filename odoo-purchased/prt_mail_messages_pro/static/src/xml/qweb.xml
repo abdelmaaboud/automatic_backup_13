@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+  <!--      Chatter (mail_thread widget) buttons  -->
+    <t t-name="mail.Chatter.Buttons">
+        <button t-if="new_message_btn" type="button" class="btn btn-sm btn-link o_chatter_button_new_message" title="Send a message">
+            Send message
+        </button>
+        <button t-if="log_note_btn" class="btn btn-sm btn-link o_chatter_button_log_note" title="Log a note. Followers will not be notified.">
+            Log note
+        </button>
+        <button t-if="schedule_activity_btn" class="btn btn-sm btn-link o_chatter_button_schedule_activity" title="Log or schedule an activity">
+            <i class="fa fa-clock-o"/> <t t-if="isMobile">Activity</t><t t-else="">Schedule activity</t>
+        </button>
+        <label class="btn btn-sm btn-link o_filter_checkbox_label" title="Hide notifications">
+          <i class="fa fa-eye-slash"/> <t t-if="isMobile">Hide</t><t t-else="">Hide notifications</t>
+          <input type="checkbox" class="btn btn-sm btn-link o_filter_checkbox" title="Hide notifications"/>
+        </label>
+    </t>
+    <!-- Show buttons in chatter -->
+    <t t-extend="mail.ChatThread.Message">
+      <t t-jquery=".o_thread_message_reply" t-operation="after">
+        <span>
+          <i class="fa fa-quote-left o_thread_icon o_thread_message_prt_button o_thread_message_reply_composer_quote"
+             t-att-data-message-id="message.id" title="Quote"/>
+          <i class="fa fa-copy o_thread_icon o_thread_message_prt_button o_thread_message_reply_composer_forward"
+             t-att-data-message-id="message.id" title="Forward"/>
+          <i class="fa fa-arrow-right o_thread_icon o_thread_message_prt_button o_thread_message_reply_composer_move"
+             t-att-data-message-id="message.id" title="Move"/>
+        </span>
+
+      </t>
+    </t>
+</templates>

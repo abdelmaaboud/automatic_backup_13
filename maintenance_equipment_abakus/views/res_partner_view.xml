@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="action_equipments_from_partner" model="ir.actions.act_window">
+            <field name="name">Equipments</field>
+            <field name="res_model">maintenance.equipment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="maintenance_equipment_abakus.hr_equipment_view_tree_abakus" />
+            <field name="context">{}</field>
+            <field name="domain">['|', ('customer_id', '=', context.get('default_customer_id')), ('customer_id.parent_id', '=', context.get('default_customer_id'))]</field>
+        </record>
+
+        <record id="view_partner_form_asset" model="ir.ui.view">
+            <field name="name">view_partner.form.asset</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="groups_id" eval="[(4, ref('maintenance.group_equipment_manager'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" posion="inside">
+                    <button class="oe_stat_button"
+                        icon="fa-laptop"
+                        name="%(maintenance_equipment_abakus.action_equipments_from_partner)d"
+                        context="{'default_equipment_assign_to': 'customer', 'default_customer_id': active_id}"
+                        type="action"
+                        groups="maintenance.group_equipment_manager">
+                       <field string="Equipments" name="equipment_count" widget="statinfo" groups="maintenance.group_equipment_manager"/>
+                   </button>
+                </xpath>
+                <xpath expr="//notebook" posion="inside">
+                    <page name="maintenance" string="Maintenance">
+                        <group>
+                            <!--<field name="on_premise_username" />-->
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

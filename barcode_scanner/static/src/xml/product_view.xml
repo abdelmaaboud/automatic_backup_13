@@ -1,0 +1,88 @@
+<odoo>
+    <t t-name="barcode_scanner.product_info">
+        <ol class="breadcrumb">
+            <li id="home_breadcrumb"><a href="javascript:">Home</a></li>
+            <li id="products_breadcrumb"><a href="javascript:">Products</a></li>
+            <li class="active"><t t-esc="widget.product.name"/></li>
+        </ol>
+        <div class="container-fluid text-center clearfix">
+            <h3 class="text-center mb32">Product Info</h3>
+            <div class="row" t-if="widget.product != undefined">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 text-left">
+                    <button id="edit_button" class="btn btn-primary" style="margin-left:10px;">Edit</button>
+                    <button t-if="widget.edit_mode" id="discard_edit_button" class="btn btn-default" style="margin-left:10px;">Discard</button>
+                </div>
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                   <div class="thumbnail">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-3">
+                                <img t-if="widget.product.image" id="product_image"
+                                t-attf-src="data:image/png;base64,{{widget.product.image}}" style="max-height:300px;" class="img-responsive img-thumbnail"/>
+                                <img t-else="" id="product_image" src="/barcode_scanner/static/src/image/image-not-found.jpg" style="max-height:300px;" class="img-responsive img-thumbnail"/>
+                                <div class="col-xs-12">
+                                    <t t-if="widget.edit_mode">  
+                                        <input id="file" class="inputfile" style="display:none;" accept="image/*" type="file"/>
+                                        <label for="file"> <i class="fa fa-camera"></i> Modify Image</label>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-8">
+                                <div>
+                                    <h3 t-if="!widget.edit_mode" id="product_name"> <t t-esc="widget.product.name"></t> </h3>
+                                    <div t-elif="widget.edit_mode" class="form-group">
+                                        <label for="product_name_input">Product Name</label>
+                                        <input class="form-control" id='product_name_input'/>
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label for="product_description_input">Description</label>
+                                            <textarea t-if="!widget.edit_mode" rows="6" style="max-width: 100%; min-width: 100%;" class="form-control" id='product_description_input' disabled=""><t t-if="widget.product.description" t-esc="widget.product.description"/></textarea>
+                                            <textarea t-elif="widget.edit_mode" rows="6" style="max-width: 100%; min-width: 100%;" class="form-control" id='product_description_input'/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="product_ref_input">Ref</label>
+                                                <t t-if="!widget.edit_mode">
+                                                    <input t-if="widget.product.ref" class="form-control" id='product_ref_input' disabled="" t-att-value="widget.product.ref"/>
+                                                    <input t-else="" class="form-control" id='product_ref_input' disabled=""/>
+                                                </t>
+                                                <input t-elif="widget.edit_mode" class="form-control" id='product_ref_input'/>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="product_barcode_input">Barcode</label>
+                                                <t t-if="!widget.edit_mode">
+                                                    <input t-if="widget.product.barcode" class="form-control" id='product_barcode_input' disabled="" t-att-value="widget.product.barcode"/>
+                                                    <input t-else="" class="form-control" id='product_barcode_input' disabled=""/>
+                                                </t>
+                                                <input t-elif="widget.edit_mode" class="form-control" id='product_barcode_input'/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6">
+                                            <p> Incoming quantity :  <t t-esc="widget.product.incoming_qty"></t> </p>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6">
+                                            <p> Outgoing quantity :  <t t-esc="widget.product.outgoing_qty"></t> </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <t t-if="widget.product.pickings.length gt 0">
+                <button id="incomming_button"  class="btn btn-primary">Incomming</button>
+            </t>
+            <t t-if="widget.product.pickings.length lt 1">
+                <button class="btn btn-default disabled">No Incommings</button>
+            </t>
+        </div>
+    </t>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="abakus_product_paperformat" model="report.paperformat">
+            <field name="name">ABAKUS Labels Paperformat 76x102</field>
+			<field name="orientation">Landscape</field>
+			<field name="format">custom</field>
+			<field name="page_height">102</field>
+			<field name="page_width">76</field>
+			<field name="margin_top">10</field>
+			<field name="margin_bottom">1</field>
+			<field name="margin_right">1</field>
+			<field name="margin_left">1</field>
+			<field name="dpi">150</field>
+		</record>
+    </data>
+</odoo>

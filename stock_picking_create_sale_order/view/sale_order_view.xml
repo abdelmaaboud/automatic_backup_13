@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_order_form_inherit_sale_stock_picking_list_origin">
+       <field name="name">view_order_form_inherit_sale_stock_picking_list_origin</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='sale_shipping']" position="inside">
+                <field name="origin_picking_id" readonly="1" attrs="{'invisible': [('origin_picking_id', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

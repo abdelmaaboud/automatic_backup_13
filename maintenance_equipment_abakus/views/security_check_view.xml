@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="security_check_tree" model="ir.ui.view">
+            <field name="name">security_check_tree</field>
+            <field name="model">security.check</field>
+            <field name="arch" type="xml">
+                <tree string="Security Checks">
+                    <field name="name" />
+                    <field name="partner_id" />
+                    <field name="write_uid" readonly="1" />
+                    <field name="create_date" readonly="1" />
+                    <field name="date_end" />
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="security_check_form" model="ir.ui.view">
+            <field name="name">security.check.form</field>
+            <field name="model">security.check</field>
+            <field name="arch" type="xml">
+                <form string="Security Check">
+                    <header>
+                        <button name="action_confirm" states="draft" string="Mark as Todo" type="object" class="oe_highlight"/>
+                        <button name="action_done" states="open" string="Mark as Done" type="object" class="oe_highlight"/>
+                        <button name="action_validate" states="waiting" string="Validate" type="object" class="oe_highlight"/>
+                        <button name="action_refuse" states="waiting" string="Refuse" type="object" class="oe_highlight"/>
+                        <button name="action_cancel" string="Cancel" type="object" states="draft,open,waiting,closed"/>
+                        <button name="action_redraft" states="cancel" string="Reset as draft" type="object" />
+                        <button name="action_duplicate" states="closed" class="oe_highlight" string="Create a new one for the customer" type="object" />
+                        <button name="action_print_complete" class="oe_highlight" string="Print" type="object" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,open,waiting,closed" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" readonly="1" />
+                                <field name="write_uid" readonly="1" />
+                                <field name="partner_id" domain="[('parent_id', '=', False), ('customer', '=', True)]" />
+                                <field name="subscription_id" domain="[('partner_id', '=', partner_id)]" />
+                                <field name="maintenance_request_id" domain="[('customer_id', '=', partner_id)]" />
+                                <field name="analytic_account_id" invisible="1" />
+                            </group>
+                            <group>
+                                <field name="create_date" readonly="1" />
+                                <field name="date_end" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Checks">
+                                <group string="External Accesses">
+                                    <group col="5">
+                                        <button string="Create Report" class="btn-primary" type="object" name="print_external_access"  />
+                                        <field name="external_access_attachment_ids" widget="many2many_binary" nolabel="1"  />
+                                        <field name="external_access_check_date" />
+                                    </group>
+                                    <field name="external_access_ids" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="partner_id" />
+                                            <!--<field name="on_premise_username" />-->
+                                            <field name="connection_mode_ids" widget="many2many_tags" domain="[('active', '=', True)]"/>
+                                            <field name="comment" />
+                                        </tree>
+                                    </field>
+                                    <field name="external_access_free_text" />
+                                </group>
+                                <group string="Backups">
+                                    <group col="5">
+                                        <button string="Create Report" class="btn-primary" type="object" name="print_backups"  />
+                                        <field name="backups_attachment_ids" widget="many2many_binary" nolabel="1"  />
+                                        <field name="backups_check_date" />
+                                    </group>
+                                    <field name="backups_ids" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="source" />
+                                            <field name="type_id" />
+                                            <field name="destination" />
+                                            <field name="frequency" />
+                                            <field name="date_last_successful_restore" />
+                                            <field name="report_monitoring" />
+                                        </tree>
+                                    </field>
+                                    <field name="backups_free_text" />
+                                </group>
+                                <group string="Access Rights">
+                                    <group col="4">
+                                        <button string="Create Report" class="btn-primary" type="object" name="print_access_rights"  />
+                                        <field name="access_rights_attachment_ids" widget="many2many_binary" nolabel="1"  />
+                                        <field name="access_rights_check_date"  />
+                                    </group>
+                                    <field name="access_rights_ids" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="username" />
+                                            <field name="groups" />
+                                            <field name="shares" />
+                                            <field name="rights" />
+                                        </tree>
+                                    </field>
+                                    <field name="access_rights_free_text" />
+                                </group>
+                                <group string="Portal Accesses">
+                                    <group col="5">
+                                        <button string="Create Report" class="btn-primary" type="object" name="print_gate_access"  />
+                                        <button string="Auto Fill Users" class="btn-primary" type="object" name="import_gate_access_users"  />
+                                        <field name="gate_access_attachment_ids" widget="many2many_binary" nolabel="1"  />
+                                        <field name="gate_access_check_date" />
+                                    </group>
+                                    <field name="gate_access_ids" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="username" />
+                                            <field name="sales_ku" />
+                                            <field name="accounting_ku" />
+                                            <field name="project_ku" />
+                                            <field name="date_last_connection" />
+                                        </tree>
+                                    </field>
+                                    <field name="gate_access_free_text" />
+                                </group>
+                                <group string="Servers Security">
+                                    <group col="6">
+                                        <button string="Create Report" class="btn-primary" type="object" name="print_servers_security"  />
+                                        <field name="server_security_attachment_ids" widget="many2many_binary"  nolabel="1"  />
+                                        <field name="server_security_check_date" />
+                                    </group>
+                                    <field name="server_security_ids" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="server" />
+                                            <field name="hardware_ok" />
+                                            <field name="maintenance" />
+                                            <field name="shadow_copies" />
+                                            <field name="resources_ok" />
+                                            <field name="irmc_ok" />
+                                            <field name="monitoring_probes" />
+                                        </tree>
+                                    </field>
+                                    <field name="server_security_free_text" />
+                                </group>
+                                <group string="Network Security">
+                                    <group col="5">
+                                        <button string="Create Report" class="btn-primary" type="object" name="print_network_security"  />
+                                        <field name="network_security_attachment_ids" widget="many2many_binary" nolabel="1"  />
+                                        <field name="network_security_check_date" />
+                                    </group>
+                                    <field name="network_security_ids" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="firewall" />
+                                            <field name="firewall_licences_ok" />
+                                            <field name="firewall_rules_ok" />
+                                            <field name="wlan" />
+                                            <field name="complex_passwords" />
+                                        </tree>
+                                    </field>
+                                    <field name="network_security_free_text" />
+                                </group>
+                                <group string="Workstations Security">
+                                    <group col="5">
+                                        <button string="Create Report" class="btn-primary" type="object" name="print_workstations_security"  />
+                                        <field name="workstation_security_attachment_ids" widget="many2many_binary"  nolabel="1"  />
+                                        <field name="workstation_security_check_date" />
+                                    </group>
+                                    <field name="workstation_security_ids" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="workstation" />
+                                            <field name="description" />
+                                            <field name="antivirus_ok" />
+                                        </tree>
+                                    </field>
+                                    <field name="workstation_security_free_text" />
+                                </group>
+                                <group string="Todos">
+                                    <group col="5">
+                                        <button string="Create Report" class="btn-primary" type="object" name="print_todos_report"  />
+                                        <field name="todos_attachment_ids" widget="many2many_binary"  nolabel="1"  />
+                                        <field name="todos_date" />
+                                    </group>
+                                    <field name="todo_ids" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="name" />
+                                            <field name="description" />
+                                            <field name="project_id" />
+                                            <field name="task_id" />
+                                            <field name="task_state_id" readonly="True" />
+                                        </tree>
+                                    </field>
+                                    <field name="todos_free_text" />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_security_checks" model="ir.actions.act_window">
+            <field name="name">Security Checks</field>
+            <field name="res_model">security.check</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menuitem_security_check"
+                  name="Security Checks"
+                  action="action_security_checks"
+                  parent="maintenance.menu_m_request"
+                  sequence="15" />
+    </data>
+</odoo>

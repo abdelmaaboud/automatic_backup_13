@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.actions.act_window" id="action_view_supected_duplicates_for_hr_application">
+        <field name="name">Suspected Duplicates</field>
+        <field name="res_model">hr_duplicate_suspect</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('origin_id', '=', context.get('origin_id'))]</field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_applicant_list_of_suspect_duplicates">
+        <field name="name">hr_applicant.list_of_suspect_duplicates</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.crm_case_form_view_job"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_button_box']" position="inside">
+                 <button name="%(action_view_supected_duplicates_for_hr_application)d" class="oe_stat_button" icon="fa-copy" type="action" context="{'origin_id': active_id}">
+                     <field name="suspect_ids_count" widget="statinfo" string="Suspected Duplicates" />
+                </button>
+            </xpath>
+
+            <xpath expr="//field[@name='description']" position="after">
+                <notebook>
+                    <page string="Duplicates" name="duplicates">
+                        <field name="suspect_ids" readonly="True">
+                            <tree>
+                                <field name="duplicate_partner_name"/>
+                                <field name="duplicate_job_id"/>
+                                <field name="duplicate_create_date"/>
+                                <field name="duplicate_stage_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.server" id="act_recruitment_check_duplicates">
+        <field name="name">Check Recruitment Application Duplicates</field>
+        <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+        <field name="state">code</field>
+        <field name="code">action = env['hr.applicant'].browse(context['active_ids'])._action_check_duplicates()
+        </field>
+    </record>
+
+<!--    <record model="ir.values" id="hr_applicant_run_check_duplicate_action">-->
+<!--        <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>-->
+<!--        <field name="name">Run Recruitment Application Duplicates Check</field>-->
+<!--        <field name="key2">client_action_multi</field>-->
+<!--        <field name="value" eval="'ir.actions.server,' + str(ref('act_recruitment_check_duplicates'))"/>-->
+<!--        <field name="key">action</field>-->
+<!--        <field name="model">hr.applicant</field>-->
+<!--    </record>-->
+</odoo>

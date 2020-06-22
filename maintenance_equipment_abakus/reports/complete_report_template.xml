@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="security_check_report_complete_template">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="maintenance_equipment_abakus.external_access_document" t-lang="user.partner_id.lang"/>
+                    <t t-call="maintenance_equipment_abakus.backups_document" t-lang="user.partner_id.lang"/>
+                    <t t-call="maintenance_equipment_abakus.access_rights_document" t-lang="user.partner_id.lang"/>
+                    <t t-call="maintenance_equipment_abakus.gate_access_document" t-lang="user.partner_id.lang"/>
+                    <t t-call="maintenance_equipment_abakus.servers_security_document" t-lang="user.partner_id.lang"/>
+                    <t t-call="maintenance_equipment_abakus.network_security_document" t-lang="user.partner_id.lang"/>
+                    <t t-call="maintenance_equipment_abakus.workstations_security_document" t-lang="user.partner_id.lang"/>
+                    <t t-call="maintenance_equipment_abakus.todos_document" t-lang="user.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

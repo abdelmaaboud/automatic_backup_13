@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_hr_holidays_calendar_view_improvements">
+        <field name="name">hr.holidays.calendar.view.improvements</field>
+        <field name="model">hr.holidays</field>
+        <field name="inherit_id" ref="hr_holidays.view_holiday_new_calendar"/>
+        <field name="arch" type="xml">
+            <field name="display_name" position="after">
+                <field name="state_info"/>
+            </field>
+        </field>
+    </record>
+</odoo>

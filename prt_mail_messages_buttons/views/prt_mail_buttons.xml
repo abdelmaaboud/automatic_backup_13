@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<odoo>
+
+<!--## Form ##-->
+    <record id="prt_mail_message_form_buttons" model="ir.ui.view">
+        <field name="name">prt.mail.message.form</field>
+        <field name="model">mail.message</field>
+        <field name="inherit_id" ref="prt_mail_messages.prt_mail_message_form"/>
+        <field name="arch" type="xml">
+          <div class="oe_button_box" position="replace"/>
+          <xpath expr="/form/*" position="before">
+            <header>
+              <button name="reply" type="object" icon="fa-reply" string="Reply"
+                context="{'wizard_mode': False}"
+                help="Post new message to record. Record followers will be notified!"/>
+
+              <button name="reply" type="object" icon="fa-quote-left" string="Quote"
+                context="{'wizard_mode': 'quote'}"
+                help="Post new message to record. Original message text will be qouted. Record followers will be notified!"/>
+
+              <button name="reply" type="object" icon="fa-copy" string="Forward"
+                context="{'wizard_mode': 'forward'}"
+                help="Copy message to other record. Original message text will be qouted and kept. Followers of the other record will be notified!"/>
+
+              <button name="move" type="object" icon="fa-arrow-right" string="Move"
+                help="Move message from current to other record" invisible="0"/>
+
+              <button name="thread_messages" type="object" string="Open Thread"
+                  icon="fa-envelope" attrs="{'invisible': [('thread_messages_count', '&lt;', 2)]}"/>
+
+              <button string="Mark read" type="object" class="oe_highlight" name="set_message_done"
+                icon="fa-file" attrs="{'invisible': [('needaction', '=', False)]}"/>
+
+              <button string="Mark unread" type="object" name="mark_as_unread"
+                icon="fa-check" attrs="{'invisible': [('needaction', '=', True)]}"/>
+
+              <button name="toggle_message_starred" type="object"
+                  icon="fa-check" attrs="{'invisible': [('starred', '=', True)]}"
+                  string="Star"/>
+
+              <button name="toggle_message_starred" type="object" class="oe_highlight"
+                  icon="fa-star" attrs="{'invisible': [('starred', '=', False)]}"
+                  string="Unstar"/>
+
+            <field name="thread_messages_count" invisible="1" string="In thread"/>
+            </header>
+          </xpath>
+        </field>
+    </record>
+
+</odoo>

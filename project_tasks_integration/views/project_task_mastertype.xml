@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="project_task_mastertype_improvements_form_view" model="ir.ui.view">
+        <field name="name">project_task_mastertype_improvements_form_view</field>
+        <field name="model">project.task.mastertype</field>
+        <field name="inherit_id" ref="project_task_mastertype.project_task_mastertype_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='sequence']" position="after">
+                <field name="need_estimate"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

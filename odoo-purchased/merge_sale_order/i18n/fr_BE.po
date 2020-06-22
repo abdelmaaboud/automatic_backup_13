@@ -1,0 +1,122 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* merge_sale_order
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20181109\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-12 13:09+0000\n"
+"PO-Revision-Date: 2019-04-12 15:15+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fr_BE\n"
+"X-Generator: Poedit 2.1.1\n"
+
+#. module: merge_sale_order
+#: model:ir.ui.view,arch_db:merge_sale_order.view_merge_sale_line
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: merge_sale_order
+#: selection:merge.sale.order,merge_type:0
+msgid "Create new order and cancel all selected sale orders"
+msgstr "Créer une nouvelle offre et annuler toutes les offres sélectionnées"
+
+#. module: merge_sale_order
+#: selection:merge.sale.order,merge_type:0
+msgid "Create new order and delete all selected sale orders"
+msgstr "Créer une nouvelle offre et supprimer toutes les offres sélectionnées"
+
+#. module: merge_sale_order
+#: model:ir.model.fields,field_description:merge_sale_order.field_merge_sale_order_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: merge_sale_order
+#: model:ir.model.fields,field_description:merge_sale_order.field_merge_sale_order_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: merge_sale_order
+#: model:ir.model.fields,field_description:merge_sale_order.field_merge_sale_order_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: merge_sale_order
+#: model:ir.model.fields,field_description:merge_sale_order.field_merge_sale_order_id
+msgid "ID"
+msgstr "ID"
+
+#. module: merge_sale_order
+#: model:ir.model.fields,field_description:merge_sale_order.field_merge_sale_order___last_update
+msgid "Last Modified on"
+msgstr "Dernière Modification le"
+
+#. module: merge_sale_order
+#: model:ir.model.fields,field_description:merge_sale_order.field_merge_sale_order_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: merge_sale_order
+#: model:ir.model.fields,field_description:merge_sale_order.field_merge_sale_order_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: merge_sale_order
+#: model:ir.actions.act_window,name:merge_sale_order.action_view_merge_sale_line
+#: model:ir.ui.view,arch_db:merge_sale_order.view_merge_sale_line
+msgid "Merge Orders"
+msgstr "Fusionner les offres"
+
+#. module: merge_sale_order
+#: model:ir.model.fields,field_description:merge_sale_order.field_merge_sale_order_merge_type
+msgid "Merge Type"
+msgstr "Fusionner les types"
+
+#. module: merge_sale_order
+#: selection:merge.sale.order,merge_type:0
+msgid "Merge order on existing selected order and cancel others"
+msgstr "Fusionner les offres sur une offre sélectionée existante et annuler les autres"
+
+#. module: merge_sale_order
+#: selection:merge.sale.order,merge_type:0
+msgid "Merge order on existing selected order and delete others"
+msgstr "Fusionner les offres sur une offre sélectionée existante et supprimer les autres"
+
+#. module: merge_sale_order
+#: code:addons/merge_sale_order/wizard/merge_sale_order_wizard.py:49
+#, python-format
+msgid "Please select Sale orders which are in Quotation state to perform the Merge Operation."
+msgstr "Veuillez sélectionner des offres non-confirmée pour fusionner."
+
+#. module: merge_sale_order
+#: code:addons/merge_sale_order/wizard/merge_sale_order_wizard.py:54
+#, python-format
+msgid "Please select Sale orders whose Customers are same to  perform the Merge Operation."
+msgstr "Veuillez sélectionner des offres qui concernent le même partenaire."
+
+#. module: merge_sale_order
+#: code:addons/merge_sale_order/wizard/merge_sale_order_wizard.py:45
+#, python-format
+msgid "Please select atleast two sale orders to perform the Merge Operation."
+msgstr "Veuillez sélectionner au moins 2 offres."
+
+#. module: merge_sale_order
+#: model:ir.model.fields,field_description:merge_sale_order.field_merge_sale_order_sale_order_id
+msgid "Sale Order"
+msgstr "Commande client"
+
+#. module: merge_sale_order
+#: model:ir.ui.view,arch_db:merge_sale_order.view_merge_sale_line
+msgid "Sale Order Merge"
+msgstr "Fusion de Commandes Client"
+
+#. module: merge_sale_order
+#: model:ir.model,name:merge_sale_order.model_merge_sale_order
+msgid "merge.sale.order"
+msgstr "merge.sale.order"

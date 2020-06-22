@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+
+<!-- View technical fields -->
+    <record id="group_technical" model="res.groups">
+        <field name="name">Messages: View technical fields</field>
+        <field name="comment">View technical fields in mail messages</field>
+    </record>
+  </data>
+</odoo>

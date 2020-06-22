@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="hr_equipment_view_tree_abakus" model="ir.ui.view">
+            <field name="name">hr_equipment_view_tree_abakus</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_view_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="asset_number"/>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="customer_id" />
+                    <field name="criticality"/>
+                    <field name="equipment_assign_to" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="maintenance_equipment_view_form_inherit_hr_abakus" model="ir.ui.view">
+            <field name="name">hr_equipment_view_form_abakus</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="inherit_id" ref="hr_maintenance.maintenance_equipment_view_form_inherit_hr" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='equipment_assign_to']" position="after">
+                    <field name="customer_id" attrs="{'invisible': [('equipment_assign_to', '!=', 'customer')]}" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_tasks_linked_to_equipment" model="ir.actions.act_window">
+            <field name="name">Tasks Related To This Equipment</field>
+            <field name="res_model">project.task</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context"></field>
+            <field name="domain">[('equipment_ids', 'in', context.get('default_equipment_ids'))]</field>
+        </record>
+
+        <record id="action_worklogs_linked_to_equipment" model="ir.actions.act_window">
+            <field name="name">Worklogs For Equipment</field>
+            <field name="res_model">account.analytic.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="domain">[('equipment_ids', 'in', context.get('default_equipment_ids'))]</field>
+            <field name="view_ids" eval="[
+                                         (5, 0, 0),
+                                         (0, 0, {'view_mode': 'tree', 'view_id': ref('analytic.view_account_analytic_line_tree')}),
+                                         (0, 0, {'view_mode': 'form', 'view_id': ref('analytic.view_account_analytic_line_form')})]"/>
+        </record>
+
+        <record id="hr_equipment_view_form_abakus" model="ir.ui.view">
+            <field name="name">hr_equipment_view_form_abakus</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_button_box']" position="inside">
+                    <button class="oe_stat_button"
+                            icon="fa-tasks"
+                            name="%(maintenance_equipment_abakus.action_tasks_linked_to_equipment)d"
+                            context="{'default_equipment_ids': [active_id], 'default_partner_id': partner_id}"
+                            type="action">
+                        <field name="task_count" widget="statinfo" string="Tasks"/>
+                    </button>
+                    <button class="oe_stat_button"
+                            icon="fa-calendar"
+                            name="%(maintenance_equipment_abakus.action_worklogs_linked_to_equipment)d"
+                            context="{'default_equipment_ids': active_id, 'default_customer_id': customer_id}"
+                            type="action">
+                        <field name="worklog_count" widget="statinfo" string="Worklogs"/>
+                    </button>
+                </xpath>
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="asset_number" />
+                    <field name="criticality" />
+                </xpath>
+                <xpath expr="//field[@name='location']" position="after">
+                    <field name="active" />
+                </xpath>
+                <xpath expr="//field[@name='warranty']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='warranty']" position="after">
+                    <field name="ip" />
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page name="warranty" string="Warranty">
+                        <group>
+                            <field name="manufacturer_id" />
+                            <field name="purchase_date" />
+                            <field name="warranty_start_date" />
+                            <field name="warranty_end_date" />
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//field[@name='cost']" position="before">
+                    <field name="sale_order_id" readonly="1"/>
+                    <field name="sale_order_line_id" readonly="1"/>
+                </xpath>
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('equipment_assign_to', '!=', 'employee')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='serial_no']" position="attributes">
+                    <attribute name="required">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='model']" position="attributes">
+                    <attribute name="required">True</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="maintenance_equipment_view_kanban_inherit_hr_abakus" model="ir.ui.view">
+            <field name="name">maintenance_equipment_view_kanban_inherit_hr_abakus</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="inherit_id" ref="hr_maintenance.maintenance_equipment_view_kanban_inherit_hr" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="inside">
+                    <field name="customer_id" />
+                </xpath>
+                <xpath expr="//div[@t-if='record.department_id.value']" position="after">
+                    <div t-if="record.customer_id.value"><u>Customer:</u> <field name="customer_id"/></div>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="hr_equipment_view_kanban_abakus" model="ir.ui.view">
+            <field name="name">hr_equipment_view_kanban_abakus</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_view_kanban" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="inside">
+                    <field name="customer_id" />
+                    <field name="criticality" />
+                    <field name="asset_number" />
+                </xpath>
+                <xpath expr="//b[@class='o_kanban_record_title']" position="after">
+                    <div t-if="record.asset_number.value"> &amp;nbsp<i>[<field name="asset_number"/>]</i></div>
+                </xpath>
+                <xpath expr="//div[@class='o_kanban_record_body']" position="inside">
+                    <div t-if="record.criticality"><field name="criticality"/></div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_equipment_view_search_abakus" model="ir.ui.view">
+            <field name="name">hr_equipment_view_search_abakus</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_view_search" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="replace">
+                    <field name="name" filter_domain="['|','|','|','|',('name','ilike',self),('model','ilike',self),('serial_no','ilike',self),('partner_ref', 'ilike', self), ('asset_number', 'ilike', self)]"/>
+                    <field name="customer_id" />
+                    <field name="criticality"/>
+                    <field name="sale_order_id" />
+                </xpath>
+                <xpath expr="//group" position="inside">
+                    <filter string="Customer" domain="[]" context="{'group_by': 'customer_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="maintenance.hr_equipment_request_action_from_equipment" model="ir.actions.act_window">
+            <field name="domain">[('equipment_ids', 'in', active_id)]</field>
+        </record>
+	</data>
+</odoo>

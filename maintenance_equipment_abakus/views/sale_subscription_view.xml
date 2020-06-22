@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="action_equipments_linked_to_subscription" model="ir.actions.act_window">
+            <field name="name">Equipments For Subscription</field>
+            <field name="res_model">maintenance.equipment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="context">{}</field>
+            <field name="domain">['|', ('customer_id', '=', context.get('default_customer_id')), '|', ('customer_id.parent_id.child_ids', 'in', context.get('default_customer_id')), '|', ('customer_id.child_ids', 'in', context.get('default_customer_id')), ('customer_id.parent_id', '=', context.get('default_customer_id'))]</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_maintenance_request_from_subscription">
+            <field name="name">Maintenance Requests</field>
+            <field name="res_model">maintenance.request</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="domain">[('subscription_id', '=', context.get('default_subscription_id'))]</field>
+        </record>
+
+        <record id="sale_subscription_open_checks_action" model="ir.actions.act_window">
+            <field name="name">Security checks</field>
+            <field name="res_model">security.check</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('subscription_id', '=', context.get('partner_id'))]</field>
+        </record>
+
+        <record id="sale_subscription_view_form_equipments" model="ir.ui.view">
+            <field name="name">sale_subscription_view_form_equipments</field>
+            <field name="model">sale.subscription</field>
+            <field name="inherit_id" ref="sale_subscription.sale_subscription_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_button_box']" position="inside">
+                    <button class="oe_stat_button"
+                            icon="fa-gear"
+                            name="%(maintenance_equipment_abakus.action_equipments_linked_to_subscription)d"
+                            context="{'default_subscription_id': active_id, 'default_equipment_assign_to': 'customer', 'default_customer_id': partner_id}"
+                            type="action">
+                        <field name="equipment_count" widget="statinfo" string="Equipments"/>
+                    </button>
+                    <button class="oe_stat_button"
+                        icon="fa-cogs"
+                        name="%(maintenance_equipment_abakus.action_maintenance_request_from_subscription)d"
+                        context="{'default_subscription_id': active_id, 'default_customer_id': partner_id}"
+                        type="action">
+                       <field string="Maintenance" name="maintenance_count" widget="statinfo"/>
+                    </button>
+                    <button class="oe_stat_button" name="%(maintenance_equipment_abakus.sale_subscription_open_checks_action)d" type="action" icon="fa-industry" context="{'partner_id': id}">
+                        <field string="Security Check" name="security_check_count" widget="statinfo" modifiers="{'readonly': true}"/>
+                    </button>
+                </xpath>
+                <xpath expr="//field[@name='display_name']" posion="after">
+                    <field name="is_maintenance_subscription" />
+                </xpath>
+                <xpath expr="//group[@name='main']" position="after" attrs="{'invisible': [('contract_type', '!=', 'fix_price')]}">
+                    <group string="Maintenance Settings" id="maintenance_settings">
+                        <field name="is_maintenance_subscription" />
+                        <field name="maintenance_setting_ids" attrs="{'invisible': [('is_maintenance_subscription', '=', False)]}" nolabel="1" colspan="2">
+                            <tree editable="bottom">
+                                <field name="maintenance_level_id" />
+                                <field name="is_security_check" readonly="1"/>
+                                <field name="maintenance_recurring_interval" />
+                                <field name="maintenance_recurring_rule_type" />
+                            </tree>
+                        </field>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

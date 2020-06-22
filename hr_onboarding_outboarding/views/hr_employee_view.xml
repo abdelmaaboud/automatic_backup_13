@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<odoo>
+    <record model="ir.ui.view" id="hr_employee_advantages_view">
+        <field name="name">hr_employee_onboarding_outboarding_view</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="action_create_onboarding_project" string="Create onboarding project" type="object"
+                            class="oe_highlight" attrs="{'invisible':[('onboarding_project_id', '!=', False)]}"/>
+                    <button name="action_create_outboarding_project" string="Create outboarding project" type="object"
+                            class="oe_highlight" attrs="{'invisible':[('outboarding_project_id', '!=', False)]}"/>
+                </header>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="onboarding_project_id"/>
+                <field name="outboarding_project_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

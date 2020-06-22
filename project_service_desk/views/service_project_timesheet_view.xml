@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="project_service_desk.act_timesheet_worklogs_my">
+            <field name="name">Manage Worklogs</field>
+            <field name="res_model">account.analytic.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">calendar,form,tree</field>
+            <field name="domain">[('is_timesheet', '=', True')]</field>
+            <field name="context">{'search_default_mine': 1, 'form_view_ref': 'timesheet_grid.timesheet_view_form'}</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                         (0, 0, {'view_mode': 'calendar', 'sequence': 5, 'view_id': ref('hr_timesheet.timesheet_view_calendar')}),
+                         (0, 0, {'view_mode': 'tree', 'sequence': 10, 'view_id': ref('hr_timesheet.hr_timesheet_line_tree')}),
+                         (0, 0, {'view_mode': 'form', 'sequence': 10, 'view_id': ref('timesheet_grid.timesheet_view_form')}),
+                         ]"
+                   />
+        </record>
+
+        <!-- Search Timesheets -->
+        <record model="ir.ui.view" id="project_timesheets_search_service_desk">
+           <field name="name">project_timesheets_search_service_desk</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='mine']" position="after">
+                    <separator/>
+                    <filter string="Support WL" name="support_analytic_lines" domain="[('task_id.project_id.project_type', '=', 'support')]" />
+                    <filter string="Development WL" name="development_analytic_lines" domain="[('task_id.project_id.project_type', '=', 'development')]" />
+                    <filter string="Installation WL" name="installation_analytic_lines" domain="[('task_id.project_id.project_type', '=', 'installation')]" />
+                    <filter string="Other WL" name="other_tickets" domain="[('task_id.project_id.project_type', '=', 'other')]" />
+                    <separator/>
+                </xpath>
+                <xpath expr="//group" position="inside">
+                    <filter string="Invoice Factor" name="groupby_to_invoice" domain="[]" context="{'group_by':'to_invoice'}" help="Invoice Factor"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Timesheet Calendar -->
+        <record model="ir.ui.view" id="timesheet_view_calendar_service_desk">
+           <field name="name">timesheet_view_calendar_service_desk</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.timesheet_view_calendar"/>
+            <field name="arch" type="xml">
+                <xpath expr="//calendar" position="attributes">
+                    <attribute name="date_start">date_begin</attribute>
+                    <attribute name="date_delay">unit_amount</attribute>
+                    <attribute name="quick_add">False</attribute>
+                    <attribute name="event_open_popup">True</attribute>
+                    <attribute name="form_view_id">%(timesheet_grid.timesheet_view_form)d</attribute>
+                    <attribute name="color">user_id</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <menuitem name="Timesheet"
+                  id="project_service_desk.menu_timesheet"
+                  groups="project.group_project_manager,project.group_project_user"
+                  parent="project_service_desk.menu_main_service_desk"
+                  action="project_service_desk.act_timesheet_worklogs_my"
+                  sequence="15"/>
+    </data>
+</odoo>

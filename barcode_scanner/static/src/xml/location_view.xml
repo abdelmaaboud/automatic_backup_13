@@ -1,0 +1,37 @@
+<odoo>
+    <t t-name="barcode_scanner.location">
+        <div class="container-fluid text-center">
+            <h3 class="text-center mb32 mt32">Location Info</h3>
+            <div class="row" t-if="widget.location != undefined">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                    <p>Location name : <t t-esc="widget.location.display_name"></t></p>
+                    <p>Barcode : <t t-esc="widget.location.barcode"></t></p>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Products</div>
+                        <table class="table">
+                            <tr>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-center">Selected</th>
+                            </tr>
+                            <t t-if="widget.location.products">
+                                <t t-foreach="widget.location.products" t-as="product">
+                                    <tr>
+                                        <td><t t-esc="product.display_name"/></td>
+                                        <td><t t-esc="product.quantity"/></td>
+                                        <td>
+                                            <input type="number"
+                                            t-att-data-barcode="product.barcode" 
+                                            t-attf-id="product_{{product.product_id}}"></input>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <a id="tap_to_scan_fab" class="floating-action"> <i class="fa fa-barcode icon-float"></i> </a>
+        </div>
+    </t>
+</odoo>

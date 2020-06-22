@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="project_issue_email_matching" model="ir.actions.server">
+            <field name="name">Project Task Email Matching</field>
+            <field name="model_id" ref="model_project_task"/>
+            <field name="state">code</field>
+            <field name="sequence">5</field>
+            <field name="code">
+# Set description
+records.set_first_message_as_description()
+# If Created Task has a partner, add it as follower
+records.add_partner_as_task_follower()
+# Match Task with Project
+records.match_task_to_project()
+# - Send EMAIL Confirmation
+records.send_confirmation_email_to_customer()
+# Send alert to the team
+records.send_alert_to_team()
+
+# - Specific tagging for CPAS Lontzen
+# we need to set "CPAS" on the comment field of the partner to have it matched as "CPAS" in the subject
+if record.partner_id.comment and 'CPAS' in record.partner_id.comment:
+    record.write({'name' : "CPAS : " + str(record.name)})
+            </field>
+        </record>
+    </data>
+</odoo>

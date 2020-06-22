@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record id="view_task_form2_on_site" model="ir.ui.view">
+            <field name="name">view_task_form2_on_site</field>
+            <field name="model">project.task</field>
+			<field name="inherit_id" ref="hr_timesheet.view_task_form2_inherited"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='timesheet_ids']//tree//field[@name='unit_amount']" position="before">
+                    <field name="on_site"/>
+                </xpath>
+                <xpath expr="//field[@name='timesheet_ids']//kanban//field[@name='unit_amount']" position="before">
+                    <field name="on_site"/>
+                </xpath>
+                <xpath expr="//field[@name='timesheet_ids']//form//field[@name='unit_amount']" position="before">
+                    <field name="on_site"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

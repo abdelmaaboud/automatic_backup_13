@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record id="product_template_kanban" model="ir.ui.view">
+            <field name="name">product_template.kanban</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='tags'][last()]" position="after">
+                    <ul>
+                        <li>Qty Sold: <field name="sales_count" /> </li>
+                    </ul>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_template_list" model="ir.ui.view">
+            <field name="name">product_template.list</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='uom_id']" position="after">
+                    <field string="Qty Sold" name="sales_count" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

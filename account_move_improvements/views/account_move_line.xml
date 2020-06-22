@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="account_move_form_tax_abakus" model="ir.ui.view">
+            <field name="name">account_move_form_tax_abakus</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='line_ids']/tree/field[@name='currency_id']" position="before">
+                    <field name="tax_ids" widget="many2many_tags"/>
+                    <field name="compute_taxes" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

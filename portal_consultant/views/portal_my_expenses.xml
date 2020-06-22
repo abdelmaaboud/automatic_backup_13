@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_consultant.portal_my_expenses" name="Portal : My Expenses">
+        <t t-call="portal.portal_layout">
+            <t t-if="help_text">
+                <div style="margin-top:10px;">
+                    <t t-raw="help_text"/>
+                </div>
+            </t>
+            <h5/>
+            <header>
+                <h3>Expenses</h3>
+                <t>
+                    <a href="/my/expenses/form/-1" class="btn btn-default">Create</a>
+                </t>
+            </header>
+            <h5/>
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <table class="table table-hover o_portal_my_doc_table">
+                        <thead>
+                            <tr class="active">
+                                <th style="text-align:left;">Expense Description</th>
+                                <th style="text-align:left;">Expense Date</th>
+                                <th style="text-align:left;">Total</th>
+                                <th style="text-align:left;">Status</th>
+                                <th style="text-align:left;">Actions</th>
+                            </tr>
+                        </thead>
+                        <t t-foreach="expenses" t-as="expense">
+                            <tr>
+                                <td style="text-align:left;">
+                                    <a t-attf-href="/my/expenses/form/#{expense.id}">
+                                        <t t-esc="expense.name"/>
+                                    </a>
+                                </td>
+                                <td style="text-align:left;">
+                                    <span t-esc="expense.date" t-options="{'widget': 'date'}"/>
+                                </td>
+                                <td style="text-align:left;">
+                                    <span t-esc="expense.total_amount"
+                                          t-options="{'widget': 'monetary', 'display_currency': expense.currency_id}"/>
+                                </td>
+                                <td style="text-align:left;">
+                                    <t t-if="expense.sheet_id and expense.sheet_id.state=='submit'">
+                                        <span>Submitted</span>
+                                    </t>
+                                    <t t-elif="expense.sheet_id and expense.sheet_id.state=='approve'">
+                                        <span>Approved</span>
+                                    </t>
+                                    <t t-elif="expense.sheet_id and expense.sheet_id.state=='done'">
+                                        <span>Paid</span>
+                                    </t>
+                                    <t t-elif="expense.sheet_id and expense.sheet_id.state=='post'">
+                                        <span>Posted</span>
+                                    </t>
+                                    <t t-elif="expense.sheet_id and expense.sheet_id.state=='cancel'">
+                                        <span>Refused</span>
+                                    </t>
+                                    <t t-else="">
+                                        <span>To Submit</span>
+                                    </t>
+                                </td>
+                                <td style="text-align:left;">
+                                    <t t-if="expense.state=='draft'">
+                                        <span class="glyphicon glyphicon-remove text-danger"
+                                              attribute-hidden="True" data-toggle="modal"
+                                              data-target="#deleteExpenseModal"/>
+                                        <!-- Modal : delete an expense -->
+                                        <div class="modal fade" id="deleteExpenseModal" tabindex="-1" role="dialog"
+                                             aria-labelledby="deleteExpenseModalLabel"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="deleteExpenseModalLabel">Confirmation
+                                                        </h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Are you sure you want to delete this expense ?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a t-attf-href="/my/expenses/delete/#{expense.id}"
+                                                           class="btn btn-info">OK
+                                                        </a>
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a class="glyphicon glyphicon-check text-success"
+                                              attribute-hidden="True" t-attf-href="/my/expenses/submit/#{expense.id}"/>
+                                    </t>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_consultant.portal_form_expense" name="Portal : Expense Form">
+        <t t-call="portal.portal_layout">
+            <t t-if="help_text">
+                <div style="margin-top:10px;">
+                    <t t-raw="help_text"/>
+                </div>
+            </t>
+            <h5/>
+            <form action="/my/expenses/edit" method="POST" enctype="multipart/form-data">
+                <div class="form-row">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <h5/>
+                     <div class="form-group col-md-12">
+                        <label for="expense_name">Expense Description</label>
+                        <t t-if="expense_id">
+                            <input type="hidden" t-att-value="expense_id.id" name="expense_id"/>
+                        </t>
+                        <t t-else="">
+                            <input type="text" class="form-control" id="expense_name"
+                                   placeholder="e.g. Lunch with Customer" required="True" name="expense_name"/>
+                        </t>
+                        <t t-if="expense_id and expense_id.state=='draft'">
+                            <input type="text" class="form-control" id="expense_name"
+                                   required="True" name="expense_name" t-att-value="expense_id.name"/>
+                        </t>
+                        <t t-elif="expense_id and expense_id.state in ('reported', 'done', 'refused')">
+                            <input type="text" class="form-control" id="expense_name"
+                                   name="expense_name" t-att-value="expense_id.name" readonly="True"/>
+                        </t>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="expense_product">Product</label>
+                        <t t-if="expense_id">
+                            <t t-if="expense_id and expense_id.state=='draft'">
+                                <select class="form-control" id="expense_product" required="True" name="product_name">
+                                    <t t-foreach="products" t-as="product">
+                                        <t t-if="product.id==expense_id.product_id.id">
+                                            <option t-att-value="product.id" t-esc="product.name" selected="True"/>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="product.id" t-esc="product.name"/>
+                                        </t>
+                                    </t>
+                                </select>
+                            </t>
+                            <t t-else="">
+                                <select class="form-control" id="expense_product" required="True" name="product_name">
+                                    <option>
+                                        <t t-att-value="expense_id.product_id" t-esc="expense_id.product_id.name"/>
+                                    </option>
+                                </select>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <select class="form-control" id="expense_product" required="True" name="product_name">
+                                <option></option>
+                                <t t-foreach="products" t-as="product">
+                                    <option t-att-value="product.id" t-esc="product.name"/>
+                                </t>
+                            </select>
+                        </t>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="expense_unit_price">Unit Price</label>
+                        <t t-if="expense_id">
+                            <t t-if="expense_id and expense_id.state=='draft'">
+                                <input type="number" class="form-control" id="expense_unit_price"
+                                       placeholder="0.00" required="True" name="expense_unit_price"
+                                       t-att-value="expense_id.unit_amount" style="text-align:right" min="0.01"
+                                       step="0.01"/>
+                            </t>
+                            <t t-else="">
+                                <input type="number" class="form-control" id="expense_unit_price"
+                                       placeholder="0.000" required="True" name="expense_unit_price" min="0.01" step="0.01"
+                                       t-att-value="expense_id.unit_amount" readonly="True" style="text-align:right"/>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <input type="number" class="form-control" id="expense_unit_price"
+                                   placeholder="0.000" required="True" name="expense_unit_price"
+                                   style="text-align:right" min="0.01" step="0.01"/>
+                        </t>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="expense_date">Expense Date</label>
+                        <t t-if="expense_id">
+                            <t t-if="expense_id and expense_id.state=='draft'">
+                                <input type="date" class="form-control" id="expense_date" required="True"
+                                       name="expense_date"
+                                       t-att-value="expense_id.date" style="text-align:center"/>
+                            </t>
+                            <t t-else="">
+                                <input type="date" class="form-control" id="expense_date" required="True"
+                                       name="expense_date"
+                                       t-att-value="expense_id.date" readonly="True" style="text-align:center"/>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <input type="date" class="form-control" id="expense_date" required="True"
+                                   name="expense_date" style="text-align:center"/>
+                        </t>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="expense_file">Documents</label>
+                        <t t-if="not expense_id or expense_id.state=='draft'">
+                            <input type="file" multiple="True" class="form-control-file" id="expense_file" name="expense_file"/>
+                        </t>
+                    </div>
+
+                    <t t-if="expense_id">
+                        <div class="col-xs-6">
+                            <ul class="list-group">
+                                <t t-if="not attachments">
+                                    <span>No attachment for this expense</span>
+                                </t>
+                                <t t-else="">
+                                    <t t-foreach="attachments" t-as="attachment">
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-xs-11">
+                                                    <a t-attf-href="/my/expenses/download/attachment/#{attachment.id}"
+                                                       download="expense_attachment" t-esc="attachment.datas_fname"/>
+                                                </div>
+                                                <t t-if="expense_id.state=='draft'">
+                                                    <div class="col-xs-1">
+                                                        <span class="glyphicon glyphicon-remove text-danger"
+                                                              attribute-hidden="True" data-toggle="modal"
+                                                              data-target="#deleteAttachmentModal"/>
+                                                    </div>
+                                                    <!-- Modal : delete an attachment -->
+                                                    <div class="modal fade" id="deleteAttachmentModal" tabindex="-1"
+                                                         role="dialog"
+                                                         aria-labelledby="deleteAttachmentModalLabel"
+                                                         aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="deleteAttachmentModalLabel">Confirmation
+                                                                    </h5>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Are you sure you want to delete this attachment ?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <a t-attf-href="/my/expenses/delete/attachment/#{attachment.id}"
+                                                                       class="btn btn-info">OK
+                                                                    </a>
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                            data-dismiss="modal">
+                                                                        Cancel
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </li>
+                                    </t>
+                                </t>
+                            </ul>
+                        </div>
+                    </t>
+
+                    <div class="form-group col-md-6">
+                        <label for="expense_description">Expense Description</label>
+                        <t t-if="expense_id">
+                            <t t-if="expense_id and expense_id.state=='draft'">
+                                <textarea class="form-control" rows="4" id="expense_description" required="True"
+                                          placeholder="e.g. More details" name="expense_description"><t t-esc="expense_id.description"/></textarea>
+                            </t>
+                            <t t-if="expense_id and expense_id.state in ('reported', 'done', 'refused')">
+                                <textarea class="form-control" rows="4" id="expense_description" required="True"
+                                          name="expense_description" readonly="True"><t t-esc="expense_id.description"/></textarea>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <textarea class="form-control" rows="4" id="expense_description"
+                                      placeholder="e.g. More details" name="expense_description"/>
+                        </t>
+                    </div>
+
+                    <h1/>
+                    <div class="form-group col-md-12">
+                        <t t-if="not expense_id">
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <a href="/my/expenses" class="btn btn-default">Discard</a>
+                        </t>
+                        <t t-if="expense_id and expense_id.state=='draft'">
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <a t-attf-href="/my/expenses" class="btn btn-default">Discard</a>
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#deleteExpenseModal">
+                                Delete
+                            </button>
+                            <a t-attf-href="/my/expenses/submit/#{expense_id.id}"
+                               class="btn btn-primary">Submit
+                            </a>
+                            <!-- Modal : delete an expense -->
+                            <div class="modal fade" id="deleteExpenseModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="deleteExpenseModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteExpenseModalLabel">Confirmation</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete this expense ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a t-attf-href="/my/expenses/delete/#{expense_id.id}"
+                                               class="btn btn-info">OK
+                                            </a>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </form>
+        </t>
+    </template>
+</odoo>

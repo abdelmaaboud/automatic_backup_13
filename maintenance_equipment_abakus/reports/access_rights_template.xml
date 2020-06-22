@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="access_rights_document">
+
+            <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})" />
+
+            <t t-call="maintenance_equipment_abakus.security_check_layout">
+                <div class="page">
+                    <div class="oe_structure" />
+
+                   <t t-call="maintenance_equipment_abakus.security_check_layout_user" />
+
+                    <h1>User Access Rights</h1>
+
+                    <table style="width:100%; font-size:0.8em; margin-bottom:2em; margin-top:2em;">
+                        <tr>
+                            <th>User Name</th>
+                            <th>Groups</th>
+                            <th>Shares</th>
+                            <th>Rights</th>
+                        </tr>
+
+                        <tr t-foreach="doc.access_rights_ids" t-as="line">
+                            <td>
+                                <span t-field="line.username" />
+                            </td>
+                            <td>
+                                <span t-field="line.groups" />
+                            </td>
+                            <td>
+                                <span t-field="line.shares" />
+                            </td>
+                            <td>
+                                <span t-field="line.rights" />
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table style="width:100%;" >
+                        <tr>
+                            <td>
+                                <div>Comment: </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div contenteditable="true">
+                                    <span t-field="doc.access_rights_free_text"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table style="width:100%; margin-top:2em;">
+                            <tr>
+                                <td style="width:50%; text-align: left;">Validation Date:</td>
+                                <td style="width:50%; text-align: left;">Signature:</td>
+                            </tr>
+                    </table>
+
+                    <div class="oe_structure"/>
+                </div>
+            </t>
+        </template>
+
+
+        <template id="report_access_rights_template">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="maintenance_equipment_abakus.access_rights_document" t-lang="user.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

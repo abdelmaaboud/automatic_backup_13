@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template inherit_id="portal.portal_layout" id="portal_consultant.portal_my_home_consultant_breadcrumbs" priority="50">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'my_expenses'" class="breadcrumb-item active">
+                Expenses
+            </li>
+            <li t-elif="page_name == 'my_expenses_form'" class="breadcrumb-item">
+                <a href="/my/expenses">Expenses</a>
+            </li>
+        </xpath>
+    </template>
+
+    <template inherit_id="portal_consultant.portal_my_home_consultant_breadcrumbs" id="portal_consultant.portal_add_expense_breadcrumbs" priority="50">
+        <xpath expr="//li[last()]" position="after">
+            <li t-if="page_name == 'my_expenses_form' and expense_id" class="breadcrumb-item active">
+                <t t-esc="expense_id.name"/>
+            </li>
+            <li t-elif="page_name == 'my_expenses_form'" class="breadcrumb-item active">
+                New
+            </li>
+        </xpath>
+    </template>
+
+    <template inherit_id="portal.portal_layout" id="portal_consultant.portal_my_home_consultant_breadcrumbs_leave" priority="50">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'my_leaves'" class="breadcrumb-item active">
+                Leaves
+            </li>
+            <li t-elif="page_name == 'my_leaves_form'" class="breadcrumb-item">
+                <a href="/my/leaves">Leaves</a>
+            </li>
+        </xpath>
+    </template>
+
+    <template inherit_id="portal_consultant.portal_my_home_consultant_breadcrumbs_leave" id="portal_consultant.portal_form_leave_breadcrumbs" priority="50">
+        <xpath expr="//li[last()]" position="after">
+            <li t-if="page_name == 'my_leaves_form' and leave_id" class="breadcrumb-item active">
+                <t t-esc="leave_id.name"/>
+            </li>
+            <li t-elif="page_name == 'my_leaves_form'" class="breadcrumb-item active">
+                New
+            </li>
+        </xpath>
+    </template>
+
+    <template inherit_id="portal.portal_layout" id="portal_consultant.portal_my_home_consultant_breadcrumbs_timesheet" priority="50">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'my_timesheets'" class="breadcrumb-item active">
+                Timesheets
+            </li>
+            <li t-elif="page_name == 'my_timesheets_form'" class="breadcrumb-item">
+                <a href="/my/timesheets">Timesheets</a>
+            </li>
+        </xpath>
+    </template>
+
+    <template inherit_id="portal_consultant.portal_my_home_consultant_breadcrumbs_timesheet" id="portal_consultant.portal_form_timesheet_breadcrumbs" priority="50">
+        <xpath expr="//li[last()]" position="after">
+            <li t-if="page_name == 'my_timesheets_form' and timesheet_id" class="breadcrumb-item active">
+                <t t-esc="timesheet_id.name"/>
+            </li>
+            <li t-elif="page_name == 'my_timesheets_form'" class="breadcrumb-item active">
+                New
+            </li>
+        </xpath>
+    </template>
+</odoo>

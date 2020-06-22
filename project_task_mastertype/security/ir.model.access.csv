@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+project_user_project_task_mastertype,project_user_project_task_mastertype,project_task_mastertype.model_project_task_mastertype,project.group_project_user,1,0,0,0
+project_manager_project_task_mastertype,project_manager_project_task_mastertype,project_task_mastertype.model_project_task_mastertype,project.group_project_manager,1,1,1,1

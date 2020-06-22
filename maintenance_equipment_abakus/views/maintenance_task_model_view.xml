@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="maintenance_task_model_tree_view" model="ir.ui.view">
+            <field name="name">maintenance.task.model.tree</field>
+            <field name="model">maintenance.task.model</field>
+            <field name="arch" type="xml">
+                <tree string="Maintenance Tasks Models">
+                    <field name="category_ids"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="maintenance_task_model_form_view" model="ir.ui.view">
+            <field name="name">maintenance.task.model.form</field>
+            <field name="model">maintenance.task.model</field>
+            <field name="arch" type="xml">
+                <form string="Tasks">
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>Task Name <field name="name" class="oe_inline"/></h1>
+                    </div>
+                    <group>
+                        <field name="category_ids" widget="many2many_tags"/>
+                        <field name="active"/>
+                    </group>
+                    <notebook>
+                        <page string="Operations">
+                            <separator string="Description for Operations"/>
+                            <field name="operations_description" placeholder="Specify the jobs that need execute..."/>
+                        </page>
+                        <page string="Documentation">
+                            <separator string="Description for Documentation"/>
+                            <field name="documentation_description" placeholder="Specify the documentation useful when execute this order..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_tasks_models" model="ir.actions.act_window">
+            <field name="name">Maintenance Tasks Models</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">maintenance.task.model</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Maintenance Tasks Models"
+            action="action_tasks_models"
+            id="menu_maintenance_tasks_models"
+            parent="maintenance.menu_maintenance_configuration"
+            sequence="150"/>
+    </data>
+</odoo>

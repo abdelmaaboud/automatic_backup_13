@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <!--<record forcecreate="True" id="ir_cron_sale_subscription_create_maintenance_request" model="ir.cron">
+            <field name="name">Create Maintenance Requests for Subscriptions based on their settings</field>
+            <field eval="True" name="active"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.subscription'" name="model"/>
+            <field eval="'cron_create_maintenance_requests'" name="function"/>
+            <field eval="'()'" name="args"/>
+        </record>
+        -->
+
+        <record model="ir.cron" id="ir_cron_sale_subscription_create_maintenance_request">
+            <field name="name">Create Maintenance Requests for Subscriptions based on their settings</field>
+            <field name="model_id" ref="model_sale_subscription"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_create_maintenance_requests()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+    </data>
+</odoo>

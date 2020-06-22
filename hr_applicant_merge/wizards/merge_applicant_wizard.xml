@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="merge_applicant_wizard_form_view" model="ir.ui.view">
+        <field name="name">merge_applicant_wizard_form_view</field>
+        <field name="model">merge.applicant.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="applicant_ids" readonly="True" widget="many2many"/>
+                        <field name="type" widget="radio"/>
+                        <field name="applicant_id"
+                               attrs="{'invisible': [('type', 'in', ['new', 'new_unlink'])], 'required': [('type', 'in', ['to_selected', 'to_selected_unlink'])]}"
+                               domain="[('id', 'in', applicant_ids)]"
+                               options="{'no_create': True, 'no_create_edit': True}"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_merge_applicants"
+                            type="object" class="oe_highlight"
+                            string="Merge Applicants"
+                            confirm="Are you sure you want to merge these candidates ?"/>
+                    or
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

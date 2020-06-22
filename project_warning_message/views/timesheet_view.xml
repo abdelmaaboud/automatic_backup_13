@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="timesheet_view_form_warning_text">
+           <field name="name">timesheet_view_form_warning_text</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="timesheet_grid.timesheet_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <group name="warning">
+                        <field name="warning_text" widget="html" attrs="{'invisible': [('warning_text', '=', False)], 'readonly': True, 'nolabel': True}" nolabel="1"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

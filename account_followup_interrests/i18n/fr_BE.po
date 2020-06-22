@@ -1,0 +1,204 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_followup_interrests
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20200408\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-02 14:24+0000\n"
+"PO-Revision-Date: 2020-06-02 16:31+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fr_BE\n"
+"X-Generator: Poedit 2.3.1\n"
+
+#. module: account_followup_interrests
+#: model:ir.model,name:account_followup_interrests.model_account_followup_followup
+msgid "Account Follow-up"
+msgstr "Relances comptables"
+
+#. module: account_followup_interrests
+#: code:addons/account_followup_interrests/models/account_followup_report.py:163
+#, python-format
+msgid "Amount"
+msgstr "Montant"
+
+#. module: account_followup_interrests
+#: code:addons/account_followup_interrests/models/account_followup_report.py:157
+#, python-format
+msgid "Communication"
+msgstr "Communication"
+
+#. module: account_followup_interrests
+#: model:ir.model.fields,field_description:account_followup_interrests.field_account_followup_followup_line_compute_allowance
+msgid "Compute allowance"
+msgstr "Calculer les frais de dossiers"
+
+#. module: account_followup_interrests
+#: model:ir.model.fields,field_description:account_followup_interrests.field_account_followup_followup_line_compute_interests
+msgid "Compute interests"
+msgstr "Calculer les intérêts"
+
+#. module: account_followup_interrests
+#: model:ir.model,name:account_followup_interrests.model_res_partner
+msgid "Contact"
+msgstr "Contact"
+
+#. module: account_followup_interrests
+#: code:addons/account_followup_interrests/models/account_followup_report.py:153
+#, python-format
+msgid "Date"
+msgstr "Date"
+
+#. module: account_followup_interrests
+#: code:addons/account_followup_interrests/models/account_followup_report.py:154
+#, python-format
+msgid "Due Date"
+msgstr "Date d'échéance"
+
+#. module: account_followup_interrests
+#: model:ir.model.fields,field_description:account_followup_interrests.field_account_move_line_payments_allowances
+msgid "Due allowances"
+msgstr "Indemnité due"
+
+#. module: account_followup_interrests
+#: model:ir.model.fields,field_description:account_followup_interrests.field_account_move_line_payments_interests
+msgid "Due interests"
+msgstr "Intérêts dus"
+
+#. module: account_followup_interrests
+#: code:addons/account_followup_interrests/models/account_followup_report.py:162
+#, python-format
+msgid "Excluded"
+msgstr "Exclue"
+
+#. module: account_followup_interrests
+#: model:ir.model,name:account_followup_interrests.model_account_followup_followup_line
+msgid "Follow-up Criteria"
+msgstr "Critère de rappel"
+
+#. module: account_followup_interrests
+#: code:addons/account_followup_interrests/models/account_followup_report.py:156
+#, python-format
+msgid "Followup Level"
+msgstr "Niv de rappel"
+
+#. module: account_followup_interrests
+#: model:ir.model,name:account_followup_interrests.model_account_followup_report
+msgid "Followup Report"
+msgstr "Rapport de relance"
+
+#. module: account_followup_interrests
+#: code:addons/account_followup_interrests/models/account_followup_report.py:158
+#, python-format
+msgid "Interests"
+msgstr "Intérêts"
+
+#. module: account_followup_interrests
+#: model:ir.model,name:account_followup_interrests.model_account_move_line
+msgid "Journal Item"
+msgstr "Journal Item"
+
+#. module: account_followup_interrests
+#: model:ir.model.fields,field_description:account_followup_interrests.field_account_move_line_late_days
+msgid "Late Days"
+msgstr "Jours de retard"
+
+#. module: account_followup_interrests
+#: model:ir.ui.view,arch_db:account_followup_interrests.account_followup_interest_form
+msgid "Late Interests"
+msgstr "Intérêts de retard"
+
+#. module: account_followup_interrests
+#: model:ir.model.fields,field_description:account_followup_interrests.field_account_followup_followup_late_allowance
+msgid "Late allowance"
+msgstr "Indemnité de retard"
+
+#. module: account_followup_interrests
+#: model:ir.model.fields,field_description:account_followup_interrests.field_account_followup_followup_late_interest_percentage
+msgid "Late interest (%)"
+msgstr "Intérêts de retard (%)"
+
+#. module: account_followup_interrests
+#: code:addons/account_followup_interrests/models/account_followup_report.py:155
+#, python-format
+msgid "Overdue days"
+msgstr "Jours de retard"
+
+#. module: account_followup_interrests
+#: model:ir.model.fields,field_description:account_followup_interrests.field_res_partner_payments_sum_of_allowances
+#: model:ir.model.fields,field_description:account_followup_interrests.field_res_users_payments_sum_of_allowances
+msgid "Sum of due allowances"
+msgstr "Total des indemnités dues"
+
+#. module: account_followup_interrests
+#: model:ir.model.fields,field_description:account_followup_interrests.field_res_partner_payments_sum_of_interests
+#: model:ir.model.fields,field_description:account_followup_interrests.field_res_users_payments_sum_of_interests
+msgid "Sum of due interests"
+msgstr "Total des intérêts dus"
+
+#. module: account_followup_interrests
+#: code:addons/account_followup_interrests/models/account_followup_report.py:146
+#, python-format
+msgid "Total"
+msgstr "Total"
+
+#. module: account_followup_interrests
+#: code:addons/account_followup_interrests/models/account_followup_report.py:120
+#, python-format
+msgid "Total Allowances"
+msgstr "Total indemnités"
+
+#. module: account_followup_interrests
+#: code:addons/account_followup_interrests/models/account_followup_report.py:94
+#: code:addons/account_followup_interrests/models/account_followup_report.py:159
+#, python-format
+msgid "Total Due"
+msgstr "Total dû"
+
+#. module: account_followup_interrests
+#: code:addons/account_followup_interrests/models/account_followup_report.py:133
+#, python-format
+msgid "Total Interrests"
+msgstr "Total Intérêts"
+
+#. module: account_followup_interrests
+#: code:addons/account_followup_interrests/models/account_followup_report.py:107
+#, python-format
+msgid "Total Overdue"
+msgstr "Total échu"
+
+#. module: account_followup_interrests
+#: model:ir.model.fields,field_description:account_followup_interrests.field_res_partner_payments_sum_due
+#: model:ir.model.fields,field_description:account_followup_interrests.field_res_users_payments_sum_due
+msgid "Total amount due"
+msgstr "Montant total dû"
+
+#. module: account_followup_interrests
+#: code:addons/account_followup_interrests/models/account_move_line.py:88
+#, python-format
+msgid "View Bank Statement"
+msgstr "View Bank Statement"
+
+#. module: account_followup_interrests
+#: code:addons/account_followup_interrests/models/account_move_line.py:93
+#, python-format
+msgid "View Invoice"
+msgstr "View Invoice"
+
+#. module: account_followup_interrests
+#: code:addons/account_followup_interrests/models/account_move_line.py:94
+#, python-format
+msgid "View Move"
+msgstr "View Move"
+
+#. module: account_followup_interrests
+#: code:addons/account_followup_interrests/models/account_move_line.py:90
+#, python-format
+msgid "View Payment"
+msgstr "View Payment"

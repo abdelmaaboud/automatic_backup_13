@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="wizard_hr_application_check_duplicates">
+        <field name="name">wizard_hr_application_check_duplicates</field>
+        <field name="model">hr_applications_duplicate_check_wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h1>Applications Duplicate Checker</h1>
+                    <h3>Do you want to check duplicates on all applications?</h3>
+                    <footer>
+                        <button name="mass_check_duplicates" type="object" string="Yes, check duplicates"
+                                class="oe_highlight"/>
+                        <button special="cancel" string="No, cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="launch_hr_recruitment_mass_check_duplicate_wizard" model="ir.actions.act_window">
+        <field name="name">Applications Duplicate Checker</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr_applications_duplicate_check_wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="hr_recruitment_mass_check_duplicates_menu" action="launch_hr_recruitment_mass_check_duplicate_wizard"
+              parent="hr_recruitment.menu_crm_case_categ0_act_job" sequence="2"/>
+</odoo>

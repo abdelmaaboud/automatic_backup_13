@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="email_template_task_email_matching_answer" model="mail.template">
+            <field name="name">Project Task - Email matching answer</field>
+            <field name="email_from">${(object.user_id.email or 'noreply@abakusitsolutions.eu')|safe}</field>
+            <field name="subject">ABAKUS : Task reception confirmation</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="model_id" ref="project.model_project_task"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html">
+                <![CDATA[
+                    <div style="font-family: Arial, Helvetica, Calibri, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; padding: 0 5px 0 5px; link">
+
+                        <p style="font-size:13px;margin-block-start:0px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin:0px 0px 9px 0px;">Dear client,</p>
+
+                        <p style="font-size:13px;margin-block-start:0px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin:0px 0px 9px 0px;">
+                            This is an automated message to confirm you the reception of your mail.
+                        </p>
+                        <p style="font-size:13px;margin-block-start:0px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin:0px 0px 9px 0px;">
+                            A Ticket has been created in our system, a support person will take care of it as soon as possible.
+                        </p>
+                        <p style="font-size:13px;margin-block-start:0px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin:0px 0px 9px 0px;">
+                            In case of emergency, don't hesitate to contact us by phone: ${object.company_id.phone}.
+                        </p>
+
+                        <div style="margin:0px 0px 9px 0px;border-left: 2px solid #E97B2E; margin-left: 10px; padding-left: 5px;">
+                            <p style="font-size:13px;margin-block-start:0px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin:0px 0px 9px 0px;"><strong style="font-weight:bold;"><u>TICKET REFERENCE</u></strong></p>
+                            <p style="font-size:13px;margin-block-start:0px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin:0px 0px 9px 0px;"><strong style="font-weight:bold;">N°: </strong>${object.id}</p>
+                            <p style="font-size:13px;margin-block-start:0px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin:0px 0px 9px 0px;"><strong style="font-weight:bold;">Customer: </strong>${object.partner_id.name}</p>
+                            <p style="font-size:13px;margin-block-start:0px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin:0px 0px 9px 0px;"><strong style="font-weight:bold;">Date: </strong>${object.create_date}</p>
+                            <p style="font-size:13px;margin-block-start:0px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin:0px 0px 9px 0px;"><strong style="font-weight:bold;">Priotity: </strong>${object.priority}</p>
+                            <p style="font-size:13px;margin-block-start:0px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin:0px 0px 9px 0px;"><strong style="font-weight:bold;">Subject: </strong><br />
+                                ${object.name}
+                            </p>
+                        </div>
+
+                        <p style="font-size:13px;margin-block-start:0px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin:0px 0px 9px 0px;">Don't hesitate to contact us if you have any question.</p>
+                        <p style="font-size:13px;margin-block-start:0px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin:0px 0px 9px 0px;">Thanks a lot for having chosen ${object.company_id.name or 'us'}!</p>
+
+                        <!-- SIGNATURE -->
+                        <div style="width: 100%; margin: 0px; padding: 0px; background-color: #E97B2E; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+                            <h3 style="font-size:16px;color:inherit;line-height:1.1;font-weight:400;font-family:inherit;margin: 0px; padding: 10px 15px; font-size: 14px; color: #DDD;">
+                                <strong style="font-weight:bold;">${object.company_id.name}</strong></h3>
+                        </div>
+                        <div style="width: 100% -15px; margin: 0px; padding: 5px 15px; line-height: 16px; background-color: #DDD; border-bottom-right-radius: 5px 5px; border-bottom-left-radius: 5px 5px; ">
+                            <span style="color: #222; margin-bottom: 5px; display: block; ">
+                                % if object.company_id.street:
+                                    ${object.company_id.street}<br />
+                                % endif
+                                % if object.company_id.street2:
+                                    ${object.company_id.street2}<br />
+                                % endif
+                                % if object.company_id.city or object.company_id.zip:
+                                    ${object.company_id.zip} ${object.company_id.city}<br />
+                                % endif
+                                % if object.company_id.country_id:
+                                    ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br />
+                                % endif
+
+                                % if object.company_id.phone:
+                                    <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+                                        Téléphone : ${object.company_id.phone}
+                                    </div>
+                                % endif
+                                % if object.company_id.website:
+                                    <div>
+                                        <a href="${object.company_id.website}" style="text-decoration-color:initial;text-decoration-style:initial;text-decoration-line:none;color:rgb(33, 183, 153);background-color:transparent;text-decoration:none;">www.abakusitsolutions.eu</a>
+                                    </div>
+                                %endif
+                            </span>
+                        </div>
+                    </div>
+                ]]>
+            </field>
+        </record>
+
+        <record id="email_template_new_task_email_to_SM" model="mail.template">
+            <field name="name">Project Task - New task email to SM</field>
+            <field name="email_from">${(object.user_id.email or 'noreply@abakusitsolutions.eu')|safe}</field>
+            <field name="subject">New issue created from ${(object.partner_id.name or 'UNKNOWN (create new contact in projects partner)')|safe}</field>
+            <field name="model_id" ref="project.model_project_task"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html">
+                <![CDATA[
+                    <p>Hello,</p>
+                    <p>A new Issue has been created by email in Odoo.</p>
+                    <ul style="margin:0px 0 9px 0;">
+                        <li>Title: ${object.name}</li>
+                        <li>Author: ${object.email_from}</li>
+                        <li>Project: ${(object.project_id.name or 'no project')|safe}</li>
+                        <li>Link: <a href="https://my.abakusitsolutions.eu/web#id=${object.id}&amp;view_type=form&amp;model=project.task&amp;menu_id=845&amp;action=1239">click here</a> (https://my.abakusitsolutions.eu/web#id=${object.id}&amp;view_type=form&amp;model=project.task&amp;menu_id=845&amp;action=1239)</li>
+                    </ul>
+                    <br />
+                    <p>Thanks, The Odoo System</p>
+                ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

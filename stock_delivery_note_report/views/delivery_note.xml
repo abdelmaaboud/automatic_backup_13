@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SO REPORT -->
+    <record id="stock.view_picking_form_delivery_note_print" model="ir.ui.view">
+        <field name="name">stock_view_picking_form_delivery_note_print</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="(//button[@name='do_print_picking'])[1]" position="after">
+                <button name="print_delivery_note" type="object" class="oe_highlight" string="Print Delivery Note"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

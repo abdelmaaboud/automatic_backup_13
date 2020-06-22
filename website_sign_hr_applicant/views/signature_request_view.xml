@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="signature_request_view_tree_data_agreement">
+        <field name="name">signature_request_view_tree_data_agreement</field>
+	    <field name="model">signature.request</field>
+	    <field name="inherit_id" ref="website_sign.signature_request_view_tree"/>
+	    <field name="arch" type="xml">  
+            <data>
+                <xpath expr="//tree" position="inside">
+                    <field name="data_agreement_document" />
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="signature_request_view_kanban_data_agreement">
+        <field name="name">signature_request_view_kanban_data_agreement</field>
+	    <field name="model">signature.request</field>
+	    <field name="inherit_id" ref="website_sign.signature_request_view_kanban"/>
+	    <field name="arch" type="xml">  
+            <data>
+                <xpath expr="//div[@class='o_kanban_title clearfix']" position="inside">
+                    <field name="data_agreement_document" hidden="1" />
+                    <div style="
+                                background-color: #21b799;
+                                max-width: 125px;
+                                border-radius: 50px;
+                                align-items: center;
+                                text-align: center;
+                                float: right;
+                                padding: 2px;
+                                margin: 2px;"
+                         t-if="record.data_agreement_document.raw_value">
+                        Data Agreement Document
+                    </div>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="signature_request_view_form_data_agreement">
+        <field name="name">signature_request_view_form_data_agreement</field>
+        <field name="model">signature.request</field>
+        <field name="inherit_id" ref="website_sign.signature_request_view_form" />
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='archived']" position="before">
+                    <field name="data_agreement_document" />
+                </xpath>
+                <xpath expr="//field[@name='request_item_ids']" position="replace">
+                    <field name="request_item_ids">
+                        <tree>
+                            <field name="partner_id" />
+                            <field name="hr_applicant_id" />
+                            <field name="signer_email" />
+                            <field name="role_id" />
+                            <field name="state" />
+                        </tree>
+                    </field>
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

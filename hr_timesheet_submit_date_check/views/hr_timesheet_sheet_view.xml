@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record model="ir.ui.view" id="hr_timesheet_sheet_form_submit_date">
+		<field name="name">hr_timesheet_sheet_form_submit_date</field>
+		<field name="model">hr_timesheet.sheet</field>
+		<field name="inherit_id" ref="hr_timesheet_sheet.hr_timesheet_sheet_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="(//field[@name='company_id'])" position="after">
+				<field name="submit_date" attrs="{'invisible': [('submit_date', '=', False)]}"/>
+				<field name="submit_date_check" attrs="{'invisible': [('submit_date', '=', False)]}"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="hr_timesheet_sheet_tree_simplified_submit_settings">
+		<field name="name">hr_timesheet_sheet_tree_simplified_submit_settings</field>
+		<field name="model">hr_timesheet.sheet</field>
+		<field name="inherit_id" ref="hr_timesheet_sheet.hr_timesheet_sheet_tree_simplified"/>
+		<field name="arch" type="xml">
+			<xpath expr="(//field[@name='state'])" position="before">
+				<field name="submit_date" attrs="{'readonly': True}" />
+				<field name="submit_date_check" attrs="{'readonly': True}" />
+			</xpath>
+		</field>
+	</record>
+</odoo>

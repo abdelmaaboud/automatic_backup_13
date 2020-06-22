@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="email_template_sale_order_expiration" model="mail.template">
+        <field name="name">Sale Order Expiration Email</field>
+        <field name="email_from">${object.company_id and object.company_id.email or ''}</field>
+        <field name="subject">Sale Orders Expiration</field>
+        <field name="email_to">${object.user_id.email|safe}</field>
+        <field name="lang">${object.lang}</field>
+        <field name="model_id" ref="sale_order_expiration_and_reminder.model_sale_order"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html">
+            <![CDATA[
+<div style="font-family: Arial, Helvetica, Calibri, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; padding: 0 5px 0 5px; link">
+    <p>Dear ${(object.user_id.name)},</p>
+    <p>The following sale order(s) are expired and will be automatically cancelled if they remain untouched :</p>
+
+    <table style="font-family: Arial, Helvetica, Calibri, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; width: 100%; margin: 0px; padding: 0px; link; border-collapse: collapse; border: 1px solid rgb(34, 34, 34);">
+
+    <tr>
+    <th style="border: 1px solid rgb(34, 34, 34);">Name</th>
+    <th style="border: 1px solid rgb(34, 34, 34);">Status</th>
+    <th style="border: 1px solid rgb(34, 34, 34);">Expiration Date</th>
+    <th style="border: 1px solid rgb(34, 34, 34);">Cancellation Date</th>
+    </tr>
+
+    % for row in ctx.get('so_list'):
+
+    <tr>
+    <td style="border: 1px solid rgb(34, 34, 34);">${(row.name)}</td>
+    <td style="border: 1px solid rgb(34, 34, 34);">${(row.state)}</td>
+    <td style="border: 1px solid rgb(34, 34, 34);">${(row.validity_date)}</td>
+    <td style="border: 1px solid rgb(34, 34, 34);">${(row.cancel_date)}</td>
+    </tr>
+
+    % endfor
+
+    </table>
+
+    <!-- SIGNATURE -->
+    <div style="width: 100%; margin: 0px; padding: 0px; background-color: #E97B2E; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+        <h3 style="margin: 0px; padding: 10px 15px; font-size: 14px; color: #DDD;">
+            <strong>${object.company_id.name}</strong></h3>
+    </div>
+    <div style="width: 100% -15px; margin: 0px; padding: 5px 15px; line-height: 16px; background-color: #DDD; border-bottom-right-radius: 5px 5px; border-bottom-left-radius: 5px 5px; ">
+        <span style="color: #222; margin-bottom: 5px; display: block; ">
+        % if object.company_id.street:
+            ${object.company_id.street}<br/>
+        % endif
+        % if object.company_id.street2:
+            ${object.company_id.street2}<br/>
+        % endif
+        % if object.company_id.city or object.company_id.zip:
+            ${object.company_id.zip} ${object.company_id.city}<br/>
+        % endif
+        % if object.company_id.country_id:
+            ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>
+        % endif
+        </span>
+        % if object.company_id.phone:
+            <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+                Phone: &nbsp; ${object.company_id.phone}
+            </div>
+        % endif
+         % if object.company_id.fax:
+            <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+                Fax: &nbsp; ${object.company_id.fax}
+            </div>
+        % endif
+        % if object.company_id.website:
+            <div>
+                <a href="${object.company_id.website}">${object.company_id.website}</a>
+            </div>
+        %endif
+    </div>
+</div>
+]]>
+        </field>
+    </record>
+
+    <record id="sale_order_expiration_reminder_cron_mail_template" model="mail.template">
+        <field name="name">Sale order expiration reminder</field>
+        <field name="email_from">${(object.email or '')|safe}</field>
+        <field name="subject">Sale order contract consultancy expiration reminder ${user.company_id.name}</field>
+        <field name="email_to">${object.email|safe}</field>
+        <field name="lang">${object.lang}</field>
+        <field name="model_id" ref="base.model_res_users"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html"><![CDATA[
+Dear ${object.name},
+% macro sale_order_table(values):
+<table cellspacing="1" border="1" cellpadding="4">
+    <tr>
+        <th>Customer</th>
+        <th>Ref</th>
+        <th>Expiration Date</th>
+        <th>Status</th>
+    </tr>
+    % for customer, sales_orders in values:
+        % for sales_order in sales_orders:
+        <tr>
+            <td>${customer.name}</td>
+            <td>
+                ${sales_order.client_order_ref}
+                 -
+                <a href="${ctx["base_url"]}/web#action=${ctx["action_id"]}&id=${sales_order.id}&view_type=form">${sales_order.name}</a>
+            </td>
+            <td>${sales_order.consultancy_expiration_date}</td>
+            <td>${sales_order.consultancy_expiration_selection}</td>
+        </tr>
+        % endfor
+    % endfor
+</table>
+% endmacro
+% if "new" in ctx["data"]:
+    <h2>The following sales orders just expired: </h2>
+    ${sale_order_table(ctx["data"]["new"].items())}
+% endif
+% if "old" in ctx["data"]:
+    <h2>The following expired sales orders are still not processed: </h2>
+    ${sale_order_table(ctx["data"]["old"].items())}
+% endif
+% if "future" in ctx["data"]:
+    <h2>The following sales orders will expire in less than one month: </h2>
+    ${sale_order_table(ctx["data"]["future"].items())}
+% endif
+
+<p>
+    Thanks,
+</p>
+<pre>
+--
+Odoo Automatic Email
+</pre>
+            ]]></field>
+    </record>
+
+</odoo>

@@ -1,0 +1,207 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_order_report_abakus
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-20 14:39+0000\n"
+"PO-Revision-Date: 2020-04-20 16:42+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: de\n"
+"X-Generator: Poedit 2.3\n"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid ""
+"<span>\n"
+"                                        <strong>Delivery Method:</strong>\n"
+"                                        <br/>\n"
+"                                    </span>"
+msgstr ""
+"<span>\n"
+"                                        <strong>Auslieferungsmethode:</strong>\n"
+"                                        <br/>\n"
+"                                    </span>"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid ""
+"<span>\n"
+"                                        <strong>Payment Term:</strong>\n"
+"                                        <br/>\n"
+"                                    </span>"
+msgstr ""
+"<span>\n"
+"                                        <strong>Zahlungsbedingung:</strong>\n"
+"                                        <br/>\n"
+"                                    </span>"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid ""
+"<span>\n"
+"                                        <strong>Reference:</strong>\n"
+"                                        <br/>\n"
+"                                    </span>"
+msgstr ""
+"<span>\n"
+"                                        <strong>Referenzen:</strong>\n"
+"                                        <br/>\n"
+"                                    </span>"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid ""
+"<span>\n"
+"                                        <strong>Representative:</strong>\n"
+"                                    </span>"
+msgstr ""
+"<span>\n"
+"                                        <strong>Berater:</strong>\n"
+"                                    </span>"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid ""
+"<span>\n"
+"                                        <strong>Requestor:</strong>\n"
+"                                        <br/>\n"
+"                                    </span>"
+msgstr ""
+"<span>\n"
+"                                        <strong>zu Händen:</strong>\n"
+"                                        <br/>\n"
+"                                    </span>"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid "<strong>Expiration Date:</strong>"
+msgstr "<strong>Gültigkeitdatum:</strong><br/>"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid "<strong>Fiscal Position Remark:</strong>"
+msgstr "<strong>Steuerzuordnung:</strong>"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid ""
+"<strong>Order Date:</strong>\n"
+"                                        <br/>"
+msgstr ""
+"<strong>Bestelldatum:</strong>\n"
+"                                        <br/>"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid ""
+"<strong>Quotation Date:</strong>\n"
+"                                        <br/>"
+msgstr ""
+"<strong>Angebotsdatum:</strong>\n"
+"                                        <br/>"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid "<strong>Total Without Taxes</strong>"
+msgstr "<strong>Nettobetrag</strong>"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid "<strong>Total</strong>"
+msgstr "<strong>Gesamt</strong>"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid ""
+"Acceptance signifies the customer’s agreement on the proposed solutions, technology and\n"
+"                        services. Subject to prior information to the client, AbAKUS it-solutions reserves the right to\n"
+"                        propose similar or equivalent equipment if the product ordered is no longer available."
+msgstr "Durch Bestätigung des Angebots erklären Sie sich bereit den vorgeschlagenen Lösungen, Technologien und Dienstleitungen zuzustimmen. Falls ein Produkt zum Zeitpunkt der Bestellung nicht mehr Verfügbar sein sollte, behalten wir uns das Recht vor, in Absprache mit Ihnen dieses durch ein Ähnliches oder Gleichwertiges zu ersetzen."
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid ""
+"All plans, descriptive literature, product specifications and all descriptions or illustrations\n"
+"                        are given for the sole purpose of providing an indicative idea of the products they describe."
+msgstr "Die von uns bereitgestellten Datenblätter, Beschreibungen und Bilder gelten lediglich als Anhaltspunkt um das Angebot besser zu erläutern."
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid "Amount"
+msgstr "Betrag"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid "Description"
+msgstr "Beschreibung"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid "Disc.(%)"
+msgstr "Rabatt (%)"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_title_report_improved
+msgid "Order"
+msgstr "Bestellung"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid "Price"
+msgstr "Preis"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid "Quantity"
+msgstr "Anzahl"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_title_report_improved
+msgid "Quotation"
+msgstr "Angebot"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid "Taxes"
+msgstr "Umsatzsteuer"
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid "The invoice will be sent and will be due upon delivery of the goods and/or services."
+msgstr "Die Rechnungstellung erflogt bei Lieferung der Ware und/oder Dienstleistung."
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid ""
+"The order is placed by returning this offer dated and signed, with the signature preceded by the\n"
+"                        words “read and approved”. Confirmation of the order can also be made by email or by online\n"
+"                        approval on our internet portal."
+msgstr "Um dieses Angebot als Bestellung zu bestätigen, senden Sie es uns bitte zum Auftrag unterschrieben zurück. Die Bestätigung kann ebenfalls per Antwortemail oder über den einmaligen Link in unserem Portal erfolgen."
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid ""
+"Unless included in the list of products and services offered, installation and configuration\n"
+"                        costs are not included in this offer."
+msgstr "Falls nicht genau in der Aufstellung der Produkte und Dienstleistungen vermerkt, beinhaltet dieses Angebot weder die Konfigurations- noch Installationsdienstleistungen."
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid ""
+"Unless otherwise mentioned, the general conditions of AbAKUS it-solutions apply. By accepting\n"
+"                        this offer the customer acknowledges that he/she has read and accepted them. The general\n"
+"                        conditions of sale are available at www.abakusitsolutions.eu/company/general-conditions"
+msgstr "Falls nicht anders vermerkt gelten unsere allgemeinen Geschäftsbedingungen (AGB). Die Bestätigung dieses Angebotes zum Auftrag gilt auch für die Kenntnisnahme und die Annahme unserer AGB. Unsere AGB sind unter www.abakusitsolutions.eu/company/general-conditions veröffentlicht."
+
+#. module: sale_order_report_abakus
+#: model:ir.ui.view,arch_db:sale_order_report_abakus.sale_order_report_improved
+msgid "VAT:"
+msgstr "USt."

@@ -1,0 +1,556 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* contract_sale_signable
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-20150625\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-15 15:15+0000\n"
+"PO-Revision-Date: 2018-08-10 12:58+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fr_BE\n"
+"X-Generator: Poedit 2.0.9\n"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "\"On-Site\" on site intervention / appointment"
+msgstr "\"On-Site\" prestation sur le site du client (sur rendez-vous)"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "1 (min=1)"
+msgstr "1 (min=1)"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "1 (min=2)"
+msgstr "1 (min=2)"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "1/4 (min=1)"
+msgstr "1/4 (min=1)"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "1/4 (min=1/4)"
+msgstr "1/4 (min=1/4)"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "1x yearly"
+msgstr "1x par an"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "According to the degree of emergency and the type of intervention (on-site or remotely), here are the reaction times below which we commit ourselves to intervene (in at least 80% of the interventions)."
+msgstr "En fonction du degré d’urgence et du type d’intervention (sur site ou à distance), voici le temps de réaction en dessous duquel nous nous engageons à intervenir pour, au moins, 85% des interventions."
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Agreement"
+msgstr "Accord"
+
+#. module: contract_sale_signable
+#: field:account.analytic.account,agreement_date:0
+msgid "Agreement date"
+msgstr "Date d'accord"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Agreement on reaction time applies only for customers with an SLA."
+msgstr "L'accord sur le temps de réaction ne s'applique qu'aux clients ayant un SLA."
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.contract_conditions_document
+msgid "All our supplies and delivery follow our general conditions. Any deviation must be done in writing and expressly accepted by us. 1. Each order implies to the approval by the customer of our general terms and conditions and thus the invalidity of its own general terms and conditions of purchase, unless otherwise stated in writing. 2. AbAKUS Sprl cannot be considered responsible in any way for any loss of data. 3. Except if contractually agreed otherwise, our invoices are payable within 30 days from the date of the invoice 4 complaints must be submitted within 25 days of delivery by registered mail, otherwise it will be regarded as not delivered. 5 bills that are delivered, are recognized as a legal document. In the case of a payment backlog, the remaining balance is legally immediately required and an interest rate of 1% per month in approach will be brought. The seller reserves the right of an additional sum amounting to 20% of the amount owed, with a minimum of €40,-, to demand and this as compensation between the two contracted parties. 6 This contract is governed under Belgian law, any dispute between the parties agreed must be presented before the Court in Eupen."
+msgstr "All our supplies and delivery follow our general conditions. Any deviation must be done in writing and expressly accepted by us. 1. Each order implies to the approval by the customer of our general terms and conditions and thus the invalidity of its own general terms and conditions of purchase, unless otherwise stated in writing. 2. AbAKUS Sprl cannot be considered responsible in any way for any loss of data. 3. Except if contractually agreed otherwise, our invoices are payable within 30 days from the date of the invoice 4 complaints must be submitted within 25 days of delivery by registered mail, otherwise it will be regarded as not delivered. 5 bills that are delivered, are recognized as a legal document. In the case of a payment backlog, the remaining balance is legally immediately required and an interest rate of 1% per month in approach will be brought. The seller reserves the right of an additional sum amounting to 20% of the amount owed, with a minimum of €40,-, to demand and this as compensation between the two contracted parties. 6 This contract is governed under Belgian law, any dispute between the parties agreed must be presented before the Court in Eupen."
+
+#. module: contract_sale_signable
+#: model:ir.model,name:contract_sale_signable.model_account_analytic_account
+msgid "Analytic Account"
+msgstr "Compte analytique"
+
+#. module: contract_sale_signable
+#: field:account.analytic.account,automatic_reneval_of_license:0
+msgid "Automatic reneval of license"
+msgstr "Renouvellement automatique des licences"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Automatic renewal of licenses"
+msgstr "Renouvellement automatique des licences"
+
+#. module: contract_sale_signable
+#: field:account.analytic.account,backup:0
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Backup"
+msgstr "Sauvegarde"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.contract_conditions_document
+msgid "Baseline and down-payment invoices"
+msgstr "Baseline et acomptes"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Billing down payment"
+msgstr "Facturation des acomptes"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Contract"
+msgstr "Contrat"
+
+#. module: contract_sale_signable
+#: model:ir.actions.report.xml,name:contract_sale_signable.contract_conditions_report
+msgid "Contract Conditions"
+msgstr "Conditions du Contrat"
+
+#. module: contract_sale_signable
+#: model:ir.actions.report.xml,name:contract_sale_signable.contract_abakus_signable
+msgid "Contract Signable"
+msgstr "Contrat à signer"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Contract expiration date"
+msgstr "Date d'expiration du contrat"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Contract starting date"
+msgstr "Date de début du contrat"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Customer"
+msgstr "Client"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.contract_conditions_document
+msgid "Data privacy"
+msgstr "Confidentialité des données"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Estimation"
+msgstr "Estimation"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.contract_conditions_document
+msgid "Extract of general terms and conditions - http://www.abakusitsolutions.eu"
+msgstr "Extrait de nos conditions générales de vente - http://www.abakusitsolutions.eu"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Hourly rate"
+msgstr "Tarif horaire"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Hourly rates"
+msgstr "Tarifs horaire"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Hours"
+msgstr "Heures"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Information"
+msgstr "Informations"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Invoicing unit"
+msgstr "Unités de facturation"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Item outside SLA"
+msgstr "Tickets hors SLA"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Km (between AbAKUS Eupen and the client)"
+msgstr "Km (entre AbAKUS Eupen et le client)"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Less than"
+msgstr "Moins de"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.contract_conditions_document
+msgid "Limitation of liability"
+msgstr "Limite de responsabilité"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Low"
+msgstr "Basse"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Minimum down-payment per month"
+msgstr "Acompte minimum par mois"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Minimum per year"
+msgstr "Minimum par an"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Minimum time invoiced per intervention"
+msgstr "Temps minimum facturé par intervention"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Monday to Friday from 8:30 a.m. to 5:30 p.m."
+msgstr "Du Lundi au Vendredi de 8:30 à 17:30"
+
+#. module: contract_sale_signable
+#: field:account.analytic.account,monitoring:0
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Monitoring"
+msgstr "Monitoring"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "More than 135 Km"
+msgstr "Plus de 135 Km"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "NBD"
+msgstr "NBD"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Name"
+msgstr "Description"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Next Business Day"
+msgstr "Next Business Day"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "None"
+msgstr "Aucun"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Normal"
+msgstr "Normal"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "OS: technician on site"
+msgstr "OS: technicien sur site"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Office hours"
+msgstr "Office hours"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Only for customers with SLA or on appointment. Except otherwise agreed in writing, applicable rates are increased by 150% after 10 PM and 200% on Sundays."
+msgstr "Seulement pour les clients avec un SLA ou un rendez-vous. Sauf exception écrite, les tarfis applicables sont majorés de 150% après 22:00 et 200% le dimanche."
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Options"
+msgstr "Options"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Oral order is sufficient"
+msgstr "Précision orale suffisante"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Our general terms and conditions are attached and are considered well known by the customer. All our prices are VAT excluded."
+msgstr "Nos conditions générales de ventes ci-jointes son considérées comme bien connues du client. Tous nos prix s'entendent HTVA."
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Outside business hours"
+msgstr "En dehors des heures d'ouverture"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Outside of business hours"
+msgstr "En dehors des heures d'ouverture"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.contract_conditions_document
+msgid "Payment - adjustment of prices - termination times"
+msgstr "Paiement - Ajustement des prix - dates de fin"
+
+#. module: contract_sale_signable
+#: field:account.analytic.account,preventive_maintenance:0
+msgid "Preventive Maintenance"
+msgstr "Preventive Maintenance"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Preventive maintenance"
+msgstr "Preventive maintenance"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.contract_conditions_document
+msgid "Preventive maintenance & administrative renewal of licences and subscriptions management"
+msgstr "Maintenance préventive & gestion de renouvellement automatique des licences et abonnements"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.contract_conditions_document
+msgid ""
+"Preventive maintenance concerns the replacement, the revision, or the repair of piece of hardware or software before it causes any damage. It is only available for customers with a contract having an SLA (Service Level Agreement). In order to control the servers, the logs and the backups, a remote and secure access to the server(s) needs to be configured. Permanent access to the customer (VPN) infrastructure is requested for this service.\n"
+"                In order to be able to renew licenses and contracts within the required timeframe, they will be charged three months before expiration. Without contestation within 30 days bills are due."
+msgstr ""
+"Preventive maintenance concerns the replacement, the revision, or the repair of piece of hardware or software before it causes any damage. It is only available for customers with a contract having an SLA (Service Level Agreement). In order to control the servers, the logs and the backups, a remote and secure access to the server(s) needs to be configured. Permanent access to the customer (VPN) infrastructure is requested for this service.\n"
+"                In order to be able to renew licenses and contracts within the required timeframe, they will be charged three months before expiration. Without contestation within 30 days bills are due."
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Price by displacement"
+msgstr "Prix par déplacement"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Price per travel"
+msgstr "Prix par déplacement"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Printed twice at : ...................................................... on the date ...................."
+msgstr "Fait en double exemplaire à : ...................................................... le ...................."
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Priority"
+msgstr "Priorité"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Rates"
+msgstr "Tarifs"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.contract_conditions_document
+msgid ""
+"Rates will be adjusted at the Belgian index once a year.\n"
+"                The duration of the contract is one year, tacitly renewable for the same period.\n"
+"                The termination period is three months before the due date and has to be confirmed in writing. \n"
+"                In the event of delayed payment, AbAKUS will reduce its level of service to a minimum and will intervene only in extreme emergencies. Any delivery of preventive maintenance and verification of backup will be suspended. However, an officially disputed invoice (email / mail) will not hinder the reactivity or the quality of our services. \n"
+"                Customers without SLA Baseline (€85 per month) have to, unless otherwise agreed, prepay requested interventions. This agreement cancels and replaces any contract or previous convention concluded between AbAKUS and the client. Remarks in writing must be countersigned by all parties."
+msgstr ""
+"Rates will be adjusted at the Belgian index once a year.\n"
+"                The duration of the contract is one year, tacitly renewable for the same period.\n"
+"                The termination period is three months before the due date and has to be confirmed in writing. \n"
+"                In the event of delayed payment, AbAKUS will reduce its level of service to a minimum and will intervene only in extreme emergencies. Any delivery of preventive maintenance and verification of backup will be suspended. However, an officially disputed invoice (email / mail) will not hinder the reactivity or the quality of our services. \n"
+"                Customers without SLA Baseline (€85 per month) have to, unless otherwise agreed, prepay requested interventions. This agreement cancels and replaces any contract or previous convention concluded between AbAKUS and the client. Remarks in writing must be countersigned by all parties."
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Reaction time (SLA)"
+msgstr "Temps de réaction (SLA)"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Reaction time (compliance: 85%)"
+msgstr "Temps de réaction (tolérance : 85%)"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Reaction time in minutes"
+msgstr "Temps de réaction en minutes"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Request for support"
+msgstr "Request for support"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "SD: per email or per telephone"
+msgstr "SD: par email ou par téléphone"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid ""
+"SD: per email or per telephone<br/>\n"
+"                                        OD: technician on site<br/>\n"
+"                                        Agreement on reaction time applies only for customers with an SLA."
+msgstr ""
+"SD: par email ou par téléphone<br/>\n"
+"                                        OD: technicien sur site<br/>\n"
+"                                        L'accord sur le temps de réaction ne s'applique qu'aux clients ayant un SLA."
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "SLA"
+msgstr "SLA"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Service Contract - IT Services"
+msgstr "Contrat de Support - Service IT"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Service Desk / +32.87 59 35 58 or per Email at support@abakusitsolutions.eu"
+msgstr "Bureau de support / +32.87 59 35 58 ou par e-mail à support@abakusitsolutions.eu"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Service Level Agreement"
+msgstr "Service Level Agreement"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Service type"
+msgstr "Type de service"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Signature and date"
+msgstr "Signature et date"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.contract_conditions_document
+msgid "Special conditions"
+msgstr "Conditions spéciales"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.contract_conditions_document
+msgid ""
+"The baseline corresponds to a minimum amount charged over a period of 12 months. Billing is done through periodic instalment invoices covering at least the baseline. All benefits (preventive maintenance, service desk, on-site support) are valued on times and means basis at the agreed rate. After 12 months, an invoice of the “balance” will be established if the number of hours worked is greater than the amount already charged.\n"
+"                If carried out benefits are superior to the invoices of payments, an adaptation of the invoices of payments may be considered along the way. If the amount in the baseline has been used up and invoiced before the deadline (12 months), the tariff can be adapted and will be the subject of a new contract."
+msgstr ""
+"The baseline corresponds to a minimum amount charged over a period of 12 months. Billing is done through periodic instalment invoices covering at least the baseline. All benefits (preventive maintenance, service desk, on-site support) are valued on times and means basis at the agreed rate. After 12 months, an invoice of the “balance” will be established if the number of hours worked is greater than the amount already charged.\n"
+"                If carried out benefits are superior to the invoices of payments, an adaptation of the invoices of payments may be considered along the way. If the amount in the baseline has been used up and invoiced before the deadline (12 months), the tariff can be adapted and will be the subject of a new contract."
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.contract_conditions_document
+msgid ""
+"The contractor commits himself to guarantee the confidentiality of the data. He will not duplicate or communicate to not authorized third parties information which has been communicated to him. AbAKUS will implement appropriate means for absolute secrecy about the information to which it had access during the execution of the present contract. \n"
+"                At the request of the customer, any configuration information or installation files will be transmitted to him. Upon delivery of this document, the provider disclaims all liability in the event of misuse."
+msgstr ""
+"The contractor commits himself to guarantee the confidentiality of the data. He will not duplicate or communicate to not authorized third parties information which has been communicated to him. AbAKUS will implement appropriate means for absolute secrecy about the information to which it had access during the execution of the present contract. \n"
+"                At the request of the customer, any configuration information or installation files will be transmitted to him. Upon delivery of this document, the provider disclaims all liability in the event of misuse."
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "The parts commit themselves on the above mentioned options for a period of 1 year"
+msgstr "Les parties s’engagent sur base des options susmentionnées pour une période de 1 an."
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "The proposed approach is based on a standard “Baseline” directly linked to the number of hours to be consumed during the year in the context of the managed services. The amount due for the work done has to be paid monthly for “Baselines” above 5 hours."
+msgstr "L’approche proposée est basée sur une “Baseline” standard liée directement à un nombre d’heures à consommer dans l’année pour gérer l’infrastructure. La somme due pour les prestations est à régler mensuellement pour les « Baseline » supérieures à 5 heures."
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "The proposed contract gives you access to a certain amount of hours  for annual interventions with a SLA (Service Level Agreement). According to the number of hours consumed (as described in the table below), the amount of hours available in your contract will be reduced (in function of, on the one hand, the place of the intervention and on the other hand, the degree of emergency)."
+msgstr "Le contrat que nous proposons donne accès à un certain nombre d’heures pour des interventions annuelles avec un SLA (service level agreement). Les heures prestées seront déduites du nombre d’heures disponibles. Dès lors, si les heures prestées devaient dépasser le nombre d’heures fixées dans le contrat (en fonction du lieu d’intervention d’une part et d’autre part de l’urgence), le surplus sera facturé soit à la fin de la mensualité, soit à la fin du contrat."
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.contract_conditions_document
+msgid ""
+"The service provider (AbAKUS) shall in no case be considered as responsible for direct or indirect damages resulting from the use of the equipment, including any loss of data or information.\n"
+"                The provider will not be held responsible for the failures and malfunctions of hardware or software, whatever may be the duration of the breakdown or the immobilization before the restoring to normal operation.\n"
+"                The responsibility of the contractor cannot be questioned in the case of force majeure or for other reasons independent of its control such as strikes, labour disruptions, supplier’s delays, sinister or accidents.\n"
+"                The service provider commits himself to make every effort to solve a problem and this within the boundaries of obligation of means and not of results."
+msgstr ""
+"The service provider (AbAKUS) shall in no case be considered as responsible for direct or indirect damages resulting from the use of the equipment, including any loss of data or information.\n"
+"                The provider will not be held responsible for the failures and malfunctions of hardware or software, whatever may be the duration of the breakdown or the immobilization before the restoring to normal operation.\n"
+"                The responsibility of the contractor cannot be questioned in the case of force majeure or for other reasons independent of its control such as strikes, labour disruptions, supplier’s delays, sinister or accidents.\n"
+"                The service provider commits himself to make every effort to solve a problem and this within the boundaries of obligation of means and not of results."
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "The travel expenses (in the case of on-site intervention) is fixed and related to the distance between the site location and our offices."
+msgstr "Le tarif par déplacement (pour les interventions sur site) est fixé en fonction du nombre de km séparant le lieu d’intervention et nos bureaux."
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Ticket"
+msgstr "Ticket"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Travel expenses"
+msgstr "Tarif de déplacement"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Urgent"
+msgstr "Urgent"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "Yes"
+msgstr "Oui"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "abakusBackground"
+msgstr "abakusBackground"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "day(s)"
+msgstr "jour(s)"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "from"
+msgstr "de"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "min"
+msgstr "min"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "month(s)"
+msgstr "mois"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "text-right"
+msgstr "text-right"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "text-right abakusBackground"
+msgstr "text-right abakusBackground"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "week(s)"
+msgstr "semaine(s)"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "year(s)"
+msgstr "année(s)"
+
+#. module: contract_sale_signable
+#: view:website:contract_sale_signable.signable_contract_document
+msgid "€ every"
+msgstr "€ tous les"

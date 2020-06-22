@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.actions.act_window" id="action_signed_documents">
+        <field name="name">Documents signed by the applicant</field>
+        <field name="res_model">signature.request.item</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="website_sign.signature_request_item_view_tree" />
+        <field name="context">{'search_default_Current': 1}</field>
+        <field name="domain">[('hr_applicant_id', '=', active_id)]</field>
+    </record>
+
+    <record model="ir.ui.view" id="crm_case_form_view_job_signature_request">
+        <field name="name">crm_case_form_view_job_signature_request</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.crm_case_form_view_job" />
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//header" position="inside">
+                    <button string="Send Document To Sign" name="%(action_send_document_sign_selection_wizard)d" type="action" class="oe_highlight" attrs="{'invisible': [('emp_id', '!=', False)]}"/>
+                </xpath>
+                <xpath expr="//div[@class='oe_button_box']" position="inside">
+                     <button name="action_signed_documents" class="oe_stat_button" icon="fa-thumbs-up" type="object" help="See documents signed by this applicant" context="{'applicant_id': active_id}">
+                         <field name="signature_request_count" widget="statinfo" string="Signed Docs"/>
+                    </button>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="has_signed_main_data_document" />
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_crm_case_jobs_filter_has_signed_main_data_doc">
+        <field name="name">view_crm_case_jobs_filter_has_signed_main_data_doc</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.view_crm_case_jobs_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='inactive']" position="after">
+                <separator/>
+                <filter string="Signed the Data Agreement Doc" name="has_signed_main_data_document" domain="[('has_signed_main_data_document', '=', True)]"/>
+                <filter string="NOT Signed the Data Agreement Doc" name="has_signed_main_data_document" domain="[('has_signed_main_data_document', '=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

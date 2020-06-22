@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="smart_display_web" name="Smart Display">
+        <html t-att-data-callflows="display.name">
+            <head>
+                <title>Smart Display</title>
+                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+                <meta http-equiv="content-type" content="text/html, charset=utf-8" />
+                <meta name="viewport" content=" width=1024, user-scalable=no"/>
+                <meta name="apple-mobile-web-app-capable" content="yes"/>
+                <meta name="mobile-web-app-capable" content="yes"/>
+                <t t-call-assets="web.assets_common" t-css="false" />
+                <t t-call-assets="web.assets_backend" t-css="false" />
+                <script type="text/javascript" src="/project_smart_display/static/src/js/sipjs.js"></script>
+                <script type="text/javascript" src="/project_smart_display/static/src/js/smart_display.js"></script>
+                <link rel="stylesheet" href="/web/static/lib/bootstrap/css/bootstrap.css" />
+                <link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css" />
+                <link rel="stylesheet" href="/web/static/lib/fontawesome/css/font-awesome.css" />
+                <link rel="stylesheet" href="/project_smart_display/static/src/css/display_style.css" />
+            </head>
+            <body onload="startTime(); startPageManager();">
+                <!-- Header row -->
+                <div class="container-fluid">
+                    <div class="row dashboard_header">
+                        <div class="col-md-5">
+                            <h2><span style="font-weight: bold" t-field="display.name" /></h2>
+                            <span id="display_id" style="display: none;" t-field="display.id"/>
+                            <span id="display_delay" style="display: none;" t-field="display.delay"/>
+                        </div>
+                        <div class="col-md-4">
+                            <h2><span id="date_time_clock" /></h2>
+                        </div>
+                        <div class="col-md-2">
+                            <h2>Page <t t-if="len(display.page_line_ids) > 0"><span id="page_index" class="page_index">1</span></t><t t-if="len(display.page_line_ids) == 0">0</t>/<span t-esc="len(display.page_line_ids)" id="page_count" class="page_count"/>
+                            </h2>
+                        </div>
+                        <div class="col-md-1" style="text-align: right; margin-top: 4px;">
+                            <img src="https://raw.githubusercontent.com/abakus-it/abakus-11.0/shaheen_internship_2/project_smart_display/static/description/icon.png" class="abakus_logo"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- Main content row -->
+                <div class="container-fluid">
+                    <div class="row" style="height:92%;">
+                        <t t-if="display.show_telephony == True">
+                            <div class="col-md-10">
+                                <!-- iframe -->
+                                <iframe class="page_iframe" style="display: none;" src="" id="page_iframe"/>
+                                <!-- smart dashboard -->
+                                <div class="page_smart_dashboard" style="display: none;" id="smart_dashboard"/>
+                            </div>
+                            <div class="col-md-2 allocloud_div">
+                                <div style="display: inline-block;">
+                                    <img src="http://www.tubusiness.be/images/logo-membres/allocloud-vertical.jpg" class="allocloud_logo"/>
+                                </div>
+                                <div style="float: left;">
+                                    <div id="contacts_id"></div>
+                                </div>
+                                <div>
+                                    <div id="contacts_status"></div>
+                                </div>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <div class="col-md-12">
+                                <!-- iframe -->
+                                <iframe class="page_iframe" style="display: none;" src="" id="page_iframe"/>
+                                <!-- smart dashboard -->
+                                <div class="page_smart_dashboard" style="display: none;" id="smart_dashboard"/>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </body>
+        </html>
+    </template>
+    <template id="smart_display_page" name="Page for Smart Display">
+        <h3><span t-field="page.name" /></h3>
+        <t t-if="page.mode == 'iframe'">
+            <iframe t-att-src="page.iframe_url" id="main_iframe"/>
+        </t>
+    </template>
+</odoo>

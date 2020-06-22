@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_crm_case_jobs_filter_website_privacy_policy_accepted">
+        <field name="name">view_crm_case_jobs_filter_website_privacy_policy_accepted</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.view_crm_case_jobs_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='inactive']" position="after">
+                <separator/>
+                <filter string="Accepted Privacy Policy on Website Form" name="website_privacy_policy_accepted"
+                        domain="[('website_privacy_policy_accepted', '=', True)]"/>
+                <filter string="Not Accepted Privacy Policy on Website Form" name="website_privacy_policy_not_accepted"
+                        domain="[('website_privacy_policy_accepted', '=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

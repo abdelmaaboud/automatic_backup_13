@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="view_sale_order_with_lead_remove_opportunity_id">
+            <field name="name">sale.order.with.lead.remove.opportunity_id</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_crm.sale_view_inherit123"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='opportunity_id']" position="replace" />
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_sale_order_with_lead_add_opportunity_id">
+            <field name="name">sale.order.with.lead.add.opportunity_id</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='sales_person']" position="inside">
+                    <field name="opportunity_id" help="Log in the chatter from which opportunity the order originates" domain="[('stage_id', '!=', 'Won'), ('stage_id', '!=', 'Lost'), '|', '|', ('partner_id.parent_id', '=', partner_id), ('partner_id', '=', partner_id), ('partner_id.child_ids', 'in', partner_id)]" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

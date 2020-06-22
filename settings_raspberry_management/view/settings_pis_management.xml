@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="settings_raspberry_pis_form">
+        <field name="name">settings_raspberry_pis_form</field>
+        <field name="model">settings.raspberry_pi</field>
+        <field name="arch" type="xml">
+            <form string="Control room PIs">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="ip_address"/>
+                    </group>
+                    <group>
+                        <field name="webpage_url"/>
+                        <field name="webpage_user"/>
+                        <field name="webpage_password" password="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="settings_raspberry_pis_action">
+        <field name="name">Raspberry PIs</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">settings.raspberry_pi</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- base.menu_custom -->
+    <menuitem id="settings_raspberry_pis" name="Raspberry PIs" parent="base.menu_custom"
+              action="settings_raspberry_pis_action"/>
+</odoo>

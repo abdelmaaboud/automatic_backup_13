@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_bonus_tree" model="ir.ui.view">
+        <field name="name">view_bonus_tree</field>
+        <field name="model">hr.bonus</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="state=='refused'"
+                  decoration-success="state=='approved'"
+                  decoration-info="state=='submitted'">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="employee_id"/>
+                <field name="date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_bonus_form" model="ir.ui.view">
+        <field name="name">view_bonus_form</field>
+        <field name="model">hr.bonus</field>
+        <field name="arch" type="xml">
+            <form string="Bonus">
+                <header>
+                    <button name="action_submit" states="draft" string="Submit" type="object" class="oe_highlight" groups="base.group_user"/>
+                    <button name="action_draft" states="submitted,approved,refused,paid" string="Set to draft" type="object" groups="base.group_user,hr.group_hr_user"/>
+                    <button name="action_approve" states="submitted" string="Approve" type="object" class="oe_highlight" groups="hr.group_hr_user"/>
+                    <button name="action_paid" states="approved" string="Mark as paid" type="object" class="oe_highlight" groups="hr.group_hr_user"/>
+                    <button name="action_refuse" states="submitted" string="Refuse" type="object" groups="hr.group_hr_user"/>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="employee_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

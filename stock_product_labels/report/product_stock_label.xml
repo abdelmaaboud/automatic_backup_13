@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+            id="product_labels"
+            string="Product Label"
+            model="product.product"
+            report_type="qweb-pdf"
+            file="product_label"
+            name="stock_product_labels.product_label"
+    />
+
+    <!--<record id="stock_product_labels.product_label" models="ir.actions.report.xml">
+        <field name="paperformat_id" ref="deliveries_labels.stock_deliveries_labels_paperformat"/>
+    </record>-->
+
+    <template id="product_label">
+        <!-- Multicompany -->
+        <t t-if="o and 'company_id' in o">
+            -
+            <t t-set="company" t-value="o.company_id"/>
+            -
+        </t>
+        -
+        <t t-if="not o or not 'company_id' in o">
+            -
+            <t t-set="company" t-value="res_company"/>
+            -
+        </t>
+
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="product">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <div class="row">
+                            <table style="width: 100%; border: 1px solid black; text-align: center;">
+                                <tr>
+                                    <td colspan="2">
+                                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo"
+                                            style="margin-top: 2px; height: 50px;"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="border-bottom: 1px black solid;">
+                                        <span t-esc="company.partner_id.name"/>
+                                        /
+                                        <span t-esc="company.partner_id.street"/>
+                                        <span t-esc="company.partner_id.zip"/>
+                                        <span t-esc="company.partner_id.city"/>
+                                        /
+                                        <span t-esc="company.partner_id.phone"/>
+                                    </td>
+                                </tr>
+                                <tr style="border: 1px solid black;">
+                                    <span t-if="product.product_brand_id">
+                                        <td style="padding: 2px;">
+                                            <h4>
+                                                <span t-esc="product.product_brand_id.name"/>
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <span t-esc="product.name"/>
+                                            </h4>
+                                        </td>
+                                    </span>
+                                    <span t-if="not product.product_brand_id">
+                                        <td colspane="2" style="padding: 2px;">
+                                            <h4>
+                                                <span t-esc="product.name"/>
+                                            </h4>
+                                        </td>
+                                    </span>
+                                </tr>
+                                <tr style="border: 1px solid black;">
+                                    <td>
+                                        <h4>Ref:</h4>
+                                    </td>
+                                    <td>
+                                        <h4>
+                                            <span t-esc="product.default_code"/>
+                                        </h4>
+                                    </td>
+
+                                </tr>
+                                <tr style="border: 1px solid black;">
+                                    <td colspan="2">
+                                        <span t-if="product.barcode">
+                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', product.barcode, 600, 100)"
+                                                style="margin-top: 5px; width:270px; height:50px"/>
+                                            <h5>
+                                                <span t-esc="product.barcode"/>
+                                            </h5>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <report
+            id="product_labels_stock"
+            string="Product Label With Stock"
+            model="stock.quant"
+            report_type="qweb-pdf"
+            file="product_label_stock"
+            name="stock_product_labels.product_label_stock"
+    />
+
+    <!--<record id="stock_product_labels.product_label_stock" models="ir.actions.report.xml">
+        <field name="paperformat_id" ref="deliveries_labels.stock_deliveries_labels_paperformat"/>
+    </record>-->
+
+    <template id="product_label_stock">
+        <!-- Multicompany -->
+        <t t-if="o and 'company_id' in o">
+            -
+            <t t-set="company" t-value="o.company_id"/>
+            -
+        </t>
+        -
+        <t t-if="not o or not 'company_id' in o">
+            -
+            <t t-set="company" t-value="res_company"/>
+            -
+        </t>
+
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="quant">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <div class="row">
+                            <table style="width: 100%; border: 1px solid black; text-align: center;">
+                                <tr>
+                                    <td colspan="2">
+                                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo"
+                                            style="margin-top: 2px; height: 50px;"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="border-bottom: 1px black solid;">
+                                        <span t-esc="company.partner_id.name"/>
+                                        /
+                                        <span t-esc="company.partner_id.street"/>
+                                        <span t-esc="company.partner_id.zip"/>
+                                        <span t-esc="company.partner_id.city"/>
+                                        /
+                                        <span t-esc="company.partner_id.phone"/>
+                                    </td>
+                                </tr>
+                                <tr style="border: 1px solid black;">
+                                    <span t-if="quant.product_id.product_brand_id">
+                                        <td style="padding: 2px;">
+                                            <h4>
+                                                <span t-esc="quant.product_id.product_brand_id.name"/>
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <span t-esc="quant.product_id.name"/>
+                                            </h4>
+                                        </td>
+                                    </span>
+                                    <span t-if="not quant.product_id.product_brand_id">
+                                        <td colspane="2" style="padding: 2px;">
+                                            <h4>
+                                                <span t-esc="quant.product_id.name"/>
+                                            </h4>
+                                        </td>
+                                    </span>
+                                </tr>
+                                <tr style="border: 1px solid black;">
+                                    <td>
+                                        <h4>Ref:</h4>
+                                    </td>
+                                    <td>
+                                        <h4>
+                                            <span t-esc="quant.product_id.default_code"/>
+                                        </h4>
+                                    </td>
+                                </tr>
+                                <tr style="border: 1px solid black;">
+                                    <td>
+                                        <h4>Loc:</h4>
+                                    </td>
+                                    <td>
+                                        <h4>
+                                            <span t-esc="quant.location_id.name"/>
+                                        </h4>
+                                    </td>
+                                </tr>
+                                <tr style="border: 1px solid black;">
+                                    <td colspan="2">
+                                        <span t-if="quant.product_id.barcode">
+                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', quant.product_id.barcode, 600, 100)"
+                                                style="margin-top: 5px; width:270px; height:50px"/>
+                                            <br/>
+                                            <span t-esc="quant.product_id.barcode"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

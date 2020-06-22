@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="partner_supplier_remittance_advice">
+        <field name="name">partner_supplier_remittance_advice</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account_payment_partner.view_partner_property_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='supplier_payment_mode_id']" position="after">
+                <field name="send_remittance_advice"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

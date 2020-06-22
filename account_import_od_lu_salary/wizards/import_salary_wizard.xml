@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+        <record id="import_salary_form_view" model="ir.ui.view">
+            <field name="name">import_salary_form_view</field>
+            <field name="model">import.salary.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="file" required="1"/>
+                    </group>
+                    <footer>
+                        <button class="oe_highlight" name="action_import_file" type="object" string="Import Salary"/>
+                        or
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <act_window id="launch_import_salary_wizard"
+                    name="Import Salary"
+                    res_model="import.salary.wizard"
+                    view_mode="form"
+                    target="new"
+                    key2="client_action_multi"/>
+
+        <menuitem parent="account.menu_finance_entries_generate_entries" id="launch_import_salary_wizard_menuitem"
+                  string="Import Salary LU" action="launch_import_salary_wizard"/>
+</odoo>

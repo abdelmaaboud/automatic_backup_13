@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="account_payment_mode_add_default_account_ids_form_view" model="ir.ui.view">
+        <field name="name">account_payment_mode_add_default_account_ids_form_view</field>
+        <field name="model">account.payment.mode</field>
+        <field name="inherit_id" ref="account_payment_order.account_payment_mode_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='default_journal_ids']" position="after">
+                <field name="default_account_ids" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

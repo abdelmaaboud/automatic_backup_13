@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="be_vat_checks_wizard" model="ir.ui.view">
+            <field name="name">Belgium VAT Checks</field>
+            <field name="model">be.vat.checks</field>
+            <field name="arch" type="xml">
+                <form string="Belgium VAT Checks">
+                    <group string="Data">
+                        <group>
+                            <field name="company_id"/>
+                        </group>
+                        <group>
+                            <field name="date_from" />
+                            <field name="date_to" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="check_result" />
+                    </group>
+
+                    <button name="compute_cheks" string="Do the checks" type="object" class="oe_highlight" />
+                    <footer>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_be_vat_checks" model="ir.actions.act_window">
+            <field name="name">Belgium VAT Checks</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">be.vat.checks</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="be_vat_checks_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+            name="Belgium VAT Checks"
+            parent="l10n_be.account_reports_be_statements_menu"
+            action="action_be_vat_checks"
+            id="l10n_be_vat_checks.be_vat_checks_menu"
+            sequence="20"/>
+    </data>
+</odoo>

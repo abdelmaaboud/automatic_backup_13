@@ -1,0 +1,26 @@
+<odoo>
+
+    <record model="ir.ui.view" id="sale_subscription_view_form_generate_invoice">
+        <field name="name">sale_subscription_view_form_generate_invoice</field>
+        <field name="model">sale.subscription</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='recurring_invoice']" position="attributes">
+                <attribute name="groups" />
+            </xpath>
+        </field>
+    </record>
+    
+
+    <record model="ir.ui.view" id="sale_subscription_view_list_improvements">
+        <field name="name">sale_subscription_view_list_improvements</field>
+        <field name="model">sale.subscription</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_view_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="recurring_next_date" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

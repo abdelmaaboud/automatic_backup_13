@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="user_access_to_own_kpi_values" model="ir.rule">
+            <field name="name">Show KPI values for corresponding users only</field>
+            <field name="model_id" ref="board_kpi_management.model_board_kpi_value" />
+            <field name="global" eval="True" />
+            <field name="perm_read" eval="True" />
+            <field name="perm_write" eval="True" />
+            <field name="perm_create" eval="True" />
+            <field name="perm_unlink" eval="True" />
+            <field name="domain_force">[('kpi_id.user_ids', '=', user.id)]</field>
+        </record>
+        
+        <record id="user_access_to_own_kpi" model="ir.rule">
+            <field name="name">Show KPI for corresponding users only</field>
+            <field name="model_id" ref="board_kpi_management.model_board_kpi" />
+            <field name="global" eval="True" />
+            <field name="perm_read" eval="True" />
+            <field name="perm_write" eval="True" />
+            <field name="perm_create" eval="True" />
+            <field name="perm_unlink" eval="True" />
+            <field name="domain_force">[('user_ids','child_of',[user.id])]</field>
+        </record>
+    </data>
+</odoo>

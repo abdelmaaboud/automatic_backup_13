@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Supplier info form view -->
+    <record id="product_supplierinfo_form_view_suppliers_updater" model="ir.ui.view">
+        <field name="name">product_supplierinfo_form_view_suppliers_updater</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group/group[last()]" position="before">
+                <group string="Auto updated">
+                    <field name="qty_available" readonly="1"/>
+                    <field name="last_update" readonly="1"/>
+                    <field name="state"/>
+                    <button name="update_supplierinfo_with_supplier_updater" string="Update" type="object" class="oe_highlight"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_supplierinfo_tree_view_suppliers_updater" model="ir.ui.view">
+        <field name="name">product_supplierinfo_tree_view_suppliers_updater</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='price']" position="after">
+                <field name="qty_available" />
+                <field name="last_update" />
+                <field name="state" />
+                <button name="update_supplierinfo_with_supplier_updater" string="Update" type="object" class="oe_highlight"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

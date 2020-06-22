@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="signature_request_item_view_tree_applicant">
+        <field name="name">signature_request_item_view_tree_applicant</field>
+	    <field name="model">signature.request.item</field>
+	    <field name="inherit_id" ref="website_sign.signature_request_item_view_tree"/>
+	    <field name="arch" type="xml">  
+            <data>
+                <xpath expr="//tree" position="inside">
+                    <field name="signature_request_id" string="Document"/>
+                    <field name="hr_applicant_id" />
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="signature_request_item_view_form_applicant">
+        <field name="name">signature_request_item_view_form_applicant</field>
+        <field name="model">signature.request.item</field>
+        <field name="inherit_id" ref="website_sign.signature_request_item_view_form" />
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//div[@class='oe_title']" position="inside">
+                    <label for="hr_applicant_id" class="oe_edit_only"/>
+                    <h1><field name="hr_applicant_id"/></h1>
+                </xpath>
+                <xpath expr="//field[@name='access_token']" position="before">
+                    <field name="signature_request_id" string="Document Requested"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

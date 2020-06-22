@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="old_products_wizard_form_view" model="ir.ui.view">
+        <field name="name">old_products_wizard_form_view</field>
+        <field name="model">old.products.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Old Products Wizard">
+                <group>
+                    <field name="limit_date" required="True"/>
+                    <field name="take_quote"/>
+                </group>
+                <footer>
+                    <button name="action_open_old_products" type="object" string="Show Products" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" special="cancel" name="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="launch_old_product_wizard"
+            name="Old Products Wizard"
+            res_model="old.products.wizard"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi"/>
+
+    <menuitem action="launch_old_product_wizard" name="Old Products Wizard" id="old_products_wizard_menuitem" parent="sale.product_menu_catalog" sequence="20"/>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    <record model="ir.rule" id="ir_values_supplier_settings_rule">
+        <field name="name">Supplier Updater Settings Rule</field>
+        <field name="model_id" ref="suppliers_product_updater.model_suppliers_product_updater_settings_data"/>
+        <field name="domain_force">[]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_create" eval="True"/>
+    </record>
+    -->
+</odoo>

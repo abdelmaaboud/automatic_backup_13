@@ -1,0 +1,15 @@
+[submodule "odoo-purchased"]
+	path = odoo-purchased
+	url = git@gitlab.com:abakus-it/odoo-purchased.git
+[submodule "OCA-bank-payment"]
+	path = OCA-bank-payment
+	url = https://github.com/OCA/bank-payment
+	branch = 11.0
+[submodule "report-print-send"]
+	path = report-print-send
+	url = https://github.com/OCA/report-print-send
+	branch = 11.0
+[submodule "suppliers_product_updater"]
+	path = suppliers_product_updater
+	url = git@github.com:abakus-it/suppliers_product_updater.git
+	branch = 11.0

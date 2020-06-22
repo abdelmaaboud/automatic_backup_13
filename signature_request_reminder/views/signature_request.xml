@@ -1,0 +1,18 @@
+<odoo>
+    
+    <record model="ir.ui.view" id="signature_request_reminder_view_form">
+        <field name="name">signature_request_reminder_view_form</field>
+        <field name="model">signature.request</field>
+        <field name="inherit_id" ref="website_sign.signature_request_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group>
+                    <field name="send_reminder" />
+                    <field name="last_sent_reminder" />
+                    <field name="day_before_send_reminder" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+    
+</odoo>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="report_external_access"
+            string="Security Check External Access Report"
+            model="security.check"
+            report_type="qweb-pdf"
+            file="maintenance_equipment_abakus.report_external_access"
+            name="maintenance_equipment_abakus.report_external_access_template"
+        />
+        <report
+            id="report_backups"
+            string="Security Check Backups Report"
+            model="security.check"
+            report_type="qweb-pdf"
+            file="maintenance_equipment_abakus.report_backups"
+            name="maintenance_equipment_abakus.report_backups_template"
+        />
+        <report
+            id="report_access_rights"
+            string="Security Check Access Rights Report"
+            model="security.check"
+            report_type="qweb-pdf"
+            file="maintenance_equipment_abakus.report_access_rights"
+            name="maintenance_equipment_abakus.report_access_rights_template"
+        />
+        <report
+            id="report_gate_access"
+            string="Security Check Gate Access Report"
+            model="security.check"
+            report_type="qweb-pdf"
+            file="maintenance_equipment_abakus.report_gate_access"
+            name="maintenance_equipment_abakus.report_gate_access_template"
+        />
+        <report
+                id="report_servers_security"
+                string="Security Check Servers Security Report"
+                model="security.check"
+                report_type="qweb-pdf"
+                file="maintenance_equipment_abakus.report_servers_security"
+                name="maintenance_equipment_abakus.report_servers_security_template"
+        />
+        <report
+                id="report_network_security"
+                string="Security Check Network Security Report"
+                model="security.check"
+                report_type="qweb-pdf"
+                file="maintenance_equipment_abakus.report_network_security"
+                name="maintenance_equipment_abakus.report_network_security_template"
+        />
+        <report
+                id="report_workstations_security"
+                string="Security Check Workstations Security Report"
+                model="security.check"
+                report_type="qweb-pdf"
+                file="maintenance_equipment_abakus.report_workstations_security"
+                name="maintenance_equipment_abakus.report_workstations_security_template"
+        />
+
+        <report
+                id="report_todos"
+                string="Security Check Todos Report"
+                model="security.check"
+                report_type="qweb-pdf"
+                file="maintenance_equipment_abakus.report_todos"
+                name="maintenance_equipment_abakus.report_todos_template"
+        />
+
+        <report
+                id="report_security_check_complete"
+                string="Security Check Complete Report"
+                model="security.check"
+                report_type="qweb-pdf"
+                file="maintenance_equipment_abakus.security_check_report_complete"
+                name="maintenance_equipment_abakus.security_check_report_complete_template"
+        />
+    </data>
+</odoo>

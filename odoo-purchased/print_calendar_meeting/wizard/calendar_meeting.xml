@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+    <data>
+        <record id="view_calendar_meeting_form" model="ir.ui.view">
+            <field name="name">Calendar Meeting Report</field>
+            <field name="model">calendar.meeting.report</field>
+            <field name="arch" type="xml">
+                <form string="Calendar Meeting Report">
+                    <group string="Meeting Report">
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    <group string="Select Attendees">
+                        <field name="attendees_ids" nolabel="1" />
+                    </group>
+                    <footer>
+                        <button name="print_meeting_report"  type="object"  string="Print" class="btn-primary"/>
+                        or
+                        <button string="_Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_calendar_meeting_report" model="ir.actions.act_window">
+            <field name="name">Calendar Meeting Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">calendar.meeting.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_calendar_meeting_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</openerp>

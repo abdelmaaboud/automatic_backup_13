@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="kpi_values_summary_mail_template" model="mail.template">
+        <field name="name">Notify for KPI values summary</field>
+        <field name="model_id" ref="model_board_kpi" />
+        <field name="email_from">${(object.create_uid.email or object.company_id.email or 'noreply@localhost')|safe}</field>
+        <field name="email_to"></field>
+        <field name="subject">KPI values summary</field>
+        <field name="body_html"><![CDATA[
+                % for kpi in object.get_kpi_ids_by_user(object):
+                    <h3>Summary of values for KPI : ${kpi.name}</h3>
+                    % if kpi.summary_mail_frequency == 'day':
+                        <p><strong>Period concerned :</strong> ${kpi.generate_summary_mail_values(kpi)[3]}</p>
+                    % else:
+                        <p><strong>Period concerned :</strong> from ${kpi.generate_summary_mail_values(kpi)[3]} to ${kpi.generate_summary_mail_values(kpi)[4]}</p>
+                    % endif
+
+                    % if kpi.exists_summary_values == True:
+                        <ul>
+                            <li>Minimum value : ${kpi.generate_summary_mail_values(kpi)[0]}</li>
+                            <li>Maximum value : ${kpi.generate_summary_mail_values(kpi)[1]}</li>
+                            <li>Values average : ${kpi.generate_summary_mail_values(kpi)[2]}</li>
+                        </ul>
+                    % else:
+                        <p>No data have been generated for specified period.</p>
+                    % endif
+                % endfor
+            ]]></field>
+    </record>
+    
+    <record id="kpi_value_threshold_mail_template" model="mail.template">
+        <field name="name">Notify for KPI value threshold</field>
+        <field name="model_id" ref="model_board_kpi" />
+        <field name="email_from">${(object.create_uid.email or object.company_id.email or 'noreply@localhost')|safe}</field>
+        <field name="email_to">${object.generate_threshold_mail_values()}</field>
+        <field name="subject">KPI threshold reached</field>
+        <field name="body_html"><![CDATA[
+                <h3>Warning : KPI with name ${object.name} has a value which has reached the fixed threshold (${object.threshold_operator} ${object.threshold_value}).</h3>
+            ]]></field>
+    </record>
+</odoo>

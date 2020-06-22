@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="rename_document_subject_followup_letter" inherit_id="account_reports.followup_filter_info_template">
+        <xpath expr="//p" position="replace">
+            <p>
+                Subject: <span t-esc="options.get('subject', 'Customer Account Statement')"></span><br/>
+                Date: <span t-esc="today" t-options="{'widget': 'date'}"/><br/>
+                <t t-if="partner_addr.ref">Customer ref: <span t-field="partner_addr.ref"/></t>
+            </p>
+        </xpath>
+    </template>
+    <template id="add_footer_template_followup" inherit_id="account_reports.template_followup_report">
+        <xpath expr="//table[hasclass('o_account_reports_table')]" position="attributes">
+            <attribute name="style">margin-bottom: 0px;</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('table-responsive')]" position="after">
+            <div style="padding-bottom:40px; position: relative;">
+                <span t-if="options.get('summary_bottom')"><t t-esc="options.get('summary_bottom')" t-options="{'widget': 'text'}"/></span>
+            </div>
+            <table id="Tableau_01" width="539" border="0" cellpadding="0" cellspacing="0"
+                   style="border-collapse: collapse;background-color:#fff;" bgcolor="#ffffff">
+                <tbody style="line-height: 0; background-color:#ffffff" bgcolor="#ffffff">
+                    <style>
+<!--                        #Tableau_01 a, #Tableau_01 a:visited, #Tableau_01 a:hover, #Tableau_01 a:active, #Tableau_01 :any-link {-->
+<!--                        color:#fff !important;-->
+<!--                        text-decoration:none !important;-->
+<!--                        },-->
+                        td.txtBl a, td.txtBl a:visited, td.txtBl a:hover, td.txtBl a:active, td.txtBl :any-link:active {
+                        color:#000 !important;
+                        text-decoration:none !important;
+                        },
+                        td.txtBl :any-link { color: green },
+                        td.txtBl :any-link:active { color: orange },
+                    </style>
+                    <tr height="34" bgcolor="#fff" style="background-color:#fff">
+                        <td colspan="3" rowspan="7" style="line-height: 1px">
+                            <img src="https://www.abakusitsolutions.eu/sign/new_01.jpg" width="249" height="171" alt=""/>
+                        </td>
+                        <td colspan="5" width="290" height="34" bgcolor="#fff" style="background-color:#fff"></td>
+                    </tr>
+                    <tr height="21" bgcolor="#fff" style="background-color:#fff">
+                        <td colspan="5" width="290" bgcolor="#ffffff" style="background-color:#fff; font-size: 16px;">
+                            <p style="font-weight:bold; color:#000; font-family:arial,sans-serif; font-size: 16px; line-height: 1px;">
+                                <t t-if="options.get('signature', False)"><t t-esc="options.get('signature')"/></t>
+                                <t t-else="">
+                                    Accounting Team
+                                </t>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr height="9" bgcolor="#fff" style="background-color:#fff; line-height: 0">
+                        <td colspan="5" height="9" bgcolor="#fff" style="background-color:#fff;"></td>
+                    </tr>
+                    <tr height="16" bgcolor="#fff" style="background-color:#fff">
+                        <td colspan="5"></td>
+                    </tr>
+                    <tr height="12" bgcolor="#fff" style="background-color:#fff">
+                        <td colspan="5" height="12" bgcolor="#fff" style="background-color:#fff"></td>
+                    </tr>
+                    <tr valign="top" height="40" bgcolor="#fff" style="background-color:#fff">
+                        <td colspan="5" height="40" bgcolor="#fff" style="background-color:#fff"></td>
+                    </tr>
+                    <tr height="39" bgcolor="#fff" style="background-color:#fff">
+                        <td colspan="5" height="39" bgcolor="#fff" style="background-color:#fff"></td>
+                    </tr>
+                    <tr height="10">
+                        <td colspan="8" height="10" bgcolor="#ebebeb" style="background-color:#ebebeb"></td>
+                    </tr>
+                    <tr height="14">
+                        <td colspan="8" width="539" bgcolor="#ebebeb"
+                            style="background-color:#ebebeb;font-size:12px; text-transform:uppercase;color:#000; font-family:arial,sans-serif;text-indent: 12px; line-height: 1px">
+                            <strong>Germany</strong>
+                            . Adenauerstrasse 20 A2 . D-52146 WÜRSELEN . T : +49 2405 80749 50
+                        </td>
+                    </tr>
+                    <tr height="7">
+                        <td colspan="8" height="7" bgcolor="#ebebeb" style="background-color:#ebebeb"></td>
+                    </tr>
+                    <tr height="14">
+                        <td colspan="8" width="539" bgcolor="#ebebeb"
+                            style="background-color:#ebebeb;font-size:12px; text-transform:uppercase;color:#000; font-family:arial,sans-serif;text-indent: 12px; line-height: 1px">
+                            <strong>Belgium</strong>
+                            . Euregiostrasse 8 . B-4700 EUPEN . T : +32 87 59 35 50
+                        </td>
+                    </tr>
+                    <tr height="7">
+                        <td colspan="8" height="7" bgcolor="#ebebeb" style="background-color:#ebebeb"></td>
+                    </tr>
+                    <tr height="14">
+                        <td colspan="8" width="539" bgcolor="#ebebeb"
+                            style="background-color:#ebebeb;font-size:12px; text-transform:uppercase;color:#000; font-family:arial,sans-serif;text-indent: 12px; line-height: 1px">
+                            <strong>Luxembourg</strong>
+                            . Hauptstrooss 1 . L-9753 HEINERSCHEID . T : +352 20 88 20 50
+                        </td>
+                    </tr>
+                    <tr height="7">
+                        <td colspan="8" height="7" bgcolor="#ebebeb" style="background-color:#ebebeb"></td>
+                    </tr>
+                    <tr height="8">
+                        <td colspan="8" height="8" bgcolor="#df633b" style="background-color:#df633b"></td>
+                    </tr>
+                    <tr height="14" style="background-color: #df633b" bgcolor="#df633b">
+                        <td colspan="8" width="539" bgcolor="#df633b"
+                            style="background-color:#df633b;font-size:12px; text-transform:uppercase;color:#fff; font-family:arial,sans-serif;text-indent: 12px; line-height: 1px">
+                            ABAKUS it-solutions . expert in it comfort .
+                            <a href="https://www.abakusitsolutions.eu"
+                               style="color:#fff !important; text-decoration:none !important; line-height: normal;">
+                                www.abakusitsolutions.eu
+                            </a>
+                        </td>
+                    </tr>
+                    <tr height="8" style="background-color: #df633b" bgcolor="#df633b">
+                        <td colspan="8" bgcolor="#df633b"
+                            style="background-color:#df633b;font-size:0px;line-height: 1px">
+                        </td>
+                    </tr>
+                    <tr bgcolor="#ffffff" style="background-color:#ffffff:margin:0">
+                        <td bgcolor="#ffffff" style="background-color:#ffffff:margin:0" width="1" height="1"></td>
+                        <td bgcolor="#ffffff" style="background-color:#ffffff:margin:0" width="11" height="1"></td>
+                        <td bgcolor="#ffffff" style="background-color:#ffffff:margin:0" width="237" height="1"></td>
+                        <td bgcolor="#ffffff" style="background-color:#ffffff:margin:0" width="21" height="1"></td>
+                        <td bgcolor="#ffffff" style="background-color:#ffffff:margin:0" width="109" height="1"></td>
+                        <td bgcolor="#ffffff" style="background-color:#ffffff:margin:0" width="23" height="1"></td>
+                        <td bgcolor="#ffffff" style="background-color:#ffffff:margin:0" width="126" height="1"></td>
+                        <td bgcolor="#ffffff" style="background-color:#ffffff:margin:0" width="11" height="1"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </xpath>
+    </template>
+</odoo>

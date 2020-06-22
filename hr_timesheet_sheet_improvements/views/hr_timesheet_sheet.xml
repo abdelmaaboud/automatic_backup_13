@@ -1,0 +1,17 @@
+<odoo>
+
+    <record model="ir.ui.view" id="hr_timesheet_sheet_form_note_exists">
+        <field name="name">hr_timesheet_sheet_form_note_exists</field>
+        <field name="model">hr_timesheet.sheet</field>
+        <field name="inherit_id" ref="hr_timesheet_sheet.hr_timesheet_sheet_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='note_to_manager']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='note_to_manager']" position="after">
+                <field name="note_to_manager_exists" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

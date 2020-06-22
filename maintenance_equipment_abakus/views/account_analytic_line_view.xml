@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="timesheet_view_form_maintenance_abakus" model="ir.ui.view">
+            <field name="name">timesheet_view_form_maintenance_abakus</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="timesheet_grid.timesheet_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='task_id']" position="after">
+                    <field name="maintenance_request_id" domain="[('partner_id', '=', project_id.partner_id)]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

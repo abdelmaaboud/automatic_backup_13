@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="hr_timesheet_sheet_holiday_on_sheet_form_view" model="ir.ui.view">
+            <field name="name">hr_timesheet_sheet_holiday_on_sheet_form_view</field>
+            <field name="model">hr_timesheet.sheet</field>
+            <field name="inherit_id" ref="hr_timesheet_sheet.hr_timesheet_sheet_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group" position="after">
+                    <group string="Leaves">
+                        <field name="leave_ids" nolabel="1" widget="many2many">
+                            <tree>
+                                <field name="holiday_status_id"/>
+                                <field name="name"/>
+                                <field name="number_of_days" sum="number_of_days"/>
+                                <field name="date_from"/>
+                                <field name="date_to"/>
+                                <field name="state" invisible="1"/>
+                            </tree>
+                        </field>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

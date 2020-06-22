@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<odoo>
+    <record model="ir.ui.view" id="project_project_on_out_boarding">
+        <field name="name">project_project_on_out_boarding</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[last()]" position="after"
+                   attrs="{'invisible':[('onboarding_project', '=', False), ('outboarding_project', '=', False)]}">
+                <page name="on_out_boarding" string="HR">
+                    <group>
+                        <field name="onboarding_project" attrs="{'invisible':[('outboarding_project', '=', True)]}"/>
+                        <field name="outboarding_project" attrs="{'invisible':[('onboarding_project', '=', True)]}"/>
+                        <field name="on_out_boarding_employee_id"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_account_analytic_account_service_report">
+        <field name="name">view_account_analytic_account_service_report</field>
+        <field name="model">sale.subscription</field>
+        <field name="inherit_id" ref="account_analytic_account_improvements.sale_subscription_contract_improvements"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@id='balance_contract_status']" position="after">
+                <group name="contract_report_setting" id="contract_report_setting" string="Contract Report">
+                    <field name="report_partner_id"/>
+                    <field name="last_send_report_date"/>
+                    <button name="print_timesheets_report" type="object" string="Print"/>
+                    <button name="action_service_report_sent" type="object" string="Send by Email"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Action to send the report -->
+    <record model="ir.actions.server" id="sale_subscription_send_report">
+        <field name="name">Send the report</field>
+        <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
+        <field name="state">code</field>
+        <field name="code">self.action_service_report_sent()</field>
+    </record>
+
+    <!-- Action print the report -->
+    <record model="ir.actions.server" id="sale_subscription_print_report">
+        <field name="name">Send the report</field>
+        <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
+        <field name="state">code</field>
+        <field name="code">self.print_timesheets_report()</field>
+    </record>
+</odoo>

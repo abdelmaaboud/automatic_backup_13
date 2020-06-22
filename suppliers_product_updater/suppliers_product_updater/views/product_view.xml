@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_template_form_view_supplier_updater" model="ir.ui.view">
+        <field name="name">product_template_form_view_supplier_updater</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="purchase.view_product_supplier_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='vendors']" position="after">
+                <group name="updater_info">
+                    <field name="last_update_price" />
+                    <field name="total_suppliers_stock" />
+                    <button name="update_product_with_supplier_updater" type="object" class="oe_highlight" string="Update Suppliers Info" attrs="{'invisible': [('seller_ids', '=', False)]}" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

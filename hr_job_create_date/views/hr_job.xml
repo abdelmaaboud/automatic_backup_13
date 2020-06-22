@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="hr_job_create_date_form_view">
+        <field name="name">hr_job_create_date_form_view</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_hr_job_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="create_date" widget="date" readonly="True"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_job_create_date_kanban_view">
+        <field name="name">hr_job_create_date_kanban_view</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr_recruitment.view_hr_job_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="create_date"/>
+            </xpath>
+            <xpath expr="//div[@class='col-xs-6 o_kanban_primary_right']" position="inside">
+                <field name="create_date" readonly="True" widget="date"/>
+            </xpath>
+            <xpath expr="//t[@t-name='kanban-box']/div/div[2]/t[2]/div/div[1]" position="attributes">
+                <attribute name="class">col-xs-6 o_kanban_primary_left</attribute>
+            </xpath>
+            <xpath expr="//t[@t-name='kanban-box']/div/div[2]/t[2]/div" position="inside">
+                <div class="col-xs-6 o_kanban_primary_right">
+                    <field name="create_date" readonly="True" widget="date"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

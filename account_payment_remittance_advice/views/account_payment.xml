@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="payment_form_with_remittance_advice">
+        <field name="name">payment_form_with_remittance_advice</field>
+        <field name="model">account.payment.order</field>
+        <field name="inherit_id" ref="account_payment_order.account_payment_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_line_ids']" position="replace">
+                <field name="payment_line_ids">
+                    <tree>
+                        <field name="order_id" invisible="not context.get('account_payment_line_main_view')"/>
+                        <field name="partner_id"/>
+                        <field name="send_remittance_advice" string="Rem. Advice"/>
+                        <field name="communication"/>
+                        <field name="partner_bank_id"/>
+                        <field name="ml_maturity_date"/>
+                        <field name="date"/>
+                        <field name="amount_currency" string="Amount"/>
+                        <field name="currency_id"/>
+                        <field name="name"/>
+                        <field name="amount_company_currency" sum="Total in Company Currency" invisible="1"/>
+                        <field name="payment_type" invisible="1"/>
+                    </tree>
+                </field>
+            </xpath>
+        </field>
+    </record>
+</odoo>

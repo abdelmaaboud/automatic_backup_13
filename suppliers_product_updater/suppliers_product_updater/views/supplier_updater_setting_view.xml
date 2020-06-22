@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_suppliers_product_setting_tree" model="ir.ui.view">
+        <field name="name">view_suppliers_product_setting_tree</field>
+        <field name="model">supplier.updater.setting</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="supplier_mode" />
+                <field name="supplier_id" />
+                <field name="demo_mode" />
+                <field name="frequency" />
+                <field name="last_update" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_suppliers_product_setting_form" model="ir.ui.view">
+        <field name="name">view_suppliers_product_setting_form</field>
+        <field name="model">supplier.updater.setting</field>
+        <field name="arch" type="xml">
+            <form string="Configure Supplier Product Updater">
+                <header>
+                    <button type="object" name="execute_updater" string="Execute Update" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="supplier_mode" />
+                            <field name="supplier_id" />
+                            <field name="demo_mode" class="oe_inline"/>
+                            <field name="frequency" class="oe_inline"/>
+
+                        </group>
+                        <group>
+                            <field name="active"/>
+                            <field name="last_update" class="oe_inline" />
+                        </group>
+                    </group>
+                    <group>
+                        <group attrs="{'invisible': [('supplier_mode', '!=', 'td')]}">
+                            <field name="td_customer_number" />
+                            <field name="td_auth_code"/>
+                            <field name="td_info_type"/>
+                        </group>
+
+                        <group attrs="{'invisible': [('supplier_mode', '!=', 'also')]}">
+                            <field name="also_server" />
+                            <field name="also_user"/>
+                            <field name="also_password"/>
+                            <field name="also_file"/>
+                        </group>
+
+                        <group attrs="{'invisible': [('supplier_mode', '!=', 'im')]}">
+                            <field name="im_server" attrs="{'required': [('supplier_mode', '=', 'im')]}"/>
+                            <field name="im_user" attrs="{'required': [('supplier_mode', '=', 'im')]}"/>
+                            <field name="im_password" attrs="{'required': [('supplier_mode', '=', 'im')]}"/>
+                            <field name="im_file" attrs="{'required': [('supplier_mode', '=', 'im')]}"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_suppliers_product_settings" model="ir.actions.act_window">
+        <field name="name">Supplier Product Updater</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">supplier.updater.setting</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">['|', ('active', '=', False), ('active', '=', True)]</field>
+    </record>
+
+    <menuitem id="menu_suppliers_product_settings" name="Suppliers Product Updaters" parent="base.menu_automation"
+        sequence="50" action="action_suppliers_product_settings"/>
+</odoo>

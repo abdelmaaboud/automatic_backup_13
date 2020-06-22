@@ -1,0 +1,96 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* prt_mail_messages_buttons
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0-20181005\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-05 13:33+0000\n"
+"PO-Revision-Date: 2018-10-05 16:35+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: prt_mail_messages_buttons
+#: model:ir.ui.view,arch_db:prt_mail_messages_buttons.prt_mail_message_form_buttons
+msgid ""
+"Copy message to other record. Original message text will be qouted and kept. "
+"Followers of the other record will be notified!"
+msgstr ""
+"Копирует сообщение в другую запись. Текст оригинального сообщения будет "
+"процитирован. Подписчики другой записи будут уведомлены!"
+
+#. module: prt_mail_messages_buttons
+#: model:ir.ui.view,arch_db:prt_mail_messages_buttons.prt_mail_message_form_buttons
+msgid "Forward"
+msgstr "Переслать"
+
+#. module: prt_mail_messages_buttons
+#: model:ir.ui.view,arch_db:prt_mail_messages_buttons.prt_mail_message_form_buttons
+msgid "In thread"
+msgstr "В цепочке"
+
+#. module: prt_mail_messages_buttons
+#: model:ir.ui.view,arch_db:prt_mail_messages_buttons.prt_mail_message_form_buttons
+msgid "Mark read"
+msgstr "Не прочитано"
+
+#. module: prt_mail_messages_buttons
+#: model:ir.ui.view,arch_db:prt_mail_messages_buttons.prt_mail_message_form_buttons
+msgid "Mark unread"
+msgstr "Прочитано"
+
+#. module: prt_mail_messages_buttons
+#: model:ir.ui.view,arch_db:prt_mail_messages_buttons.prt_mail_message_form_buttons
+msgid "Move"
+msgstr "Перемещение"
+
+#. module: prt_mail_messages_buttons
+#: model:ir.ui.view,arch_db:prt_mail_messages_buttons.prt_mail_message_form_buttons
+msgid "Move message from current to other record"
+msgstr "Переместить сообщение из текущей в другую запись"
+
+#. module: prt_mail_messages_buttons
+#: model:ir.ui.view,arch_db:prt_mail_messages_buttons.prt_mail_message_form_buttons
+msgid "Open Thread"
+msgstr "Открыть Цепочку"
+
+#. module: prt_mail_messages_buttons
+#: model:ir.ui.view,arch_db:prt_mail_messages_buttons.prt_mail_message_form_buttons
+msgid ""
+"Post new message to record. Original message text will be qouted. Record "
+"followers will be notified!"
+msgstr ""
+"Отправить сообщение в текущую запись. Текст исходного сообщения будет "
+"процитирован. Подписчики записи будут уведомлены!"
+
+#. module: prt_mail_messages_buttons
+#: model:ir.ui.view,arch_db:prt_mail_messages_buttons.prt_mail_message_form_buttons
+msgid "Post new message to record. Record followers will be notified!"
+msgstr ""
+"Отправить новоое сообщение в запись. Подписчики записи будут уведомлены!"
+
+#. module: prt_mail_messages_buttons
+#: model:ir.ui.view,arch_db:prt_mail_messages_buttons.prt_mail_message_form_buttons
+msgid "Quote"
+msgstr "Цитировать"
+
+#. module: prt_mail_messages_buttons
+#: model:ir.ui.view,arch_db:prt_mail_messages_buttons.prt_mail_message_form_buttons
+msgid "Reply"
+msgstr "Ответить"
+
+#. module: prt_mail_messages_buttons
+#: model:ir.ui.view,arch_db:prt_mail_messages_buttons.prt_mail_message_form_buttons
+msgid "Star"
+msgstr "Отметить"
+
+#. module: prt_mail_messages_buttons
+#: model:ir.ui.view,arch_db:prt_mail_messages_buttons.prt_mail_message_form_buttons
+msgid "Unstar"
+msgstr "Убрать отметку"

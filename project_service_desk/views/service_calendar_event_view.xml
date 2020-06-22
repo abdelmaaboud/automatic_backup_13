@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!--<record id="project_forecast_tree_service_desk" model="ir.ui.view">
+            <field name="name">project_forecast_tree_service_desk</field>
+            <field name="model">project.forecast</field>
+            <field name="arch" type="xml">
+                <tree string="Plan">
+                    <field name="user_id"/>
+                    <field name="project_id"/>
+                    <field name="task_id"/>
+                    <field name="task_ids"/>
+                    <field name="leave_id"/>
+                </tree>
+            </field>
+        </record>
+        -->
+
+        <record id="project_forecast_calendar_service_desk" model="ir.ui.view">
+            <field name="name">project_forecast_calendar_service_desk</field>
+            <field name="model">calendar.event</field>
+            <field name="inherit_id" ref="calendar.view_calendar_event_calendar" />
+            <field name="arch" type="xml">
+                <xpath expr="//calendar" position="attributes">
+                    <attribute name="quick_add">False</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_ids']" position="after">
+                    <field name="project_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="service_desk_view_calendar_event_form" model="ir.ui.view">
+            <field name="name">service_desk_view_calendar_event_form</field>
+            <field name="model">calendar.event</field>
+            <field name="inherit_id" ref="calendar.view_calendar_event_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='categ_ids']" position="before">
+                    <field name="project_id" domain="[('state', 'not in', ('draft', 'cancelled', 'close'))]" />
+                    <field nolabel="1" name="task_ids" domain="[('project_id', '=', project_id), ('stage_id.fold', '=', False)]" attrs="{'invisible':[('project_id', '=', False)]}" context="{'default_project_id': project_id}" colspan="2">
+                        <tree>
+                            <field name="name" string="Task"/>
+                            <field name="user_id" />
+                            <field name="planned_hours" widget="float_time" />
+                            <field name="stage_id"/>
+                        </tree>
+                    </field>
+                    <field name="tasks_planned_hours" widget="float_time" attrs="{'invisible':[('project_id', '=', False)]}"/>
+                </xpath>
+                <!--<xpath expr="//field[@name='start_datetime']" position="before">
+                    <field name="planned_time"/>
+                </xpath>-->
+            </field>
+        </record>
+
+        <!-- Search Planning -->
+        <record model="ir.ui.view" id="view_calendar_event_search_service_desk">
+           <field name="name">view_calendar_event_search_service_desk</field>
+            <field name="model">calendar.event</field>
+            <field name="inherit_id" ref="calendar.view_calendar_event_search" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='categ_ids']" position="before">
+                    <field name="project_id"/>
+                    <field name="task_ids"/>
+                </xpath>
+                <xpath expr="//filter[@name='message_needaction']" position="after">
+                    <separator />
+                    <filter string="Support" name="support_forecast" domain="[('project_id.project_type', '=', 'support')]" />
+                    <filter string="Development" name="development_forecast" domain="[('project_id.project_type', '=', 'development')]" />
+                    <filter string="Installation" name="installation_forecast" domain="[('project_id.project_type', '=', 'installation')]" />
+                    <filter string="Other" name="other_forecast" domain="[('project_id.project_type', '=', 'other')]" />
+                    <separator />
+                </xpath>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="project_service_desk.act_calendar">
+            <field name="name">Project Planning</field>
+            <field name="res_model">calendar.event</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">calendar,tree,form</field>
+            <field name="search_view_id" ref="calendar.view_calendar_event_search"/>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                         (0, 0, {'view_mode': 'calendar', 'sequence': 5, 'view_id': ref('calendar.view_calendar_event_calendar')}),
+                         (0, 0, {'view_mode': 'tree', 'sequence': 10, 'view_id': ref('calendar.view_calendar_event_tree')}),
+                         (0, 0, {'view_mode': 'form', 'sequence': 15, 'view_id': ref('calendar.view_calendar_event_form')}),
+                         ]"
+                   />
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem name="Planning"
+            id="project_service_desk.menu_planning"
+            groups="project.group_project_manager,project.group_project_user"
+            parent="project_service_desk.menu_main_service_desk"
+            action="project_service_desk.act_calendar"
+            sequence="3"/>
+    </data>
+</odoo>

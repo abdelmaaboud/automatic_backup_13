@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_order_products_received_view_form" model="ir.ui.view">
+        <field name="name">purchase_order_products_received_view_form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_shipped']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="purchase_order_products_received_view_tree" model="ir.ui.view">
+        <field name="name">purchase_order_products_received_view_tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_untaxed']" position="before">
+                <field name="is_shipped"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="purchase_order_products_received_view_search" model="ir.ui.view">
+        <field name="name">purchase_order_products_received_view_search</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='to_approve']" position="after">
+                <separator/>
+                <filter string="To Receive" name="to_receive" domain="[('is_shipped', '=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

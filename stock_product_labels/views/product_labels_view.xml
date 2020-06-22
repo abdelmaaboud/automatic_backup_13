@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="product_with_stock_label_button">
+        <field name="name">product.product.with.stock.label.button</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button class="oe_highlight" type="object" string="Print Label" name="print_labels"/>
+                <button class="oe_highlight" type="object" string="Print Label + Stock" name="print_labels_w_stock_location" attrs="{'invisibe': [('qty_available', '>', 0)]}"/>
+                <field name="qty_available" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>      
+        <record model="ir.ui.view" id="sale_subscription_view_form_on_site">
+            <field name="name">sale_subscription_view_form_on_site</field>
+            <field name="model">sale.subscription</field>
+            <field name="inherit_id" ref="sale_subscription.sale_subscription_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='main']" position="inside">
+                    <group string="On Site Settings" id="on_site_settings" name="on_site_settings">
+                        <field name ="on_site_product"/>
+                        <field name ="on_site_invoice_by_km"/>
+                        <field name ="on_site_distance_in_km"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

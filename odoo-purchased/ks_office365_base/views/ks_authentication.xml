@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="settings_form_view" model="ir.ui.view">
+        <field name="name">Settings Form</field>
+        <field name="model">ks_office365.settings</field>
+        <field name="arch" type="xml">
+            <form create="false">
+                <sheet string="Credentials">
+                    <div class="row" style="padding: 35px;">
+                        <div class="col-9">
+                            <group>
+                                <field name="ks_client_id"/>
+                                <field name="ks_client_secret"/>
+                                <field name="ks_redirect_url"/>
+                            </group>
+                        </div>
+
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="ks_office_scope_page" model="ir.ui.view">
+        <field name="name">office365.scope.page</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <sheet string="Scope">
+                    <group class="scopes">
+                    </group>
+                </sheet>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="settings_action_id" model="ir.actions.act_window">
+        <field name="name">Office 365 Settings</field>
+        <field name="res_model">ks_office365.settings</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="res_id" eval="office365_authentication_data_id"/>
+    </record>
+
+    <template id="ks_authentication_redirect_success_page" name="Authentication Success Code Page">
+        <div class="code success"
+             style="font-size:3em; text-align:center; background:#48bb3e; width: 300px; height: 300px; display: flex;
+                    align-items: center; justify-content: center; border-radius: 50%; flex-direction: column;
+                    color: white; margin: auto; margin-top: calc(50vh - 150px);">
+              <span class="tick" style="font-size: 90px;
+                            line-height: 1;
+                            margin-bottom: -30px;" >
+                  &#10004;
+              </span>
+              <span>Successful</span>
+
+        </div>
+        <script>
+            setTimeout(function(){
+                window.location.href = '/';
+            }, 1100)
+        </script>
+    </template>
+
+    <template id="ks_authentication_redirect_fail_page" name="Authentication Failure Code Page">
+         <div class="code success"
+             style="font-size:3em; text-align:center; background:#FF4645; width: 300px; height: 300px; display: flex;
+                    align-items: center; justify-content: center; border-radius: 50%; flex-direction: column;
+                    color: white; margin: auto; margin-top: calc(50vh - 150px);">
+              <span class="tick" style="font-size: 90px;
+                            line-height: 1;
+                            margin-bottom: -11px" >
+                  &#10005;
+              </span>
+              <span>Failed</span>
+        </div>
+        <script>
+            setTimeout(function(){
+                window.location.href = '/';
+            }, 1100)
+        </script>
+    </template>
+
+</odoo>

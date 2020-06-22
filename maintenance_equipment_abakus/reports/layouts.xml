@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="security_check_layout">
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+
+            <t t-call="maintenance_equipment_abakus.security_check_layout_header" />
+            <t t-raw="0" />
+            <t t-call="maintenance_equipment_abakus.security_check_layout_footer" />
+        </template>
+
+        <template id="security_check_layout_header">
+            <div class="header">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="height: 5em;"/>
+                    </div>
+                    <div t-if="company.report_header" class="col-xs-6 text-right" style="margin-top:2em;" t-field="company.report_header"/>
+                </div>
+                <div class="row zero_min_height">
+                    <div class="col-xs-12">
+                        <div style="border-bottom: 1px solid black;"></div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="security_check_layout_user">
+            <div class="security_check_layout_user">
+                <table>
+                    <tr>
+                        <td>
+                            <div>Author:
+                                <span t-field="doc.write_uid"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>Creation date:
+                                <span t-field="doc.create_date"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>Expiration date:
+                                <span t-field="doc.date_end"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>State:
+                                <span t-field="doc.state"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>Client:
+                                <span t-field="doc.partner_id"/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </template>
+
+        <template id="security_check_layout_footer">
+            <div class="footer">
+                <div class="text-center" style="border-top: 1px solid black;">
+                    <t t-set="company" t-value="company.sudo()"/>
+
+                    <ul class="list-inline" style="padding-top:2em;">
+                        <li>Page:</li>
+                        <li><span class="page"/></li>
+                        <li>/</li>
+                        <li><span class="topage"/></li>
+                    </ul>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

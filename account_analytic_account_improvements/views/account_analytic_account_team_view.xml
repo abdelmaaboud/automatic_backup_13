@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="account_analytic_account_team_tree_view">
+            <field name="name">account_analytic_account_team_tree_view</field>
+            <field name="model">account.analytic.account.team</field>
+            <field name="arch" type="xml">
+                <tree string="Type Form">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="users"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_analytic_account_team_form_view">
+            <field name="name">account_analytic_account_team_form_view</field>
+            <field name="model">account.analytic.account.team</field>
+            <field name="arch" type="xml">
+                <form string="Contract Team">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id"/>
+                            <field name="active"/>
+                            <field name="users"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="contract_team_action">
+            <field name="name">Contract Teams</field>
+            <field name="res_model">account.analytic.account.team</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="contract_team_menu" name="Contract Teams" parent="sale_subscription.menu_sale_subscription_config" action="contract_team_action" sequence="55"/>
+    </data>
+</odoo>

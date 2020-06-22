@@ -1,0 +1,71 @@
+/* Nav-bar menu */
+.navbar-inverse {
+  background-color: #000000;
+  border-color: #000000;
+}
+
+.o_web_client .navbar .o_menu_toggle:hover {
+  background-color: #000000;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #E7E7E7;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .oe_menu_toggler:hover, .navbar-inverse .navbar-nav > .active > a:hover {
+  color: #E97B2E;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+  color: #E97B2E;
+  background-color: transparent;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+  background-color: #000000;
+}
+
+/* Side-bar menu */
+.openerp .oe_stat_button:hover {
+  background: #E97B2E;
+  color: white;
+}
+
+.openerp .oe_secondary_menu_section {
+  font-weight: bold;
+  margin-left: 8px;
+  color: #E97B2E;
+}
+
+.openerp .nav-pills > li.active > a, .openerp a.list-group-item.active > a {
+  background-color: #E97B2E;
+  color: white;
+  border-radius: 0;
+}
+
+.openerp .nav-pills > li.active a:hover, .openerp .nav-pills > li.active a:focus, .openerp a.list-group-item.active
+  background-color: #E97B2E;
+}
+
+.openerp .nav-pills > li.active .badge, .openerp a.list-group-item.active .badge {
+  background-color: white;
+  color: #E97B2E;
+  text-shadow: none;
+}
+
+.ui-menu .ui-menu-item a.ui-state-hover, .ui-menu .ui-menu-item a.ui-state-active {
+  background: #E97B2E;
+}
+
+.modal-lg {
+  width: 70%;
+}
+
+.oe_form_sheet_width  {
+  max-width: 1300px;
+}
+
+.navbar .oe_topbar_name {
+  max-width: 250px;
+}
+}

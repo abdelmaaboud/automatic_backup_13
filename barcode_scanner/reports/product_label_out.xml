@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+            id="abakus_move_single_label_outgoing_report"
+            string="Abakus Stock Move Label OUT (Move-Single)"
+            model="stock.move"
+            report_type="qweb-pdf"
+            file="abakus_product_label_outgoing"
+            name="barcode_scanner.abakus_move_single_label_outgoing"
+            paperformat="barcode_scanner.abakus_product_paperformat"
+		/>
+
+    <!-- Deliveries labels report for 1 line -->
+    <template id="abakus_single_line_outgoing">
+        <t t-call="web.basic_layout">
+            <div class="page">
+                <div class="row">
+                    <!-- Header with move line date and picking name -->
+                    <div class="col-xs-12" style="margin-bottom:5px; border: 1px solid black;">
+                        <div class="col-xs-4">
+                            <p style="font-size:22; text-align: center; margin:0px; font-weight: bold; padding:0px;"><t t-esc="docs.picking_id.name" /></p>
+                        </div>
+                        <div class="col-xs-4">
+                            <p style="text-align:center; font-weight:bold; font-size:25; margin:auto;">OUT</p>
+                        </div>
+                        <div class="col-xs-4">
+                            <p style="font-size:22; text-align: center; margin:0px; padding:0px;"> <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%d.%m.%Y')" /> </p>
+                        </div>
+                    </div>
+                    <!-- Address part with company logo and phone -->
+                    <div class="col-xs-12" style="margin-bottom: 5px;">
+                        <!-- Company logo with phone number -->
+                        <div class="col-xs-4 text-center">
+                            <div class="col-xs-12">
+                                <img t-if="user.company_id.logo"
+                                t-attf-src="data:image/png;base64,{{user.company_id.logo}}"
+                                height="auto" width="auto" style="max-width: 125px; max-height:125px; display:block; margin-left:auto; margin-right:auto;"
+                                /> 
+                            </div>
+                            <div class="col-xs-12">
+                                <p style="text-align:center; font-weight:bold; font-size:15; margin:0px; padding:0px;"><t t-esc="user.company_id.phone"/></p>
+                            </div>
+                        </div>
+                        <!-- Partner company OUT-->
+                        <div t-if="docs.picking_code == 'outgoing'" class="col-xs-8" style="border: 1px solid black;">
+                            <div class="col-xs-12" style="margin-top:10px; margin-bottom:2px;">
+                                <div class="col-xs-12">
+                                    <p style="text-align:center; font-weight: bold; font-size:28; margin:0px; padding:0px;"><t t-esc="o.picking_id.partner_id.display_name" /></p>
+                                    <p style="text-align:center; font-size:20; margin:0px; padding:0px;"><t t-esc="o.picking_id.partner_id.street" /> - <t t-esc="o.picking_id.partner_id.zip" /> <t t-esc="o.picking_id.partner_id.city" /></p>
+                                    <p style="text-align:center; font-size:20; margin:0px; padding:0px;"> <t t-esc="o.picking_id.partner_id.country_id.name" /> </p>
+                                </div>
+                                <div class="col-xs-12">
+                                    <hr style="margin:0; padding:0; margin-right:8%; border: 1px solid black;"/>
+                                </div>
+                                <div class="col-xs-12">
+                                    <p style="text-align:center; font-size:16; margin:0px; padding:0px;"><t t-esc="user.company_id.name" /></p>
+                                    <p style="text-align:center; font-size:14; margin:0px; padding:0px;"><t t-esc="user.company_id.street" /> - <t t-esc="user.company_id.zip" /> <t t-esc="user.company_id.city" /></p>
+                                    <p style="text-align:center; font-size:14; margin:0px; padding:0px;"> <t t-esc="user.company_id.country_id.name" /> </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr/>
+                    <!-- Product info -->
+                    <div class="col-xs-12" style="margin-bottom:5px; border: 1px solid black;">
+                        <div class="col-xs-12" style="margin-top:2px; border-bottom: 1px solid black;">
+                            <p style="font-size:26; text-align: center; margin:0px; font-weight: bold;  padding:0px;"><t t-esc="docs.product_id.name" /></p>
+                        </div>
+                        <div class="col-xs-12" style="margin-top:2px; margin-bottom:10px;">
+                            <p style="font-size:22; text-align: center; margin: 0px; padding:0px;"> REF : <t t-esc="docs.product_id.default_code" /></p>
+                        </div>
+                    </div>
+
+                    <hr/>
+                    
+                    <!-- Footer with the barcode info -->
+                    <div class="col-xs-12" style="border: 1px solid black;">
+                        <div class="col-xs-12 text-center" style="margin-top:5px; margin-bottom:5px;">
+                            <img t-attf-src="/report/barcode/EAN13/{{docs.product_id.barcode}}" height="75px" width="auto" style="max-width:400px"/>
+                        </div>
+                        <div class="col-xs-12" style="text-align:center; margin-bottom:5px;">
+                            <p style="font-size:20; padding:0px; margin: 0px;"><t t-esc="docs.product_id.barcode" /></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="abakus_move_single_label_outgoing">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="company_id" t-value="o.picking_id.company_id"/>
+                <t t-set="product_id" t-value="o.product_id"/>
+                <t t-set="picking_id" t-value="o.picking_id"/>
+
+                <t t-call="barcode_scanner.abakus_single_line_outgoing" />
+            </t>
+        </t>
+    </template>
+
+
+
+</odoo>

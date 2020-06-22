@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_task_form_improvements" model="ir.ui.view">
+        <field name="name">product.form.view.inherit.improvements</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="sale_timesheet.view_product_timesheet_form"/>
+        <field name="arch" type="xml">
+            <field name="project_id" position="before">
+                <field name="planned_hours" widget="float_time"
+                       attrs="{'invisible':['|', ('type','!=','service'), ('service_tracking', 'in', ('no', 'project_only'))]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>
+

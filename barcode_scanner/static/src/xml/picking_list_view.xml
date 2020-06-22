@@ -1,0 +1,44 @@
+<odoo>
+    <t t-name="barcode_scanner.picking_list">
+        <t t-if="widget.model == 'partner'">
+            <ol class="breadcrumb">
+                <li id="home_breadcrumb"><a href="javascript:">Home</a></li>
+                <li id="partners_breadcrumb"><a href="javascript:">Partners</a></li>
+                <li id="partner_breadcrumb"><a href="javascript:"><t t-esc="widget.model_key"/></a></li>
+                <li class="active">Outgoings</li>
+            </ol>
+        </t>
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h4 class="text-center mb32">Select A Picking</h4>
+                        <t t-if="widget.incomming != null">
+                            <t t-if="widget.incomming.in_selected != null">
+                                <h6 class="text-center">There is <t t-esc="widget.incomming.in_selected - widget.incomming.out_selected"/> product(s) to process.</h6>
+                            </t>
+                        </t>
+                    </div>
+                    <div class="col-xs-12 text-center mb24">
+                        <button t-if="widget.operation_type_name == 'out' and widget.incomming != null" id="finish_incomming_process" class="btn btn-default">Finish</button>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="list-group">
+                            <t t-foreach="widget.product.pickings" t-as="picking">
+                                <a href="javascript:void(0)">
+                                    <div class="list-group-item" t-att-data-id="picking.id" t-att-data-name="picking.name">
+                                        <h4 class="list-group-item-heading text-left"> <t t-esc="picking.display_name"/> </h4>
+                                        <h5 t-if="picking.partner_name" class="list-group-item-heading text-left ml24"> <t t-esc="picking.partner_name"/> </h5>
+                                        <h5 class="list-group-item-heading text-left ml24" t-if="picking.origin"> Source Document : <t t-esc="picking.origin"/> </h5>
+                                        <h6 t-if='picking.ordered_qty > 0' class="list-group-item-heading text-left ml24"> Ordered Quantity : <t t-esc="picking.ordered_qty"/> </h6>
+                                        <h6 t-if="picking.state" class="list-group-item-heading text-right"> <t t-esc="picking.state"/> </h6>
+                                    </div>
+                                </a>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</odoo>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_task_form2_inherited_improved">
+            <field name="name">view_task_form2_inherited_improved</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="hr_timesheet.view_task_form2_inherited" />
+            <field name="arch" type="xml">
+                <!-- Tree -->
+                <xpath expr="//field[@name='timesheet_ids']/tree/field[@name='name']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='timesheet_ids']/tree/field[@name='name']" position="after">
+                    <field name="flat_name" />
+                </xpath>
+                <!-- Kanban -->
+                <xpath expr="//field[@name='timesheet_ids']/kanban/field[@name='name']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='timesheet_ids']/kanban/field[@name='name']" position="after">
+                    <field name="flat_name" />
+                </xpath>
+                <!-- Form -->
+                <xpath expr="//field[@name='timesheet_ids']//form//field[@name='name']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='timesheet_ids']//form//field[@name='name']" position="after">
+                    <field name="flat_name" />
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="timesheet_view_calendar_improved">
+            <field name="name">timesheet_view_calendar_improved</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.timesheet_view_calendar" />
+            <field name="arch" type="xml">
+                <xpath expr="//calendar" position="replace">
+                    <calendar string="Timesheets" date_start="date_begin" color="user_id" date_delay="unit_amount" mode="week" readonly_form_view_id="%(timesheet_grid.timesheet_view_form)d" form_view_id="%(timesheet_grid.timesheet_view_form)d" event_open_popup="True" quick_add="False">
+                        <field name="user_id" />
+                        <field name="project_id" />
+                        <field name="flat_name" />
+                    </calendar>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="timesheet_view_form_improvement">
+            <field name="name">timesheet_view_form_improvement</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="timesheet_grid.timesheet_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='project_id']" position="replace"/>
+                <xpath expr="//field[@name='employee_id']" position="replace"/>
+                <xpath expr="//field[@name='task_id']" position="replace"/>
+                <xpath expr="//field[@name='date']" position="replace"/>
+                <xpath expr="//field[@name='unit_amount']" position="replace"/>
+
+                <!-- Add header with task stages -->
+                <xpath expr="(//sheet//group)[1]" position="before">
+                    <header attrs="{'invisible':[('task_id', '=', False)]}"><field name="stage_id"  widget="statusbar" clickable="True" options="{'fold_field': 'fold'}"/></header>
+                </xpath>
+
+                <!-- Add new fields -->
+                <xpath expr="//sheet/group[1]" position="before">
+                  <field name="account_id" invisible="1"/>
+                  <field name="partner_id" invisible="1"/>
+                  <group>
+                      <label for="project_id" style="font-weight: bold;"/>
+                      <field nolabel="1" colspan="2" name="project_id" string="Project" domain="[('state', 'not in', ['close', 'cancelled'])]" required="True"/>
+                  </group>
+                  <group>
+                      <group>
+                          <field name="employee_id"/>
+                          <field name="task_id" attrs="{'readonly': [('project_id', '=', False)]}" context="{'default_project_id': project_id, 'default_analytic_account_id': account_id, 'default_user_id': user_id}"/>
+                          <field name="task_state" attrs="{'invisible':[('task_id', '=', False)]}" readonly="True"/>
+                          <field name="task_planned_hours" widget="float_time" attrs="{'invisible':[('task_id', '=', False)]}" readonly="True"/>
+                          <field name="effective_hours" widget="float_time" readonly="True" attrs="{'invisible': [('task_id', '=', False)]}"/>
+                          <field name="remaining_hours" widget="float_time" attrs="{'invisible': [('task_id', '=', False)]}"/>
+                          <button name="close_task_issue" type="object" attrs="{'invisible':[('task_id', '=', False)]}" string="Close task/issue" class="oe_highlight"/>
+                      </group>
+                      <group>
+                          <field name="date_begin" string="Date" />
+                          <label for="unit_amount" string="Duration"/>
+                          <div name="duration_block" style="border: 1px solid black;     max-width: 121px;     border-radius: 30px;     padding-top: 3px;     background: lightgrey;">
+                              <button name="remove_quarter" string="-" type="object" class="oe_highlight oe_inline" style="margin: 2px;     border-radius: 20px;"/>
+                              <field name="unit_amount" string="Time Spent" widget="float_time" class="oe_inline" style="padding: 5px;     border: 1px solid;     text-align: center;     max-width: 60px;"/>
+                              <button name="add_quarter" string="+" type="object" class="oe_highlight oe_inline" style="margin: 2px;     border-radius: 20px;"/>
+                          </div>
+                          <field name="on_site"/>
+                          <field name="validated" readonly="True" invisible="True"/>
+                      </group>
+                  </group>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="replace">
+                    <group string="Description">
+                        <field name="name" nolabel="1" widget="html" placeholder="Describe your activity" colspan="4"/>
+                    </group>
+                    <group string="Note to Manager">
+                        <field name="note_to_manager" nolabel="1" placeholder="Enter a note to the manager if necessary"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_timesheet_line_tree_improved">
+            <field name="name">hr_timesheet_line_tree_improved</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date']" position="before">
+                    <field name="date_begin"/>
+                    <field name="user_id" />
+                </xpath>
+                <xpath expr="//field[@name='task_id']" position="after">
+                    <field name="flat_name" />
+                    <field name="note_to_manager"/>
+                </xpath>
+                <xpath expr="//field[@name='unit_amount']" position="before">
+                    <button name="remove_quarter" string="-" type="object" class="oe_highlight oe_inline"/>
+                </xpath>
+                <xpath expr="//field[@name='unit_amount']" position="after">
+                    <button name="add_quarter" string="+" type="object" class="oe_highlight oe_inline"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

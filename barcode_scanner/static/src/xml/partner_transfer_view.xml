@@ -1,0 +1,95 @@
+<odoo>
+    <t t-name="barcode_scanner.partner_transfer">
+        <ol class="breadcrumb">
+            <li id="home_breadcrumb"><a href="javascript:">Home</a></li>
+            <li id="partners_breadcrumb"><a href="javascript:">Partners</a></li>
+            <li id="partner_breadcrumb"><a href="javascript:"><t t-esc="widget.partner_key"/></a></li>
+            <li class="active">Sell</li>
+        </ol>
+        <div class="container-fluid text-center clearfix">
+            <h3 class="text-center mb32">Sell</h3>
+            <div class="row" t-if="widget.partner != undefined">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Products</div>
+
+                        <t t-if="widget.products">
+                            <t t-foreach="widget.products" t-as="product">
+                                <t t-call="barcode_scanner.product_partner_sell_view"></t>
+                            </t>
+                        </t>
+
+                        <hr />
+
+                        <button id="add_product_button"  class="btn btn-default mb24">Add Product</button>
+                    </div>
+
+                </div>
+            </div>
+            <button id="confirm_button"  class="btn btn-default">Confirm</button>
+            <a id="tap_to_scan_fab" class="floating-action"> <i class="fa fa-barcode icon-float"></i> </a>
+        </div>
+        <div id="modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <i class="glyphicon glyphicon-remove"></i> </button>
+                    <h4 class="modal-title">Product List</h4>
+                </div>
+                <div id="modal-body" class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </t>
+
+    <t t-name="barcode_scanner.product_partner_sell_view">
+        <div class="col-xs-12">
+            <div class="thumbnail">
+                <div class="row">
+                    <div class="col-xs-12 text-right">
+                        <button class="btn remove-product" t-att-data-barcode="product.barcode"
+                                t-attf-data-product-id="{{product.id}}" t-attf-id="delete_button_{{product.id}}">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                    </div>
+                    <div class="col-xs-4">
+                        <img t-if="product.image" t-attf-src="data:image/png;base64,{{product.image}}" class="img-responsive"/>
+                        <img t-else="" src="/barcode_scanner/static/src/image/image-not-found.jpg" class="img-responsive"/>
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="text-left">
+                            <p> <t t-esc="product.name"/> </p>
+                            <p> <t t-if="product.ref" t-esc="product.ref"/> <span t-else=""> No reference </span> </p>
+                            <p> <t t-if="product.barcode" t-esc="product.barcode"/> <span t-else=""> No barcode</span> </p>
+                        </div>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <hr style="magin:0px; padding:0px;" />
+                    </div>
+                    <t t-foreach="product.quants" t-as="quant">
+                        <div t-if="quant.quantity_available - quant.reserved_quantity > 0" class="col-xs-12">
+                            <p> From : <t t-esc="quant.location_display_name"/> </p>
+                            <div class="input-group number-spinner">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                </span>
+                                <input t-att-value="quant.selected" t-att-data-barcode="product.barcode" 
+                                        t-attf-id="quant_{{quant.id}}" type="number" class="form-control text-center"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                </span>
+                            </div>
+                            <p> Available : <t t-esc="quant.quantity_available - quant.reserved_quantity"/> </p>
+                        </div>
+                        <hr t-if="quant_index != product.quants.length - 1"/>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</odoo>

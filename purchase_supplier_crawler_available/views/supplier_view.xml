@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="supplier_form_crawler_available">
+            <field name="name">supplier.form.crawler.available</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//group[@name='purchase']" position="inside">
+                        <field name="crawler_available" />
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

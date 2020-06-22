@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record forcecreate="True" id="ir_cron_for_board_kpi" model="ir.cron">
+        <field name="name">Computation, agregation and value threshold for KPI</field>
+        <field name="active" eval="True"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_board_kpi"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_compute_kpi()</field>
+    </record>
+    
+    <record forcecreate="True" id="ir_cron_for_summary_mail_digest" model="ir.cron">
+        <field name="name">Values summary for KPI</field>
+        <field name="active" eval="True"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="nextcall">2019-12-24 8:30:00</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_board_kpi"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_recurring_mails_for_summary()</field>
+    </record>
+</odoo>

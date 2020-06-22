@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <data>
+
+        <record id="module_category_office_rights" model="ir.module.category">
+            <field name="name">Office365 Rights</field>
+            <field name="description">Access rights for Office365</field>
+            <field name="sequence">12</field>
+        </record>
+
+        <record id="office_users_group_id" model="res.groups">
+             <field name="name">Office365 Users</field>
+             <field name="category_id" ref="ks_office365_base.module_category_office_rights"/>
+             <field name="implied_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+
+        <record id="office_manager_group_id" model="res.groups">
+             <field name="name">Office365 Manager</field>
+             <field name="category_id" ref="ks_office365_base.module_category_office_rights"/>
+             <field name="implied_ids" eval="[(6, 0, [ref('ks_office365_base.office_users_group_id')])]"/>
+        </record>
+
+        <record id="ks_office_user_access_id" model="ir.rule">
+            <field name="name">Office User Record Rule</field>
+            <field name="model_id" ref="model_ks_office365_logs"/>
+            <field name="domain_force">[('ks_user', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('ks_office365_base.office_users_group_id'))]"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record id="ks_office_manager_access_id" model="ir.rule">
+            <field name="name">Office Manager Record Rule</field>
+            <field name="model_id" ref="model_ks_office365_logs"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('ks_office365_base.office_manager_group_id'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+    </data>
+</odoo>

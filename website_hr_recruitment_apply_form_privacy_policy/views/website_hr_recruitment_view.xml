@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Product page price -->
+    <template id="apply_form_checkbox_privacy_policy" inherit_id="website_hr_recruitment.apply">
+        <xpath expr="(//div[@class='form-group form-field o_website_form_custom'])[last()]" position="after">
+            <div class="form-group form-field o_website_form_custom">
+                <div class="col-md-2 col-sm-4 text-right">
+                </div>
+                <div class="col-md-7 col-sm-8">
+                    <label class="control-label" for="website_privacy_policy_accepted">
+                        <input type="checkbox" required="" t-attf-id="website_privacy_policy_accepted"
+                               t-attf-name="website_privacy_policy_accepted" t-att-value="True"
+                               class="o_website_form_input"/>
+                        I have read and accept the
+                        <a href="/page/privacy-policy" target="_blank">Privacy Policy</a>
+                    </label>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_consultant.portal_my_timesheets" name="Portal : Timesheets">
+        <t t-call="portal.portal_layout">
+            <t t-if="help_text">
+                <div style="margin-top:10px;">
+                    <t t-raw="help_text"/>
+                </div>
+            </t>
+            <h5/>
+            <header>
+                <h3>My Timesheets Sheets</h3>
+                <t>
+                    <a href="/my/timesheets/form/-1" class="btn btn-default">Create</a>
+                </t>
+            </header>
+            <t>
+                <h5/>
+            </t>
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <table class="table table-hover o_portal_my_doc_table">
+                        <thead>
+                            <tr class="active" style="text-align:left;">
+                                <th style="text-align:left;">Name</th>
+                                <th style="text-align:left;">Start Date</th>
+                                <th style="text-align:left;">End Date</th>
+                                <th style="text-align:left;">Status</th>
+                                <th style="text-align:left;">Total Time</th>
+                                <th style="text-align:left;">Actions</th>
+                            </tr>
+                        </thead>
+                        <t t-foreach="timesheets" t-as="timesheet">
+                            <tr>
+                                <td style="text-align:left;">
+                                    <a t-attf-href="/my/timesheets/form/#{timesheet.id}">
+                                        <t t-esc="timesheet.display_name"/>
+                                    </a>
+                                </td>
+                                <td style="text-align:left;">
+                                    <span t-esc="timesheet.date_start" t-options="{'widget': 'date'}"/>
+                                </td>
+                                <td style="text-align:left;">
+                                    <span t-esc="timesheet.date_end" t-options="{'widget': 'date'}"/>
+                                </td>
+                                <td style="text-align:left;">
+                                    <t t-if="timesheet.state=='new'">
+                                        <span>New</span>
+                                    </t>
+                                    <t t-if="timesheet.state=='draft'">
+                                        <span>Open</span>
+                                    </t>
+                                    <t t-if="timesheet.state=='confirm'">
+                                        <span>Wainting Approval</span>
+                                    </t>
+                                    <t t-if="timesheet.state=='done'">
+                                        <span>Approved</span>
+                                    </t>
+                                </td>
+                                <td style="text-align:left;">
+                                    <span t-esc="timesheet.conv_float_time(timesheet.total_time)"/>
+                                </td>
+                                <td style="text-align:left;">
+                                    <t t-if="timesheet.state=='draft'">
+                                        <span class="glyphicon glyphicon-remove text-danger"
+                                              attribute-hidden="True" data-toggle="modal"
+                                              data-target="#deleteTimesheetModal"/>
+                                        <!-- Modal : delete an timesheet -->
+                                        <div class="modal fade" id="deleteTimesheetModal" tabindex="-1" role="dialog"
+                                             aria-labelledby="deleteTimesheetModalLabel"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="deleteTimesheetModalLabel">Confirmation
+                                                        </h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Are you sure you want to delete this timesheet ?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a t-attf-href="/my/timesheets/delete/#{timesheet.id}"
+                                                           class="btn btn-info">OK
+                                                        </a>
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a class="glyphicon glyphicon-check text-success"
+                                           attribute-hidden="True" t-attf-href="/my/timesheets/submit/#{timesheet.id}"/>
+                                    </t>
+                                    <a class="glyphicon glyphicon-print text-primary"
+                                       attribute-hidden="True" t-attf-href="/my/timesheets/pdf/#{timesheet.id}"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_consultant.portal_form_timesheet" name="Portal : Timesheet Form">
+        <t t-call="portal.portal_layout">
+            <t t-if="help_text">
+                <div style="margin-top:10px;">
+                    <t t-raw="help_text"/>
+                </div>
+            </t>
+            <h5/>
+            <form action="/my/timesheets/edit" method="POST" enctype="multipart/form-data">
+                <div class="form-row">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <h5/>
+                    <t t-if="info">
+                        <div class="alert alert-danger" role="alert">
+                            <span t-esc="info"/>
+                        </div>
+                    </t>
+                    <div class="form-group col-md-4">
+                        <div class="row">
+                            <div class="col-xs">
+                                <label for="timesheet_name">Timesheet Information</label>
+                                <t t-if="timesheet_id">
+                                    <input type="hidden" t-att-value="timesheet_id.id" name="timesheet_id"/>
+                                    <t t-if="timesheet_id.state=='draft'">
+                                        <input type="text" class="form-control" id="timesheet_name"
+                                               name="timesheet_name" t-att-value="timesheet_id.name" readonly="True"/>
+                                    </t>
+                                    <t t-elif="timesheet_id.state=='confirm' or timesheet_id.state=='done'">
+                                        <input type="text" class="form-control" id="timesheet_name"
+                                               name="timesheet_name" t-att-value="timesheet_id.name"
+                                               readonly="True"/>
+                                    </t>
+                                </t>
+                            </div>
+
+                            <div class="col-xs" style="margin-top:10px;">
+                                <label for="timesheet_date_from">Start Date</label>
+                                <t t-if="timesheet_id">
+                                    <input type="date" class="form-control" id="timesheet_start_date"
+                                           required="True" name="timesheet_start_date"
+                                           t-att-value="timesheet_id.date_start" readonly="True"
+                                           style="text-align:left"/>
+                                </t>
+                                <t t-else="">
+                                    <input type="date" class="form-control" id="timesheet_start_date"
+                                           required="True" name="timesheet_start_date"
+                                           style="text-align:center"/>
+                                </t>
+                            </div>
+
+                            <div class="col-xs" style="margin-top:10px;">
+                                <label for="timesheet_date_end">End Date</label>
+                                <t t-if="timesheet_id">
+                                    <input type="date" class="form-control" id="timesheet_end_date"
+                                           required="True" name="timesheet_end_date"
+                                           t-att-value="timesheet_id.date_end" readonly="True"
+                                           style="text-align:left"/>
+                                </t>
+                                <t t-else="">
+                                    <input type="date" class="form-control" id="timesheet_end_date"
+                                           required="True" name="timesheet_end_date"
+                                           style="text-align:center"/>
+                                </t>
+                            </div>
+
+                            <!--  Project 1-->
+                            <div class="col-xs" style="margin-top:10px;">
+                                <label for="timesheet_project">Main Project</label>
+                                <input type="text" class="form-control" id="default_project"
+                                       name="default_project" t-att-value="project_1.name" readonly="True"/>
+                            </div>
+
+                            <!-- Task 1-->
+                            <div class="col-xs" style="margin-top:10px;">
+                                <label for="timesheet_project">Main Task</label>
+                                <input type="text" class="form-control" id="task_1.id"
+                                       name="task_1.id" t-att-value="task_1.name" readonly="True"/>
+                            </div>
+
+                            <!-- Project2    -->
+                            <div class="col-xs" style="margin-top:10px;">
+                                <label for="timesheet_project_2">Second Project</label>
+                                <t t-if="timesheet_id">
+                                    <input type="hidden" id="timesheet_project_2" name="timesheet_project_2" t-att-value="timesheet_id.timesheet_project_2.id"/>
+                                    <select class="form-control" id="timesheet_project_2_display"
+                                            name="timesheet_project_2_display" readonly="True">
+                                        <option selected="True" t-att-value="timesheet_id.timesheet_project_2.id"
+                                                t-esc="timesheet_id.timesheet_project_2.name"/>
+                                    </select>
+                                </t>
+                                <t t-else="">
+                                    <select class="form-control" id="timesheet_project_2"
+                                            name="timesheet_project_2">
+                                        <option value=""/>
+                                        <t t-foreach="project_projects" t-as="t">
+                                            <option t-att-value="t.id" t-esc="t.name"/>
+                                        </t>
+                                    </select>
+                                </t>
+                            </div>
+
+
+                            <!-- Task2-->
+                            <div class="col-xs" style="margin-top:10px;">
+                                <label for="timesheet_task_2">Second Task</label>
+                                <t t-if="timesheet_id">
+                                    <input type="hidden" id="timesheet_task_2" name="timesheet_task_2" t-att-value="timesheet_id.timesheet_task_2.id"/>
+                                    <select class="form-control" id="timesheet_task_2_display"
+                                            name="timesheet_task_2_display" readonly="True">
+                                        <option selected="True" t-att-value="timesheet_id.timesheet_task_2.id"
+                                                t-esc="timesheet_id.timesheet_task_2.name"/>
+                                    </select>
+                                </t>
+                                <t t-else="">
+                                    <select class="form-control" id="timesheet_task_2"
+                                            name="timesheet_task_2">
+                                        <option value=""/>
+                                        <t t-foreach="project_projects.mapped('task_ids')" t-as="t">
+                                            <option t-att-value="t.id" t-esc="t.name"/>
+                                        </t>
+                                    </select>
+                                </t>
+                            </div>
+
+                            <div class="col-xs" style="margin-top:10px;">
+                                <label for="timesheet_file">Attachment</label>
+                                <t t-if="not timesheet_id or timesheet_id.state=='draft'">
+                                    <input type="file" class="form-control-file" id="timesheet_file" name="timesheet_file"/>
+                                </t>
+                            </div>
+
+                            <t t-if="timesheet_id">
+                                <div class="col-xs" style="margin-top:10px;">
+                                    <ul class="list-group">
+                                        <t t-if="not attachments">
+                                            <span>No attachment for this timesheet</span>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-foreach="attachments" t-as="attachment">
+                                                <li class="list-group-item">
+                                                    <div class="row">
+                                                        <div class="col-xs-11">
+                                                            <a t-attf-href="/my/timesheets/download/attachment/#{attachment.id}"
+                                                               download="timesheet_attachment"
+                                                               t-esc="attachment.datas_fname"/>
+                                                        </div>
+                                                        <t t-if="timesheet_id.state=='draft'">
+                                                            <div class="col-xs-1">
+                                                                <span class="glyphicon glyphicon-remove text-danger"
+                                                                      attribute-hidden="True" data-toggle="modal"
+                                                                      data-target="#deleteAttachmentModal"/>
+                                                            </div>
+                                                            <!-- Modal : delete an attachment -->
+                                                            <div class="modal fade" id="deleteAttachmentModal"
+                                                                 tabindex="-1"
+                                                                 role="dialog"
+                                                                 aria-labelledby="deleteAttachmentModalLabel"
+                                                                 aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title"
+                                                                                id="deleteAttachmentModalLabel">
+                                                                                Confirmation
+                                                                            </h5>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            Are you sure you want to delete this
+                                                                            attachment ?
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <a t-attf-href="/my/timesheets/delete/attachment/#{attachment.id}"
+                                                                               class="btn btn-info">OK
+                                                                            </a>
+                                                                            <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-dismiss="modal">
+                                                                                Cancel
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </t>
+                                                    </div>
+                                                </li>
+                                            </t>
+                                        </t>
+                                    </ul>
+                                </div>
+                            </t>
+
+                            <t t-if="not timesheet_id">
+                                <div class="col-xs" style="margin-top:20px; ">
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                    <a href="/my/timesheets" class="btn btn-default">Discard</a>
+                                </div>
+                            </t>
+                            <t t-if="timesheet_id and timesheet_id.state=='draft'" name="portal_action_buttons">
+                                <div class="col-xs" style="margin-top:20px; ">
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                    <a href="/my/timesheets" class="btn btn-default">Discard</a>
+                                </div>
+                                <div class="col-xs" style="margin-top:20px; ">
+                                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                            data-target="#deleteTimesheetModal">
+                                        Delete
+                                    </button>
+                                    <!-- Modal : delete a timesheet -->
+                                    <div class="modal fade" id="deleteTimesheetModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="deleteTimesheetModalLabel"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="deleteTimesheetModalLabel">
+                                                        Confirmation
+                                                    </h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure you want to delete this timesheet ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a t-attf-href="/my/timesheets/delete/#{timesheet_id.id}"
+                                                       class="btn btn-info">OK
+                                                    </a>
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-8">
+                        <t t-if="timesheet_id">
+                            <label>Timesheet Details</label>
+                            <div class="panel panel-default">
+                                <div class="table-responsive">
+                                    <table class="table table-hover o_portal_my_doc_table">
+                                        <tr class="active" style="text-align:left;">
+                                            <th style="text-align:left;">Day</th>
+                                            <th style="text-align:left;">Date</th>
+                                            <th style="text-align:left;">Main Task</th>
+                                            <th style="text-align:left;">Secondary Task</th>
+                                            <th style="text-align:left;">Total Time</th>
+                                        </tr>
+                                        <t t-set="counter" t-value="0"/>
+                                        <t t-set="main_task_total" t-value="0.0"/>
+                                        <t t-set="second_task_total" t-value="0.0"/>
+                                        <!--loops on each day between start and end dates of the timesheet_sheet-->
+                                        <tr style="text-align:left;"
+                                            t-foreach="timesheet_id.dates_between_str_dates(timesheet_id.date_start,timesheet_id.date_end)"
+                                            t-as="each_date">
+                                            <t t-set="counter" t-value="counter + 1"/>
+                                            <t t-set="main_task_current_day_time"
+                                               t-value="timesheet_id.get_unit_amount_for_employee_by_day_and_aal(user.employee_ids.id, each_date, task_1)"/>
+                                            <t t-set="main_task_total"
+                                               t-value="main_task_total + main_task_current_day_time"/>
+                                            <t t-set="second_task_current_day_time"
+                                               t-value="timesheet_id.get_unit_amount_for_employee_by_day_and_aal(user.employee_ids.id, each_date, timesheet_id.timesheet_task_2)"/>
+                                            <t t-set="second_task_total"
+                                               t-value="second_task_total + second_task_current_day_time"/>
+                                            <t t-set="current_day_total"
+                                               t-value="main_task_current_day_time + second_task_current_day_time"/>
+
+
+                                            <!--display only weekday existing in res_cal-->
+                                            <td style="text-align:left">
+                                                <span t-esc="WEEKDAY_TO_NAME[each_date.weekday()]"/>
+                                            </td>
+                                            <!-- date -->
+                                            <td style="text-align:left">
+                                                <span t-esc="each_date" t-options="{'widget': 'date'}"/>
+                                            </td>
+                                            <!-- Time on main AA -->
+                                            <td style="text-align:left">
+                                                <t t-if="timesheet_id.state=='draft'">
+                                                    <input type="text"
+                                                           t-attf-id="main-task-unit-amount_#{each_date}"
+                                                           t-attf-name="main-task-unit-amount_#{each_date}"
+                                                           class="form-control text-right"
+                                                           style="max-width:65px;"
+                                                           t-att-value="timesheet_id.conv_float_time(main_task_current_day_time)"/>
+                                                </t>
+                                                <t t-elif="timesheet_id.state=='confirm' or timesheet_id.state=='done'">
+                                                    <span t-esc="timesheet_id.conv_float_time(main_task_current_day_time)"/>
+                                                </t>
+                                            </td>
+                                            <!-- Time on second AA -->
+                                            <td style="text-align:left">
+                                                <t t-if="timesheet_id.state=='draft'">
+                                                    <input type="text"
+                                                           t-attf-id="second-task-unit-amount_#{each_date}"
+                                                           t-attf-name="second-task-unit-amount_#{each_date}"
+                                                           class="form-control text-right"
+                                                           style="max-width:65px;"
+                                                           t-att-value="timesheet_id.conv_float_time(second_task_current_day_time)"/>
+                                                </t>
+                                                <t t-elif="timesheet_id.state=='confirm' or timesheet_id.state=='done'">
+                                                    <span t-esc="timesheet_id.conv_float_time(second_task_current_day_time)"/>
+                                                </t>
+                                            </td>
+                                            <!-- Total -->
+                                            <td style="text-align:left">
+                                                <span t-esc="timesheet_id.conv_float_time(current_day_total)"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2">
+                                                Total
+                                            </th>
+                                            <th style="text-align:left">
+                                                <span t-esc="timesheet_id.conv_float_time(main_task_total)"/>
+                                            </th>
+                                            <th style="text-align:left" name="second_task_total">
+                                                <span t-esc="timesheet_id.conv_float_time(second_task_total)"/>
+                                            </th>
+                                            <th style="text-align:left">
+                                                <span t-esc="timesheet_id.conv_float_time(main_task_total + second_task_total)"/>
+                                            </th>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </form>
+            <script src="/portal_consultant/static/src/js/get_project_tasks.js"/>
+        </t>
+        </template>
+        </odoo>

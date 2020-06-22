@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Displays -->
+    <record model="ir.actions.act_window" id="smart_display_action">
+        <field name="name">Smart Displays</field>
+        <field name="res_model">project.smart.display</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="context">{}</field>
+    </record>
+    <record id="smart_display_tree" model="ir.ui.view">
+        <field name="name">smart_display_tree</field>
+        <field name="model">project.smart.display</field>
+        <field name="arch" type="xml">
+            <tree string="Smart Displays">
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="raspberry_ip_address"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+    <record id="smart_display_form" model="ir.ui.view">
+        <field name="name">smart_display_form</field>
+        <field name="model">project.smart.display</field>
+        <field name="arch" type="xml">
+            <form string="Smart Display">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="website_open_page_button" type="object" icon="fa-globe" string="Open display"/>
+                    </div>
+                    <div class="oe_title">
+                        <label string="Display name"/>
+                        <h1>
+                            <field name="name" required="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="url_for_pi" readonly="True" string="URL"/>
+                            <field name="raspberry_ip_address"/>
+                            <field name="user_id"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                            <field name="delay"/>
+                            <field name="show_telephony"/>
+                            <label for="callflow_ids" attrs="{'invisible': [('show_telephony', '!=', True)]}"/>
+                            <div attrs="{'invisible': [('show_telephony', '!=', True)]}">
+                                <field name="callflow_ids" class="oe_inline" widget="many2many_tags" options="{'no_create':True}"/>
+                                <button name="create_callflows_in_DB" class="oe_inline" type="object" string="Refresh contacts list"/>
+                            </div>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="page_line_ids">
+                            <tree editable="bottom">
+                                <field name="sequence" widget="handle"/>
+                                <field name="page_id"/>
+                                <field name="mode" readonly="1"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Pages -->
+    <record model="ir.actions.act_window" id="smart_display_pages_action">
+        <field name="name">Smart Display Pages</field>
+        <field name="res_model">project.smart.display.page</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="context">{}</field>
+    </record>
+    <record id="smart_display_page_tree" model="ir.ui.view">
+        <field name="name">smart_display_page_tree</field>
+        <field name="model">project.smart.display.page</field>
+        <field name="arch" type="xml">
+            <tree string="Pages">
+                <field name="name"/>
+                <field name="mode"/>
+            </tree>
+        </field>
+    </record>
+    <record id="smart_display_page_form" model="ir.ui.view">
+        <field name="name">smart_display_page_form</field>
+        <field name="model">project.smart.display.page</field>
+        <field name="arch" type="xml">
+            <form string="Display Page">
+                <sheet>
+                    <div class="oe_title">
+                        <label string="Page name"/>
+                        <h1>
+                            <field name="name" required="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="mode"/>
+                    </group>
+                    <group>
+                        <field name="iframe_url" attrs="{'invisible': [('mode', '!=', 'iframe')]}"/>
+                        <field name="widget_line_ids" context="{'default_page_id': id}" attrs="{'invisible': [('mode', '!=', 'smart_dashboard')]}">
+                            <tree editable="bottom">
+                                <field name="sequence" widget="handle"/>
+                                <field name="widget_id"/>
+                                <field name="widget_type" invisible="1"/>
+                                <field name="width"/>
+                                <field name="graph_height" attrs="{'invisible': [('widget_type', '!=', 'graph')]}"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Widgets -->
+    <record model="ir.actions.act_window" id="smart_display_widgets_action">
+        <field name="name">Smart Display Widgets</field>
+        <field name="res_model">project.smart.display.widget</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="context">{}</field>
+    </record>
+    <record id="smart_display_widget_tree" model="ir.ui.view">
+        <field name="name">smart_display_widget_tree</field>
+        <field name="model">project.smart.display.widget</field>
+        <field name="arch" type="xml">
+            <tree string="Widgets">
+                <field name="name"/>
+                <field name="widget_type"/>
+            </tree>
+        </field>
+    </record>
+    <record id="smart_display_widget_form" model="ir.ui.view">
+        <field name="name">smart_display_widget_form</field>
+        <field name="model">project.smart.display.widget</field>
+        <field name="arch" type="xml">
+            <form string="Widget">
+                <sheet>
+                    <div class="oe_title">
+                        <label string="Widget name"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="widget_type"/>
+                        </group>
+                        <group>
+                            <field name="model_id" attrs="{'invisible': [('widget_type', 'not in', ('list', 'summary', 'graph', 'lastValue'))], 'required': [('widget_type', 'in', ('list', 'summary', 'graph', 'lastValue'))]}"/>
+                            <field name="model" invisible="1"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible': [('widget_type', '!=', 'list')]}">
+                        <group>
+                            <field name="field_line_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="model" invisible="1"/>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="field_id" domain="[('model', '=', model)]"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <label for="sort_by"/>
+                            <div>
+                                <field name="sort_by" class="oe_inline" domain="[('model', '=', model)]" attrs="{'required': [('widget_type', '=', 'list')]}"/>
+                                <field name="sorting_order" class="oe_inline" attrs="{'required': [('widget_type', '=', 'list')]}"/>
+                            </div>
+                            <field name="nb_results_in_list"/>
+                            <field name="nb_results_to_color"/>
+                            <field name="result_color" attrs="{'invisible': [('nb_results_to_color', '=', 0)], 'required': [('nb_results_to_color', '>', 0)]}"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible': [('widget_type', '!=', 'summary')]}">
+                        <group>
+                            <field name="summary_name" attrs="{'required': [('widget_type', '=', 'summary')]}"/>
+                        </group>
+                        <group>
+                            <field name="background_color" attrs="{'required': [('widget_type', '=', 'summary')]}"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible': [('widget_type', '!=', 'graph')]}">
+                        <group>
+                            <field name="graph_type" attrs="{'required': [('widget_type', '=', 'graph')]}"/>
+                            <field name="x_axis_label" attrs="{'invisible': [('graph_type', 'not in', ('bar', 'linear'))]}"/>
+                            <field name="y_axis_label" attrs="{'invisible': [('graph_type', 'not in', ('bar', 'linear'))]}"/>
+                            <field name="x_axis_orientation" attrs="{'invisible': [('graph_type', '!=', 'linear')], 'required': [('graph_type', '=', 'linear')]}"/>
+                            <field name="graph_color" attrs="{'invisible': [('graph_type', '!=', 'linear')], 'required': [('graph_type', '=', 'linear')]}"/>
+                            <field name="graph_line_style" attrs="{'invisible': [('graph_type', '!=', 'linear')], 'required': [('graph_type', '=', 'linear')]}"/>
+                            <field name="group_by_field" domain="[('model_id.model', '=', model), ('ttype', 'not in', ('many2many', 'one2many'))]" attrs="{'invisible': [('graph_type', 'not in', ('sector', 'bar'))], 'required': [('graph_type', 'in', ('sector', 'bar'))]}"/>
+                        </group>
+                        <group>
+                            <field name="graph_title" attrs="{'invisible': [('graph_type', '=', False)]}"/>
+                            <field name="start_date" attrs="{'invisible': [('graph_type', '!=', 'linear')], 'required': [('graph_type', '=', 'linear')]}"/>
+                            <label for="period_interval" attrs="{'invisible': [('graph_type', '!=', 'linear')]}"/>
+                            <div attrs="{'invisible': [('graph_type', '!=', 'linear')]}">
+                                <field name="period_interval" class="oe_inline" attrs="{'required': [('graph_type', '=', 'linear')]}"/>
+                                <field name="group_by_period" class="oe_inline" attrs="{'required': [('graph_type', '=', 'linear')]}"/>
+                            </div>
+                            <field name="operation" attrs="{'invisible': [('graph_type', '!=', 'linear')], 'required': [('graph_type', '=', 'linear')]}"/>
+                            <field name="operation_field" domain="[('model', '=', model), ('ttype', 'in', ('integer', 'float'))]" attrs="{'invisible': [('operation', 'not in', ('sum', 'average'))], 'required': [('operation', 'in', ('sum', 'average'))]}"/>
+                            <field name="explode_biggest_part" attrs="{'invisible': [('graph_type', '!=', 'sector')]}"/>
+                            <field name="x_axis_orientation" attrs="{'invisible': [('graph_type', '!=', 'bar')], 'required': [('graph_type', '=', 'bar')]}"/>
+                            <field name="horizontal_graph" attrs="{'invisible': [('graph_type', '!=', 'bar')]}"/>
+                            <field name="graph_color" attrs="{'invisible': [('graph_type', '!=', 'bar')], 'required': [('graph_type', '=', 'bar')]}"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible': [('widget_type', '!=', 'lastValue')]}">
+                        <group>
+                            <field name="last_value_description"/>
+                            <field name="background_color" attrs="{'required': [('widget_type', '=', 'lastValue')]}"/>
+                        </group>
+                        <group>
+                            <field name="last_value_field" domain="[('model', '=', model)]" attrs="{'required': [('widget_type', '=', ('lastValue'))]}"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible': [('widget_type', '!=', 'missedCalls')]}">
+                        <group>
+                            <field name="call_type" attrs="{'required': [('widget_type', '=', 'missedCalls')]}"/>
+                        </group>
+                        <group>
+                            <field name="callflow_name" attrs="{'required': [('call_type', '=', 'incoming')], 'invisible': [('call_type', '!=', 'incoming')]}"/>
+                            <field name="username" attrs="{'required': [('call_type', '=', 'internal')], 'invisible': [('call_type', '!=', 'internal')]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="filter_domain"/>
+                        </group>
+                        <group>
+                            <h4 align="center">Variables usable in domain</h4>
+                            <ul>
+                              <li>%_USER_ID => user id related to dashboard</li>
+                              <li>%_TODAY => today's date</li>
+                              <li>%_YESTERDAY => yesterday's date</li>
+                              <li>%_TOMORROW => tomorrow's date</li>
+                            </ul>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <menuitem id="project_smart_display_menu_main"
+              name="Smart Displays"
+              parent="base.menu_administration"
+              sequence="10"/>
+    <menuitem id="project_smart_display_menu_displays"
+              name="Displays"
+              parent="project_smart_display_menu_main"
+              action="smart_display_action"
+              sequence="5"/>
+    <menuitem id="project_smart_display_menu_pages"
+              name="Pages"
+              parent="project_smart_display_menu_main"
+              action="smart_display_pages_action"
+              sequence="10"/>
+    <menuitem id="project_smart_display_menu_widgets"
+              name="Widgets"
+              parent="project_smart_display_menu_main"
+              action="smart_display_widgets_action"
+              sequence="15"/>
+</odoo>

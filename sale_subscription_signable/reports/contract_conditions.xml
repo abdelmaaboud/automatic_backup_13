@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<report
+			id="contract_conditions_report"
+			string="Contract Conditions"
+			model="sale.subscription"
+			report_type="qweb-pdf"
+			file="contract_conditions" 
+			name="sale_subscription_signable.contract_conditions"
+		/>
+
+        <template id="contract_conditions">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="sale_subscription_signable.contract_conditions_document" t-lang="doc.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+       
+        <template id="contract_conditions_document">
+            <t t-name="contract_sale_signable.contract_conditions_document">
+                <t t-call="report.external_layout">
+                    <div class="page">
+                        <style type="text/css">
+                            hr {
+                                margin: 5px 0;
+                            }
+                        </style>
+                        <h3>Special conditions</h3>
+                        <h5 style="font-weight: bold;">Preventive maintenance &amp; administrative renewal of licences and subscriptions management<hr/></h5>
+                        <small>Preventive maintenance concerns the replacement, the revision, or the repair of piece of hardware or software before it causes any damage. It is only available for customers with a contract having an SLA (Service Level Agreement). In order to control the servers, the logs and the backups, a remote and secure access to the server(s) needs to be configured. Permanent access to the customer (VPN) infrastructure is requested for this service.
+                        In order to be able to renew licenses and contracts within the required timeframe, they will be charged three months before expiration. Without contestation within 30 days bills are due.</small>
+                        <h5 style="font-weight: bold;">Baseline and down-payment invoices<hr/></h5>
+                        <small>The baseline corresponds to a minimum amount charged over a period of 12 months. Billing is done through periodic instalment invoices covering at least the baseline. All benefits (preventive maintenance, service desk, on-site support) are valued on times and means basis at the agreed rate. After 12 months, an invoice of the “balance” will be established if the number of hours worked is greater than the amount already charged.
+                        If carried out benefits are superior to the invoices of payments, an adaptation of the invoices of payments may be considered along the way. If the amount in the baseline has been used up and invoiced before the deadline (12 months), the tariff can be adapted and will be the subject of a new contract.</small>
+                        <h5 style="font-weight: bold;">Data privacy<hr/></h5>
+                        <small>The contractor commits himself to guarantee the confidentiality of the data. He will not duplicate or communicate to not authorized third parties information which has been communicated to him. AbAKUS will implement appropriate means for absolute secrecy about the information to which it had access during the execution of the present contract.
+                        At the request of the customer, any configuration information or installation files will be transmitted to him. Upon delivery of this document, the provider disclaims all liability in the event of misuse.</small>
+                        <h5 style="font-weight: bold;">Limitation of liability<hr/></h5>
+                        <small>The service provider (AbAKUS) shall in no case be considered as responsible for direct or indirect damages resulting from the use of the equipment, including any loss of data or information.
+                        The provider will not be held responsible for the failures and malfunctions of hardware or software, whatever may be the duration of the breakdown or the immobilization before the restoring to normal operation.
+                        The responsibility of the contractor cannot be questioned in the case of force majeure or for other reasons independent of its control such as strikes, labour disruptions, supplier’s delays, sinister or accidents.
+                        The service provider commits himself to make every effort to solve a problem and this within the boundaries of obligation of means and not of results.</small>
+                        <h5 style="font-weight: bold;">Payment - adjustment of prices - termination times<hr/></h5>
+                        <small>Rates will be adjusted at the Belgian index once a year.
+                        The duration of the contract is one year, tacitly renewable for the same period.
+                        The termination period is three months before the due date and has to be confirmed in writing.
+                        In the event of delayed payment, AbAKUS will reduce its level of service to a minimum and will intervene only in extreme emergencies. Any delivery of preventive maintenance and verification of backup will be suspended. However, an officially disputed invoice (email / mail) will not hinder the reactivity or the quality of our services.
+                        Customers without SLA Baseline (€85 per month) have to, unless otherwise agreed, prepay requested interventions. This agreement cancels and replaces any contract or previous convention concluded between AbAKUS and the client. Remarks in writing must be countersigned by all parties.</small>
+                        <h5 style="font-weight: bold;">Extract of general terms and conditions - http://www.abakusitsolutions.eu<hr/></h5>
+                        <small>All our supplies and delivery follow our general conditions. Any deviation must be done in writing and expressly accepted by us. 1. Each order implies to the approval by the customer of our general terms and conditions and thus the invalidity of its own general terms and conditions of purchase, unless otherwise stated in writing. 2. AbAKUS Sprl cannot be considered responsible in any way for any loss of data. 3. Except if contractually agreed otherwise, our invoices are payable within 30 days from the date of the invoice 4 complaints must be submitted within 25 days of delivery by registered mail, otherwise it will be regarded as not delivered. 5 bills that are delivered, are recognized as a legal document. In the case of a payment backlog, the remaining balance is legally immediately required and an interest rate of 1% per month in approach will be brought. The seller reserves the right of an additional sum amounting to 20% of the amount owed, with a minimum of €40,-, to demand and this as compensation between the two contracted parties. 6 This contract is governed under Belgian law, any dispute between the parties agreed must be presented before the Court in Eupen.</small>
+                    </div>
+                </t>
+            </t>
+        </template>
+	</data>
+</odoo>

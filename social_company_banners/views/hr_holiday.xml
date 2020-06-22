@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="hr_holiday_with_banner_form_view">
+            <field name="name">hr_holiday_with_banner_form</field>
+            <field name="model">hr.holidays</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_new" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_title']" position="after">
+                    <field name="banner_text" readonly="1" nolabel="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

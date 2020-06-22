@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="action_equipments_from_sale" model="ir.actions.act_window">
+            <field name="name">Equipments for sale</field>
+            <field name="res_model">maintenance.equipment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="view_id" ref="maintenance_equipment_abakus.hr_equipment_view_tree_abakus" />
+            <field name="context">{}</field>
+            <field name="domain">[('sale_order_id', '=', context.get('default_sale_order_id'))]</field>
+        </record>
+
+        <record id="sale_order_with_equipment_search" model="ir.ui.view">
+            <field name="name">sale_order_with_equipment_search</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_view_search_inherit_sale" />
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='sales']" position="after">
+                    <filter string="Equipments created" name="equipments_ok" domain="[('equipments_created','=', True)]"/>
+                    <filter string="Equipments to create" name="equipments_not_ok" domain="[('equipments_created','=', False)]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_order_with_equipments_button_form" model="ir.ui.view">
+            <field name="name">sale_order_with_equipments_button_form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="groups_id" eval="[(4, ref('maintenance.group_equipment_manager'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="%(maintenance_equipment_abakus.action_create_equipments_from_sale_wizard)d"
+                            string="Create Equipments"
+                            class="btn-primary"
+                            type="action"
+                            context="{'default_sale_order_id': active_id}"/>
+                </xpath>
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button class="oe_stat_button"
+                            icon="fa-laptop"
+                            name="%(maintenance_equipment_abakus.action_equipments_from_sale)d"
+                            context="{'default_sale_order_id': active_id}"
+                            type="action"
+                            attrs="{'invisible': [('equipments_created', '=', False)]}">
+                           <field string="Equipments" name="equipments_count" widget="statinfo"/>
+                       </button>
+                </xpath>
+                <xpath expr="//group[@name='technical']" position="inside">
+                    <field name="equipments_created" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

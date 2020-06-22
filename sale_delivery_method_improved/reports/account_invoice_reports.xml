@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="invoice_report_with_delivery_method" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@name='reference']" position="after">
+            <div name="reference" class="col-xs-2" t-if="o.carrier_id">
+                <strong>Delivery:</strong>
+                <p t-field="o.carrier_id"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>

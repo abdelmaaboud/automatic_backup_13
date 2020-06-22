@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_board_kpi_value" model="ir.actions.act_window">
+            <field name="name">KPI Values</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">board.kpi.value</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph,pivot</field>
+            <field name="domain">[('kpi_id.user_ids','=', uid)]</field>
+        </record>
+
+        <menuitem name="KPI Values"
+            action="action_board_kpi_value"
+            id="menu_board_kpi_value"
+            parent="menu_board_kpi"
+            sequence="15"/>
+
+        <record id="board_kpi_value_tree_view" model="ir.ui.view">
+            <field name="name">board.kpi.value.tree.view</field>
+            <field name="model">board.kpi.value</field>
+            <field name="arch" type="xml">
+                <tree string="KPI">
+                    <field name="kpi_id"/>
+                    <field name="value"/>
+                    <field name="value_type"/>
+                    <field name="create_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="board_kpi_value_form_view" model="ir.ui.view">
+            <field name="name">board.kpi.value.form.view</field>
+            <field name="model">board.kpi.value</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="kpi_id" readonly="True"/>
+                            <field name="value" readonly="True" attrs="{'invisible': [('value_type', 'not in', ('number', 'percentage'))]}"/>
+                            <field name="agregation_type" readonly="True" attrs="{'invisible': [('value_type', 'not in', ('number', 'percentage'))]}"/>
+                            <field name="value_boolean" readonly="True" attrs="{'invisible': [('value_type', '!=', 'bool')]}"/>
+                            <field name="value_type" readonly="True"/>
+                            <field name="custom_create_date" readonly="True"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="board_kpi_value_graph_view" model="ir.ui.view">
+            <field name="name">board.kpi.value.graph.view</field>
+            <field name="model">board.kpi.value</field>
+            <field name="arch" type="xml">
+                <graph string="KPI Values">
+                    <field name="kpi_id"/>
+                    <field name="value"/>
+                    <field name="value_boolean"/>
+                </graph>
+            </field>
+        </record>
+    </data>
+</odoo>

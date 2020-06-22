@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="view_project_tree_description">
+           <field name="name">view_project_tree_description</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="project_description" />
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="edit_project_form_description">
+           <field name="name">edit_project_form_description</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='misc']" position="before">
+                    <group name="description" string="Description">
+                        <field name="project_description" nolabel="1" colspan="4" placeholder="Describe the project ..."/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

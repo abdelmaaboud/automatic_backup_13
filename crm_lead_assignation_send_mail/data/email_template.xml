@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <record id="email_template_crm_lead_assignation" model="mail.template">
+            <field name="name">Lead Assigned to user</field>
+            <field name="email_from">${user.email}</field>
+            <field name="subject">You have been assigned on a Lead for ${object.partner_id != False and object.partner_id.name or object.contact_name}</field>
+            <field name="email_to">${(object.user_id != False and object.user_id.email)|safe}</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+                <p>Dear ${object.user_id.name},</p><p>You have been assigned a Lead, here are some details:</p>
+                <ul>
+                    <li>Assigned by: ${user.name}</li>
+                    <li>Name: ${object.name}</li>
+                    <li>Customer: ${object.partner_id.name or ''}</li>
+                    <li>Description: ${object.description or ''}</li>
+                </ul><p><a href="https://my.abakusitsolutions.eu/web#id=${object.id}&amp;view_type=form&amp;model=crm.lead&amp;action=562&amp;menu_id=68">Click here to get it</a></p>
+                ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

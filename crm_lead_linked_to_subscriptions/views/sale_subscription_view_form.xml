@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- inherit view of Subscription form : adding the "Associated Lead" field -->
+    <record id="sale_subscription_with_lead_form_view" model="ir.ui.view">
+        <field name="name">Sale Subscription with Lead</field>
+        <field name="model">sale.subscription</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='code']" position="after">
+                <field name="lead_id" domain="['|', '|', ('partner_id.parent_id', '=', partner_id), ('partner_id', '=', partner_id), ('partner_id.child_ids', 'in', partner_id)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_users_form_service_desk" model="ir.ui.view">
+        <field name="name">view_users_form_service_desk</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='messaging']" position="before">
+                <group string="Service Desk Preferences" name="service_desk_preferences">
+                    <field name="automatically_assign_to_created_task" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+    
+</odoo>

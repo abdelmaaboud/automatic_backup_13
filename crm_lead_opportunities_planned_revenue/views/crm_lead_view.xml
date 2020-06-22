@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="crm_case_form_view_oppor_planned_revenue">
+            <field name="name">crm_case_form_view_oppor_planned_revenue</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+            <field name="arch" type="xml">
+                <!-- Periodic revenue -->
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="planned_revenue_periodically" class="oe_inline" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                        <field name="planned_revenue_period" class="oe_inline" />
+                        <field name="planned_revenue_yearly" class="oe_inline" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                        <field name="planned_revenue_fixed" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                        <field name="panned_margin" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                </xpath>
+            </field>
+        </record>
+	</data>
+</odoo>

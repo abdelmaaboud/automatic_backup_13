@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<data>
+    <record id="res_company_form_view_portal" model="ir.ui.view">
+        <field name="name">res_company_form_view_portal</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page" position="after">
+                <page string="Portal Help Text">
+                    <group>
+                        <group>
+                            <field name="portal_help_home" widget="html"/>
+                            <field name="portal_help_expense_list_view" widget="html"/>
+                            <field name="portal_help_expense_form_view" widget="html"/>
+                        </group>
+                        <group>
+                            <field name="portal_help_leave_list_view" widget="html"/>
+                            <field name="portal_help_leave_form_view" widget="html"/>
+                            <field name="portal_help_timesheet_list_view" widget="html"/>
+                            <field name="portal_help_timesheet_form_view" widget="html"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</data>

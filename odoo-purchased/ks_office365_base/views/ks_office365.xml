@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="ks_office365_view_users_form" model="ir.ui.view">
+        <field name="name">office365.res.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="ks_office365_base.ks_office_scope_page"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="attributes">
+                <attribute name="groups">base.group_system</attribute>
+            </xpath >
+
+            <xpath expr="//label[@for='login']" position="attributes">
+                <attribute name="groups">base.group_system</attribute>
+            </xpath >
+
+            <xpath expr="//field[@name='login']" position="attributes">
+                <attribute name="groups">base.group_system</attribute>
+            </xpath >
+
+            <notebook position="inside">
+                <sheet string="Token" attrs="{'invisible': [('ks_is_login_user', '=', False)]}">
+                    <field name="ks_auth_token" invisible="True"/>
+                    <field name="ks_is_login_user" invisible="True"/>
+                    <footer>
+                        <group attrs="{'invisible': [('ks_auth_token', '=', False)]}" style="color: black;">
+                            <group>
+                                <field name="ks_auth_user_name"/>
+                            </group>
+                            <group>
+                                <field name="ks_auth_user_email"/>
+                            </group>
+                        </group>
+                        <div style="text-align: center;">
+                            <button name="get_authentication_code" string="Generate Token" class="btn btn-primary"
+                                    type="object" attrs="{'invisible': [('ks_auth_token', '!=', False)]}"
+                                    groups="ks_office365_base.office_users_group_id,ks_office365_base.office_manager_group_id"
+                                    style="width: 10em; margin-top: 2em;"/>
+                        </div>
+                        <div style="text-align: center;">
+                            <button string="Refresh Token" name="refresh_token" class="btn btn-primary"
+                                    attrs="{'invisible': [('ks_auth_token', '=', False)]}"
+                                    style="width: 10em; margin-right: 1em;" type="object"/>
+                            <button name="ks_clear_token" string="Clear Token" class="btn btn-primary"
+                                    attrs="{'invisible': [('ks_auth_token', '=', False)]}"
+                                    style="width: 10em;" type="object"/>
+                        </div>
+                    </footer>
+                </sheet>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="ks_office365_change_pwd_view_users_form" model="ir.ui.view">
+        <field name="name">office365.res.change_pwd.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="auth_signup.res_users_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_reset_password']" position="attributes">
+                <attribute name="groups">base.group_system</attribute>
+            </xpath >
+        </field>
+    </record>
+
+</odoo>

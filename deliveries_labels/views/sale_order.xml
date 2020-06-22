@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- SO REPORT -->
+	<record id="sale_order_report_labels" model="ir.ui.view">
+		<field name="name">sale_order_report</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_order_form"/>
+		<field name="groups_id" eval="[(6,0,[ref('sales_team.group_sale_salesman')])]"/>
+		<field name="arch" type="xml">
+			<xpath expr="(//button[@name='print_quotation'])[1]" position="after">
+				<button name="print_labels" type="object" string="Print labels"/>
+			</xpath>
+		</field>
+	</record>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form -->
+    <record model="ir.ui.view" id="view_holiday_status_normal_tree_improved">
+        <field name="name">view_holiday_status_normal_tree_improved</field>
+        <field name="model">hr.holidays.status</field>
+        <field name="inherit_id" ref="hr_holidays.view_holiday_status_normal_tree"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="sequence" widget="handle" />
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

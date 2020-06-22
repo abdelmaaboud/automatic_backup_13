@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- TEMPLATE DEFINITIONS -->
+    <!-- SALE ORDER TITLE (Inherit from External Layout) -->
+    <template id="sale_order_title_report_improved" inherit_id="web.external_layout">
+        <xpath expr="//t[@t-if='not o and doc']" position="before">
+            <t t-if="doc_model == 'sale.order'">
+                <style type="text/css">
+                    h1 {
+                    color: #E94E1B;
+                    font-size: 20pt;
+                    font-weight: light;
+                    text-align: right;
+                    }
+                    .document-title {
+                    position: absolute;
+                    right: 0;
+                    }
+                </style>
+                <div class="col-xs-6 pull-right document-title">
+                    <h1>
+                        <span t-if="doc.state not in ['draft','sent']">Order</span>
+                        <span t-if="doc.state in ['draft','sent']">Quotation</span>
+                        <span t-field="doc.name"/>
+                    </h1>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- SALE ORDER REPORT -->
+    <template id="sale_order_report_improved" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@class='page']" position="replace">
+            <div class="page">
+                <style type="text/css">
+                    .page {
+                    font-family: "Verdana", Times New Roman", Times, serif;
+                    }
+                    strong {
+                    font-weight: bold;
+                    }
+                    .orange {
+                    color: #E94E1B;
+                    }
+                    .border-top-orange {
+                    border-top: 1px solid #E94E1B;
+                    }
+
+
+                    .uppertable {
+                    font-size: 14px;
+                    color: black;
+                    border: 1px solid #E94E1B;
+                    margin: -15px 0 -15px 0;
+                    padding: 8px;
+                    }
+
+                    .sale_table {
+                    border-collapse: collapse;
+                    border-spacing: 0;
+                    width: 100%;
+                    margin: 10px 0 15px 0;
+                    font-size: 14px;
+                    }
+                    .sale_table th {
+                    font-style: bold;
+                    border-bottom: 1px solid #E94E1B;
+                    }
+                    .sale_table td {
+                    border-bottom: 1px solid #E94E1B;
+                    }
+                    .sale_table td, .sale_table th {
+                    vertical-align: top;
+                    padding: 2px 8px 2px 8px;
+                    }
+                    .sale_table .text-right { text-align: right; }
+                    .sale_table .text-left { text-align: left; }
+                    .sale_table tr:first-child th {
+                    border-top: 0;
+                    }
+                    .sale_table tr:last-child td {
+                    border-bottom: 0;
+                    }
+                    .sale_table tr td:first-child,
+                    .sale_table tr th:first-child {
+                    border-left: 0;
+                    }
+                    .sale_table tr td:last-child,
+                    .sale_table tr th:last-child {
+                    border-right: 0;
+                    }
+                    .sale_table img {
+                    width: 50px;
+                    }
+
+                    .total_table {
+                    border-collapse: collapse;
+                    border-spacing: 0;
+                    width: 100%;
+                    margin: 10px 0 15px 0;
+                    font-size: 14px;
+                    }
+                    .total_table td, .sale_table th {
+                    vertical-align: top;
+                    padding: 2px 5px 2px 5px;
+                    word-wrap: break-word;
+                    }
+
+                    .information_text {
+                    font-size: 14px;
+                    }
+
+                    .sale-condition-block {
+                    padding-left: 5px;
+                    font-style: italic;
+                    font-weight: light;
+                    font-size: 8pt;
+                    border-left: 1px solid black;
+                    }
+                    .sale-condition-block p {
+                    margin-bottom: 5px;
+                    }
+                </style>
+                <div class="oe_structure"/>
+
+                <div class="row mt32 mb32 uppertable" id="informations">
+                    <div class="col-xs-3">
+                        <!-- Quotation / SO Date -->
+                        <t t-if="doc.state in ['draft','sent']">
+                            <strong>Quotation Date:</strong>
+                            <br/>
+                        </t>
+                        <t t-if="doc.state in ['sale','done']">
+                            <strong>Order Date:</strong>
+                            <br/>
+                        </t>
+                        <!-- Validity Date -->
+                        <t t-if="doc.state in ['draft','sent']">
+                            <strong>Expiration Date:</strong>
+                            <br/>
+                        </t>
+                        <!-- Salesperson -->
+                        <span>
+                            <strong>Representative:</strong>
+                            <br/>
+                        </span>
+                        <!-- Contact -->
+                        <span>
+                            <strong>Requestor:</strong>
+                            <br/>
+                        </span>
+                        <!-- Payment Term -->
+                        <span>
+                            <strong>Payment Term:</strong>
+                            <br/>
+                        </span>
+                        <!-- Delivery Method -->
+                        <span>
+                            <strong>Delivery Method:</strong>
+                            <br/>
+                        </span>
+                        <!-- Reference -->
+                        <span>
+                            <strong>Reference:</strong>
+                            <br/>
+                        </span>
+
+                    </div>
+                    <div class="col-xs-3">
+                        <!-- Quotation / SO Date -->
+                        <t t-if="doc.state in ['draft','sent']">
+                            <span t-field="doc.date_order"
+                                  t-options="{&quot;format&quot;: &quot;yyyy-MM-dd&quot;}"/>
+                            <br/>
+                        </t>
+                        <t t-if="doc.state in ['sale','done']">
+                            <span t-field="doc.confirmation_date"
+                                  t-options="{&quot;format&quot;: &quot;yyyy-MM-dd&quot;}"/>
+                            <br/>
+                        </t>
+                        <!-- Validity Date -->
+                        <t t-if="doc.state in ['draft','sent']">
+                            <span t-esc="doc.validity_date" t-options='{"format": "d MMMM y"}'/>
+                            <br/>
+                        </t>
+                        <!-- Salesperson -->
+                        <span t-field="doc.user_id.name"/>
+                        <br/>
+                        <!-- Contact Person -->
+                        <span t-field="doc.partner_id.name"/>
+                        <br/>
+                        <!-- Payment Term -->
+                        <span t-field="doc.payment_term_id"/>
+                        <br/>
+                        <!-- Delivery Method -->
+                        <span t-field="doc.carrier_id.name"/>
+                        <br/>
+                        <!-- Reference -->
+                        <span t-field="doc.client_order_ref"/>
+                    </div>
+                    <div class="col-xs-5">
+                        <!-- Partner Invoice Name -->
+                        <strong>
+                            <div t-field="doc.partner_invoice_id" class="orange"
+                                 t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;name&quot;], &quot;no_marker&quot;: true, &quot;phone_icons&quot;: true}"/>
+                        </strong>
+                        <!-- Partner Invoice Address -->
+                        <div t-field="doc.partner_invoice_id"
+                             t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;vat&quot;], &quot;no_marker&quot;: true, &quot;phone_icons&quot;: true}"/>
+                        <!-- TAX ID -->
+                        <span t-if="doc.partner_id.vat">
+                            VAT:
+                            <span t-field="doc.partner_id.vat"/>
+                        </span>
+                        <span t-if="not doc.partner_id.vat and doc.partner_id.parent_id.vat">
+                            VAT:
+                            <span t-field="doc.partner_id.parent_id.vat"/>
+                        </span>
+
+                    </div>
+                </div>
+
+                <!-- Upper comments -->
+                <t t-if="doc.header_text">
+                    <span class="information_text" t-field="doc.header_text"/>
+                </t>
+
+                <!-- Lines -->
+                <table class="sale_table" width="100%">
+                    <!-- Hide discout columns if no discount is applied for all lines -->
+                    <t t-set="discount_on_lines" t-value="any([l.discount for l in doc.order_line])"/>
+                    <thead>
+                        <tr>
+                            <th width="75px"></th>
+                            <th class="text-left">Description</th>
+                            <th width="75px" class="text-right">Quantity</th>
+                            <th width="100px" class="text-right">Price</th>
+                            <th width="75px" t-if="discount_on_lines" class="text-right"
+                                groups="sale.group_discount_per_so_line">Disc.(%)
+                            </th>
+                            <th width="100px" class="text-right">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_lines_body">
+                        <t t-foreach="doc.order_line" t-as="l">
+                            <tr t-if="l.product_uom_qty">
+                                <td>
+                                    <span t-field="l.product_id.image_small"
+                                          t-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;} "/>
+                                </td>
+                                <td>
+                                    <span t-field="l.name"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.product_uom_qty"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.price_unit"
+                                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;doc.pricelist_id.currency_id&quot;}"/>
+                                </td>
+                                <td t-if="discount_on_lines" class="text-right"
+                                    groups="sale.group_discount_per_so_line">
+                                    <span t-field="l.discount"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.price_subtotal"
+                                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;doc.pricelist_id.currency_id&quot;}"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+
+                <!-- Totals -->
+                <div style="white-space: nowrap;" class="row" name="total">
+                    <div class="col-xs-4 pull-right">
+                        <table class="total_table">
+                            <tr class="border-top-orange">
+                                <td>
+                                    <strong>Total Without Taxes</strong>
+                                </td>
+                                <td class="text-right">
+                                    <strong>
+                                        <span t-field="doc.amount_untaxed"
+                                              t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;doc.pricelist_id.currency_id&quot;}"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Taxes</td>
+                                <td class="text-right">
+                                    <span t-field="doc.amount_tax"
+                                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;doc.pricelist_id.currency_id&quot;}"/>
+                                </td>
+                            </tr>
+                            <tr class="border-top-orange">
+                                <td>
+                                    <strong>Total</strong>
+                                </td>
+                                <td class="text-right">
+                                    <strong>
+                                        <span t-field="doc.amount_total"
+                                              t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;doc.pricelist_id.currency_id&quot;}"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Lower comments -->
+                <t t-if="doc.note">
+                    <span class="information_text" t-field="doc.note"/>
+                </t>
+
+                <!-- Conditions -->
+                <div class="sale-condition-block">
+                    <p>
+                        La commande se fait par retour de cette offre datée, signée et précédée de la mention « lu et
+                        approuvé ». La confirmation de commande peut également se faire par email ou par approbation en
+                        ligne sur notre portail.
+                    </p>
+                    <p>
+                        L’acceptation marque l'accord du client sur les solutions, la technologie et les prestations
+                        proposées. Moyennant information préalable au client, AbAKUS it-solutions se réserve le droit de
+                        proposer du matériel similaire ou équivalent si le produit commandé n’est plus disponible.
+                    </p>
+                    <p>
+                        L’ensemble des plans, de la documentation descriptive, des spécifications des produits et toutes
+                        les descriptions ou illustrations sont faits à la seule fin de donner une idée indicative des
+                        produits qui y sont décrits.
+                    </p>
+                    <p>
+                        Sauf si repris dans la liste des produits et services offerts, les frais d’installation et de
+                        configuration ne sont pas compris dans cette offre.
+                    </p>
+                    <p>
+                        La facture sera envoyée et due dès livraison des biens et/ou des services.
+                    </p>
+                    <p>
+                        Sauf mention contraire, les conditions générales d’AbAKUS it-solutions sont d’application. En
+                        acceptant cette offre le client reconnait avoir pu en prendre connaissance et les accepter. Les
+                        conditions générales de vente sont disponibles sur
+                        www.abakusitsolutions.eu/company/general-conditions
+                    </p>
+                </div>
+                <p id="fiscal_position_remark" t-if="doc.fiscal_position_id and doc.fiscal_position_id.note">
+                    <strong>Fiscal Position Remark:</strong>
+                    <span t-field="doc.fiscal_position_id.note"/>
+                </p>
+            </div>
+        </xpath>
+    </template>
+</odoo>

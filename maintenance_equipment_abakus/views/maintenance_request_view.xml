@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_equipment_request_view_tree_abakus" model="ir.ui.view">
+            <field name="name">hr_equipment_request_view_tree_abakus</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="customer_id" />
+                    <field name="level_id" />
+                    <field name="origin" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_equipment_request_view_form_abakus" model="ir.ui.view">
+            <field name="name">hr_equipment_request_view_form_abakus</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="action_prepare_maintenance_request" string="Prepare Maintenance" class="oe_highlight" type="object" attrs="{'invisible': [('close_date', '!=', False)]}"/>
+                    <button name="action_set_to_done" string="Done" class="oe_highlight" type="object" attrs="{'invisible': [('close_date', '!=', False)]}"/>
+                    <button name="action_set_to_draft" string="Set to draft" type="object" attrs="{'invisible': [('close_date', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='maintenance_team_id']" position="before">
+                    <field name="origin" />
+                    <field name="company_id" groups="base.group_multi_company" widget="selection"/>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='employee_id']" position="before">
+                    <field name="customer_id" />
+                    <field name="level_id"/>
+                    <field name="is_security_check" readonly="1" attrs="{'invisible': [('is_security_check', '=', False)]}"/>
+                    <field name="security_check_id" />
+                    <field name="subscription_id" domain="['|', ('partner_id', 'child_of', customer_id), ('partner_id', 'child_of', customer_id.parent_id)]" />
+                </xpath>
+                <xpath expr="//field[@name='maintenance_type']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='description']" position="after">
+                    <notebook>
+                        <page name="operations" string="Operations" attrs="{'invisible': [('is_security_check', '=', True)]}">
+                            <separator string="Description for Operations"/>
+                            <field name="operations_description" placeholder="Specify the jobs that need execute..."/>
+                            <field name="task_ids">
+                                <tree editable="bottom" string="Tasks">
+                                    <field name="name" />
+                                    <field name="category_id" />
+                                    <field name="equipment_id" domain="[('category_id', '=', category_id)]" required="True"/>
+                                    <field name="operations_description" />
+                                    <field name="documentation_description" />
+                                    <field name="comment" />
+                                    <field name="state" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="equipments" string="Equipments" attrs="{'invisible': [('is_security_check', '=', True)]}">
+                            <field name="equipment_ids">
+                                <tree editable="bottom">
+                                    <field name="asset_number" />
+                                    <field name="name" />
+                                    <field name="category_id" />
+                                    <field name="criticality" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="documentation" string="Documentation">
+                            <separator string="Description for Documentation"/>
+                            <field name="documentation_description" placeholder="Specify the documentation useful when execute this order..."/>
+                        </page>
+                        <page name="timesheet" string="Timesheets">
+                            <group>
+                                <field name="analytic_account_id" />
+                            </group>
+                            <field name="analytic_line_ids" >
+                                <tree editable="bottom" string="Timesheet Activities" default_order="date">
+                                    <field name="date_begin"/>
+                                    <field name="user_id" required="1"/>
+                                    <field name="name"/>
+                                    <field name="timesheet_invoice_type" />
+                                    <field name="account_id" invisible="1"/>
+                                    <field name="unit_amount" string="Duration" sum="Total time" widget="float_time"/>
+                                    <field name="maintenance_request_id" invisible="1" />
+                                    <field name="project_id" domain="[('analytic_account_id', '=', account_id)]"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <group string="Description of Problems">
+                        <field name="problem_description" colspan="4" nolabel="1"/>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='equipment_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_equipment_request_view_search_abakus" model="ir.ui.view">
+            <field name="name">hr_equipment_request_view_search_abakus</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="equipment_ids"/>
+                </xpath>
+                <xpath expr="//group" position="inside">
+                    <filter name="group_level"
+                        string="Maintenance Level"
+                        context="{'group_by': 'level_id'}"
+                    />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_equipment_request_view_kanban_abakus" model="ir.ui.view">
+            <field name="name">hr_equipment_request_view_kanban_abakus</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="inside">
+                    <field name="level_id" />
+                    <field name="customer_id" />
+                </xpath>
+                <xpath expr="//span[@t-if='record.equipment_id.raw_value']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//span[@t-if='record.category_id.raw_value']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//span[@t-if='record.category_id.raw_value']" position="after">
+                    <span t-if="record.level_id.raw_value"><field name="level_id"/></span>
+                    <span t-if="record.customer_id.raw_value"><field name="customer_id"/></span>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

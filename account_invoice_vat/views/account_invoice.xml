@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="invoice_supplier_form_vat">
+        <field name="name">invoice_supplier_form_vat</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='reference']" position="after">
+                    <field name="partner_vat" readonly="True"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="invoice_supplier_tree_vat">
+        <field name="name">invoice_supplier_tree_vat</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_tree"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="partner_vat"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_account_invoice_filter_vat">
+        <field name="name">view_account_invoice_filter_vat</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//search" position="inside">
+                    <field name="partner_vat" filter_domain="[('partner_id.vat', 'ilike', self)]"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

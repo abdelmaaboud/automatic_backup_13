@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="account_analytic_line_with_journal_form">
+            <field name="name">account_analytic_line_with_journal_form</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="account.view_account_analytic_line_form_inherit_account" />
+            <field name="arch" type="xml">
+                <!-- Add the debit, credit and balance -->
+                <xpath expr="//field[@name='move_id']" position="after">
+                    <field name="move_journal_id" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_analytic_structured_line_tree" model="ir.ui.view">
+            <field name="name">account.analytic.structured.line.tree</field>
+            <field name="model">account.analytic.line</field>
+            <field name="arch" type="xml">
+                <tree string="Analytic Lines">
+                    <field name="date"/>
+                    <field name="name"/>
+                    <field name="account_id"/>
+                    <field name="general_account_id"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="unit_amount" sum="Quantity"/>
+                    <field name="amount" sum="Total"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

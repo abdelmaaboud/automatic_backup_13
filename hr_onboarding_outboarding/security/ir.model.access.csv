@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_on_out_boarding_project_template,access_hr_on_out_boarding_project_template,hr_onboarding_outboarding.model_hr_project_on_out_boarding,hr.group_hr_manager,1,1,1,1

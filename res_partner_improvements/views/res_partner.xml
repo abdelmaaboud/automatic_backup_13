@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="res_partner_improvements_form_view">
+        <field name="name">res_partner_improvements_form_view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="(//field[@name='title'])" position="before">
+                <field name="id"/>
+            </xpath>
+            <xpath expr="//form//form//group//group[2]" position="inside">
+                <button name="archive" string="Archive contact" type="object" class="oe_highlight"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

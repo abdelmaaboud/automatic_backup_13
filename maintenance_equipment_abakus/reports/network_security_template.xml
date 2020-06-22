@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="network_security_document">
+
+            <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})" />
+
+            <t t-call="maintenance_equipment_abakus.security_check_layout">
+                <div class="page">
+                    <div class="oe_structure" />
+
+                    <t t-call="maintenance_equipment_abakus.security_check_layout_user" />
+
+                    <h1>Network Security</h1>
+
+                    <table style="width:100%; font-size:0.8em; margin-bottom:2em; margin-top: 2em;">
+                        <tr>
+                            <th>Firewall</th>
+                            <th>Firewall License OK</th>
+                            <th>Firewall Rules OK</th>
+                            <th>WLAN</th>
+                            <th>Complex Passwords</th>
+                        </tr>
+
+                        <tr t-foreach="doc.network_security_ids" t-as="line">
+                            <td>
+                                <span t-field="line.firewall" />
+                            </td>
+                            <td>
+                                <span t-field="line.firewall_licences_ok" />
+                            </td>
+                            <td>
+                                <span t-field="line.firewall_rules_ok" />
+                            </td>
+                            <td>
+                                <span t-field="line.wlan" />
+                            </td>
+                            <td>
+                                <span t-field="line.complex_passwords" />
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table style="width:100%;" >
+                        <tr>
+                            <td>
+                                <div>Comment: </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div contenteditable="true">
+                                    <span t-field="doc.network_security_free_text"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table style="width:100%; margin-top:2em;">
+                            <tr>
+                                <td style="width:50%; text-align: left;">Validation Date:</td>
+                                <td style="width:50%; text-align: left;">Signature:</td>
+                            </tr>
+                    </table>
+
+                    <div class="oe_structure"/>
+                </div>
+            </t>
+        </template>
+
+
+        <template id="report_network_security_template">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="maintenance_equipment_abakus.network_security_document" t-lang="user.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

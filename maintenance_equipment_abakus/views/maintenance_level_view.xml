@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="maintenance_level_tree_view" model="ir.ui.view">
+            <field name="name">maintenance.level.tree</field>
+            <field name="model">maintenance.level</field>
+            <field name="arch" type="xml">
+                <tree string="Maintenance levels">
+                    <field name="name"/>
+                    <field name="is_security_check" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="maintenance_level_form_view" model="ir.ui.view">
+            <field name="name">maintenance.level.form</field>
+            <field name="model">maintenance.level</field>
+            <field name="arch" type="xml">
+                <form string="levels">
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" class="oe_inline"/></h1>
+                    </div>
+                    <group>
+                        <field name="is_security_check" />
+                        <field name="active"/>
+                    </group>
+                    <notebook>
+                        <page string="Tasks">
+                            <field name="task_model_ids">
+                                <tree editabl="Bottom">
+                                    <field name="name" />
+                                    <field name="category_ids" widget="many2many_tags"/>
+                                    <field name="operations_description" />
+                                    <field name="documentation_description" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Description">
+                            <separator string="Description"/>
+                            <field name="description" />
+                        </page>
+                    </notebook>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_levels" model="ir.actions.act_window">
+            <field name="name">Maintenance Levels</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">maintenance.level</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Maintenance Levels"
+            action="action_levels"
+            id="menu_maintenance_levels"
+            parent="maintenance.menu_maintenance_configuration"
+            sequence="100"/>
+ 	</data>
+</odoo>

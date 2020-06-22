@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Tasks Tree view -->
+        <record model="ir.ui.view" id="project_service_desk.tasks_tree">
+            <field name="name">project.service.desk.task.tree</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_tree2" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="default_order">create_date desc</attribute>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="create_date" />
+                </xpath>
+            </field>
+        </record>
+
+        <!-- My Tasks -->
+        <record model="ir.actions.act_window" id="project_service_desk.act_tasks_my">
+            <field name="name">My Open Tasks</field>
+            <field name="res_model">project.task</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,calendar,form,pivot,graph</field>
+            <field name="domain" eval="['|', ('is_closed', '=', False), ('stage_id', '=', False), '|', ('project_id', '=', False), '|', ('project_id.privacy_visibility', '!=', 'followers'), '&amp;', ('project_id.privacy_visibility', '=', 'followers'), ('project_id.message_is_follower', '=', True)]"/>
+            <field name="context">{"search_default_my_tasks":1}</field>
+            <field name="search_view_id" ref="project.view_task_search_form"/>
+        </record>
+
+        <!-- Unassigned Tasks -->
+        <record model="ir.actions.act_window" id="project_service_desk.act_tasks_unassigned">
+            <field name="name">Unassigned Tasks</field>
+            <field name="res_model">project.task</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,calendar,form,pivot,graph</field>
+            <field name="domain" eval="['|', ('stage_id.fold', '=', False), ('stage_id', '=', False), '|', ('project_id', '=', False), '|', ('project_id.privacy_visibility', '!=', 'followers'), '&amp;', ('project_id.privacy_visibility', '=', 'followers'), ('project_id.message_is_follower', '=', True)]"/>
+            <field name="context">{"search_default_unassigned":1}</field>
+            <field name="search_view_id" ref="project.view_task_search_form"/>
+        </record>
+
+        <!-- Open Tasks -->
+        <record model="ir.actions.act_window" id="project_service_desk.act_tasks_open">
+            <field name="name">Open Tasks</field>
+            <field name="res_model">project.task</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,calendar,form,pivot,graph</field>
+            <field name="domain" eval="['|', ('stage_id.fold', '=', False), ('stage_id', '=', False), '|', ('project_id', '=', False), '|', ('project_id.privacy_visibility', '!=', 'followers'), '&amp;', ('project_id.privacy_visibility', '=', 'followers'), ('project_id.message_is_follower', '=', True)]"/>
+            <field name="context">{'search_default_Current': 1}</field>
+            <field name="search_view_id" ref="project.view_task_search_form"/>
+        </record>
+
+        <!-- Closed Tasks -->
+        <record model="ir.actions.act_window" id="project_service_desk.act_tasks_closed">
+            <field name="name">Closed Tasks</field>
+            <field name="res_model">project.task</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,calendar,form,pivot,graph</field>
+            <field name="domain" eval="[('stage_id.fold', '=', True), '|', ('project_id.privacy_visibility', '!=', 'followers'), '&amp;', ('project_id.privacy_visibility', '=', 'followers'), ('project_id.message_is_follower', '=', True)]"/>
+            <field name="context">{'search_default_Current': 1}</field>
+            <field name="search_view_id" ref="project.view_task_search_form"/>
+        </record>
+
+        <!-- All Tasks -->
+        <record model="ir.actions.act_window" id="project_service_desk.act_tasks_all">
+            <field name="name">All Tasks</field>
+            <field name="res_model">project.task</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,calendar,form,pivot,graph</field>
+            <field name="domain" eval="['|', ('project_id.privacy_visibility', '!=', 'followers'), '&amp;', ('project_id.privacy_visibility', '=', 'followers'), ('project_id.message_is_follower', '=', True)]"/>
+            <field name="context">{}</field>
+            <field name="search_view_id" ref="project.view_task_search_form"/>
+        </record>
+
+        <!-- Search Tasks -->
+        <record model="ir.ui.view" id="project_task_search_service_desk">
+           <field name="name">project_task_search_support_project</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_search_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='unassigned']" position="after">
+                    <separator/>
+                    <filter string="Support Tasks" name="support_tickets" domain="[('project_id.project_type', '=', 'support')]" />
+                    <filter string="Development Tasks" name="development_tickets" domain="[('project_id.project_type', '=', 'development')]" />
+                    <filter string="Installation Tasks" name="installation_tickets" domain="[('project_id.project_type', '=', 'installation')]" />
+                    <filter string="Internal Tasks" name="internal_tickets" domain="[('project_id.project_type', '=', 'internal')]" />
+                    <filter string="Other Tasks" name="other_tickets" domain="[('project_id.project_type', '=', 'other')]" />
+                    <separator/>
+                </xpath>
+                <xpath expr="//group" position="inside">
+                    <separator/>
+                    <filter string="Project Type" context="{'group_by':'project_type'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <menuitem name="Tasks"
+                  id="project_service_desk.menu_tasks"
+                  groups="project.group_project_manager,project.group_project_user"
+                  parent="project_service_desk.menu_main_service_desk"
+                  sequence="10"/>
+
+        <menuitem name="My Tasks"
+                  id="project_service_desk.menu_tasks_my"
+                  groups="project.group_project_manager,project.group_project_user"
+                  parent="project_service_desk.menu_tasks"
+                  action="project_service_desk.act_tasks_my"
+                  sequence="5"/>
+
+        <menuitem name="Unassigned Tasks"
+                  id="project_service_desk.menu_tasks_unassigned"
+                  groups="project.group_project_manager,project.group_project_user"
+                  parent="project_service_desk.menu_tasks"
+                  action="project_service_desk.act_tasks_unassigned"
+                  sequence="10"/>
+
+        <menuitem name="Open Tasks"
+                  id="project_service_desk.menu_tasks_open"
+                  groups="project.group_project_manager,project.group_project_user"
+                  parent="project_service_desk.menu_tasks"
+                  action="project_service_desk.act_tasks_open"
+                  sequence="15"/>
+
+        <menuitem name="Closed Tasks"
+                  id="project_service_desk.menu_tasks_closed"
+                  groups="project.group_project_manager,project.group_project_user"
+                  parent="project_service_desk.menu_tasks"
+                  action="project_service_desk.act_tasks_closed"
+                  sequence="20"/>
+
+        <menuitem name="All Tasks"
+                  id="project_service_desk.menu_tasks_all"
+                  groups="project.group_project_manager,project.group_project_user"
+                  parent="project_service_desk.menu_tasks"
+                  action="project_service_desk.act_tasks_all"
+                  sequence="25"/>
+    </data>
+</odoo>

@@ -1,0 +1,35 @@
+<odoo>
+
+    <record model="ir.ui.view" id="stock_quant_date_tree_view">
+        <field name="name">stock.quant.date.tree</field>
+        <field name="model">stock.quant.date</field>
+        <field name="arch" type="xml">
+            <tree string="Stock quant date tree">
+                <field name="date"/>
+                <field name="product_id"/>
+                <field name="location_id" />
+                <field name="quantity" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_quant_date_search">
+        <field name="name">stock.quant.date.search</field>
+        <field name="model">stock.quant.date</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="product_id"/>
+                <field name="location_id"/>
+                <group string="Group By">
+                    <filter name="by_location" string="Location"
+                            context="{'group_by': 'location_id'}"/>
+                </group>
+                <group string="Group By">
+                    <filter name="by_product" string="Product"
+                            context="{'group_by': 'product_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+</odoo>

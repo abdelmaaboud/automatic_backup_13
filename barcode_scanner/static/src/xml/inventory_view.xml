@@ -1,0 +1,71 @@
+<odoo>
+    <t t-name="barcode_scanner.inventory">
+        <ol class="breadcrumb">
+            <li id="home_breadcrumb"><a href="javascript:">Home</a></li>
+            <li class="active">Inventory</li>
+        </ol>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-0 col-sm-6"></div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                    <label for="sel1">Select location:</label>
+                    <select class="form-control" id="location">
+                        <t t-foreach="widget.locations" t-as="location">
+                            <option t-att-value="location.id"> <t t-esc="location.display_name"/> </option>
+                        </t>
+                    </select>
+                    </div>
+                </div>
+                <div class="col-xs-12"> <hr style="margin:0px;"/> </div>
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                    <div class="panel panel-default mb0">
+                        <div class="panel-heading text-center">Products</div>
+                    </div>
+                    <div class="panel-body">
+                        <t t-if="widget.products">
+                            <t t-foreach="widget.products" t-as="product">
+                                <div class="thumbnail">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-3">
+                                            <img t-if="product.image" t-attf-src="data:image/png;base64,{{product.image}}" class="img-responsive text-center" style="margin: 0 auto; height:100px;"/>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-9">
+                                            <h3><t t-esc="product.name"/></h3>
+                                            <p t-if="product.ref"> Ref : <t t-esc="product.ref"/> </p>
+                                            <p t-if="product.barcode"> Barcode : <t t-esc="product.barcode"/> </p>
+                                        </div>
+                                    </div>
+                                    <hr style="padding:5px; margin:5px;" />
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <label> Virtual quantity </label>
+                                            <span> : <t t-esc="product.quantity"/> </span>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="text-center"> Real Quantity </label>
+                                            <div class="input-group number-spinner">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                                </span>
+                                                <input t-att-data-barcode="product.barcode" 
+                                                        t-attf-id="input_{{product.product_id}}" type="number" class="form-control text-center"/>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </t>
+                    </div>
+                </div>
+                <div class="col-xs-12 text-center">
+                    <button id="confirm_button" class="btn btn-default">Confirm</button>
+                </div>
+            </div>
+            <a id="tap_to_scan_fab" class="floating-action"> <i class="fa fa-barcode icon-float"></i> </a>
+        </div>
+    </t>
+</odoo>

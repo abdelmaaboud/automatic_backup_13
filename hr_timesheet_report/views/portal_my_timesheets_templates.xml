@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="hr_timesheet_report.add_print_template" name="Portal : Timesheets" inherit_id="portal_consultant.portal_form_timesheet">
+        <xpath expr="//t[@name='portal_action_buttons']" position="after">
+            <t t-elif="timesheet_id and (timesheet_id.state=='confirm' or timesheet_id.state=='done')">
+                <a t-attf-href="/my/timesheets/pdf/#{timesheet_id.id}" class="btn btn-info">
+                    Print
+                </a>
+            </t>
+        </xpath>
+        <xpath expr="//button[@name='submit']" position="after">
+            <a t-attf-href="/my/timesheets/pdf/#{timesheet_id.id}" class="btn btn-info">
+                Print
+            </a>
+        </xpath>
+    </template>
+</odoo>

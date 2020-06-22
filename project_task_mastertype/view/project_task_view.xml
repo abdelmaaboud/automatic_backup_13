@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="project_task_with_mastertype_form">
+           <field name="name">project_task_with_mastertype_form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='project_id']" position="after">
+                    <field style="color: blue; font-weight: bold;" name="master_type_id" widget="selection"/>
+                    <field name="possible_types" invisible="1" />
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="project_task_with_type_tree">
+           <field name="name">project_task_type_tree</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_tree2" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="master_type_code" string="Type"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="project_task_with_type_kanban">
+           <field name="name">project_task_with_type_kanban</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_kanban" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='color']" position="after">
+                    <field name="master_type_code" />
+                    <field name="master_type_id" />
+                </xpath>
+                <xpath expr="//field[@name='name']" position="before">
+                    <t t-if="record.master_type_code.raw_value">
+                        <span t-attf-style="color: blue;">[<field name="master_type_code" />]</span>
+                    </t>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="project_task_with_type_search">
+           <field name="name">project_task_with_type_search</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_search_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='project_id']" position="after">
+                    <field name="master_type_id" string="Task Type" filter_domain="['|',('master_type_id','ilike',self),('master_type_code','ilike',self)]"/>
+                </xpath>
+                <xpath expr="//filter[@name='unassigned']" position="after">
+                    <filter string="Tasks" name="type_tasks" domain="[('master_type_id.code', '=', 'TASK')]" />
+                    <filter string="Tickets" name="type_tasks" domain="[('master_type_id.code', '=', 'TICKET')]" />
+                    <filter string="RFC" name="type_tasks" domain="[('master_type_id.code', '=', 'RFC')]" />
+                </xpath>
+                <xpath expr="//group" position="inside">
+                    <separator/>
+                    <filter string="Task Type" context="{'group_by':'master_type_id'}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

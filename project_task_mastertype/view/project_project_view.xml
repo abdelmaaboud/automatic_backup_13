@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="edit_project_task_type">
+           <field name="name">edit_project_task_type</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='options_active']" position="after">
+                    <div>
+                        <label for="possible_task_master_type_ids" class="oe_inline"/>
+                        <field name="possible_task_master_type_ids" string="Possible Tasks Types" widget="many2many_tags" class="oe_inline"/>
+                    </div>
+                    <div>
+                        <label for="default_task_master_type_id" class="oe_inline"/>
+                        <field name="default_task_master_type_id" string="Default Task Type" class="oe_inline"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

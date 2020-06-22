@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<odoo>
+    <record model="ir.ui.view" id="delivery_carrier_with_route_form">
+        <field name="name">delivery_carrier_with_route_form</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='delivery_type']" position="after">
+                <field name="route_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="delivery_carrier_with_route_tree">
+        <field name="name">delivery_carrier_with_route_tree</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="route_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

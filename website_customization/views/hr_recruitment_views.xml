@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="job_detail_customization" inherit_id="website_hr_recruitment.detail">
+        <xpath expr="//div[@id='wrap']/div[1]" position="after">
+            <section class="s_text_image_floating">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 mb16 mt16">
+                            <h3 style="text-align: left; font-weight: 600; line-height: 1.25;">Join ABAKUS IT-SOLUTIONS
+                                and become an expert in IT comfort!
+                            </h3>
+                            <p style="text-align: left; line-height: normal;">
+                                <b>
+                                    <i>
+                                        <font style="color: rgb(231, 148, 57);">ABAKUS IT-SOLUTIONS is seeking to hire
+                                            people passionate about IT not afraid to mix serious work and a bit of
+                                            madness!
+                                        </font>
+                                    </i>
+                                </b>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+        <xpath expr="//div[@id='wrap']" position="inside">
+            <section class="s_image_text">
+                <div class="container">
+                    <div class="row">
+                        <div class="mt32 mb32 col-md-4">
+                            <img class="img img-responsive center-block mb16"
+                                 src="/website_customization/static/description/abakus-zen-portrait.jpg"
+                                 alt="Odoo image and text block" data-original-title="" title=""/>
+                        </div>
+                        <div class="mt16 col-md-8 mb16">
+                            <div style="text-align: left;">
+                                <b>
+                                    <font style="font-size: 18px;">by ABAKUS IT-SOLUTIONS</font>
+                                </b>
+                            </div>
+                            <p style="text-align: left; ">
+                                <span lang="EN-US" style="font-size: 10.5pt; font-family: Helvetica, sans-serif;">
+                                    Opportunities are numerous. From bare applications development to of IT
+                                    infrastructures management including conception, architecture and requirements
+                                    analysis.
+                                </span>
+                            </p>
+                            <p style="text-align: left;">
+                                <span lang="EN-US" style="font-size: 10.5pt; font-family: Helvetica, sans-serif;">
+                                    Although open to technologies used by our customers, ABAKUS IT-SOLUTIONS seeks
+                                    mainly but not only consultants mastering: Windows and Linux Servers, networks,
+                                    developments (JAVA, SAP, .NET,…) as well as highly specialized experts for example
+                                    in cybersecurity or in Content Management System (CMS) (SharePoint, Drupal,
+                                    WebLogic…).
+                                </span>
+                            </p>
+                            <p style="text-align: left;">
+                                <span lang="EN-US" style="font-size: 10.5pt; font-family: Helvetica, sans-serif;">In
+                                    terms of non-technical competencies, ABAKUS IT-SOLUTIONS hires dynamic persons, open
+                                    to the world, interested by innovation and having a keen sense of client
+                                    relationship.
+                                </span>
+                            </p>
+                            <p style="text-align: left;">
+                                <span lang="EN-US" style="font-size: 10.5pt; font-family: Helvetica, sans-serif;">A very
+                                    good command of English is essential, the capacity to speak French, German or Dutch
+                                    is an asset.
+                                </span>
+                            </p>
+                            <p style="text-align: left;">
+                                <span lang="EN-US" style="font-size: 10.5pt; font-family: Helvetica, sans-serif;">Even
+                                    though most of our positions require at least 3 years of experience, some are open
+                                    to new starters.
+                                </span>
+                            </p>
+                            <span lang="EN-US" style="font-size: 10.5pt; font-family: Helvetica, sans-serif;">
+                                <div style="text-align: left;">
+                                    <span style="font-size: 10.5pt;">ABAKUS IT-SOLUTIONS works either in its premises or
+                                        in our customer’s one, remote activities are sometime possible.
+                                    </span>
+                                </div>
+                            </span>
+                        </div>
+                        <div class="o_animate_preview mt8 col-md-8 mb0" style="text-align: center;">
+                            <p>In the meantime,</p>
+                            <p>
+                                <font style="font-size: 18px;" class="text-alpha">Look around on our website:</font>
+                            </p>
+                            <p>
+                                <a href="https://abakuitsolutions.eu/" class="btn btn-lg btn-primary" target="_blank"
+                                   data-original-title="" title="" style="position: relative; overflow: hidden;">
+                                    <span
+                                            class="graph-ripple"
+                                            style="height: 197px; width: 197px; top: -69.5px; left: 13.9063px;"/>
+                                    Continue To Our Website
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+    </template>
+</odoo>

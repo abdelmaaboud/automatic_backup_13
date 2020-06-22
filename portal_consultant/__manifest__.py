@@ -1,0 +1,30 @@
+{
+    'name': "Consultant Portal",
+    'category': "web",
+    'version': "11.0.1.0",
+    "author": "ABAKUS IT-SOLUTIONS",
+    'depends': [
+        'website',
+        'hr_timesheet',
+        'hr_holidays',
+        'hr_expense',
+        'sale',
+        'hr_timesheet_sheet',
+        'current_project_consultant',
+        'hr_analytic_timesheet_improvements',
+        'hr_holidays_improvements',
+    ],
+
+    'data': [
+        'views/res_users_form_consultant.xml',
+        'views/hr_employee.xml',
+        'views/portal_my_home_consultant.xml',
+        'views/portal_my_expenses.xml',
+        'views/breadcrumb_consultant.xml',
+        'views/portal_my_leaves.xml',
+        'views/portal_my_timesheets.xml',
+        'views/view_project_project_form_portal.xml',
+        'views/res_company_form_view_portal.xml',
+    ],
+    'installable': True,
+}

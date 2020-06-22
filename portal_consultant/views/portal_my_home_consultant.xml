@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_consultant.portal_my_home_consultant" inherit_id="portal.portal_my_home" priority="50"
+              name="Portal : My Home">
+
+        <xpath expr="//h3" position="before">
+            <t t-if="info">
+                <div class="alert alert-danger mt16" role="alert">
+                    <span t-esc="info"/>
+                </div>
+            </t>
+        </xpath>
+        <xpath expr="//ul[hasclass('o_portal_docs')]" position="inside">
+            <li t-if="portal_consultant" class="list-group-item">
+                <span class="badge" t-esc="expense_count"/>
+                <a href="/my/expenses">Expenses</a>
+            </li>
+        </xpath>
+
+        <xpath expr="//ul[hasclass('o_portal_docs')]" position="inside">
+            <li t-if="portal_consultant" class="list-group-item">
+                <span class="badge" t-esc="leave_count"/>
+                <a href="/my/leaves">Leaves</a>
+            </li>
+        </xpath>
+
+        <xpath expr="//ul[hasclass('o_portal_docs')]" position="inside">
+            <li t-if="portal_consultant" class="list-group-item">
+                <span class="badge" t-esc="timesheet_count"/>
+                <a href="/my/timesheets">Timesheets</a>
+            </li>
+        </xpath>
+
+        <xpath expr="//div" position="before">
+            <t t-if="help_text">
+                <div style="margin-top:10px;">
+                    <t t-raw="help_text"/>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>
+

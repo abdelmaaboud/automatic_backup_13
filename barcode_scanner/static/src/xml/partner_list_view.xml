@@ -1,0 +1,93 @@
+<odoo>
+    <t t-name="barcode_scanner.partner_list">
+        <ol class="breadcrumb">
+            <li id="home_breadcrumb"><a href="javascript:">Home</a></li>
+            <li class="active">Partners</li>
+        </ol>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 text-right mb24">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-xs-0 col-sm-4"></div>
+                            <div class="col-xs-12 col-sm-8">
+                                <div class="input-group">
+                                    <input id="partner_search_input" type="text" class="form-control" placeholder="Search partner..." t-attf-value="{{widget.search_text}}">
+                                        <span class="input-group-btn">
+                                            <button id="partner_search_button" class="btn btn-default" type="button">Search</button>
+                                        </span>
+                                    </input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="padding:0px; margin:0px;" />
+                    <div class="row text-right">
+                        <div class="col-xs-0 col-sm-4">
+                        </div>
+                        <div class="col-xs-6 col-sm-2">
+                            <div class="checkbox">
+                                <label t-if="widget.is_company"><input data-type="true" type="checkbox" value="is_company" checked="true"/>Company</label>
+                                <label t-else=""><input data-type="true" type="checkbox" value="is_company"/>Company</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-2">
+                            <div class="checkbox">
+                                <label t-if="widget.is_vendor"><input data-type="true" type="checkbox" value="is_vendor" checked="true"/>Vendor</label>
+                                <label t-else=""><input data-type="true" type="checkbox" value="is_vendor"/>Vendor</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-2">
+                            <div class="checkbox">
+                                <label t-if="widget.is_customer"><input data-type="true" type="checkbox" value="is_customer" checked="true"/>Customer</label>
+                                <label t-else=""><input data-type="true" type="checkbox" value="is_customer"/>Customer</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-2">
+                            <div class="checkbox">
+                                <label t-if="widget.is_employee"><input data-type="true" type="checkbox" value="is_employee" checked="true"/>Employee</label>
+                                <label t-else=""><input data-type="true" type="checkbox" value="is_employee"/>Employee</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="display:flex; flex-wrap: wrap;">
+                <t t-foreach="widget.partners_to_display" t-as="partner">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                        <a href="#" onClick="return false;">
+                            <div t-att-data-key="partner.id" class="thumbnail">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <img t-if="partner.image" t-attf-src="data:image/png;base64,{{partner.image}}" class="img-responsive"/>
+                                    </div>
+                                    <div class="col-xs-8 mt24">
+                                        <h3 style="margin-top:0; padding-top:0;"> <t t-esc="partner.name"/> </h3>
+                                        <h5> <t t-if="partner.address.street" t-esc="partner.address.street"/> </h5>
+                                        <h5> <t t-if="partner.address.zip" t-esc="partner.address.zip"/>  <t t-if="partner.address.city" t-esc="partner.address.city"/> </h5>
+                                        <h5> <t t-if="partner.address.country" t-esc="partner.address.country"/> </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </t>
+                <div class="col-xs-12">
+                    <nav aria-label="Page navigation">
+                      <ul class="pagination">
+                        <li t-if="widget.page == 1" id="li-prev disabled"><a href="#" aria-label="Previous"><span aria-hidden="true"> PREV </span></a></li>
+                        <li t-else="" id="li-prev"><a href="#" aria-label="Previous"><span aria-hidden="true"> PREV </span></a></li>
+                        <t t-foreach="widget.total_pages" t-as="page">
+                            <li t-if="widget.page == page_index + 1" class='li-page active'><a href="#"><t t-esc="page_index + 1"/> </a></li>
+                            <li t-else="" class='li-page'><a href="#"><t t-esc="page_index + 1"/> </a></li>
+                        </t>
+                        <li t-if="widget.page == widget.total_pages" id="li-next disabled"><a href="#" aria-label="Next"><span aria-hidden="true"> NEXT </span></a></li>
+                        <li t-else="" id="li-next"><a href="#" aria-label="Next"><span aria-hidden="true"> NEXT </span></a></li>
+                      </ul>
+                    </nav>
+                </div>
+            </div>
+            
+        </div>
+    </t>
+</odoo>

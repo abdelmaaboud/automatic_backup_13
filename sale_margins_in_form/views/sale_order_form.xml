@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_sale_order_line_margin">
+        <field name="name">sale.order.line.margin</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form_editable_list"/>
+        <field name="groups_id" eval="[(6,0,[ref('sales_team.group_sale_salesman')])]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                <attribute name="editable">bottom</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_sale_order_margin">
+        <field name="name">sale.order.margin</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="groups_id" eval="[(6,0,[ref('sales_team.group_sale_salesman')])]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_total']" position="after">
+                <field name="total_margin"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']//tree//field[@name='price_unit']" position="after">
+                <field name="margin"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_tree_sale_order_quotation_margin">
+        <field name="name">sale.order.quotation.margin.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="groups_id" eval="[(6,0,[ref('sales_team.group_sale_salesman')])]"/>
+        <field name="arch" type="xml">
+            <field name="amount_total" position="after">
+                <field name="total_margin" sum="Total Margin"/>
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_tree_sale_order_tree_margin">
+        <field name="name">sale.order.margin.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="groups_id" eval="[(6,0,[ref('sales_team.group_sale_salesman')])]"/>
+        <field name="arch" type="xml">
+            <field name="amount_total" position="after">
+                <field name="total_margin" sum="Total Margin"/>
+            </field>
+        </field>
+    </record>
+</odoo>

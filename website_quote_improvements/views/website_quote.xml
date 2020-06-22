@@ -1,0 +1,21 @@
+<odoo>
+
+    <template inherit_id="website_quote.so_quotation_content" id="so_quotation_content_header_text">
+        <xpath expr="//div[@t-field='quotation.website_description']" position="after">
+            <div t-field="quotation.header_text" class="oe_no_empty"/>
+        </xpath>
+        <xpath expr="//t[@t-call='website_quote.pricing']" position="after">
+            <div t-field="quotation.note" class="oe_no_empty"/>
+        </xpath>
+        <xpath expr="//div[@class='oe_structure']" position="replace">
+        </xpath>
+    </template>
+
+    <template inherit_id="website_quote.pricing" id="so_quotation_pricing_improvements">
+        <xpath expr="//h1[@class='page-header']" position="replace">
+        </xpath>
+        <xpath expr="//section[@id='terms']" position="replace">
+        </xpath>
+    </template>
+
+</odoo>

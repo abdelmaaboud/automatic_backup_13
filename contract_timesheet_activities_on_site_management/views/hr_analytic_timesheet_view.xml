@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>      
+        <record id="hr_timesheet_line_tree_on_site" model="ir.ui.view">
+            <field name="name">hr_timesheet_line_tree_on_site</field>
+            <field name="model">account.analytic.line</field>
+			<field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
+            <field name="arch" type="xml">
+				<xpath expr="//field[@name='unit_amount']" position="before">
+					<field name="on_site"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="signature_request_template_view_tree_data_agreement">
+        <field name="name">signature_request_template_view_tree_data_agreement</field>
+	    <field name="model">signature.request.template</field>
+	    <field name="inherit_id" ref="website_sign.signature_request_template_view_tree"/>
+	    <field name="arch" type="xml">  
+            <data>
+                <xpath expr="//tree" position="inside">
+                    <field name="data_agreement_document" />
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="signature_request_template_view_form_data_agreement">
+        <field name="name">signature_request_template_view_form_data_agreement</field>
+        <field name="model">signature.request.template</field>
+        <field name="inherit_id" ref="website_sign.signature_request_template_view_form" />
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='archived']" position="before">
+                    <field name="data_agreement_document" />
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="signature_request_template_view_search_main_data_doc">
+        <field name="name">signature_request_template_view_search_main_data_doc</field>
+        <field name="model">signature.request.template</field>
+        <field name="inherit_id" ref="website_sign.signature_request_template_view_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <separator/>
+                <filter string="Main Data Agreement Doc" name="main_data_agreement_document" domain="[('data_agreement_document', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tree view for connection mode -->
+        <record id="config_backup_type_tree" model="ir.ui.view">
+            <field name="name">security.check.backup.type.tree</field>
+            <field name="model">backup.type</field>
+            <field name="arch" type="xml">
+                <tree string="Backup Types Tree">
+                    <field name="name"/>
+                    <field name="active"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form view -->
+        <record id="config_backup_type_form" model="ir.ui.view">
+            <field name="name">security.check.backup.type.form</field>
+            <field name="model">backup.type</field>
+            <field name="arch" type="xml">
+                <form string="Backup Types Form" class="o_packaging_type">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="active"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree view for connection mode -->
+        <record id="config_connection_mode_tree" model="ir.ui.view">
+            <field name="name">security.check.connection.mode.tree</field>
+            <field name="model">connection.mode</field>
+            <field name="arch" type="xml">
+                <tree string="Connection Modes Tree">
+                    <field name="name"/>
+                    <field name="active"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form view -->
+        <record id="config_connection_mode_form" model="ir.ui.view">
+            <field name="name">security.check.connection.mode.form</field>
+            <field name="model">connection.mode</field>
+            <field name="arch" type="xml">
+                <form string="Connection Modes Form" class="o_packaging_type">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="active"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem name="Security Check"
+            id="menu_maintenance_security_check_config"
+            parent="maintenance.menu_maintenance_configuration"
+            sequence="50"/>
+
+        <!-- Config : actions + submenuitems -->
+        <record id="action_config_connection_mode" model="ir.actions.act_window">
+            <field name="name">Connection Modes</field>
+            <field name="res_model">connection.mode</field>
+            <field name="view_id" ref="config_connection_mode_tree"/>
+        </record>
+
+        <record id="action_config_backup_type" model="ir.actions.act_window">
+            <field name="name">Backup Types</field>
+            <field name="res_model">backup.type</field>
+            <field name="view_id" ref="config_backup_type_tree"/>
+        </record>
+
+        <menuitem id="menuitem_config_connection_mode"
+                  name="Connection Modes"
+                  action="action_config_connection_mode"
+                  parent="menu_maintenance_security_check_config"
+                  sequence="5" />
+
+        <menuitem id="menuitem_config_backup_type"
+                  name="Backup Types"
+                  action="action_config_backup_type"
+                  parent="menu_maintenance_security_check_config"
+                  sequence="10" />
+    </data>
+</odoo>

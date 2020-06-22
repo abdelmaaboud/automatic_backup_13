@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <report 
+			id="contract_sale_report_abakus"
+			string="Contract Order Report"
+			model="sale.subscription"
+			report_type="qweb-pdf"
+			file="contract_sale_report_abakus" 
+			name="contract_sale_report_abakus.sale_contract_report"
+		/>
+
+        <template id="sale_contract_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="contract_sale_report_abakus.sale_contract_report_document" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+        <!-- SALE CONTRACT REPORT -->
+        <template id="sale_contract_report_document">
+            <t t-name="contract_sale_report_abakus.sale_contract_report_document">
+				<t t-call="web.external_layout">
+                    <div class="page">
+                        <style type="text/css">
+                            .page {
+                                font-family: "Verdana", Times New Roman", Times, serif;
+                            }
+                            strong {
+                                font-weight: bold;
+                            }
+                            .orange {
+                                color: #E94E1B;
+                            }
+                            .border-top-orange {
+                                border-top: 1px solid #E94E1B;
+                            }
+
+
+                            .uppertable {
+                                font-size: 14px;
+                                color: black;
+                                border: 1px solid #E94E1B;
+                                margin: -15px 0 -15px 0;
+                                padding: 8px;
+                            }
+
+                            .uppertable td {
+                                word-wrap: break-word;
+                                vertical-align: top;
+                                width: 40%;
+                            }
+
+                            .sale_table {
+                                border-collapse: collapse;
+                                border-spacing: 0;
+                                width: 100%;
+                                margin: 10px 0 15px 0;
+                                font-size: 14px;
+                            }
+                            .sale_table th {
+                                font-style: bold;
+                                border-bottom: 1px solid #E94E1B;
+                            }
+                            .sale_table td {
+                                border-bottom: 1px solid #E94E1B;
+                            }
+                            .sale_table td, .sale_table th {
+                                vertical-align: top;
+                                padding: 2px 8px 2px 8px;
+                            }
+                            .sale_table .text-right { text-align: right; }
+                            .sale_table .text-left { text-align: left; }
+                            .sale_table tr:first-child th {
+                                border-top: 0;
+                            }
+                            .sale_table tr:last-child td {
+                                border-bottom: 0;
+                            }
+                            .sale_table tr td:first-child,
+                            .sale_table tr th:first-child {
+                                border-left: 0;
+                            }
+                            .sale_table tr td:last-child,
+                            .sale_table tr th:last-child {
+                                border-right: 0;
+                            }
+                            .sale_table img {
+                                width: 50px;
+                            }
+
+                            .total_table {
+                                border-collapse: collapse;
+                                border-spacing: 0;
+                                width: 100%;
+                                margin: 10px 0 15px 0;
+                                font-size: 14px;
+                            }
+                            .total_table td, .sale_table th {
+                                vertical-align: top;
+                                padding: 2px 5px 2px 5px;
+                                word-wrap: break-word;
+                            }
+
+                            .information_text {
+                                font-size: 14px;
+                            }
+
+                            .sale-condition-block {
+                                padding-left: 5px;
+                                font-style: italic;
+                                font-weight: light;
+                                font-size: 8pt;
+                                border-left: 1px solid black;
+                            }
+                            .sale-condition-block p {
+                                margin-bottom: 5px;
+                            }
+                            </style>
+                        <div class="oe_structure"/>
+
+                        <div class="row mt32 mb32 uppertable" id="general_information">
+                            <div class="col-xs-6">
+                                <table width="100%">
+                                    <tr>
+                                        <td>
+                                            <strong>Contract Reference:</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.code"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Agreement Date:</strong>
+                                        </td>
+                                        <td>
+                                            <span t-if="o.agreement_date" t-field="o.agreement_date" t-field-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Start Date:</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.date_start" t-field-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>End Date:</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.date" t-field-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Next Invoice Date:</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.recurring_next_date" t-field-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Recurrency:</strong>
+                                        </td>
+                                        <td>every <span t-field="o.recurring_interval"/>  <span t-field="o.recurring_rule_type"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span><strong>Representative:</strong></span>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.user_id.name"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-xs-5">
+                                <!-- Partner Invoice Name -->
+                                <strong><div t-field="o.partner_id" class="orange" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;name&quot;], &quot;no_marker&quot;: true, &quot;phone_icons&quot;: true}"/></strong>
+                                <!-- Partner Invoice Address -->
+                                <div t-field="o.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;vat&quot;], &quot;no_marker&quot;: true, &quot;phone_icons&quot;: true}"/>
+                                <!-- TAX ID -->
+                                <span t-if="o.partner_id.vat">
+                                    VAT: <span t-field="o.partner_id.vat"/>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row mt32 mb32 uppertable" id="contract_details">
+                            <div class="col-xs-6">
+                                <table width="100%">
+                                    <tr>
+                                        <td>
+                                            <span><strong>Contract Min. Agreement:</strong><br/></span>
+                                        </td>
+                                        <td>
+                                            <span t-esc="o.contractual_minimum_amount / o.timesheet_product_price"/> hours (<span t-field="o.contractual_minimum_amount" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.pricelist_id.currency_id&quot;}"/>)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span><strong>Timesheet Product:</strong><br/></span>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.contract_type_product_name"/> (<span t-field="o.timesheet_product_price" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.pricelist_id.currency_id&quot;}"/>)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span><strong>Timesheet Min. Time:</strong><br/></span>
+                                        </td>
+                                        <td>
+                                            <span t-esc="o.minimum_invoicable_quantity.as_integer_ratio()[0]"/>/<span t-esc="o.minimum_invoicable_quantity.as_integer_ratio()[1]"/> hours (<span t-esc="int(o.minimum_invoicable_quantity * 60)" /> min)
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h2>Installment Invoices</h2>
+                        <!-- Lines -->
+                        <table class="sale_table" width="100%">
+                            <thead>
+                                <tr>
+                                    <th width="75px"/>
+                                    <th class="text-left">Product</th>
+                                    <th width="75px" class="text-right">Quantity</th>
+                                    <th width="100px" class="text-right">Price</th>
+                                    <th width="75px" t-if="discount_on_lines" class="text-right" groups="sale.group_discount_per_so_line">Disc.(%)</th>
+                                    <th width="100px" class="text-right">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody class="sale_lines_body">
+                                <t t-foreach="o.recurring_invoice_line_ids" t-as="l">
+                                    <tr>
+                                        <td>
+                                            <span t-field="l.product_id.image_small" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;} "/>
+                                        </td>
+                                        <td>
+                                            <span t-field="l.name"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="l.quantity"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="l.price_unit" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.pricelist_id.currency_id&quot;}"/>
+                                        </td>
+                                        <td t-if="discount_on_lines" class="text-right" groups="sale.group_discount_per_so_line">
+                                            <span t-field="l.discount"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="l.price_subtotal" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.pricelist_id.currency_id&quot;}"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Totals -->
+                        <div style="white-space: nowrap;" class="row" name="total">
+                            <div class="col-xs-4 pull-right">
+                                <table class="total_table">
+                                    <tr class="border-top-orange">
+                                        <td>
+                                            <strong>Recurring Total Without Taxes</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong><span t-field="o.recurring_total" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></strong>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Lower comments -->
+                        <t t-if="o.description">
+                            <span class="information_text" t-field="o.description"/>
+                        </t>
+
+                        <!-- Conditions -->
+                        <div class="sale-condition-block">
+                            <p>
+                                The order is placed by returning this offer dated and signed, with the signature preceded by the words “read and approved”. Confirmation of the order can also be made by email or by online approval on our internet portal.
+                            </p>
+                            <p>
+                                Acceptance signifies the customer’s agreement on the proposed solutions, technology and services. Subject to prior information to the client, AbAKUS it-solutions reserves the right to propose similar or equivalent equipment if the product ordered is no longer available.
+                            </p>
+                            <p>
+                                All plans, descriptive literature, product specifications and all descriptions or illustrations are given for the sole purpose of providing an indicative idea of the products they describe.
+                            </p>
+                            <p>
+                                Unless included in the list of products and services offered, installation and configuration costs are not included in this offer.
+                            </p>
+                            <p>
+                                The invoice will be sent and will be due upon delivery of the goods and/or services.
+                            </p>
+                            <p>
+                                Unless otherwise mentioned, the general conditions of AbAKUS it-solutions apply. By accepting this offer the customer acknowledges that he/she has read and accepted them. The general conditions of sale are available at www.abakusitsolutions.eu/company/general-conditions
+                            </p>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</openerp>

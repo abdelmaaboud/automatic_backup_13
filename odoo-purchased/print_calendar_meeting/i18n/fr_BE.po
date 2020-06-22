@@ -1,0 +1,206 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* print_calendar_meeting
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20180713\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-25 08:51+0000\n"
+"PO-Revision-Date: 2018-09-25 10:52+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fr_BE\n"
+"X-Generator: Poedit 2.0.9\n"
+
+#. module: print_calendar_meeting
+#: model:ir.ui.view,arch_db:print_calendar_meeting.calendar_meeting_report_id
+msgid "<strong>Attendees</strong>"
+msgstr "<strong>Particpants</strong>"
+
+#. module: print_calendar_meeting
+#: model:ir.ui.view,arch_db:print_calendar_meeting.calendar_meeting_report_id
+msgid "<strong>Author</strong>"
+msgstr "<strong>Auteur</strong>"
+
+#. module: print_calendar_meeting
+#: model:ir.ui.view,arch_db:print_calendar_meeting.calendar_meeting_report_id
+msgid "<strong>End Date</strong>"
+msgstr "<strong>Fin</strong>"
+
+#. module: print_calendar_meeting
+#: model:ir.ui.view,arch_db:print_calendar_meeting.calendar_meeting_report_id
+msgid "<strong>Location</strong>"
+msgstr "<strong>Emplacement</strong>"
+
+#. module: print_calendar_meeting
+#: model:ir.ui.view,arch_db:print_calendar_meeting.calendar_meeting_report_id
+msgid "<strong>Meeting Start Date</strong>"
+msgstr "<strong>Début du rdv</strong>"
+
+#. module: print_calendar_meeting
+#: model:ir.ui.view,arch_db:print_calendar_meeting.calendar_meeting_report_id
+msgid "<strong>Meeting Stop Date</strong>"
+msgstr "<strong>Fin du rdv</strong>"
+
+#. module: print_calendar_meeting
+#: model:ir.ui.view,arch_db:print_calendar_meeting.calendar_meeting_report_id
+msgid "<strong>Start Date</strong>"
+msgstr "<strong>Début</strong>"
+
+#. module: print_calendar_meeting
+#: model:ir.ui.view,arch_db:print_calendar_meeting.calendar_meeting_report_id
+msgid "<strong>Subject</strong>"
+msgstr "<strong>Sujet<strong>"
+
+#. module: print_calendar_meeting
+#: model:ir.actions.act_window,name:print_calendar_meeting.action_calendar_meeting_report
+#: model:ir.ui.view,arch_db:print_calendar_meeting.view_calendar_meeting_form
+msgid "Calendar Meeting Report"
+msgstr "Rapport des rendez-vous du calendrier"
+
+#. module: print_calendar_meeting
+#: model:ir.model.fields,field_description:print_calendar_meeting.field_calendar_meeting_report_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: print_calendar_meeting
+#: model:ir.model.fields,field_description:print_calendar_meeting.field_calendar_meeting_report_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: print_calendar_meeting
+#. openerp-web
+#: code:addons/print_calendar_meeting/static/src/xml/calendar_view.xml:28
+#, python-format
+msgid "Day"
+msgstr "Jour"
+
+#. module: print_calendar_meeting
+#: model:ir.model.fields,field_description:print_calendar_meeting.field_calendar_meeting_report_display_name
+#: model:ir.model.fields,field_description:print_calendar_meeting.field_report_print_calendar_meeting_calendar_meeting_report_id_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: print_calendar_meeting
+#: model:ir.model.fields,field_description:print_calendar_meeting.field_calendar_meeting_report_id
+#: model:ir.model.fields,field_description:print_calendar_meeting.field_report_print_calendar_meeting_calendar_meeting_report_id_id
+msgid "ID"
+msgstr "ID"
+
+#. module: print_calendar_meeting
+#: model:ir.model.fields,field_description:print_calendar_meeting.field_calendar_meeting_report___last_update
+#: model:ir.model.fields,field_description:print_calendar_meeting.field_report_print_calendar_meeting_calendar_meeting_report_id___last_update
+msgid "Last Modified on"
+msgstr "Dernière Modification le"
+
+#. module: print_calendar_meeting
+#: model:ir.model.fields,field_description:print_calendar_meeting.field_calendar_meeting_report_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: print_calendar_meeting
+#: model:ir.model.fields,field_description:print_calendar_meeting.field_calendar_meeting_report_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: print_calendar_meeting
+#: model:ir.model.fields,field_description:print_calendar_meeting.field_calendar_meeting_report_end_date
+msgid "Meeting End Date"
+msgstr "Fin du rdv"
+
+#. module: print_calendar_meeting
+#: model:ir.ui.view,arch_db:print_calendar_meeting.view_calendar_meeting_form
+msgid "Meeting Report"
+msgstr "Rapport de rendez-vous"
+
+#. module: print_calendar_meeting
+#: model:ir.model.fields,field_description:print_calendar_meeting.field_calendar_meeting_report_start_date
+msgid "Meeting Start Date"
+msgstr "Début du rdv"
+
+#. module: print_calendar_meeting
+#: model:ir.ui.view,arch_db:print_calendar_meeting.calendar_meeting_report_id
+msgid "Meetings"
+msgstr "Évènements"
+
+#. module: print_calendar_meeting
+#. openerp-web
+#: code:addons/print_calendar_meeting/static/src/xml/calendar_view.xml:30
+#, python-format
+msgid "Month"
+msgstr "Mois"
+
+#. module: print_calendar_meeting
+#: code:addons/print_calendar_meeting/wizard/calendar_meeting.py:35
+#, python-format
+msgid "No meetings found"
+msgstr "Pas de rendez-vous trouvés"
+
+#. module: print_calendar_meeting
+#: model:ir.ui.view,arch_db:print_calendar_meeting.view_calendar_meeting_form
+msgid "Print"
+msgstr "Imprimer"
+
+#. module: print_calendar_meeting
+#. openerp-web
+#: code:addons/print_calendar_meeting/static/src/js/calendar.js:21
+#, python-format
+msgid "Print Calendar"
+msgstr "Imprimer le calendrier"
+
+#. module: print_calendar_meeting
+#. openerp-web
+#: code:addons/print_calendar_meeting/static/src/xml/calendar_view.xml:32
+#, python-format
+msgid "Print Meeting"
+msgstr "Imprimer"
+
+#. module: print_calendar_meeting
+#: model:ir.actions.report,name:print_calendar_meeting.calendar_meeting_report
+msgid "Print Meeting Report"
+msgstr "Rapport des rendez-vous"
+
+#. module: print_calendar_meeting
+#: model:ir.model.fields,field_description:print_calendar_meeting.field_calendar_meeting_report_attendees_ids
+#: model:ir.ui.view,arch_db:print_calendar_meeting.view_calendar_meeting_form
+msgid "Select Attendees"
+msgstr "Sélectionnez les participants"
+
+#. module: print_calendar_meeting
+#. openerp-web
+#: code:addons/print_calendar_meeting/static/src/xml/calendar_view.xml:24
+#, python-format
+msgid "Today"
+msgstr "Aujourd'hui"
+
+#. module: print_calendar_meeting
+#. openerp-web
+#: code:addons/print_calendar_meeting/static/src/xml/calendar_view.xml:29
+#, python-format
+msgid "Week"
+msgstr "Semaine"
+
+#. module: print_calendar_meeting
+#: model:ir.ui.view,arch_db:print_calendar_meeting.view_calendar_meeting_form
+msgid "_Cancel"
+msgstr "_Annuler"
+
+#. module: print_calendar_meeting
+#: model:ir.model,name:print_calendar_meeting.model_calendar_meeting_report
+msgid "calendar.meeting.report"
+msgstr "calendar.meeting.report"
+
+#. module: print_calendar_meeting
+#: model:ir.ui.view,arch_db:print_calendar_meeting.view_calendar_meeting_form
+msgid "or"
+msgstr "ou"
+
+#. module: print_calendar_meeting
+#: model:ir.model,name:print_calendar_meeting.model_report_print_calendar_meeting_calendar_meeting_report_id
+msgid "report.print_calendar_meeting.calendar_meeting_report_id"
+msgstr "report.print_calendar_meeting.calendar_meeting_report_id"

@@ -1,0 +1,13 @@
+<odoo>
+    <record model="ir.actions.act_url" id="barcode_scanner_url">
+        <field name="name">Barcode Scanner Interface</field>
+        <field name="url">/barcode_scanner/home</field>
+        <field name="target">self</field>
+    </record>
+
+    <menuitem id="barcode_scanner_menu_item"
+              name="Barcode Scanner Interface"
+              parent="stock.menu_stock_root"
+              action="barcode_scanner_url"
+              sequence="10"/>
+</odoo>

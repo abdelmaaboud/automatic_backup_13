@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>      
+        <record model="ir.ui.view" id="sale_quote_planned_time_template_form">
+            <field name="name">sale.quote.planned.time.template.form</field>
+            <field name="model">sale.quote.template</field>
+            <field name="inherit_id" ref="website_quote.view_sale_quote_template_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree//field[@name='name']" position="after">
+                    <field name="planned_hours" widget="float_time"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

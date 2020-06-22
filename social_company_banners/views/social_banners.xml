@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="social_banner_tree_view">
+            <field name="name">social_banner.tree</field>
+            <field name="model">social.banner</field>
+            <field name="arch" type="xml">
+                <tree string="Social Banners">
+                    <field name="name"/>
+                    <field name="valid_from"/>
+                    <field name="valid_to"/>
+                    <field name="create_uid"/>
+                    <field name="priority"/>
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="social_banner_form_view">
+            <field name="name">social_banner.form</field>
+            <field name="model">social.banner</field>
+            <field name="arch" type="xml">
+                <form string="Social Banner">
+                    <header>
+                         <button string="Publish" name="action_confirm" states="new" type="object" class="oe_highlight"/>
+                        <button string="End" name="action_stop" states="confirm" type="object" class="oe_highlight"/>
+                        <button string="Set to draft" name="action_renew" states="done, confirm" type="object" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="new,confirm,done"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Banner info">
+                                <field name="name"/>
+                                <field name="priority"/>
+                            </group>
+                            <group string="Banner visibility">
+                                <field name="valid_from"/>
+                                <field name="valid_to"/>
+                                <field name="visible_on"/>
+                                <field name="visible_for"/>
+                            </group>
+                            <field name="text"/>
+                            <group string="Visible by departments" attrs="{'invisible': ['|', ('visible_for','=','all'), ('visible_for','=','company')]}">
+                                <field name="department_ids" widget="many2many_tags" />
+                            </group>
+                            <group string="Visible by companies" attrs="{'invisible': ['|', ('visible_for','=','all'),('visible_for','=','department')]}">
+                                <field name="company_ids" widget="many2many_tags" />
+                            </group>
+                            <field name="read_by_ids" readonly="1">
+                                <tree>
+                                    <field name="user_id"/>
+                                    <field name="date"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="social_banners_action">
+            <field name="name">Social Banners</field>
+            <field name="res_model">social.banner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="social_company_banners.settings" name="Settings" parent="mail.mail_channel_menu_root_chat" sequence="10" />
+        <menuitem id="social_banners_menu" name="Social Banners" groups="hr.group_hr_user" parent="social_company_banners.settings" action="social_banners_action" sequence="10"/>
+
+        
+    </data>
+</odoo>

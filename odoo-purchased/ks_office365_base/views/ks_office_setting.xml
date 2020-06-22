@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="ks_office365_main_form" model="ir.ui.view">
+        <field name="name">office365 Settings Form</field>
+        <field name="model">res.users</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//notebook/page[2]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record model="ir.actions.server" id="ks_office_setting_actions_user">
+            <field name="name">Office365</field>
+            <field name="model_id" ref="model_res_users"/>
+            <field name="binding_model_id" ref="model_res_users"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = model.open_current_user()
+            </field>
+            <field name="context" eval="{'form_view_ref': 'ks_office365_base.ks_office365_main_form'}"/>
+    </record>
+</odoo>

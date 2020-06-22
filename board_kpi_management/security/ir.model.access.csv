@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+kpi_access,kpi access,board_kpi_management.model_board_kpi,,1,1,1,1
+kpi_value_access,kpi value access,board_kpi_management.model_board_kpi_value,,1,1,1,1
+kpi_category_access,kpi category access,board_kpi_management.model_board_kpi_category,,1,1,1,1

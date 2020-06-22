@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="external_access_document">
+
+            <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})"/>
+
+            <t t-call="maintenance_equipment_abakus.security_check_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+
+                    <t t-call="maintenance_equipment_abakus.security_check_layout_user" />
+
+                    <h1>User External Access</h1>
+
+                    <table style="width:100%; font-size:0.8em; margin-bottom:2em; margin-top:2em;">
+                        <tr>
+                            <th>User</th>
+                            <th>Login</th>
+                            <th>Connection Mode</th>
+                            <th>Comment</th>
+                        </tr>
+
+                        <tr t-foreach="doc.external_access_ids" t-as="line">
+                            <td>
+                                <span t-field="line.partner_id.name"/>
+                            </td>
+                            <td>
+                                <span t-field="line.on_premise_username"/>
+                            </td>
+                            <td>
+                                <t t-foreach="line.connection_mode_ids" t-as="cmode">
+                                    <span t-field="cmode.name"/>,
+                                </t>
+                            </td>
+                            <td>
+                                <span t-field="line.comment"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table style="width:100%;" >
+                        <tr>
+                            <td>
+                                <div>Comment: </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div contenteditable="true">
+                                    <span t-field="doc.external_access_free_text"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table style="width:100%; margin-top:2em;">
+                            <tr>
+                                <td style="width:50%; text-align: left;">Validation Date:</td>
+                                <td style="width:50%; text-align: left;">Signature:</td>
+                            </tr>
+                    </table>
+
+                    <div class="oe_structure"/>
+                </div>
+            </t>
+        </template>
+
+
+        <template id="report_external_access_template">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="maintenance_equipment_abakus.external_access_document"
+                       t-lang="user.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

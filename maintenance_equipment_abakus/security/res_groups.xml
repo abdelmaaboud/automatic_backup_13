@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <record model="ir.module.category" id="module_category_maintenance_security_check">
+            <field name="name">Maintenance Security Checks</field>
+            <field name="description">Helps you manage your security checks process.</field>
+            <field name="sequence">7</field>
+        </record>
+
+        <record id="security_check_group_manager" model="res.groups">
+            <field name="name">Security Check User</field>
+            <field name="category_id" ref="module_category_maintenance_security_check"/>
+        </record>
+    </data>
+</odoo>

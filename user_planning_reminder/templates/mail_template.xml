@@ -1,0 +1,66 @@
+<odoo>
+    <data> 
+       <record id="week_planning" model="mail.template">
+            <field name="name">Week Planning for Employee</field>
+            <field name="email_from">${(ctx.get('partner_id').email or ''|safe)}</field>
+            <field name="subject">${ctx.get('partner_id').email or ''} - This Week Planning</field>
+            <field name="email_to" >${(ctx.get('partner_id').email or ''|safe)}</field>
+            <field name="model_id" ref="model_res_users"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html"><![CDATA[
+                <style>
+                    span.oe_mail_footer_access {
+                        display:block;    
+                        text-align:center;
+                        color:grey;                                
+                    }
+                </style>
+                <div style="border-radius: 2px; max-width: 1200px; height: auto;margin-left: auto;margin-right: auto;background-color:#f9f9f9;">
+                    <div style="height: auto;margin-left:12px;margin-top:30px;">
+                        <p>HERE IS YOUR PLANING FOR THIS WEEK!</p>
+                        <ul>
+                        % for item in ctx.event_by_days:
+                            % for day, events in item.items():
+                                <li>${day} :
+                                    <ul>
+                                    % for event in events:
+                                        <li>${datetime.datetime.strptime(event.start_datetime, '%Y-%m-%d %H:%M:%S').hour}:${datetime.datetime.strptime(event.start_datetime, '%Y-%m-%d %H:%M:%S').minute} - 
+                                            <a href='/mail/view?model=calendar.event&res_id=${event.id}'>${event.name}</a>
+                                            <ul>
+                                                % if event.location:
+                                                    <li> ${event.location} </li>
+                                                % endif
+                                                <li> Attendees
+                                                    <ul>
+                                                    % for attendee in event.attendee_ids:
+                                                        <li> ${attendee.display_name}</li>
+                                                    % endfor
+                                                    </ul>
+                                                </li>
+                                                % if event.project_id.name:
+                                                    <li> ${event.project_id.name} </li>
+                                                % endif
+                                                % if event.task_ids:
+                                                    <li> Tasks
+                                                        <ul>
+                                                            % for task in event.task_ids:
+                                                                <li>${task.display_name}</li>
+                                                            % endfor
+                                                        </ul>
+                                                    </li>
+                                                % endif
+                                            </ul>
+                                        </li>
+                                    % endfor
+                                    <ul>
+                                </li>
+                            %endfor
+                        % endfor
+                        <ul>
+                    </div>            
+                </div>
+                ]]>
+                </field>
+        </record>
+    </data>
+</odoo>

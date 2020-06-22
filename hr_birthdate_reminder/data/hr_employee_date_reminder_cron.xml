@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record forcecreate="True" id="ir_cron_employee_reminder" model="ir.cron">
+            <field name="name">Employee birthday and entry date reminder</field>
+            <field name="active" eval="True"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model_id" ref="hr_contract.model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">env['hr.employee'].send_email_on_birthday_or_entry_date()</field>
+<!--            <field name="function" eval="'send_email_on_birthday_or_entry_date'"/>-->
+<!--            <field name="args" eval="'()'"/>-->
+<!--            <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 06:00:00')" />-->
+        </record>
+    </data>
+</odoo>

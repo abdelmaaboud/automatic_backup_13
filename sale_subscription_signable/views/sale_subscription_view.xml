@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+       <record model="ir.ui.view" id="sale_subscription_contract_improvements_signable_report">
+           <field name="name">sale_subscription_contract_improvements_signable_report</field>
+            <field name="model">sale.subscription</field>
+            <field name="inherit_id" ref="account_analytic_account_improvements.sale_subscription_contract_improvements"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='fix_price_contract_settings']" position="after">
+                    <group string="Contractual information" id="contractual_info"  attrs="{'invisible': [('invoice_contract_type', '!=', 'balance')]}">
+                        <field name="preventive_maintenance"/>
+                        <field name="automatic_reneval_of_license"/>
+                        <field name="monitoring"/>
+                        <field name="backup"/>
+                        <field name="sla_bool" />
+                        <field name="agreement_date"/>
+                    </group>
+                </xpath>
+            </field>
+       </record>
+    </data>
+</odoo>

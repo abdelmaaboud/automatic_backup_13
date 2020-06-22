@@ -1,0 +1,14 @@
+<odoo>
+    <record model="ir.cron" id="sale_subscription_expiration_reminder_cron">
+        <field name="name">Sale subscription expiration reminder</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">weeks</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
+        <field name="code">model.cron_sale_subscription_expiring()</field>
+        <field name="args" eval="'()'"/>
+        <field name="nextcall"
+               eval="(DateTime.now() + timedelta(days=(7 - DateTime.now().weekday()))).strftime('%Y-%m-%d 06:00:00')"/>
+    </record>
+</odoo>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem name="KPI"
+            id="menu_board_kpi"
+            parent="base.menu_board_root"
+            sequence="10"/>
+
+        <record id="action_board_kpi" model="ir.actions.act_window">
+            <field name="name">KPIs</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">board.kpi</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('user_ids','=', uid)]</field>
+        </record>
+
+        <menuitem name="KPI"
+            action="action_board_kpi"
+            id="menu_board_kpi_kpi"
+            parent="menu_board_kpi"
+            sequence="10"/>
+
+        <record id="board_kpi_tree_view" model="ir.ui.view">
+            <field name="name">board.kpi.tree.view</field>
+            <field name="model">board.kpi</field>
+            <field name="arch" type="xml">
+                <tree string="KPI">
+                    <field name="sequence" widget="handle" />
+                    <field name="category_id" />
+                    <field name="name"/>
+                    <field name="last_value_text"/>
+                    <field name="last_compute_date"/>
+                    <field name="compute_recurring_interval" />
+                    <field name="compute_recurring_type" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="board_kpi_form_view" model="ir.ui.view">
+            <field name="name">board.kpi.form.view</field>
+            <field name="model">board.kpi</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_compute_value" string="Compute KPI" class="oe_highlight" type="object"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" />
+                                <field name="category_id" />
+                            </group>
+                            <group>
+                                <field name="value_method" />
+                                <field name="value_type" />
+                            </group>
+                            <group>
+                                <label for="compute_recurring_interval" string="Compute every"/>
+                                <div>
+                                    <field name="compute_recurring_interval" class="oe_inline"/>
+                                    <field name="compute_recurring_type" class="oe_inline"/>
+                                </div>
+                                <field name="last_value_text" readonly="True"/>
+                                <field name="last_compute_date" readonly="True"/>
+                            </group>
+                            <group>
+                                <field name="enable_agregation"/>
+                                <label for="agregation_period" attrs="{'invisible': [('enable_agregation', '!=', True)]}"/>
+                                <div attrs="{'invisible': [('enable_agregation', '!=', True)], 'required': [('enable_agregation', '=', True)]}">
+                                    <field name="agregation_period_interval" class="oe_inline"/>
+                                    <field name="agregation_period" class="oe_inline"/>
+                                </div>
+                                <field name="agregation_type" attrs="{'invisible': [('enable_agregation', '!=', True)], 'required': [('enable_agregation', '=', True)]}"/>
+                            </group>
+                            <group>
+                                <field name="user_ids" widget="many2many_tags" />
+                            </group>
+                            <group>
+                                <field name="enable_recurring_mails"/>
+                            </group>
+                            <group>
+                                <field name="enable_threshold_mails" attrs="{'invisible': [('enable_recurring_mails', '!=', True)]}"/>
+                                <label for="threshold_value"  attrs="{'invisible': [('enable_threshold_mails', '!=', True)]}"/>
+                                <div>
+                                    <field name="threshold_operator" attrs="{'invisible': [('enable_threshold_mails', '!=', True)], 'required': [('enable_threshold_mails', '=', True)]}" class="oe_inline"/>
+                                    <field name="threshold_value" attrs="{'invisible': [('enable_threshold_mails', '!=', True)]}" class="oe_inline"/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="enable_summary_mails" attrs="{'invisible': [('enable_recurring_mails', '!=', True)]}"/>
+                                <field name="summary_mail_frequency" attrs="{'invisible': [('enable_summary_mails', '!=', True)], 'required': [('enable_summary_mails', '=', True)]}"/>
+                            </group>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="Python Code">
+                                <field name="method_code" placeholder="Enter Python code here. Help about Python expression is available in the help tab of this document." attrs="{'required': [('value_method', '=', 'code')]}"/>
+                            </page>
+                            <page string="Values">
+                                <group>
+                                    <field name="value_ids" nolabel="True">
+                                        <tree default_order="custom_create_date desc">
+                                            <field name="value" readonly="True" attrs="{'invisible': [('value_type', 'not in', ('number', 'percentage'))]}"/>
+                                            <field name="agregation_type" readonly="True" attrs="{'invisible': [('value_type', 'not in', ('number', 'percentage'))]}"/>
+                                            <field name="value_boolean" readonly="True" attrs="{'invisible': [('value_type', '!=', 'bool')]}"/>
+                                            <field name="value_type" />
+                                            <field name="custom_create_date" />
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Help">
+                                <group>
+                                    <div style="margin-top: 4px;">
+                                        <h3>Help with Python expressions.</h3>
+                                        <p>Various fields may use Python code or Python expressions. The following variables can be used:</p>
+                                        <ul>
+                                            <li>self: ORM model of the record on which the action is triggered</li>
+                                            <li>uid: current user id</li>
+                                            <li>user: current user</li>
+                                            <li>time: Python time module</li>
+                                            <li>datetime: Python datetime module</li>
+                                            <li>dateutil: Python dateutil module</li>
+                                            <li>timezone: Python timezone module</li>
+                                        </ul>
+                                        <div>
+                                            <p>Example of condition expression using Python</p>
+                                            <ul>
+                                                <li>condition: True</li>
+                                                <li>condition: object.list_price > 5000</li>
+                                            </ul>
+                                        </div>
+                                        <div attrs="{'invisible': [('value_method', '!=', 'code')]}">
+                                            <p>Example of python code</p>
+                                            <code>
+                                                self.env['board.kpi.value'].create({
+                                                    'kpi_id': self.id,
+                                                    'value': len(self.env['project.issue'].search([('user_id', '=', False)])),
+                                                })
+                                            </code>
+                                        </div>
+                                    </div>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.server" id="board_kpi_compute_action">
+            <field name="name">Compute KPI</field>
+            <field name="model_id" ref="board_kpi_management.model_board_kpi"/>
+            <field name="binding_model_id" ref="board_kpi_management.model_board_kpi"/>
+            <field name="state">code</field>
+            <field name="code">action = env['board.kpi'].browse(context['active_ids']).action_compute_value()</field>
+        </record>
+    </data>
+</odoo>

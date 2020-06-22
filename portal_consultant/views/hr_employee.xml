@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<data>
+    <record id="view_employee_form_consultant" model="ir.ui.view">
+        <field name="name">view_employee_form_consultant</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <button type="object" name="change_consultant_rights" string="Convert to consultant user" attrs="{'invisible': [('is_consultant', '=', True)]}" class="oe_highlight"/>
+                <button type="object" name="change_consultant_rights" string="Convert to internal user" attrs="{'invisible': [('is_consultant', '=', False)]}" class="oe_highlight"/>
+                <field name="is_consultant" readonly="True"/>
+                <div attrs="{'invisible': [('is_consultant', '=', True)]}" colspan="2">
+                    Warning, internal employees linked to an internal user consume a paid Odoo Licence
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_employee_tree_consultant" model="ir.ui.view">
+        <field name="name">view_employee_tree_consultant</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="is_consultant" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_kanban_view_employees_consultant" model="ir.ui.view">
+        <field name="name">hr_kanban_view_employees_consultant</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban[@class='o_hr_employee_kanban']" position="inside">
+                <field name="is_consultant" />
+                <field name="user_id" />
+            </xpath>
+            <xpath expr="//div[@class='o_kanban_button']" position="inside">
+                <span t-if="record.user_id.raw_value and record.is_consultant.raw_value" style="border: #E94E1B 1px solid; color: #E94E1B; border-radius: 50px; width: fit-content; padding: 4px">Consultant</span>
+                <span t-if="record.user_id.raw_value and !record.is_consultant.raw_value" style="background-color: #E94E1B; color: white; border-radius: 50px; width: fit-content; padding: 4px">Internal</span>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_employee_filter_consultant" model="ir.ui.view">
+        <field name="name">view_employee_filter_consultant</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[last()]" position="after">
+                <filter name="consultants" string="Consultant Employees" domain="[('is_consultant','=',True)]"/>
+                <filter name="internal" string="Internal Employees" domain="[('is_consultant','=',False)]"/>
+            </xpath>
+        </field>
+    </record>
+</data>

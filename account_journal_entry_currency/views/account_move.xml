@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_move_form_currency">
+        <field name="name">view_move_form_currency</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="(//field[@name='line_ids'])" position="attributes">
+                <attribute name="context">{'line_ids': line_ids, 'journal_id': journal_id, 'default_currency_id': currency_id}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

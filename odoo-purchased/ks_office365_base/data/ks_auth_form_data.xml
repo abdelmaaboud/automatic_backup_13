@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <data  noupdate="1">
+        <record forcecreate="False" id="office365_authentication_data_id" model="ks_office365.settings">
+            <field name="ks_client_id"/>
+            <field name="ks_client_secret"/>
+            <field name="ks_redirect_url"/>
+        </record>
+    </data>
+
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="sale_subscription_template_view_form_improvements">
+            <field name="name">sale_subscription_template_view_form_improvements</field>
+            <field name="model">sale.subscription.template</field>
+            <field name="inherit_id" ref="sale_subscription.sale_subscription_template_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='main']//group" position="inside">
+                    <field name="invoice_contract_type" />
+                    <field name="currency_id" />
+                </xpath>
+                <xpath expr="//group[@name='main']" position="after">
+                    <group name="contract_settings">
+                            <group name="hr_settings" string="HR settings">
+                                <field name="contract_team" />
+                                <field name="resource_calendar_id" />
+                                <field name="invoicable_factor_inside_calendar" />
+                                <field name="invoicable_factor_outside_calendar" />
+                            </group>
+                            <group name="balance_settings" string="Balance settings" attrs="{'invisible': [('invoice_contract_type', '!=', 'balance')]}">
+                                <field name="contractual_minimum_quantity" />
+                                <field name="timesheet_product"/>
+                                <field name="timesheet_product_price" />
+                                <field name="contractual_minimum_amount"/>
+                                <field name="minimum_invoicable_quantity" />
+                            </group>
+                            <group name="fix_price_settings" string="Fixed price settings" attrs="{'invisible': [('invoice_contract_type', '!=', 'fix_price')]}">
+                                <field name="description_needed" />
+                                <field name="supplier_needed" />
+                                <field name="subscription_start_date_needed" />
+                                <field name="subscription_end_date_needed" />
+                            </group>
+                            <group name="project_settings" string="Project settings">
+                                <field name="use_project" />
+                                <field name="project_template_id" attrs="{'invisible':[('use_project','=', False)]}"/>
+                            </group>
+                    </group>
+                </xpath>
+                <xpath expr="//div[@name='description']" position="before">
+                    <group string="Subscription Lines">
+                        <div>
+                            <field name="subscription_line_ids">
+                                <tree editable="bottom">
+                                    <field name="product_id" domain="[('recurring_invoice', '=', True)]" context="{'default_recurring_invoice': True}"/>
+                                    <field name="name"/>
+                                    <field name="quantity"/>
+                                    <field name="uom_id" groups="product.group_uom"/>
+                                    <field name="price_unit"/>
+                                    <field name="discount" groups="sale.group_discount_per_so_line"/>
+                                    <field name="price_subtotal"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="recurring_total" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}" modifiers="{'readonly': true}"/>
+                            </group>
+                        </div>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

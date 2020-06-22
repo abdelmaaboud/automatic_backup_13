@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form -->
+    <record model="ir.ui.view" id="view_hr_holidays_summary_dept_improved">
+        <field name="name">view_hr_holidays_summary_dept_improved</field>
+        <field name="model">hr.holidays.summary.dept</field>
+        <field name="inherit_id" ref="hr_holidays.view_hr_holidays_summary_dept"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_from']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='holiday_type']" position="replace" />
+
+            <xpath expr="//field[@name='date_from']" position="after">
+                <group>
+                    <field name="month" />
+                    <field name="year" />
+                    <field name="holiday_type" />
+                    <field name="company_id" required="1" options="{'no_create': True, 'no_open': True}" />
+                </group>
+                <group>
+                    <field name="hide_empty_categories" />
+                    <field name="hide_empty_status" />
+                    <field name="hide_no_leaves_emp" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

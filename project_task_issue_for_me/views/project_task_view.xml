@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="project_task_self_assign_button_view">
+            <field name="name">project_task_self_assign_button_view</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='stage_id']" position="before">
+                    <button name="assign_to_me" type="object" string="I take it" class="btn btn-primary" />
+                </xpath>
+                <xpath expr="//button[@name='action_assign_to_me']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+		    </field>
+        </record>
+	</data>
+</odoo>

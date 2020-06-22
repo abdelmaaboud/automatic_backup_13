@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="sale_order_carrier_mandatory">
+            <field name="name">sale_order_carrier_mandatory</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="delivery.view_order_form_with_carrier"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='carrier_id']" position="replace">
+                    <!-- Set field mandatory when date is set, date is always set so always mandatory -->
+                    <field name="carrier_id" context="{'order_id': id}" class="oe_inline" options="{'no_create': True, 'no_open': True}" attrs="{'required': [('date_order', '!=', False)], 'readonly':[('state','not in',('draft','sent'))]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

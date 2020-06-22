@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="backups_document">
+
+            <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})"/>
+
+            <t t-call="maintenance_equipment_abakus.security_check_layout">
+                <div class="page">
+                    <div class="oe_structure" />
+
+                    <t t-call="maintenance_equipment_abakus.security_check_layout_user" />
+
+                    <h1>System Backups</h1>
+
+                    <table style="width:100%; font-size:0.8em; margin-bottom:2em; margin-top:2em;">
+                        <tr>
+                            <th>Source</th>
+                            <th>Destination</th>
+                            <th>Type</th>
+                            <th>Frequency</th>
+                            <th>Date Last Successful Restore</th>
+                            <th>Report Monitoring</th>
+                        </tr>
+
+                        <tr t-foreach="doc.backups_ids" t-as="line">
+                            <td>
+                                <span t-field="line.source" />
+                            </td>
+                            <td>
+                                <span t-field="line.destination" />
+                            </td>
+                            <td>
+                                <span t-field="line.type_id" />
+                            </td>
+                            <td>
+                                <span t-field="line.frequency" />
+                            </td>
+                            <td>
+                                <span t-field="line.date_last_successful_restore" />
+                            </td>
+                            <td>
+                                <span t-field="line.report_monitoring" />
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table style="width:100%;" >
+                        <tr>
+                            <td>
+                                <div>Comment: </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div contenteditable="true">
+                                    <span t-field="doc.backups_free_text"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table style="width:100%; margin-top:2em;">
+                            <tr>
+                                <td style="width:50%; text-align: left;">Validation Date:</td>
+                                <td style="width:50%; text-align: left;">Signature:</td>
+                            </tr>
+                    </table>
+
+                    <div class="oe_structure"/>
+                </div>
+            </t>
+        </template>
+
+
+        <template id="report_backups_template">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="maintenance_equipment_abakus.backups_document" t-lang="user.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

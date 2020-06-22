@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.actions.act_window" id="partner_projects" >
+        <field name="name">Projects related to Partner</field>
+        <field name="res_model">project.project</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="view_id" ref="project.view_project_kanban" />
+        <field name="domain"></field>
+        <field name="context">{'search_default_Current': 1}</field>
+    </record>
+
+    <record model="ir.ui.view" id="view_partner_form_projects">
+        <field name="name">view_partner_form_projects</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" type="action" name="%(partner_projects)d" context="{'search_default_partner_id': active_id, 'default_partner_id': active_id}" icon="fa-puzzle-piece" attrs="{'invisible': [('open_projects_count', '=', 0)]}" modifiers="{'invisible': [['open_projects_count', '=', 0]]}">
+                    <field string="Projects" name="open_projects_count" widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

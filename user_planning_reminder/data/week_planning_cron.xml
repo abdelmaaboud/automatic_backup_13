@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record forcecreate="True" id="ir_cron_week_planning" model="ir.cron">
+        <field name="name">Week Planning</field>
+        <field name="active" eval="True"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">weeks</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False" />
+        <field name="model_id" ref="model_res_users"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_send_week_planning_email()</field>
+        <field name="nextcall" eval="datetime.today().replace(hour=4, minute=0, second=0)  - timedelta(days=datetime.today().weekday() % 7)" />
+    </record>
+</odoo>

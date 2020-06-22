@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_tasks_mastertype" inherit_id="project.portal_my_tasks" name="portal_my_tasks_mastertype">
+        <xpath expr="//thead//th[1]" position="before">
+            <th>Type</th>
+        </xpath>
+        <xpath expr="//tbody//tr//td[1]" position="before">
+            <td>
+                <span t-field="task.master_type_code" />
+            </td>
+        </xpath>
+    </template>
+
+    <template id="portal_my_task_mastertype" inherit_id="project.portal_my_task" name="portal_my_task_mastertype">
+        <xpath expr="//div[@class='panel-heading']//h4" position="replace">
+            <h4>
+                <t t-call="portal.record_pager"/>
+                <span t-field="task.master_type_code" /> - <span t-field="task.name"/> (#<span t-esc="task.id"/>)
+                <span t-field="task.stage_id.name" class="pull-right label label-info" title="Current stage of this task"/>
+                <a class="btn btn-info" t-att-href="'/web#return_label=Website&amp;model=project.task&amp;id=%s&amp;view_type=form' % (task.id)" groups="project.group_project_user">Edit Task</a>
+            </h4>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="hr_equipment_category_view_tree_abakus" model="ir.ui.view">
+            <field name="name">hr_equipment_category_view_tree_abakus</field>
+            <field name="model">maintenance.equipment.category</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_category_view_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='technician_user_id']" position="before">
+                    <field name="code" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_equipment_category_view_form_abakus" model="ir.ui.view">
+            <field name="name">hr_equipment_category_view_form_abakus</field>
+            <field name="model">maintenance.equipment.category</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_category_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='technician_user_id']" position="before">
+                    <field name="code" required="True"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_equipment_category_view_search_abakus" model="ir.ui.view">
+            <field name="name">hr_equipment_category_view_search_abakus</field>
+            <field name="model">maintenance.equipment.category</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_category_view_search" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="replace">
+                    <field name="name" string="Name and Code" filter_domain="['|', ('name','ilike',self), ('code','ilike',self)]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

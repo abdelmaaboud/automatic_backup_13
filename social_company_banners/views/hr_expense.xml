@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="hr_expense_with_banner_form_view">
+            <field name="name">hr_expense_with_banner_form</field>
+            <field name="model">hr.expense</field>
+            <field name="inherit_id" ref="hr_expense.hr_expense_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_title']" position="before">
+                    <field name="banner_text" readonly="1" nolabel="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+  <data>
+
+      <record model="ir.ui.view" id="task_deadline_date_reminder_form">
+          <field name="name">task_deadline_date_reminder_form</field>
+          <field name="model">project.task</field>
+          <field name="inherit_id" ref="task_deadline_reminder.task_deadline_reminder_form"/>
+          <field name="arch" type="xml">
+                <field name="task_reminder" position="after">
+                    <field name="date_reminder" attrs="{'invisible':[('task_reminder','=',False)]}"/>
+                </field>
+          </field>
+      </record>
+
+  </data>
+</odoo>

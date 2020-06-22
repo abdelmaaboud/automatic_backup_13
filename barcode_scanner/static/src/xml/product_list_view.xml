@@ -1,0 +1,85 @@
+<odoo>
+    <t t-name="barcode_scanner.product_list">
+        <ol t-if="widget.is_page" class="breadcrumb">
+            <li id="home_breadcrumb"><a href="javascript:">Home</a></li>
+            <li class="active">Products</li>
+        </ol>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 text-right mb24">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-xs-0 col-sm-4"></div>
+                            <div class="col-xs-12 col-sm-8">
+                                <div class="input-group">
+                                    <input id="product_search_input" type="text" class="form-control" placeholder="Search product..." t-attf-value="{{widget.search_text}}">
+                                        <span class="input-group-btn">
+                                            <button id="product_search_button" class="btn btn-default" type="button">Search</button>
+                                        </span>
+                                    </input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row text-right">
+                        <div class="col-xs-6 col-sm-3 col-sm-offset-6">
+                            <div class="checkbox">
+                                <label t-if="widget.show_available_products">
+                                    <input checked="true" id="product_available_checkbox" type="checkbox" value="available"/>Show available products
+                                </label>
+                                <label t-else="">
+                                    <input id="product_available_checkbox" type="checkbox" value="available"/>Show available products
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="checkbox">
+                                <label t-if="widget.show_unavailable_products">
+                                    <input checked="true" id="product_unavailable_checkbox" type="checkbox" value="not_available"/>Show unavailable products
+                                </label>
+                                <label t-else="">
+                                    <input id="product_unavailable_checkbox" type="checkbox" value="not_available"/>Show unavailable products
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="display:flex; flex-wrap: wrap;">
+                <t t-foreach="widget.products_to_display" t-as="product">
+                    <div class="col-xs-12 col-sm-6 col-lg-3">
+                        <a href="#" onClick="return false;">
+                            <div t-att-data-name="product.name" t-att-data-id="product.id" t-att-data-barcode="product.barcode" class="thumbnail">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <img t-if="product.image != false" t-attf-src="data:image/png;base64,{{product.image}}" class="img-responsive"/>
+                                        <img t-else="" src="/barcode_scanner/static/src/image/image-not-found.jpg" class="img-responsive"/>
+                                    </div>
+                                    <div class="col-xs-8 mt24">
+                                        <p> <t t-esc="product.name"/> </p>
+                                        <p> <t t-if="product.ref != false" t-esc="product.ref"/> <span t-else=""> No reference </span> </p>
+                                        <p> <t t-if="product.barcode != false" t-esc="product.barcode"/> <span t-else=""> No barcode</span> </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </t>
+                 <div class="col-xs-12">
+                    <nav aria-label="Page navigation">
+                      <ul class="pagination">
+                        <li t-if="widget.page == 1" id="li-prev disabled"><a href="#" aria-label="Previous"><span aria-hidden="true"> PREV </span></a></li>
+                        <li t-else="" id="li-prev"><a href="#" aria-label="Previous"><span aria-hidden="true"> PREV </span></a></li>
+                        <t t-foreach="widget.total_pages" t-as="page">
+                            <li t-if="widget.page == page_index + 1" class='li-page active'><a href="#"><t t-esc="page_index + 1"/> </a></li>
+                            <li t-else="" class='li-page'><a href="#"><t t-esc="page_index + 1"/> </a></li>
+                        </t>
+                        <li t-if="widget.page == widget.total_pages" id="li-next disabled"><a href="#" aria-label="Next"><span aria-hidden="true"> NEXT </span></a></li>
+                        <li t-else="" id="li-next"><a href="#" aria-label="Next"><span aria-hidden="true"> NEXT </span></a></li>
+                      </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </t>
+</odoo>

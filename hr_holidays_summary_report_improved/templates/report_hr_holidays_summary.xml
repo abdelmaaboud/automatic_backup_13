@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_holidayssummary_improved" inherit_id="hr_holidays.report_holidayssummary">
+        <xpath expr="//div[@class='page']" position="replace">
+            <div class="page">
+                <h3 class="mb32">Leaves Summary</h3>
+                <t t-set="info" t-value="get_header_info"/>
+                <h3 class="text-center mb32">
+                    Analyze for <u><t t-esc="info['month']"/></u> <u><t t-esc="info['year']"/></u> of the <u><t t-esc="info['holiday_type']"/></u> Leaves.
+                </h3>
+
+                <table class="table table-bordered mb32" style="table-layout:auto">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Month</th>
+                            <t t-foreach="get_months" t-as="month">
+                                &lt;th class="text-center" colspan=<t t-esc="month['days']"/>&gt;<t t-esc="month['month_name']"/>&lt;/th&gt;
+                            </t>
+                            <th t-att-colspan="len(get_holidays_status)+1" />
+                        </tr>
+                        <tr>
+                            <td rowspan="2" colspan="2">
+                                <strong>Departments and Employees</strong>
+                            </td>
+                            <t t-foreach="get_day" t-as="day">
+                                &lt;td class="text-center oe_leftfit oe_rightfit" style="background-color:<t t-esc="day['color']"/>!important; font-size: 8px; min-width: 18px"&gt; <t t-esc="day['day_str']"/>&lt;/td&gt;
+                            </t>
+                            <td class="text-center" t-att-colspan="len(get_holidays_status)+1">Sums in days</td>
+                        </tr>
+                        <tr>
+                            <t t-foreach="get_day" t-as="day">
+                                &lt;td class="text-center oe_leftfit oe_rightfit" style="background-color:<t t-esc="day['color']"/>!important; font-size: 10px" &gt; <t t-esc="day['day']"/>&lt;/td&gt;
+                            </t>
+                            <t t-foreach="get_holidays_status" t-as="status">
+                                &lt;td class="text-center" style="background-color:<t t-esc="status['color']"/>"&gt;
+                                    <t t-set="status_name" t-value="status['name'] if len(status['name']) &lt;= 6 else status['name'][:5] + '.'" />
+                                    <t t-esc="status_name" />
+                                &lt;/td&gt;
+                            </t>
+                            <td class="text-center"><strong>Total</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="get_data_from_report" t-as="obj">
+                            <tr t-if="'dept' in obj">
+                                <td style="background-color:#d5d5d5" colspan="2">
+                                    <strong><t t-esc="obj['dept']"/></strong>
+                                </td>
+                                <t t-foreach="obj['color']" t-as="c">
+                                    &lt;td style=background-color:<t t-esc="c['color']"/> !important/&gt;
+                                </t>
+                                <td style="background-color:#d5d5d5;" t-att-colspan="len(get_holidays_status)+1" />
+                            </tr>
+                            <t t-foreach="obj['data']" t-as="emp">
+                                <tr>
+                                    <td rowspan="2"><t t-esc="emp['emp']"/></td>
+                                    <td class="text-center oe_leftfit oe_rightfit" style="font-size: 8px; min-width: 18px">AM</td>
+                                    <t t-foreach="emp['display']" t-as="details">
+                                        &lt;td style=background-color:<t t-esc="details['color_morning']"/> !important /&gt;
+                                    </t>
+                                    <td rowspan="2" class="text-center" t-foreach="get_holidays_status" t-as="status">
+                                        <strong><t t-esc="emp['sum_status'].get(status['object'], 0)"/></strong>
+                                    </td>
+                                    <td rowspan="2" class="text-center"><strong><t t-esc="emp['sum']"/></strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center oe_leftfit oe_rightfit" style="font-size: 8px; min-width: 18px">PM</td>
+                                    <t t-foreach="emp['display']" t-as="details">
+                                        &lt;td style=background-color:<t t-esc="details['color_afternoon']"/> !important /&gt;
+                                    </t>
+                                </tr>
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+
+                <div class="col-xs-3 col-xs-offset-5 mt32">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-1">Color</th>
+                                <th class="text-center">Leave Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="get_holidays_status" t-as="status">
+                                &lt;td style=background-color:<t t-esc="status['color']"/>!important &gt;&lt;/td&gt;
+                                <td><t t-esc="status['name']"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

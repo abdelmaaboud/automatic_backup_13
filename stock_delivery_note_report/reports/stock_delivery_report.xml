@@ -1,0 +1,230 @@
+<?xml version="1.0"?>
+<odoo>
+    <report
+            string="Delivery Note"
+            id="action_report_delivery_order"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            name="stock_delivery_note_report.report_delivery_order"
+            file="report_delivery_order"
+    />
+
+    <template id="report_delivery_order_document">
+        <t t-name="stock_delivery_note_report.report_delivery_order_document">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div>
+                                <div style="float: left; width: 60%;">
+                                    <div t-if="o.sale_id.partner_invoice_id">
+                                        <small>
+                                            <strong>Invoice Address</strong>
+                                        </small>
+                                        <br/>
+                                        <span t-field="o.sale_id.partner_invoice_id"/>
+                                        <address t-field="o.sale_id.partner_invoice_id"
+                                                 t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: true}"/>
+                                        <t t-if="o.sale_id.partner_id.vat">
+                                            <span t-field="o.sale_id.partner_id.vat"/>
+                                        </t>
+                                    </div>
+                                </div>
+                                <div style="float: right; width: 40%;">
+                                    <div t-if="o.sale_id.partner_shipping_id">
+                                        <small>
+                                            <strong>Delivery Address</strong>
+                                        </small>
+                                        <br/>
+                                        <span t-field="o.sale_id.partner_shipping_id"/>
+                                        <address t-field="o.sale_id.partner_shipping_id"
+                                                 t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: true}"/>
+                                    </div>
+                                    <div t-elif="o.partner_id">
+                                        <small>
+                                            <strong>Delivery Address</strong>
+                                        </small>
+                                        <br/>
+                                        <span t-field="o.partner_id"/>
+                                            <address t-field="o.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: true}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <p style="clear: both;"/>
+                            <h1 class="text-left">Delivery Note</h1>
+                            <!-- Current Picking Info -->
+                            <table class="table table-condensed table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Ref</th>
+                                        <th>Order Number</th>
+                                        <th>Date created</th>
+                                        <th>Date done</th>
+                                        <th>State</th>
+                                        <t t-if="o.backorder_id">
+                                            <th>Backorder of</th>
+                                        </t>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <span t-esc="o.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="o.origin"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="o.date"/>
+                                        </td>
+                                        <td>
+                                            <t t-if="o.date_done">
+                                                <span t-esc="o.date_done"/>
+                                            </t>
+                                            <t t-id="not o.date_done">/</t>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.state"/>
+                                        </td>
+                                        <t t-if="o.backorder_id">
+                                            <td>
+                                                <span t-esc="o.backorder_id.name"/>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <!-- Operations -->	
+                            <table class="table table-condensed table-striped">	
+                                <thead>	
+                                    <tr>	
+                                        <th width="50%">Product</th>	
+                                        <th width="15%">From</th>	
+                                        <th width="15%">To</th>	
+                                        <th width="20%">Quantity</th>	
+                                    </tr>	
+                                </thead>	
+                                <tbody>	
+                                    <tr t-foreach="o.move_lines" t-as="move_line">	
+                                        <td>	
+                                            <t t-if="move_line.product_id.product_brand_id.name">	
+                                                <span t-esc="move_line.product_id.product_brand_id.name"/>	
+                                                -	
+                                            </t>	
+                                            <span t-esc="move_line.product_id.name"/>	
+                                            <br/>	
+                                            <span t-esc="move_line.product_id.default_code"/>	
+                                            <t t-if="move_line.product_id.barcode">	
+                                                <br/>	
+                                                <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', move_line.product_id.barcode, 600, 100)"	
+                                                     style="width:120px;height:20px"/>	
+                                                <span t-esc="move_line.product_id.barcode"/>	
+                                            </t>	
+                                        </td>	
+                                        <td>	
+                                            <span t-esc="move_line.location_id.display_name"/>	
+                                        </td>	
+                                        <td>	
+                                            <span t-esc="move_line.location_dest_id.display_name"/>	
+                                        </td>	
+                                        <td>	
+                                            <span t-esc="move_line.quantity_done"/>	
+                                            /	
+                                            <span t-esc="move_line.product_qty"/>	
+                                            <span t-esc="move_line.product_uom.name"/>	
+                                        </td>	
+                                    </tr>	
+                                </tbody>	
+                            </table>	
+                            
+                            <br/>
+                            <strong>Acknowledgment:</strong>
+                            <table width="50%" height="70px">
+                                <tr>
+                                    <td style="border: 1px black solid;">
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <p style="page-break-after:always"></p>
+
+                            <!-- Rest of the waiting moves for the customer -->
+                            <t t-if="len(o.get_pl_out_for_partner()) > 0">
+                                <h3>Other open orders</h3>
+                                <t t-foreach="o.get_pl_data_out_for_partner()" t-as="picking">
+                                    <table class="table table-condensed table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Ref</th>
+                                                <th>Order ref</th>
+                                                <th>Backorder of</th>
+                                                <th>State</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <span t-esc="picking['name']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="picking['origin']"/>
+                                                </td>
+                                                <td>
+                                                    <t t-if="picking['backorder']">
+                                                        <span t-esc="picking['backorder']"/>
+                                                    </t>
+                                                    <t t-if="not picking['backorder']">/</t>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="picking['state']"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="table table-condensed table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Quantity</th>
+                                                <th>State</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="picking['moves']" t-as="move">
+                                                <td>
+                                                    <t t-if="move['brand']">
+                                                        <span t-esc="move['brand']"/>
+                                                        -
+                                                    </t>
+                                                    <span t-esc="move['name']"/>
+                                                    <br/>
+                                                    <span t-esc="move['ref']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="move['qty']"/>
+                                                    <span t-esc="move['uom']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="move['state']"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </t>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_delivery_order">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="stock_delivery_note_report.report_delivery_order_document" t-lang="o.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>

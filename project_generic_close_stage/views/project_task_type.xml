@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree -->
+    <record model="ir.ui.view" id="task_type_tree_generic_close">
+        <field name="name">task_type_tree_generic_close</field>
+        <field name="model">project.task.type</field>
+        <field name="inherit_id" ref="project.task_type_tree"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="." position="inside">
+                    <field name="close_stage" />
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <!-- Form -->
+    <record model="ir.ui.view" id="task_type_form_generic_close">
+        <field name="name">task_type_form_generic_close</field>
+        <field name="model">project.task.type</field>
+        <field name="inherit_id" ref="project.task_type_edit"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='fold']" position="after">
+                    <field name="close_stage" />
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

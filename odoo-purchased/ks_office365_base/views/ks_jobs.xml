@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="ks_office_jobs_tree_view" model="ir.ui.view">
+        <field name="name">ks.jobs.tree.view</field>
+        <field name="model">ks.office.job</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="ks_status=='completed'" decoration-danger="ks_status=='error'"
+                  decoration-primary="ks_status=='in_process'" create="false">
+                <field name="id"/>
+                <field name="ks_module"/>
+                <field name="ks_job"/>
+                <field name="ks_records"/>
+                <field name="ks_status"/>
+                <field name="create_uid"/>
+                <field name="write_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ks_office_jobs_form_view" model="ir.ui.view">
+        <field name="name">ks.office.jobs.form.view</field>
+        <field name="model">ks.office.job</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="id"/>
+                        </group>
+                        <group>
+                            <field name="ks_job" readonly="1"/>
+                        </group>
+                        <group>
+                           <field name="create_uid"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="ks_records" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="ks_status"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="ks_error_text" style="word-break: break-all;"
+                               attrs="{'invisible':[('ks_status','in', ['completed', 'in_progress'])]}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="ks_office_jobs_action" model="ir.actions.act_window">
+        <field name="name">Office 365 Jobs</field>
+        <field name="res_model">ks.office.job</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{"search_default_ks_status_in_process":1, "search_default_ks_status_error":1}</field>
+    </record>
+
+    <record model="ir.actions.server" id="action_account_invoice_update_taxes">
+        <field name="name">Job Completed</field>
+        <field name="model_id" ref="ks_office365_base.model_ks_office_job"/>
+        <field name="binding_model_id" ref="ks_office365_base.model_ks_office_job" />
+        <field name="state">code</field>
+        <field name="code">
+            records.sudo().ks_complete_any_job()
+        </field>
+    </record>
+
+    <record id="ks_office_jobs_filter" model="ir.ui.view">
+        <field name="name">ks.office.jobs.filter</field>
+        <field name="model">ks.office.job</field>
+        <field name="arch" type="xml">
+            <search string="Office Jobs">
+                <field name="ks_job"/>
+                <filter string="In Process" name="ks_status_in_process" domain="[('ks_status', '=', 'in_process')]"/>
+                <filter string="Completed" name="ks_status_completed" domain="[('ks_status', '=', 'completed')]"/>
+                <filter string="Error" name="ks_status_error" domain="[('ks_status', '=', 'error')]"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>
